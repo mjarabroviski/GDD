@@ -22,6 +22,7 @@ BEGIN TRANSACTION
 					   WHEN Nombre = 'Ejecutivo' THEN 15
 					   WHEN Nombre = 'Premium' THEN 20
 					   WHEN Nombre = 'Común' THEN 0
+					   WHEN Nombre = 'Primera Clase' THEN 15
 END 
 COMMIT
 
@@ -114,13 +115,16 @@ UPDATE EL_PUNTERO.TL_RUTA
 COMMIT
 
 BEGIN TRANSACTION
-INSERT INTO EL_PUNTERO.TL_PASAJE(Codigo_Pasaje,Precio,ID_Cliente,ID_Butaca,ID_Viaje,ID_Compra)
-(SELECT DISTINCT [Pasaje_Codigo],
+INSERT INTO EL_PUNTERO.TL_PASAJE(Id_Compra,Codigo_Pasaje,Precio,ID_Cliente,ID_Butaca,ID_Viaje)
+(SELECT DISTINCT (SELECT TOP 1 ID_Compra FROM EL_PUNTERO.TL_COMPRA C WHERE C.ID_Cliente =  
+					(SELECT TOP 1 ID_Cliente FROM EL_PUNTERO.TL_CLIENTE WHERE Nro_Documento = Cli_Dni AND Nombre = Cli_Nombre AND Apellido = Cli_Apellido)),
+				 [Pasaje_Codigo],
 				 [Pasaje_Precio],
-				 (SELECT TOP 1 ID_Cliente FROM EL_PUNTERO.TL_CLIENTE WHERE Apellido = gd_esquema.Maestra.Cli_Apellido AND Nombre = gd_esquema.Maestra.Cli_Nombre),
-				 (SELECT TOP 1 ID_Butaca FROM EL_PUNTERO.TL_BUTACA WHERE ID_Aeronave = (SELECT TOP 1 ID_Aeronave FROM EL_PUNTERO.TL_AERONAVE WHERE Pasaje_Codigo != 0 AND Matricula = Aeronave_Matricula AND Nro_Butaca = Butaca_Nro)),
-				 (SELECT TOP 1 ID_Viaje FROM EL_PUNTERO.TL_VIAJE WHERE ID_Aeronave = (SELECT TOP 1 ID_Aeronave FROM EL_PUNTERO.TL_AERONAVE WHERE Matricula = Aeronave_Matricula AND Fecha_Salida = FechaSalida)),
-				 (SELECT TOP 1 ID_Compra FROM EL_PUNTERO.TL_COMPRA C WHERE C.ID_Cliente =  (SELECT TOP 1 ID_Cliente FROM EL_PUNTERO.TL_CLIENTE WHERE Apellido = gd_esquema.Maestra.Cli_Apellido AND Nombre = gd_esquema.Maestra.Cli_Nombre))
+				 (SELECT TOP 1 ID_Cliente FROM EL_PUNTERO.TL_CLIENTE WHERE Nro_Documento = Cli_Dni AND Nombre = Cli_Nombre AND Apellido = Cli_Apellido),
+				 (SELECT TOP 1 ID_Butaca FROM EL_PUNTERO.TL_BUTACA WHERE ID_Aeronave = 
+					(SELECT TOP 1 ID_Aeronave FROM EL_PUNTERO.TL_AERONAVE WHERE Pasaje_Codigo != 0 AND Matricula = Aeronave_Matricula AND Nro_Butaca = Butaca_Nro)),
+				 (SELECT TOP 1 ID_Viaje FROM EL_PUNTERO.TL_VIAJE WHERE ID_Aeronave = 
+					(SELECT TOP 1 ID_Aeronave FROM EL_PUNTERO.TL_AERONAVE WHERE Matricula = Aeronave_Matricula AND Fecha_Salida = FechaSalida))
 FROM gd_esquema.Maestra
 WHERE Pasaje_Codigo != 0);
 COMMIT

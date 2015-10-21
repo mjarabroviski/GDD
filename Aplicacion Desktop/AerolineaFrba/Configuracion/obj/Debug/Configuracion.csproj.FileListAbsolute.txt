@@ -1,0 +1,8 @@
+C:\Users\Melanie Jarabroviski\Documents\UTN\3ro\Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\Configuracion\obj\Debug\Configuracion.csprojResolveAssemblyReference.cache
+C:\Users\Melanie Jarabroviski\Documents\UTN\3ro\Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\Configuracion\obj\Debug\Configuracion.Properties.Resources.resources
+C:\Users\Melanie Jarabroviski\Documents\UTN\3ro\Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\Configuracion\obj\Debug\Configuracion.csproj.GenerateResource.Cache
+C:\Users\Melanie Jarabroviski\Documents\UTN\3ro\Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\Configuracion\bin\Debug\Configuracion.exe.config
+C:\Users\Melanie Jarabroviski\Documents\UTN\3ro\Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\Configuracion\bin\Debug\Configuracion.exe
+C:\Users\Melanie Jarabroviski\Documents\UTN\3ro\Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\Configuracion\bin\Debug\Configuracion.pdb
+C:\Users\Melanie Jarabroviski\Documents\UTN\3ro\Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\Configuracion\obj\Debug\Configuracion.exe
+C:\Users\Melanie Jarabroviski\Documents\UTN\3ro\Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\Configuracion\obj\Debug\Configuracion.pdb
