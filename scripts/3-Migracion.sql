@@ -103,46 +103,52 @@ UPDATE EL_PUNTERO.TL_RUTA
  COMMIT
  
  BEGIN TRANSACTION
- INSERT INTO EL_PUNTERO.TL_COMPRA(ID_Cliente,Fecha_Compra,ID_Tarjeta,ID_Administrador,Monto)
- (SELECT DISTINCT (SELECT TOP 1 ID_Cliente FROM EL_PUNTERO.TL_CLIENTE WHERE Apellido = gd_esquema.Maestra.Cli_Apellido AND Nombre = gd_esquema.Maestra.Cli_Nombre),
-				  (CASE WHEN gd_esquema.Maestra.Pasaje_FechaCompra = '1900-01-01 00:00:00.000' THEN gd_esquema.Maestra.Paquete_FechaCompra
-						WHEN gd_esquema.Maestra.Paquete_FechaCompra = '1900-01-01 00:00:00.000'  THEN gd_esquema.Maestra.Pasaje_FechaCompra
-					END),
-				  NULL,
-				  1,
-				  gd_esquema.Maestra.Paquete_Precio + gd_esquema.Maestra.Pasaje_Precio	
+ INSERT INTO EL_PUNTERO.TL_COMPRA(ID_Cliente,Fecha_Compra,ID_Tarjeta,ID_Administrador,Monto,Codigo_Pasaje,Codigo_Paquete)
+ (SELECT (SELECT ID_Cliente FROM EL_PUNTERO.TL_CLIENTE 
+			 WHERE Apellido = Cli_Apellido AND Nombre = Cli_Nombre AND Nro_Documento = Cli_Dni),
+		 (CASE WHEN Pasaje_FechaCompra = '1900-01-01 00:00:00.000' THEN Paquete_FechaCompra
+			 WHEN Paquete_FechaCompra = '1900-01-01 00:00:00.000'  THEN Pasaje_FechaCompra
+		  END),
+		  NULL,
+		  1,
+		 Paquete_Precio + Pasaje_Precio,
+		 [Pasaje_Codigo],
+		 [Paquete_Codigo]
  FROM gd_esquema.Maestra);
-COMMIT
-
-BEGIN TRANSACTION
-INSERT INTO EL_PUNTERO.TL_PASAJE(Id_Compra,Codigo_Pasaje,Precio,ID_Cliente,ID_Butaca,ID_Viaje)
-(SELECT DISTINCT (SELECT TOP 1 ID_Compra FROM EL_PUNTERO.TL_COMPRA C WHERE C.ID_Cliente =  
-					(SELECT TOP 1 ID_Cliente FROM EL_PUNTERO.TL_CLIENTE WHERE Nro_Documento = Cli_Dni AND Nombre = Cli_Nombre AND Apellido = Cli_Apellido)),
-				 [Pasaje_Codigo],
-				 [Pasaje_Precio],
-				 (SELECT TOP 1 ID_Cliente FROM EL_PUNTERO.TL_CLIENTE WHERE Nro_Documento = Cli_Dni AND Nombre = Cli_Nombre AND Apellido = Cli_Apellido),
-				 (SELECT TOP 1 ID_Butaca FROM EL_PUNTERO.TL_BUTACA WHERE ID_Aeronave = 
-					(SELECT TOP 1 ID_Aeronave FROM EL_PUNTERO.TL_AERONAVE WHERE Pasaje_Codigo != 0 AND Matricula = Aeronave_Matricula AND Nro_Butaca = Butaca_Nro)),
-				 (SELECT TOP 1 ID_Viaje FROM EL_PUNTERO.TL_VIAJE WHERE ID_Aeronave = 
-					(SELECT TOP 1 ID_Aeronave FROM EL_PUNTERO.TL_AERONAVE WHERE Matricula = Aeronave_Matricula AND Fecha_Salida = FechaSalida))
-FROM gd_esquema.Maestra
-WHERE Pasaje_Codigo != 0);
 COMMIT
 
 BEGIN TRANSACTION
 INSERT INTO EL_PUNTERO.TL_ENCOMIENDA(Codigo_Encomienda,Precio,ID_Compra,ID_Viaje,KG)
 (SELECT DISTINCT [Paquete_Codigo],
 				 [Paquete_Precio],
-				 (SELECT TOP 1 ID_Compra FROM EL_PUNTERO.TL_COMPRA C WHERE C.ID_Cliente =  (SELECT TOP 1 ID_Cliente FROM EL_PUNTERO.TL_CLIENTE WHERE Apellido = gd_esquema.Maestra.Cli_Apellido AND Nombre = gd_esquema.Maestra.Cli_Nombre)),
-				 (SELECT TOP 1 ID_Viaje FROM EL_PUNTERO.TL_VIAJE WHERE ID_Aeronave = (SELECT TOP 1 ID_Aeronave FROM EL_PUNTERO.TL_AERONAVE WHERE Matricula = Aeronave_Matricula AND Fecha_Salida = FechaSalida)),
+				 (SELECT ID_Compra FROM EL_PUNTERO.TL_COMPRA C WHERE C.Codigo_Paquete = Paquete_Codigo),
+				 (SELECT TOP 1 ID_Viaje FROM EL_PUNTERO.TL_VIAJE WHERE ID_Aeronave = (SELECT ID_Aeronave FROM EL_PUNTERO.TL_AERONAVE WHERE Matricula = Aeronave_Matricula AND Fecha_Salida = FechaSalida)),
 				 [Paquete_KG]				 
 FROM gd_esquema.Maestra
 WHERE Paquete_Codigo != 0);
 COMMIT
 
+BEGIN TRANSACTION
+INSERT INTO EL_PUNTERO.TL_PASAJE(Codigo_Pasaje,Precio,ID_Cliente,ID_Butaca,ID_Viaje,Id_Compra)
+(SELECT DISTINCT [Pasaje_Codigo],
+				 [Pasaje_Precio],
+				 (SELECT ID_Cliente FROM EL_PUNTERO.TL_CLIENTE WHERE Nro_Documento = Cli_Dni AND Nombre = Cli_Nombre AND Apellido = Cli_Apellido),
+				 (SELECT TOP 1 ID_Butaca FROM EL_PUNTERO.TL_BUTACA WHERE ID_Aeronave = 
+					(SELECT TOP 1 ID_Aeronave FROM EL_PUNTERO.TL_AERONAVE WHERE Pasaje_Codigo != 0 AND Matricula = Aeronave_Matricula AND Nro_Butaca = Butaca_Nro)),
+				 (SELECT TOP 1 ID_Viaje FROM EL_PUNTERO.TL_VIAJE WHERE ID_Aeronave = 
+					(SELECT TOP 1 ID_Aeronave FROM EL_PUNTERO.TL_AERONAVE WHERE Matricula = Aeronave_Matricula AND Fecha_Salida = FechaSalida)),
+				 (SELECT ID_Compra FROM EL_PUNTERO.TL_COMPRA C WHERE C.Codigo_Pasaje = Pasaje_Codigo)
+FROM gd_esquema.Maestra
+WHERE Pasaje_Codigo != 0);
+COMMIT
 
+BEGIN TRANSACTION
+ALTER TABLE EL_PUNTERO.TL_COMPRA
+DROP COLUMN Codigo_Pasaje
 
-
+ALTER TABLE EL_PUNTERO.TL_COMPRA
+DROP COLUMN Codigo_Paquete
+COMMIT
 
  
 

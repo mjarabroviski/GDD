@@ -12,5 +12,11 @@ namespace Persistencia.Entidades
         {
             public static String SPGetRoles = "EL_PUNTERO.GetRoles";
         }
+
+        public static class Funcionalidad
+        {
+            public static String SPGetFuncionalidades = "EL_PUNTERO.GetFuncionalidades";
+            public static String SPGetFuncionalidadesPorRol = "EL_PUNTERO.GetAFuncionalidadesPorRol";
+        }
     }
 }

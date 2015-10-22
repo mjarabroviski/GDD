@@ -5,13 +5,26 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE [EL_PUNTERO].[Actualizar_Porcentajes_Servicio]
+CREATE PROCEDURE [EL_PUNTERO].[GetAFuncionalidadesPorRol]
+@ID_Rol int
 AS
 BEGIN
-	UPDATE [EL_PUNTERO].[TL_Servicio] 
-	SET Porcentaje = 10 
-	WHERE ID_Servicio = 1
+	SET NOCOUNT ON;
+	
+	SELECT *
+	FROM [EL_PUNTERO].[TL_Funcionalidad] F
+	INNER JOIN [EL_PUNTERO].[TL_Funcionalidad_Rol] FR ON F.ID_Funcionalidad = FR.ID_Funcionalidad
+	WHERE FR.ID_Rol = @ID_Rol 
 END
 GO
 
+CREATE PROCEDURE [EL_PUNTERO].[GetRoles]
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	SELECT *
+	FROM [EL_PUNTERO].[TL_Rol] 
+END
+GO
 COMMIT

@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
 using Configuracion;
+using System.Configuration;
+
 
 namespace Persistencia.Entidades
 {
@@ -41,7 +43,7 @@ namespace Persistencia.Entidades
                 _connection = new SqlConnection(ConfiguracionDeVariables.ConnectionString);
                 _connection.Open();
             }
-            catch
+            catch(Exception e)
             {
                 throw new Exception("Error iniciando la conexion con la base de datos.");
             }

@@ -205,7 +205,9 @@ CREATE TABLE [EL_PUNTERO].[TL_COMPRA](
 	[Monto] numeric(18,2) NOT NULL,
 	[Fecha_Compra] datetime NOT NULL,
 	[ID_Tarjeta] int,
-	[ID_Administrador] int NOT NULL
+	[ID_Administrador] int NOT NULL,
+	[Codigo_Pasaje] int,
+	[Codigo_Paquete] int
 );
 
 CREATE TABLE [EL_PUNTERO].[TL_REGISTRO_MILLAS](

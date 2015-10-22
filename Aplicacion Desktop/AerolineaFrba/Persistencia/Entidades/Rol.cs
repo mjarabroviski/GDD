@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 
 namespace Persistencia.Entidades
 {
-    class Rol : IMapable
+    public class Rol : IMapable
     {
         public int ID { get; set; }
         public string Descripcion { get; set; }
@@ -16,7 +16,7 @@ namespace Persistencia.Entidades
 
         public List<Funcionalidad> Funcionalidades
         {
-            get { return _funcionalidades ?? (_funcionalidades = FuncionalidadPersistencia.GetByRole(this)); }
+            get { return _funcionalidades ?? (_funcionalidades = FuncionalidadPersistencia.ObtenerPorRol(this)); }
             set { _funcionalidades = value; }
         }
 
