@@ -30,7 +30,7 @@
         {
             this.CboRoles = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.LblEntrar = new System.Windows.Forms.Label();
+            this.btnEntrar = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // CboRoles
@@ -38,7 +38,7 @@
             this.CboRoles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CboRoles.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CboRoles.FormattingEnabled = true;
-            this.CboRoles.Location = new System.Drawing.Point(58, 77);
+            this.CboRoles.Location = new System.Drawing.Point(65, 62);
             this.CboRoles.Name = "CboRoles";
             this.CboRoles.Size = new System.Drawing.Size(296, 21);
             this.CboRoles.TabIndex = 15;
@@ -46,36 +46,35 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(55, 52);
+            this.label3.Location = new System.Drawing.Point(62, 46);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(110, 13);
+            this.label3.Size = new System.Drawing.Size(72, 13);
             this.label3.TabIndex = 14;
-            this.label3.Text = "SELECCIONAR ROL:";
+            this.label3.Text = "ROL A USAR";
             // 
-            // LblEntrar
+            // btnEntrar
             // 
-            this.LblEntrar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.LblEntrar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.LblEntrar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.LblEntrar.ForeColor = System.Drawing.Color.White;
-            this.LblEntrar.Location = new System.Drawing.Point(155, 141);
-            this.LblEntrar.Name = "LblEntrar";
-            this.LblEntrar.Size = new System.Drawing.Size(88, 32);
-            this.LblEntrar.TabIndex = 13;
-            this.LblEntrar.Text = "ACEPTAR";
-            this.LblEntrar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.LblEntrar.Click += new System.EventHandler(this.LblEntrar_Click);
+            this.btnEntrar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.btnEntrar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.btnEntrar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEntrar.ForeColor = System.Drawing.Color.White;
+            this.btnEntrar.Location = new System.Drawing.Point(162, 126);
+            this.btnEntrar.Name = "btnEntrar";
+            this.btnEntrar.Size = new System.Drawing.Size(88, 32);
+            this.btnEntrar.TabIndex = 13;
+            this.btnEntrar.Text = "LISTO";
+            this.btnEntrar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnEntrar.Click += new System.EventHandler(this.btnEntrar_Click);
             // 
             // SeleccionDeUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(408, 206);
+            this.ClientSize = new System.Drawing.Size(409, 206);
             this.Controls.Add(this.CboRoles);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.LblEntrar);
+            this.Controls.Add(this.btnEntrar);
             this.Name = "SeleccionDeUsuario";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SeleccionDeUsuario";
             this.Load += new System.EventHandler(this.SeleccionDeUsuario_Load);
             this.ResumeLayout(false);
@@ -87,6 +86,6 @@
 
         private System.Windows.Forms.ComboBox CboRoles;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label LblEntrar;
+        private System.Windows.Forms.Label btnEntrar;
     }
 }

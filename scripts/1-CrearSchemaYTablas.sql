@@ -90,7 +90,6 @@ CREATE TABLE [EL_PUNTERO].[TL_FUNCIONALIDAD](
 );
 
 INSERT INTO EL_PUNTERO.TL_FUNCIONALIDAD(Descripcion) VALUES ('ABM de Rol');
-INSERT INTO EL_PUNTERO.TL_FUNCIONALIDAD(Descripcion) VALUES ('Login y seguridad');
 INSERT INTO EL_PUNTERO.TL_FUNCIONALIDAD(Descripcion) VALUES ('Registro de Usuario');
 INSERT INTO EL_PUNTERO.TL_FUNCIONALIDAD(Descripcion) VALUES ('ABM de Ciudad');
 INSERT INTO EL_PUNTERO.TL_FUNCIONALIDAD(Descripcion) VALUES ('ABM de Ruta Aerea');
@@ -122,7 +121,6 @@ INSERT INTO EL_PUNTERO.TL_FUNCIONALIDAD_ROL (ID_Rol, ID_Funcionalidad) (
 		FROM EL_PUNTERO.TL_Rol, EL_PUNTERO.TL_Funcionalidad
 		WHERE EL_PUNTERO.TL_Rol.Descripcion = 'Administrador'
 		AND (EL_PUNTERO.TL_Funcionalidad.Descripcion = 'ABM de Rol'
-		OR EL_PUNTERO.TL_Funcionalidad.Descripcion = 'Login y seguridad'
 		OR EL_PUNTERO.TL_Funcionalidad.Descripcion = 'Consulta de millas de pasajero frecuente'
 		OR EL_PUNTERO.TL_Funcionalidad.Descripcion = 'Registro de Usuario'
 		OR EL_PUNTERO.TL_Funcionalidad.Descripcion = 'ABM de Ciudad'

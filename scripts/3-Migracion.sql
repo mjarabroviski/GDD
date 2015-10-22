@@ -80,7 +80,15 @@ UPDATE EL_PUNTERO.TL_RUTA
 			Ruta_Ciudad_Origen = (SELECT Nombre_Ciudad FROM EL_PUNTERO.TL_CIUDAD WHERE ID_Ciudad = ID_Ciudad_Origen) AND 
 			Ruta_Ciudad_Destino = (SELECT Nombre_Ciudad FROM EL_PUNTERO.TL_CIUDAD WHERE ID_Ciudad = ID_Ciudad_Destino) AND  
 			gd_esquema.Maestra.Ruta_Precio_BasePasaje != 0
- COMMIT
+
+ALTER TABLE EL_PUNTERO.TL_RUTA
+ALTER COLUMN Precio_Base_KG 
+numeric(18,2) NOT NULL;
+
+ALTER TABLE EL_PUNTERO.TL_RUTA
+ALTER COLUMN Precio_Base_Pasaje 
+numeric(18,2) NOT NULL;
+COMMIT
 
  BEGIN TRANSACTION
  INSERT INTO EL_PUNTERO.TL_VIAJE (Fecha_Salida,Fecha_Llegada,Fecha_Llegada_Estimada,ID_Aeronave,ID_Ruta)
@@ -105,7 +113,7 @@ UPDATE EL_PUNTERO.TL_RUTA
  BEGIN TRANSACTION
  INSERT INTO EL_PUNTERO.TL_COMPRA(ID_Cliente,Fecha_Compra,ID_Tarjeta,ID_Administrador,Monto,Codigo_Pasaje,Codigo_Paquete)
  (SELECT (SELECT ID_Cliente FROM EL_PUNTERO.TL_CLIENTE 
-			 WHERE Apellido = Cli_Apellido AND Nombre = Cli_Nombre AND Nro_Documento = Cli_Dni),
+			 WHERE Nro_Documento = Cli_Dni AND Apellido = Cli_Apellido AND Nombre = Cli_Nombre),
 		 (CASE WHEN Pasaje_FechaCompra = '1900-01-01 00:00:00.000' THEN Paquete_FechaCompra
 			 WHEN Paquete_FechaCompra = '1900-01-01 00:00:00.000'  THEN Pasaje_FechaCompra
 		  END),

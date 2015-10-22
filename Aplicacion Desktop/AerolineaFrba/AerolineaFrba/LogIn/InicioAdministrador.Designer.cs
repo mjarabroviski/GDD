@@ -30,10 +30,11 @@
         {
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.LblNuevo = new System.Windows.Forms.Label();
+            this.btnNuevo = new System.Windows.Forms.Label();
             this.TxtContrasena = new System.Windows.Forms.TextBox();
             this.TxtUsuario = new System.Windows.Forms.TextBox();
-            this.LblEntrar = new System.Windows.Forms.Label();
+            this.btnEntrar = new System.Windows.Forms.Label();
+            this.btnVolver = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label3
@@ -54,18 +55,18 @@
             this.label2.TabIndex = 10;
             this.label2.Text = "CONTRASEÑA";
             // 
-            // LblNuevo
+            // btnNuevo
             // 
-            this.LblNuevo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.LblNuevo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.LblNuevo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.LblNuevo.ForeColor = System.Drawing.Color.White;
-            this.LblNuevo.Location = new System.Drawing.Point(191, 147);
-            this.LblNuevo.Name = "LblNuevo";
-            this.LblNuevo.Size = new System.Drawing.Size(88, 32);
-            this.LblNuevo.TabIndex = 9;
-            this.LblNuevo.Text = "REGISTRARME";
-            this.LblNuevo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnNuevo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.btnNuevo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.btnNuevo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnNuevo.ForeColor = System.Drawing.Color.White;
+            this.btnNuevo.Location = new System.Drawing.Point(191, 147);
+            this.btnNuevo.Name = "btnNuevo";
+            this.btnNuevo.Size = new System.Drawing.Size(88, 32);
+            this.btnNuevo.TabIndex = 9;
+            this.btnNuevo.Text = "REGISTRARME";
+            this.btnNuevo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // TxtContrasena
             // 
@@ -84,30 +85,46 @@
             this.TxtUsuario.Size = new System.Drawing.Size(296, 20);
             this.TxtUsuario.TabIndex = 7;
             // 
-            // LblEntrar
+            // btnEntrar
             // 
-            this.LblEntrar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.LblEntrar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.LblEntrar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.LblEntrar.ForeColor = System.Drawing.Color.White;
-            this.LblEntrar.Location = new System.Drawing.Point(97, 147);
-            this.LblEntrar.Name = "LblEntrar";
-            this.LblEntrar.Size = new System.Drawing.Size(88, 32);
-            this.LblEntrar.TabIndex = 6;
-            this.LblEntrar.Text = "ACEPTAR";
-            this.LblEntrar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnEntrar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.btnEntrar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.btnEntrar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEntrar.ForeColor = System.Drawing.Color.White;
+            this.btnEntrar.Location = new System.Drawing.Point(97, 147);
+            this.btnEntrar.Name = "btnEntrar";
+            this.btnEntrar.Size = new System.Drawing.Size(88, 32);
+            this.btnEntrar.TabIndex = 6;
+            this.btnEntrar.Text = "ACEPTAR";
+            this.btnEntrar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnEntrar.Click += new System.EventHandler(this.btnEntrar_Click);
+            // 
+            // btnVolver
+            // 
+            this.btnVolver.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.btnVolver.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.btnVolver.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnVolver.ForeColor = System.Drawing.Color.White;
+            this.btnVolver.Location = new System.Drawing.Point(330, 176);
+            this.btnVolver.Name = "btnVolver";
+            this.btnVolver.Size = new System.Drawing.Size(78, 32);
+            this.btnVolver.TabIndex = 12;
+            this.btnVolver.Text = "VOLVER";
+            this.btnVolver.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // InicioAdministrador
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(408, 206);
+            this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.LblNuevo);
+            this.Controls.Add(this.btnNuevo);
             this.Controls.Add(this.TxtContrasena);
             this.Controls.Add(this.TxtUsuario);
-            this.Controls.Add(this.LblEntrar);
+            this.Controls.Add(this.btnEntrar);
             this.Name = "InicioAdministrador";
             this.Text = "InicioAdministrador";
             this.ResumeLayout(false);
@@ -119,9 +136,10 @@
 
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label LblNuevo;
+        private System.Windows.Forms.Label btnNuevo;
         private System.Windows.Forms.TextBox TxtContrasena;
         private System.Windows.Forms.TextBox TxtUsuario;
-        private System.Windows.Forms.Label LblEntrar;
+        private System.Windows.Forms.Label btnEntrar;
+        private System.Windows.Forms.Label btnVolver;
     }
 }
