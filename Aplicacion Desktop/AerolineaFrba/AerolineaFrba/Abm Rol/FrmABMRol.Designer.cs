@@ -99,7 +99,7 @@
             // 
             // BtnLimpiar
             // 
-            this.BtnLimpiar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(89)))), ((int)(((byte)(182)))));
+            this.BtnLimpiar.BackColor = System.Drawing.Color.DodgerBlue;
             this.BtnLimpiar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.BtnLimpiar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnLimpiar.ForeColor = System.Drawing.Color.White;
@@ -109,10 +109,11 @@
             this.BtnLimpiar.TabIndex = 25;
             this.BtnLimpiar.Text = "LIMPIAR";
             this.BtnLimpiar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.BtnLimpiar.Click += new System.EventHandler(this.BtnLimpiar_Click_1);
             // 
             // BtnBuscar
             // 
-            this.BtnBuscar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(89)))), ((int)(((byte)(182)))));
+            this.BtnBuscar.BackColor = System.Drawing.Color.DodgerBlue;
             this.BtnBuscar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.BtnBuscar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnBuscar.ForeColor = System.Drawing.Color.White;
@@ -122,6 +123,7 @@
             this.BtnBuscar.TabIndex = 24;
             this.BtnBuscar.Text = "BUSCAR";
             this.BtnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.BtnBuscar.Click += new System.EventHandler(this.BtnBuscar_Click);
             // 
             // ChkExacta
             // 
@@ -135,11 +137,11 @@
             // 
             // BtnListo
             // 
-            this.BtnListo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(89)))), ((int)(((byte)(182)))));
+            this.BtnListo.BackColor = System.Drawing.Color.DodgerBlue;
             this.BtnListo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.BtnListo.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnListo.ForeColor = System.Drawing.Color.White;
-            this.BtnListo.Location = new System.Drawing.Point(31, 445);
+            this.BtnListo.Location = new System.Drawing.Point(588, 445);
             this.BtnListo.Name = "BtnListo";
             this.BtnListo.Size = new System.Drawing.Size(88, 32);
             this.BtnListo.TabIndex = 36;
@@ -149,11 +151,11 @@
             // 
             // BtnNuevo
             // 
-            this.BtnNuevo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(89)))), ((int)(((byte)(182)))));
+            this.BtnNuevo.BackColor = System.Drawing.Color.DodgerBlue;
             this.BtnNuevo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.BtnNuevo.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnNuevo.ForeColor = System.Drawing.Color.White;
-            this.BtnNuevo.Location = new System.Drawing.Point(564, 445);
+            this.BtnNuevo.Location = new System.Drawing.Point(31, 445);
             this.BtnNuevo.Name = "BtnNuevo";
             this.BtnNuevo.Size = new System.Drawing.Size(112, 32);
             this.BtnNuevo.TabIndex = 35;
@@ -174,6 +176,7 @@
             this.Controls.Add(this.BtnNuevo);
             this.Name = "FrmABMRol";
             this.Text = "FrmABMRol";
+            this.Load += new System.EventHandler(this.FrmABMRol_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DgvRol)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();

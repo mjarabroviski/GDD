@@ -43,7 +43,7 @@ namespace Persistencia.Entidades
                 _connection = new SqlConnection(ConfiguracionDeVariables.ConnectionString);
                 _connection.Open();
             }
-            catch(Exception e)
+            catch(Exception)
             {
                 throw new Exception("Error iniciando la conexion con la base de datos.");
             }

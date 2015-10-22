@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Configuracion;
 
-namespace AerolineaFrba
+namespace Herramientas
 {
     static class Program
     {
@@ -15,12 +14,9 @@ namespace AerolineaFrba
         [STAThread]
         static void Main()
         {
-            ConfiguracionDeVariables.Iniciar();
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new LogIn.SeleccionDeUsuario());
-            Application.Run(new Abm_Rol.FrmABMRol());
+            Application.Run(new Form1());
         }
     }
 }

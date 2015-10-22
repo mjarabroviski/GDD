@@ -20,6 +20,11 @@ namespace Persistencia.Entidades
             set { _funcionalidades = value; }
         }
 
+        public Rol AgregarFuncionalidades() {
+            this._funcionalidades = this.Funcionalidades;  
+            return this;
+        }
+
         //Implement of IMapable
         public IMapable Map(SqlDataReader reader)
         {

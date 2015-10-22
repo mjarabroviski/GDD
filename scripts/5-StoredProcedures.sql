@@ -24,7 +24,33 @@ BEGIN
 	SET NOCOUNT ON;
 	
 	SELECT *
-	FROM [EL_PUNTERO].[TL_Rol] 
+	FROM [EL_PUNTERO].[TL_Rol]
+	WHERE Habilitado = 1; 
 END
 GO
+
+CREATE PROCEDURE [EL_PUNTERO].[GetUsuarios]
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	SELECT *
+	FROM [EL_PUNTERO].[TL_Usuario]
+	WHERE Habilitado = 1; 
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[GetUsuarioPorUsername]
+@User nvarchar(255)
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	SELECT *
+	FROM [EL_PUNTERO].[TL_Usuario]
+	WHERE Username = User; 
+END
+GO
+
+
 COMMIT

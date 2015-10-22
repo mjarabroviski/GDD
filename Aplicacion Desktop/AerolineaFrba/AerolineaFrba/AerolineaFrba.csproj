@@ -152,6 +152,9 @@
     <EmbeddedResource Include="Abm Rol\FrmABMRol.resx">
       <DependentUpon>FrmABMRol.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Abm Rol\FrmABMRolAltasModificaciones.resx">
+      <DependentUpon>FrmABMRolAltasModificaciones.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LogIn\ContraseñaIncorrecta.resx">
       <DependentUpon>ContraseñaIncorrecta.cs</DependentUpon>
     </EmbeddedResource>
