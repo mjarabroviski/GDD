@@ -1,0 +1,123 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using Persistencia;
+using Persistencia.Entidades;
+
+namespace AerolineaFrba.Abm_Rol
+{
+    public partial class FrmABMRol : Form
+    {
+        public FrmABMRol()
+        {
+            InitializeComponent();
+        }
+
+        private void BtnListo_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void BtnNuevo_Click(object sender, EventArgs e)
+        {
+            FrmABMRolAltasModificaciones frmABMRolAM = new FrmABMRolAltasModificaciones();
+            frmABMRolAM.ShowDialog();
+
+            //Paso NULL para volver a obtener todos los registros de la base
+            ActualizarPantalla(null);
+        }
+
+        private void ActualizarPantalla(List<Rol> roles)
+        {
+            //Borro lo que esta actualmente en la grilla
+            BorrarDataGridView();
+            var rolesDictionary = new Dictionary<int, Rol>();
+
+            #region Get the dictionary of visibilities
+
+            //El datasource debe ser todos los registros de roles almacenados en la base de datos
+            if (roles == null)
+            {
+                BorrarFiltrosUI();
+                List<Rol> _roles = RolPersistencia.ObtenerTodos();
+                LstFuncionalidades.DataSource = _roles[0].Funcionalidades;
+                //Convierto todos los roles a un diccionario con entradas de la forma: (ID, Objeto)
+                rolesDictionary = _roles.ToDictionary(a => a.ID, a => a);
+            }
+            else
+            {
+                //El datasource debe ser una lista de roles obtenidas por parametro
+                LstFuncionalidades.DataSource = roles[0].Funcionalidades;
+                //Convierto la lista de roles a un diccionario con entradas de la forma: (ID, Objeto)
+                rolesDictionary = roles.ToDictionary(a => a.ID, a => a);
+            }
+
+            #endregion
+
+            //Creo un bind para luego setearselo directamente a la DataGridView
+            var bind = rolesDictionary.Values.Select(a => new
+            {
+                Descripcion = a.Descripcion,
+                Habilitado = a.Habilitado
+            });
+            DgvRol.DataSource = bind.ToList();
+
+            //Agrego los botones a cada fila para poder modificar/borrar cada rol
+            AgregarBotonesColumnas();
+
+            LstFuncionalidades.DisplayMember = "Descripcion";
+            LstFuncionalidades.ValueMember = "ID";
+        }
+
+        private void BorrarDataGridView()
+        {
+            DgvRol.DataSource = null;
+            DgvRol.Columns.Clear();
+        }
+
+        private void BorrarFiltrosUI()
+        {
+            TxtDescripcion.Text = string.Empty;
+        }
+
+
+        private void AgregarBotonesColumnas()
+        {
+            //Creo la columna de modificar
+            var updateColumn = new DataGridViewButtonColumn
+            {
+                Text = "Modificar",
+                UseColumnTextForButtonValue = true,
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+            };
+            //Creo la columna de borrar
+            var deleteColumn = new DataGridViewButtonColumn
+            {
+                Text = "Eliminar",
+                UseColumnTextForButtonValue = true,
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+            };
+
+            //Agrego las columnas nuevas
+            DgvRol.Columns.Add(updateColumn);
+            DgvRol.Columns.Add(deleteColumn);
+        }
+
+        private void LstFuncionalidades_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DgvRol_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+    }
+}
