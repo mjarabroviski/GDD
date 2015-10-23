@@ -13,12 +13,16 @@ namespace Persistencia.Entidades
             public static String SPGetRoles = "EL_PUNTERO.GetRoles";
             public static String SPGetRolPorNombre = "EL_PUNTERO.GetRolPorNombre";
             public static String SPGetRolPorNombreComo = "EL_PUNTERO.GetRolPorNombreComo";
+            public static String SPInsertarFuncionalidadPorRol = "EL_PUNTERO.InsertarFuncionalidadPorRol";
+            public static String SPEliminarFuncionalidadesPorRol = "EL_PUNTERO.EliminarFuncionalidadesPorRol";
+            public static String SPInsertarRol = "EL_PUNTERO.InsertarRol";
+            public static String SPActualizarRolPorID = "EL_PUNTERO.ActualizarRolPorID";
         }
 
         public static class Funcionalidad
         {
             public static String SPGetFuncionalidades = "EL_PUNTERO.GetFuncionalidades";
-            public static String SPGetFuncionalidadesPorRol = "EL_PUNTERO.GetAFuncionalidadesPorRol";
+            public static String SPGetFuncionalidadesPorRol = "EL_PUNTERO.GetFuncionalidadesPorRol";
         }
 
         public static class Usuario { 

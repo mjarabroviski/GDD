@@ -160,7 +160,7 @@ namespace AerolineaFrba.Abm_Rol
             }
         }
 
-        private void FrmABMRol_Load(object sender, EventArgs e)
+        private void FrmABMRol_Load(object sender, EventArgs e)  //TODO: Mostrar en la lista a los roles que estan inhabilitados también
         {
             ActualizarPantalla(null);
         }
@@ -190,13 +190,13 @@ namespace AerolineaFrba.Abm_Rol
                 //El usuario tocó el botón de modificar
                 if (e.ColumnIndex == 2)
                 {
-                    var insertUpdateVisibility = new FrmABMRolAltasModificaciones(rolSeleccionado);
-                    insertUpdateVisibility.ShowDialog();
+                    var altasModificacionesVisibilidad = new FrmABMRolAltasModificaciones(rolSeleccionado);
+                    altasModificacionesVisibilidad.ShowDialog();
 
                     //Si modificó satisfactoriamante el rol, actualizo la grilla
-                    if (insertUpdateVisibility.AccionCompleta)
+                    if (altasModificacionesVisibilidad.AccionCompleta)
                         ActualizarPantalla(null);
-                }/*
+                }
                 else if (e.ColumnIndex == 3)
                 {
                     //El usuario tocó el botón de eliminar
@@ -208,10 +208,10 @@ namespace AerolineaFrba.Abm_Rol
                         return;
                     }
 
-                    //Esta tratando de eliminar el rol con el que esta logueado (no lo permito)
-                    if (rolSeleccionado.ID == SessionManager.CurrentRol.ID)
+                    //Esta tratando de eliminar el rol administrador (no lo permito)
+                    if (rolSeleccionado.Descripcion == "Administrador")
                     {
-                        MessageBox.Show("No se puede eliminar el rol ya que es el rol con el que actualmente se encuentra logueado", "Atencion");
+                        MessageBox.Show("No se puede eliminar el rol administrador", "Atencion");
                         return;
                     }
 
@@ -226,7 +226,6 @@ namespace AerolineaFrba.Abm_Rol
                         ActualizarPantalla(null);
                     }
                 }
-            */
             }
         }
          
