@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Persistencia.Entidades;
 using Herramientas;
+using System.Data.SqlClient;
 
 namespace Persistencia
 {
@@ -48,7 +49,7 @@ namespace Persistencia
             return UsuarioPersistencia.ObtenerPorUserName(userName);
         }
 
-        public static void Update(Usuario user)
+        public static void ActualizarPorContrasena(Usuario user)
         {
             var param = new List<SPParameter>
                 {
@@ -56,7 +57,7 @@ namespace Persistencia
                     new SPParameter("Cant_Intentos", user.CantIntentos),
                     new SPParameter("Habilitado", user.Habilitado)
                 };
-            var sp = new StoreProcedure(DBQueries.Usuario.SPUpdateUsuario, param);
+            var sp = new StoreProcedure(DBQueries.Usuario.SPActualizarUsuarioPorContraIncorrecta, param);
 
             sp.ExecuteNonQuery(null);
         }
@@ -72,5 +73,18 @@ namespace Persistencia
             sp.ExecuteNonQuery(null);
         }
 
+        public static void InsertarUsuario(Usuario user)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("Username", user.Username), 
+                    new SPParameter("Password", user.Contrasena),
+                    new SPParameter("ID_Rol", user.Rol.ID)
+                };
+
+            var sp = new StoreProcedure(DBQueries.Usuario.SPInsertarUsuario, param);
+
+            sp.ExecuteNonQuery(null);
+        }
     }
 }

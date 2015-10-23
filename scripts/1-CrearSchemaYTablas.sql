@@ -57,15 +57,6 @@ INSERT INTO EL_PUNTERO.TL_TIPO_DOCUMENTO (Descripcion) VALUES ('CI');
 INSERT INTO EL_PUNTERO.TL_TIPO_DOCUMENTO (Descripcion) VALUES ('LC');
 INSERT INTO EL_PUNTERO.TL_TIPO_DOCUMENTO (Descripcion) VALUES ('LE');
 
-CREATE TABLE [EL_PUNTERO].[TL_ADMINISTRADOR] (
-	[ID_Administrador] int IDENTITY (1,1),
-	[ID_Usuario] int NOT NULL,
-	[Nombre] nvarchar(255),
-	[Apellido] nvarchar(255),
-	[ID_Tipo_Documento] int,
-	[Nro_Documento] numeric(18,0) 
-);
-
 CREATE TABLE [EL_PUNTERO].[TL_USUARIO] (
 	[ID_Usuario] int IDENTITY (1,1),
 	[ID_Rol] int NOT NULL,
@@ -185,7 +176,7 @@ CREATE TABLE [EL_PUNTERO].[TL_DEVOLUCION](
 	[Fecha_Devolucion] datetime NOT NULL,
 	[Motivo] nvarchar(100),
 	[ID_Compra] int NOT NULL,
-	[ID_Administrador] int NOT NULL,
+	[ID_Usuario] int NOT NULL,
 );
 
 CREATE TABLE [EL_PUNTERO].[TL_ENCOMIENDA](
@@ -203,7 +194,7 @@ CREATE TABLE [EL_PUNTERO].[TL_COMPRA](
 	[Monto] numeric(18,2) NOT NULL,
 	[Fecha_Compra] datetime NOT NULL,
 	[ID_Tarjeta] int,
-	[ID_Administrador] int NOT NULL,
+	[ID_Usuario] int NOT NULL,
 	[Codigo_Pasaje] int,
 	[Codigo_Paquete] int
 );

@@ -105,13 +105,10 @@ COMMIT
  BEGIN TRANSACTION
  INSERT INTO EL_PUNTERO.TL_USUARIO (ID_Rol,Username,Password,Cant_Intentos)
  VALUES (2,'admin1','123',3);
-
- INSERT INTO EL_PUNTERO.TL_ADMINISTRADOR(Nombre,Apellido,ID_Tipo_Documento,Nro_Documento,ID_Usuario)
- VALUES ('juan','perez',1,16589754,1);
  COMMIT
  
  BEGIN TRANSACTION
- INSERT INTO EL_PUNTERO.TL_COMPRA(ID_Cliente,Fecha_Compra,ID_Tarjeta,ID_Administrador,Monto,Codigo_Pasaje,Codigo_Paquete)
+ INSERT INTO EL_PUNTERO.TL_COMPRA(ID_Cliente,Fecha_Compra,ID_Tarjeta,ID_Usuario,Monto,Codigo_Pasaje,Codigo_Paquete)
  (SELECT (SELECT ID_Cliente FROM EL_PUNTERO.TL_CLIENTE 
 			 WHERE Nro_Documento = Cli_Dni AND Apellido = Cli_Apellido AND Nombre = Cli_Nombre),
 		 (CASE WHEN Pasaje_FechaCompra = '1900-01-01 00:00:00.000' THEN Paquete_FechaCompra

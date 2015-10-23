@@ -111,11 +111,11 @@
     <Compile Include="Generacion Viaje\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Home Administrador\Home Administrador.cs">
+    <Compile Include="Home Administrador\HomeAdministrador.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Home Administrador\Home Administrador.Designer.cs">
-      <DependentUpon>Home Administrador.cs</DependentUpon>
+    <Compile Include="Home Administrador\HomeAdministrador.Designer.cs">
+      <DependentUpon>HomeAdministrador.cs</DependentUpon>
     </Compile>
     <Compile Include="Home Cliente\HomeCliente.cs">
       <SubType>Form</SubType>
@@ -149,11 +149,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Registro de Usuario\Form1.cs">
+    <Compile Include="Registro de Usuario\RegistroDeUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Registro de Usuario\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Registro de Usuario\RegistroDeUsuario.Designer.cs">
+      <DependentUpon>RegistroDeUsuario.cs</DependentUpon>
     </Compile>
     <Compile Include="Registro Llegada Destino\Form1.cs">
       <SubType>Form</SubType>
@@ -161,7 +161,7 @@
     <Compile Include="Registro Llegada Destino\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-	<EmbeddedResource Include="Abm Rol\FrmABMRol.resx">
+    <EmbeddedResource Include="Abm Rol\FrmABMRol.resx">
       <DependentUpon>FrmABMRol.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Rol\FrmABMRolAltasModificaciones.resx">
@@ -185,6 +185,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Registro de Usuario\RegistroDeUsuario.resx">
+      <DependentUpon>RegistroDeUsuario.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>

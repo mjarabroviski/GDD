@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Persistencia;
+using Persistencia.Entidades;
 using Herramientas;
 
 namespace AerolineaFrba.LogIn
@@ -71,7 +72,7 @@ namespace AerolineaFrba.LogIn
                 {
                     user.CantIntentos -= 1;
                     if (user.CantIntentos == 0) user.Habilitado = false;
-                    UsuarioPersistencia.Update(user);
+                    UsuarioPersistencia.ActualizarPorContrasena(user);
                     MessageBox.Show("Contraseña incorrecta, por favor ingresela nuevamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     TxtContrasena.Text = "";
                     return 1;
@@ -86,7 +87,29 @@ namespace AerolineaFrba.LogIn
 
         private void InicioAdministrador_Load(object sender, EventArgs e)
         {
-            
+            btnNuevo.Enabled = false;
+        }
+
+        private void btnNuevo_Click(object sender, EventArgs e)
+        {
+            //Validacion que exista el usuario antes de cambiar contrasenia
+            Usuario user = UsuarioPersistencia.ObtenerPorUserName(TxtUsuario.Text);
+            if (user == null) {
+                MessageBox.Show("El usuario ingresado no existe en el sistema, por favor registrese","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                     LimpiarCampos();
+            }
+
+            Hide();
+            ResetearContrasena reset = new ResetearContrasena(user);
+            reset.ShowDialog();
+            Close();
+        }
+
+        private void TxtUsuario_TextChanged(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(TxtUsuario.Text)) {
+                btnNuevo.Enabled = true;
+            }
         }
     }
 }

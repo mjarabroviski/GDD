@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AerolineaFrba.Registro_de_Usuario
+namespace AerolineaFrba.Home_Administrador
 {
-    public partial class Form1 : Form
+    public partial class HomeAdministrador : Form
     {
-        public Form1()
+        public HomeAdministrador()
         {
             InitializeComponent();
         }

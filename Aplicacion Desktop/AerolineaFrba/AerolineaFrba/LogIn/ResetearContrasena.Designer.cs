@@ -83,8 +83,9 @@
             this.LblAceptar.TabIndex = 11;
             this.LblAceptar.Text = "ACEPTAR";
             this.LblAceptar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LblAceptar.Click += new System.EventHandler(this.LblAceptar_Click);
             // 
-            // ContraseñaIncorrecta
+            // ResetearContrasena
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -94,8 +95,9 @@
             this.Controls.Add(this.TxtContrasenaRepetida);
             this.Controls.Add(this.TxtContrasena);
             this.Controls.Add(this.LblAceptar);
-            this.Name = "ContraseñaIncorrecta";
+            this.Name = "ResetearContrasena";
             this.Text = "ContraseñaIncorrecta";
+            this.Load += new System.EventHandler(this.ResetearContrasena_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

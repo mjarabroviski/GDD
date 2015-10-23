@@ -40,7 +40,7 @@ namespace Persistencia
             var sp = new StoreProcedure(DBQueries.Rol.SPGetRolPorNombre, param);
 
             //Retorno una lista de Roles a partir de un ExecuteReader
-            var roles = sp.ExecuteReader<Rol>();
+            List<Rol> roles = sp.ExecuteReader<Rol>();
 
             if (roles == null || roles.Count == 0)
                 return null;

@@ -65,8 +65,9 @@
             this.btnNuevo.Name = "btnNuevo";
             this.btnNuevo.Size = new System.Drawing.Size(88, 32);
             this.btnNuevo.TabIndex = 9;
-            this.btnNuevo.Text = "REGISTRARME";
+            this.btnNuevo.Text = "CAMBIAR CONTRASEÑA";
             this.btnNuevo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
             // 
             // TxtContrasena
             // 
@@ -84,6 +85,7 @@
             this.TxtUsuario.Name = "TxtUsuario";
             this.TxtUsuario.Size = new System.Drawing.Size(296, 20);
             this.TxtUsuario.TabIndex = 7;
+            this.TxtUsuario.TextChanged += new System.EventHandler(this.TxtUsuario_TextChanged);
             // 
             // btnEntrar
             // 

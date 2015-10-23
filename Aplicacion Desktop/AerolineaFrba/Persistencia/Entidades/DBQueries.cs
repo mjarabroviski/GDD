@@ -26,8 +26,9 @@ namespace Persistencia.Entidades
             public static String SPGetUsuarioPorUsername = "EL_PUNTERO.GetUsuarioPorUsername";
             public static String SPGetRolPorUsuario = "EL_PUNTERO.GetRolPorUsuario";
             public static String SPInhabilitarUsuario = "EL_PUNTERO.InhabilitarUsuario";
-            public static String SPUpdateUsuario = "EL_PUNTERO.UpdateUsuario";
+            public static String SPActualizarUsuarioPorContraIncorrecta = "EL_PUNTERO.ActualizarUsuarioPorContraIncorrecta";
             public static String SPLimpiarIntentos = "EL_PUNTERO.LimpiarIntentos";
+            public static String SPInsertarUsuario = "EL_PUNTERO.InsertarUsuario";
         }
     }
 }
