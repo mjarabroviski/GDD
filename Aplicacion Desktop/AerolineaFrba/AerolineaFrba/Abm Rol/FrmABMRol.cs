@@ -193,7 +193,7 @@ namespace AerolineaFrba.Abm_Rol
                     insertUpdateVisibility.ShowDialog();
 
                     //Si modificó satisfactoriamante el rol, actualizo la grilla
-                    if (insertUpdateVisibility.CompleteAction)
+                    if (insertUpdateVisibility.AccionCompleta)
                         ActualizarPantalla(null);
                 }/*
                 else if (e.ColumnIndex == 3)

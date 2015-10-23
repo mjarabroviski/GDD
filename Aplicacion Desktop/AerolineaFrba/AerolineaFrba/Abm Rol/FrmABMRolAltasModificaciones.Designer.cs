@@ -107,6 +107,7 @@
             this.BtnGuardar.TabIndex = 34;
             this.BtnGuardar.Text = "GUARDAR";
             this.BtnGuardar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.BtnGuardar.Click += new System.EventHandler(this.BtnGuardar_Click);
             // 
             // label1
             // 

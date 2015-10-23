@@ -45,5 +45,10 @@ namespace AerolineaFrba.Abm_Rol
                 Close();
             }
         }
+
+        private void BtnGuardar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
