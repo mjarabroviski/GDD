@@ -8,7 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Persistencia;
-using Persistencia.Entidades;   
+using Persistencia.Entidades;
+using Herramientas; 
 
 namespace AerolineaFrba.Abm_Rol
 {
