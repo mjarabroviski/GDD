@@ -127,6 +127,7 @@
             this.Controls.Add(this.btnEntrar);
             this.Name = "InicioAdministrador";
             this.Text = "InicioAdministrador";
+            this.Load += new System.EventHandler(this.InicioAdministrador_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

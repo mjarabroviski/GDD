@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AerolineaFrba.LogIn
+namespace AerolineaFrba.Home_Cliente
 {
-    public partial class ContraseñaIncorrecta : Form
+    public partial class HomeCliente : Form
     {
-        public ContraseñaIncorrecta()
+        public HomeCliente()
         {
             InitializeComponent();
         }

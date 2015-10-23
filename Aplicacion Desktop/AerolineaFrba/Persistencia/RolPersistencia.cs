@@ -19,11 +19,11 @@ namespace Persistencia
 
         public static Rol ObtenerRolPorUsuario(Usuario usuario) {
             //Obtengo el rol del usuario
-            var param = new List<SPParameter> { new SPParameter("ID_Usuario", usuario.ID) };
+            var param = new List<SPParameter> { new SPParameter("ID_User", usuario.ID) };
             var sp = new StoreProcedure(DBQueries.Usuario.SPGetRolPorUsuario, param);
 
             //Retorno una lista de Roles a partir de un ExecuteReader
-            var roles = sp.ExecuteReader<Rol>();
+            List<Rol> roles = sp.ExecuteReader<Rol>();
 
             if (roles == null || roles.Count == 0)
                 return null;

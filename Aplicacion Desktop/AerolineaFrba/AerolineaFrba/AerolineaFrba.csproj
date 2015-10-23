@@ -105,17 +105,29 @@
     <Compile Include="Generacion Viaje\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Home Administrador\Home Administrador.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Home Administrador\Home Administrador.Designer.cs">
+      <DependentUpon>Home Administrador.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Home Cliente\HomeCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Home Cliente\HomeCliente.Designer.cs">
+      <DependentUpon>HomeCliente.cs</DependentUpon>
+    </Compile>
     <Compile Include="Listado Estadistico\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Listado Estadistico\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="LogIn\ContraseñaIncorrecta.cs">
+    <Compile Include="LogIn\ResetearContrasena.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LogIn\ContraseñaIncorrecta.Designer.cs">
-      <DependentUpon>ContraseñaIncorrecta.cs</DependentUpon>
+    <Compile Include="LogIn\ResetearContrasena.Designer.cs">
+      <DependentUpon>ResetearContrasena.cs</DependentUpon>
     </Compile>
     <Compile Include="LogIn\InicioAdministrador.cs">
       <SubType>Form</SubType>
@@ -143,8 +155,8 @@
     <Compile Include="Registro Llegada Destino\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="LogIn\ContraseñaIncorrecta.resx">
-      <DependentUpon>ContraseñaIncorrecta.cs</DependentUpon>
+    <EmbeddedResource Include="LogIn\ResetearContrasena.resx">
+      <DependentUpon>ResetearContrasena.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LogIn\InicioAdministrador.resx">
       <DependentUpon>InicioAdministrador.cs</DependentUpon>
@@ -178,6 +190,10 @@
     <ProjectReference Include="..\Configuracion\Configuracion.csproj">
       <Project>{e9a2f36a-7e2e-44df-babf-89871af8ca5b}</Project>
       <Name>Configuracion</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Herramientas\Herramientas.csproj">
+      <Project>{79e8affa-74fd-44b7-9db5-a31373ef2f60}</Project>
+      <Name>Herramientas</Name>
     </ProjectReference>
     <ProjectReference Include="..\Persistencia\Persistencia.csproj">
       <Project>{c6fc2403-073a-47ac-a2d3-15ad24d70fd5}</Project>

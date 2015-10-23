@@ -20,10 +20,10 @@ namespace Persistencia
         public static Usuario ObtenerPorUserName(string userName)
         {
             //Traigo el usuario cuyo nombre de usuario coincida con el del parametro
-            var param = new List<SPParameter> { new SPParameter("Username", userName) };
+            var param = new List<SPParameter> { new SPParameter("User", userName) };
             var sp = new StoreProcedure(DBQueries.Usuario.SPGetUsuarioPorUsername, param);
 
-            var users = sp.ExecuteReader<Usuario>();
+            List<Usuario> users = sp.ExecuteReader<Usuario>();
 
             if (users == null || users.Count == 0)
                 return null;
@@ -35,36 +35,41 @@ namespace Persistencia
         {
             var param = new List<SPParameter>
                 {
-                    new SPParameter("ID_Usuario", user.ID)
+                    new SPParameter("ID_User", user.ID)
                 };
             var sp = new StoreProcedure(DBQueries.Usuario.SPInhabilitarUsuario, param);
 
             sp.ExecuteNonQuery(null);
         }
 
-        public static Usuario Login(string userName, string password)
+        public static Usuario Login(string userName)
         {
             //Traigo el usuario cuyo nombre de usuario y contraseña coincidan con los parametros
-            var usuario = UsuarioPersistencia.ObtenerPorUserName(userName);
+            return UsuarioPersistencia.ObtenerPorUserName(userName);
+        }
 
-            if (usuario == null)
-                throw new Exception("El nombre de usuario ingresado no existe.");
+        public static void Update(Usuario user)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("ID_User", user.ID),
+                    new SPParameter("Cant_Intentos", user.CantIntentos),
+                    new SPParameter("Habilitado", user.Habilitado)
+                };
+            var sp = new StoreProcedure(DBQueries.Usuario.SPUpdateUsuario, param);
 
-            if (!usuario.Habilitado)
-            {
-                throw new Exception("No puede loguearse. El usuario se encuentra inhabilitado debido a supero el limite de intentos");
-            }
+            sp.ExecuteNonQuery(null);
+        }
 
-            if (usuario.Contrasena != SHA256Encriptador.Encode(password))
-            {
-                usuario.CantIntentos -= 1;
-                if (usuario.CantIntentos == 0)
-                UsuarioPersistencia.InhabilitarUser(usuario);
+        public static void LimpiarIntentos(Usuario user)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("ID_User", user.ID)
+                };
+            var sp = new StoreProcedure(DBQueries.Usuario.SPLimpiarIntentos, param);
 
-                throw new Exception("La contraseña ingresada no es valida.");
-            }
-
-            return usuario;
+            sp.ExecuteNonQuery(null);
         }
 
     }

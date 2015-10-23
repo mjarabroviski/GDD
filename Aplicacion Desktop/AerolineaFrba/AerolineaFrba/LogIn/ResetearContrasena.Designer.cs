@@ -1,6 +1,6 @@
 ﻿namespace AerolineaFrba.LogIn
 {
-    partial class ContraseñaIncorrecta
+    partial class ResetearContrasena
     {
         /// <summary>
         /// Required designer variable.

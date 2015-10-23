@@ -48,7 +48,7 @@ BEGIN
 	
 	SELECT *
 	FROM [EL_PUNTERO].[TL_Usuario]
-	WHERE Username = User; 
+	WHERE Username = @User; 
 END
 GO
 
@@ -60,7 +60,7 @@ BEGIN
 	
 	SELECT *
 	FROM [EL_PUNTERO].[TL_Rol]
-	WHERE ID_Rol = (SELECT ID_Rol FROM TL_Usuario WHERE ID_Usuario = ID_User);
+	WHERE ID_Rol = (SELECT ID_Rol FROM TL_Usuario WHERE ID_Usuario = @ID_User);
 END
 GO
 
@@ -72,8 +72,36 @@ BEGIN
 	
 	UPDATE [EL_PUNTERO].[TL_Usuario]
 	SET Habilitado = 0
-	WHERE ID_Usuario = ID_User;
+	WHERE ID_Usuario = @ID_User;
 END
 GO
+
+CREATE PROCEDURE [EL_PUNTERO].[UpdateUsuario]
+@ID_User int,
+@Cant_Intentos int,
+@Habilitado bit
+
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	UPDATE [EL_PUNTERO].[TL_Usuario]
+	SET Habilitado = @Habilitado, Cant_Intentos = @Cant_Intentos
+	WHERE ID_Usuario = @ID_User;
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[LimpiarIntentos]
+@ID_User int
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	UPDATE [EL_PUNTERO].[TL_Usuario]
+	SET Cant_Intentos = 3
+	WHERE ID_Usuario = @ID_User;
+END
+GO
+
 
 COMMIT

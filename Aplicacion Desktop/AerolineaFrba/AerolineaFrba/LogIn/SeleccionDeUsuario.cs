@@ -24,21 +24,22 @@ namespace AerolineaFrba.LogIn
             //Obtengo el rol que seleccionó el usuario
             var RolSeleccionado = (Rol)CboRoles.SelectedItem;
 
-            if (RolSeleccionado != null)
+            if (RolSeleccionado != null && RolSeleccionado.Descripcion == "Administrador")
             {
                 var msg = MessageBox.Show(string.Format("Se procederá a loggear con el siguiente rol: {0}. Esta seguro?", RolSeleccionado.Descripcion), "Atención", MessageBoxButtons.YesNo);
                 if (msg == DialogResult.Yes)
                 {
-                    Hide();
+                   this.Hide();
 
                     //Muestro pantalla para iniciar sesion
                     InicioAdministrador inic = new InicioAdministrador();
                     inic.ShowDialog();
-
-                    Close();
                 }
             }
-            else
+            else if (RolSeleccionado.Descripcion == "Cliente")
+            {
+                //REDIRECCIONAR AL HOME DE CLIENTE
+            }else
             {
                 MessageBox.Show("Primero debe seleccionar un rol.", "Atención");
             }
