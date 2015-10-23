@@ -1,0 +1,32 @@
+BEGIN TRANSACTION
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[GetRolPorNombre]
+@Descripcion nvarchar(255)
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	SELECT *
+	FROM [EL_PUNTERO].[TL_ROL]
+	WHERE Descripcion = @Descripcion
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[GetRolPorNombreComo]
+@Descripcion nvarchar(255)
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	SELECT *
+	FROM [EL_PUNTERO].[TL_ROL] R
+	WHERE R.Descripcion LIKE '%' + LOWER(@Descripcion) + '%'
+END
+GO
+
+COMMIT
