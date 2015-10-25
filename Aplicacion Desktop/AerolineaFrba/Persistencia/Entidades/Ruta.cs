@@ -19,7 +19,6 @@ namespace Persistencia.Entidades
         public bool Habilitado { get; set; }
 
 
-
         public IMapable Map(SqlDataReader reader)
         {
             return new Ruta
@@ -34,6 +33,10 @@ namespace Persistencia.Entidades
                 Habilitado = bool.Parse(reader["Habilitado"].ToString())
             };
         }
-    }
+
+        public List<SPParameter> UnMap(IMapable entity)
+        {
+            return new List<SPParameter>();
+        }
     }
 }

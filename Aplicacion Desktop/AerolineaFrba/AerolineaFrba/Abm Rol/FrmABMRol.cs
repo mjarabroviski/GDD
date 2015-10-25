@@ -42,7 +42,7 @@ namespace AerolineaFrba.Abm_Rol
             BorrarDataGridView();
             var rolesDictionary = new Dictionary<int, Rol>();
 
-            #region Get the dictionary of visibilities
+            #region Obtengo el diccionario de roles
 
             //El datasource debe ser todos los registros de roles almacenados en la base de datos
             if (roles == null)
@@ -160,7 +160,7 @@ namespace AerolineaFrba.Abm_Rol
             }
         }
 
-        private void FrmABMRol_Load(object sender, EventArgs e)  //TODO: Mostrar en la lista a los roles que estan inhabilitados también
+        private void FrmABMRol_Load(object sender, EventArgs e)  
         {
             ActualizarPantalla(null);
         }

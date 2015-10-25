@@ -26,6 +26,13 @@ namespace Persistencia.Entidades
             public static String SPGetFuncionalidadesPorRol = "EL_PUNTERO.GetFuncionalidadesPorRol";
         }
 
+        public static class Ruta
+        {
+            public static String SPGetAllRutas = "EL_PUNTERO.GetAllRutas"; 
+            public static String SPGetServicioPorID = "EL_PUNTERO.GetServicioPorID"; 
+            public static String SPGetCiudadPorID = "EL_PUNTERO.GetCiudadPorID";
+        }
+
         public static class Usuario { 
             public static String SPGetUsuarios = "EL_PUNTERO.GetUsuarios";
             public static String SPGetUsuarioPorUsername = "EL_PUNTERO.GetUsuarioPorUsername";
