@@ -33,4 +33,6 @@ DROP PROCEDURE [EL_PUNTERO].[LimpiarIntentos];
 DROP PROCEDURE [EL_PUNTERO].[InsertarUsuario];
 DROP PROCEDURE [EL_PUNTERO].[GetRolPorNombre];
 
+DROP TRIGGER [EL_PUNTERO].[Tr_DeshabilitarUsuariosConRolDeshabilitado];
+
 DROP SCHEMA [EL_PUNTERO];

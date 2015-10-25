@@ -14,7 +14,7 @@ namespace Persistencia
         public static List<Rol> ObtenerTodos()
         {
             //Obtengo la lista de roles almacenadas en la base de datos
-            var sp = new StoreProcedure(DBQueries.Rol.SPGetRoles);
+            var sp = new StoreProcedure(DBQueries.Rol.SPGetAllRoles);
             return sp.ExecuteReader<Rol>();
         }
 

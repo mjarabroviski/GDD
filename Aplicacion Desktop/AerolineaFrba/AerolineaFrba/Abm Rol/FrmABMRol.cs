@@ -102,7 +102,7 @@ namespace AerolineaFrba.Abm_Rol
             //Creo la columna de borrar
             var deleteColumn = new DataGridViewButtonColumn
             {
-                Text = "Eliminar",
+                Text = "Inhabilitar",
                 UseColumnTextForButtonValue = true,
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
             };

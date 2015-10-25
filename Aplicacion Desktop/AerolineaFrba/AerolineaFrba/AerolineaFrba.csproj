@@ -69,11 +69,11 @@
     <Compile Include="Abm Rol\FrmABMRolAltasModificaciones.Designer.cs">
       <DependentUpon>FrmABMRolAltasModificaciones.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Ruta\Form1.cs">
+    <Compile Include="Abm Ruta\FrmABMRuta.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Ruta\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Abm Ruta\FrmABMRuta.Designer.cs">
+      <DependentUpon>FrmABMRuta.cs</DependentUpon>
     </Compile>
     <Compile Include="Canje Millas\Form1.cs">
       <SubType>Form</SubType>
@@ -166,6 +166,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Rol\FrmABMRolAltasModificaciones.resx">
       <DependentUpon>FrmABMRolAltasModificaciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Ruta\FrmABMRuta.resx">
+      <DependentUpon>FrmABMRuta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LogIn\ResetearContrasena.resx">
       <DependentUpon>ResetearContrasena.cs</DependentUpon>

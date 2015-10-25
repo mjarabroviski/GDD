@@ -11,6 +11,7 @@ namespace Persistencia.Entidades
         public static class Rol
         {
             public static String SPGetRoles = "EL_PUNTERO.GetRoles";
+            public static String SPGetAllRoles = "EL_PUNTERO.GetAllRoles";
             public static String SPGetRolPorNombre = "EL_PUNTERO.GetRolPorNombre";
             public static String SPGetRolPorNombreComo = "EL_PUNTERO.GetRolPorNombreComo";
             public static String SPInsertarFuncionalidadPorRol = "EL_PUNTERO.InsertarFuncionalidadPorRol";
