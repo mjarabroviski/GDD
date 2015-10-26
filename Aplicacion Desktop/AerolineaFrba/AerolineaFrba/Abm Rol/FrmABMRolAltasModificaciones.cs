@@ -74,7 +74,7 @@ namespace AerolineaFrba.Abm_Rol
             }
         }
 
-        private void BtnGuardar_Click(object sender, EventArgs e) //TODO: Si se inhabilita un rol, borrarselo a todos los usuarios que lo tengan
+        private void BtnGuardar_Click(object sender, EventArgs e) 
         {
             try
             {
