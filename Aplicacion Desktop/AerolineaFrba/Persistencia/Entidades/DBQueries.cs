@@ -33,6 +33,15 @@ namespace Persistencia.Entidades
             public static String SPActualizarUsuarioPorContraIncorrecta = "EL_PUNTERO.ActualizarUsuarioPorContraIncorrecta";
             public static String SPLimpiarIntentos = "EL_PUNTERO.LimpiarIntentos";
             public static String SPInsertarUsuario = "EL_PUNTERO.InsertarUsuario";
+            public static String SPActualizarContrasena = "EL_PUNTERO.ActualizarContrasena";
+        }
+
+        public static class Ciudad
+        {
+            public static String SPGetCiudades = "EL_PUNTERO.GetCiudades";
+            public static String SPEliminarCiudad = "EL_PUNTERO.EliminarCiudad";
+            public static String SPObtenerCiudadesPorParametros = "EL_PUNTERO.GetCiudadesPorParametros";
+            public static String SPObtenerCiudadesPorParametrosComo = "EL_PUNTERO.GetCiudadesPorParametrosComo";
         }
     }
 }

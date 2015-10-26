@@ -40,7 +40,7 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.btnCancelar.BackColor = System.Drawing.Color.DodgerBlue;
             this.btnCancelar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.btnCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCancelar.ForeColor = System.Drawing.Color.White;
@@ -54,7 +54,7 @@
             // 
             // btnGrabar
             // 
-            this.btnGrabar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.btnGrabar.BackColor = System.Drawing.Color.DodgerBlue;
             this.btnGrabar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.btnGrabar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnGrabar.ForeColor = System.Drawing.Color.White;
@@ -134,7 +134,7 @@
             this.Controls.Add(this.TxtContrasena);
             this.Controls.Add(this.TxtUsuario);
             this.Name = "RegistroDeUsuario";
-            this.Text = "RegistroDeUsuario";
+            this.Text = "Registro de Usuario";
             this.ResumeLayout(false);
             this.PerformLayout();
 

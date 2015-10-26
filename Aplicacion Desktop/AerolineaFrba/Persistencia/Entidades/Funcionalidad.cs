@@ -12,6 +12,7 @@ namespace Persistencia.Entidades
         public int ID { get; set; }
         public string Descripcion { get; set; }
 
+        //Implementacion de IMapable
         public IMapable Map(SqlDataReader reader)
         {
             return new Funcionalidad

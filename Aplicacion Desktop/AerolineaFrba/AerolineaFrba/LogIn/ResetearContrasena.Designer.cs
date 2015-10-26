@@ -33,6 +33,7 @@
             this.TxtContrasenaRepetida = new System.Windows.Forms.TextBox();
             this.TxtContrasena = new System.Windows.Forms.TextBox();
             this.LblAceptar = new System.Windows.Forms.Label();
+            this.btnVolver = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label3
@@ -70,33 +71,49 @@
             this.TxtContrasena.PasswordChar = '*';
             this.TxtContrasena.Size = new System.Drawing.Size(296, 20);
             this.TxtContrasena.TabIndex = 12;
+            this.TxtContrasena.TextChanged += new System.EventHandler(this.TxtContrasena_TextChanged);
             // 
             // LblAceptar
             // 
-            this.LblAceptar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.LblAceptar.BackColor = System.Drawing.Color.DodgerBlue;
             this.LblAceptar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblAceptar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.LblAceptar.ForeColor = System.Drawing.Color.White;
-            this.LblAceptar.Location = new System.Drawing.Point(151, 144);
+            this.LblAceptar.Location = new System.Drawing.Point(56, 143);
             this.LblAceptar.Name = "LblAceptar";
-            this.LblAceptar.Size = new System.Drawing.Size(88, 32);
+            this.LblAceptar.Size = new System.Drawing.Size(138, 32);
             this.LblAceptar.TabIndex = 11;
             this.LblAceptar.Text = "ACEPTAR";
             this.LblAceptar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.LblAceptar.Click += new System.EventHandler(this.LblAceptar_Click);
+            // 
+            // btnVolver
+            // 
+            this.btnVolver.BackColor = System.Drawing.Color.DodgerBlue;
+            this.btnVolver.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.btnVolver.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnVolver.ForeColor = System.Drawing.Color.White;
+            this.btnVolver.Location = new System.Drawing.Point(214, 143);
+            this.btnVolver.Name = "btnVolver";
+            this.btnVolver.Size = new System.Drawing.Size(138, 32);
+            this.btnVolver.TabIndex = 16;
+            this.btnVolver.Text = "CANCELAR";
+            this.btnVolver.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // ResetearContrasena
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(408, 206);
+            this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.TxtContrasenaRepetida);
             this.Controls.Add(this.TxtContrasena);
             this.Controls.Add(this.LblAceptar);
             this.Name = "ResetearContrasena";
-            this.Text = "ContraseñaIncorrecta";
+            this.Text = "Resetear Contraseña";
             this.Load += new System.EventHandler(this.ResetearContrasena_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -110,5 +127,6 @@
         private System.Windows.Forms.TextBox TxtContrasenaRepetida;
         private System.Windows.Forms.TextBox TxtContrasena;
         private System.Windows.Forms.Label LblAceptar;
+        private System.Windows.Forms.Label btnVolver;
     }
 }

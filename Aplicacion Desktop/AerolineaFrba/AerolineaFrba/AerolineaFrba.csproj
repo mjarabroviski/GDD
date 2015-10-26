@@ -51,11 +51,17 @@
     <Compile Include="Abm Aeronave\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Ciudad\Form1.cs">
+    <Compile Include="Abm Ciudad\ABMCiudades.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Ciudad\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Abm Ciudad\ABMCiudades.Designer.cs">
+      <DependentUpon>ABMCiudades.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Ciudad\ABMInsertarActualizarCiudad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Ciudad\ABMInsertarActualizarCiudad.Designer.cs">
+      <DependentUpon>ABMInsertarActualizarCiudad.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Rol\FrmABMRol.cs">
       <SubType>Form</SubType>
@@ -161,6 +167,12 @@
     <Compile Include="Registro Llegada Destino\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Abm Ciudad\ABMCiudades.resx">
+      <DependentUpon>ABMCiudades.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Ciudad\ABMInsertarActualizarCiudad.resx">
+      <DependentUpon>ABMInsertarActualizarCiudad.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Abm Rol\FrmABMRol.resx">
       <DependentUpon>FrmABMRol.cs</DependentUpon>
     </EmbeddedResource>
@@ -205,6 +217,10 @@
     <ProjectReference Include="..\Configuracion\Configuracion.csproj">
       <Project>{e9a2f36a-7e2e-44df-babf-89871af8ca5b}</Project>
       <Name>Configuracion</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Filtros\Filtros.csproj">
+      <Project>{f18628eb-770e-46ec-a4fc-7a5f574b0465}</Project>
+      <Name>Filtros</Name>
     </ProjectReference>
     <ProjectReference Include="..\Herramientas\Herramientas.csproj">
       <Project>{79e8affa-74fd-44b7-9db5-a31373ef2f60}</Project>

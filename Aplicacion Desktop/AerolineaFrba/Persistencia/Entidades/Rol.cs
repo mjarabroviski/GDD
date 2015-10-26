@@ -25,7 +25,7 @@ namespace Persistencia.Entidades
             return this;
         }
 
-        //Implement of IMapable
+        //Implementacion de IMapable
         public IMapable Map(SqlDataReader reader)
         {
             return new Rol

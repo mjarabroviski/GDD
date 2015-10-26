@@ -22,12 +22,14 @@ namespace AerolineaFrba.Registro_de_Usuario
         }
 
         private void LimpiarCampos() {
-            TxtContrasena.Text = "";
-            TxtUsuario.Text = "";
+            TxtContrasena.Text = string.Empty;
+            TxtUsuario.Text = string.Empty;
         }
 
         private void btnGrabar_Click(object sender, EventArgs e)
         {
+            Rol rolAUsar = RolPersistencia.ObtenerRolPorNombre("Administrador");
+
             try
             {
                 #region Validaciones
@@ -44,6 +46,11 @@ namespace AerolineaFrba.Registro_de_Usuario
 
                 if (UsuarioPersistencia.ObtenerPorUserName(TxtUsuario.Text) != null)
                     exceptionMessage += Environment.NewLine + "Ya existe un usuario con el nombre ingresado.";
+               
+                if (!rolAUsar.Habilitado)
+                {
+                    exceptionMessage += Environment.NewLine + "El Rol a registrar se encuentra inhabilitado.";
+                }
 
                 if (!string.IsNullOrEmpty(exceptionMessage))
                     throw new Exception(exceptionMessage);
@@ -58,10 +65,12 @@ namespace AerolineaFrba.Registro_de_Usuario
                 var dialogAnswer = MessageBox.Show("Esta seguro que quiere insertar el nuevo usuario?", "Atencion", MessageBoxButtons.YesNo);
                 if (dialogAnswer == DialogResult.Yes)
                 {
-                    //using (var transaction = DBManager.Instance().Connection.BeginTransaction(IsolationLevel.Serializable))
-                    //{
-                        user.Rol = RolPersistencia.ObtenerRolPorNombre("Administrador");
-                        UsuarioPersistencia.InsertarUsuario(user);
+                    using (var transaction = DBManager.Instance().Connection.BeginTransaction(IsolationLevel.Serializable))
+                    {
+                        user.Rol = rolAUsar;
+                        UsuarioPersistencia.InsertarUsuario(user,transaction);
+                        transaction.Commit();
+                        
                         var dialogAnswer2 = MessageBox.Show("Usuario registrado correctamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         if (dialogAnswer2 == DialogResult.OK) {
                             Hide();
@@ -69,9 +78,8 @@ namespace AerolineaFrba.Registro_de_Usuario
                             homeAdmin.ShowDialog();
                             Close(); 
                          }
-                    //}
+                    }
                 }
-                #endregion
 
             }
             catch (Exception ex)
@@ -80,14 +88,19 @@ namespace AerolineaFrba.Registro_de_Usuario
                 LimpiarCampos();
 
             }
+          #endregion
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            Hide();
-            HomeAdministrador homeAdmin = new HomeAdministrador();
-            homeAdmin.ShowDialog();
-            Close(); 
+            var dialogAnswer = MessageBox.Show("Esta seguro que quiere cancelar la operacion?", "Atencion", MessageBoxButtons.YesNo);
+            if (DialogResult.Yes == dialogAnswer)
+            {
+                Hide();
+                HomeAdministrador homeAdmin = new HomeAdministrador();
+                homeAdmin.ShowDialog();
+                Close();
+            }
         }
     }
 }

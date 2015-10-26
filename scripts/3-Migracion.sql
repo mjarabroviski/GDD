@@ -54,32 +54,32 @@ INSERT INTO EL_PUNTERO.TL_AERONAVE (Matricula,Fabricante,Modelo,ID_Servicio,Baja
 
  BEGIN TRANSACTION
  INSERT INTO EL_PUNTERO.TL_CIUDAD(Nombre_Ciudad)
- (SELECT [Ruta_Ciudad_Origen] FROM gd_esquema.Maestra UNION SELECT [Ruta_Ciudad_Destino] FROM gd_esquema.Maestra);
+ (SELECT SUBSTRING([Ruta_Ciudad_Origen],2,LEN([Ruta_Ciudad_Origen])-1) FROM gd_esquema.Maestra UNION SELECT SUBSTRING([Ruta_Ciudad_Destino],2,LEN([Ruta_Ciudad_Destino])-1) FROM gd_esquema.Maestra);
  COMMIT
 
  BEGIN TRANSACTION
  INSERT INTO EL_PUNTERO.TL_RUTA(Codigo_Ruta,ID_Servicio,ID_Ciudad_Origen,ID_Ciudad_Destino)
  (SELECT DISTINCT [Ruta_Codigo],
 		 (SELECT ID_Servicio FROM EL_PUNTERO.TL_SERVICIO WHERE Nombre = gd_esquema.Maestra.Tipo_Servicio),
-		 (SELECT ID_Ciudad FROM EL_PUNTERO.TL_CIUDAD WHERE Nombre_Ciudad = gd_esquema.Maestra.Ruta_Ciudad_Origen),
-		 (SELECT ID_Ciudad FROM EL_PUNTERO.TL_CIUDAD WHERE Nombre_Ciudad = gd_esquema.Maestra.Ruta_Ciudad_Destino)
+		 (SELECT ID_Ciudad FROM EL_PUNTERO.TL_CIUDAD WHERE Nombre_Ciudad = SUBSTRING((gd_esquema.Maestra.Ruta_Ciudad_Origen),2,LEN(gd_esquema.Maestra.Ruta_Ciudad_Origen)-1)),
+		 (SELECT ID_Ciudad FROM EL_PUNTERO.TL_CIUDAD WHERE Nombre_Ciudad = SUBSTRING((gd_esquema.Maestra.Ruta_Ciudad_Destino),2,LEN(gd_esquema.Maestra.Ruta_Ciudad_Destino)-1))
  FROM gd_esquema.Maestra);
  COMMIT
 
 BEGIN TRANSACTION
 UPDATE EL_PUNTERO.TL_RUTA
- SET Precio_Base_KG = Ruta_Precio_BaseKG FROM gd_esquema.Maestra, EL_PUNTERO.TL_RUTA
+ SET Precio_Base_KG = Ruta_Precio_BaseKG FROM gd_esquema.Maestra M, EL_PUNTERO.TL_RUTA
  WHERE		Ruta_Codigo=Codigo_Ruta AND 
-			Ruta_Ciudad_Origen = (SELECT Nombre_Ciudad FROM EL_PUNTERO.TL_CIUDAD WHERE ID_Ciudad = ID_Ciudad_Origen) AND 
-			Ruta_Ciudad_Destino = (SELECT Nombre_Ciudad FROM EL_PUNTERO.TL_CIUDAD WHERE ID_Ciudad = ID_Ciudad_Destino) AND  
-			gd_esquema.Maestra.Ruta_Precio_BaseKG != 0
+			SUBSTRING((M.Ruta_Ciudad_Origen),2,LEN(M.Ruta_Ciudad_Origen)-1) = (SELECT Nombre_Ciudad FROM EL_PUNTERO.TL_CIUDAD WHERE ID_Ciudad = ID_Ciudad_Origen) AND 
+			SUBSTRING((M.Ruta_Ciudad_Destino),2,LEN(M.Ruta_Ciudad_Destino)-1) = (SELECT Nombre_Ciudad FROM EL_PUNTERO.TL_CIUDAD WHERE ID_Ciudad = ID_Ciudad_Destino) AND  
+			M.Ruta_Precio_BaseKG != 0
 
 UPDATE EL_PUNTERO.TL_RUTA
- SET Precio_Base_Pasaje = Ruta_Precio_BasePasaje FROM gd_esquema.Maestra, EL_PUNTERO.TL_RUTA
+ SET Precio_Base_Pasaje = Ruta_Precio_BasePasaje FROM gd_esquema.Maestra M, EL_PUNTERO.TL_RUTA
  WHERE		Ruta_Codigo= Codigo_Ruta AND 
-			Ruta_Ciudad_Origen = (SELECT Nombre_Ciudad FROM EL_PUNTERO.TL_CIUDAD WHERE ID_Ciudad = ID_Ciudad_Origen) AND 
-			Ruta_Ciudad_Destino = (SELECT Nombre_Ciudad FROM EL_PUNTERO.TL_CIUDAD WHERE ID_Ciudad = ID_Ciudad_Destino) AND  
-			gd_esquema.Maestra.Ruta_Precio_BasePasaje != 0
+			SUBSTRING((M.Ruta_Ciudad_Origen),2,LEN(M.Ruta_Ciudad_Origen)-1) = (SELECT Nombre_Ciudad FROM EL_PUNTERO.TL_CIUDAD WHERE ID_Ciudad = ID_Ciudad_Origen) AND 
+			SUBSTRING((M.Ruta_Ciudad_Destino),2,LEN(M.Ruta_Ciudad_Destino)-1) = (SELECT Nombre_Ciudad FROM EL_PUNTERO.TL_CIUDAD WHERE ID_Ciudad = ID_Ciudad_Destino) AND  
+			M.Ruta_Precio_BasePasaje != 0
 
 ALTER TABLE EL_PUNTERO.TL_RUTA
 ALTER COLUMN Precio_Base_KG 
@@ -95,11 +95,11 @@ COMMIT
   (SELECT DISTINCT  [FechaSalida],
 					[FechaLLegada],
 					[Fecha_LLegada_Estimada],
-					(SELECT [ID_Aeronave] FROM EL_PUNTERO.TL_AERONAVE WHERE Matricula= gd_esquema.Maestra.Aeronave_Matricula),
-					(SELECT [ID_Ruta] FROM EL_PUNTERO.TL_RUTA WHERE gd_esquema.Maestra.Ruta_Codigo = Codigo_Ruta AND 
-					gd_esquema.Maestra.Ruta_Ciudad_Origen = (SELECT Nombre_Ciudad FROM EL_PUNTERO.TL_CIUDAD WHERE ID_Ciudad = ID_Ciudad_Origen) AND 
-					gd_esquema.Maestra.Ruta_Ciudad_Destino = (SELECT Nombre_Ciudad FROM EL_PUNTERO.TL_CIUDAD WHERE ID_Ciudad = ID_Ciudad_Destino))
- FROM gd_esquema.Maestra);
+					(SELECT [ID_Aeronave] FROM EL_PUNTERO.TL_AERONAVE WHERE Matricula= M.Aeronave_Matricula),
+					(SELECT [ID_Ruta] FROM EL_PUNTERO.TL_RUTA WHERE M.Ruta_Codigo = Codigo_Ruta AND 
+					SUBSTRING((M.Ruta_Ciudad_Origen),2,LEN(M.Ruta_Ciudad_Origen)-1) = (SELECT Nombre_Ciudad FROM EL_PUNTERO.TL_CIUDAD WHERE ID_Ciudad = ID_Ciudad_Origen) AND 
+					SUBSTRING((M.Ruta_Ciudad_Destino),2,LEN(M.Ruta_Ciudad_Destino)-1) = (SELECT Nombre_Ciudad FROM EL_PUNTERO.TL_CIUDAD WHERE ID_Ciudad = ID_Ciudad_Destino))
+ FROM gd_esquema.Maestra M);
  COMMIT
 
  BEGIN TRANSACTION

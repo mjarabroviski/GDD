@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Persistencia;
 using Persistencia.Entidades;
+using AerolineaFrba.Home_Cliente;
 
 namespace AerolineaFrba.LogIn
 {
@@ -38,7 +39,15 @@ namespace AerolineaFrba.LogIn
             }
             else if (RolSeleccionado.Descripcion == "Cliente")
             {
-                //REDIRECCIONAR AL HOME DE CLIENTE
+                var msg = MessageBox.Show(string.Format("Se procederá a loggear con el siguiente rol: {0}. Esta seguro?", RolSeleccionado.Descripcion), "Atención", MessageBoxButtons.YesNo);
+                if (msg == DialogResult.Yes)
+                {
+                    Hide();
+                    HomeCliente homeAdmin = new HomeCliente();
+                    homeAdmin.ShowDialog();
+                    Close();
+                }
+                
             }else
             {
                 MessageBox.Show("Primero debe seleccionar un rol.", "Atención");

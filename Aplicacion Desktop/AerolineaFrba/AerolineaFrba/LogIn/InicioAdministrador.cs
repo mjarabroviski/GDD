@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Persistencia;
 using Persistencia.Entidades;
 using Herramientas;
+using AerolineaFrba.Home_Administrador;
 
 namespace AerolineaFrba.LogIn
 {
@@ -22,20 +23,26 @@ namespace AerolineaFrba.LogIn
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            SeleccionDeUsuario selec;
-            Hide();
-            selec = new SeleccionDeUsuario();
-            selec.Show();
+            var dialogAnswer = MessageBox.Show("Esta seguro que quiere cancelar la operacion?", "Atencion", MessageBoxButtons.YesNo);
+            if (DialogResult.Yes == dialogAnswer)
+            {
+                SeleccionDeUsuario selec;
+                Hide();
+                selec = new SeleccionDeUsuario();
+                selec.Show();
+                Close();
+            }     
         }
 
         private void btnEntrar_Click(object sender, EventArgs e)
         {
             int resul = Loggear(TxtUsuario.Text, TxtContrasena.Text);
+
         }
 
         private void  LimpiarCampos() {
-            TxtContrasena.Text = "";
-            TxtUsuario.Text = "";
+            TxtContrasena.Text = string.Empty;
+            TxtUsuario.Text = string.Empty;
         }
 
         private int Loggear(string usuario, string contrasena)
@@ -74,13 +81,19 @@ namespace AerolineaFrba.LogIn
                     if (user.CantIntentos == 0) user.Habilitado = false;
                     UsuarioPersistencia.ActualizarPorContrasena(user);
                     MessageBox.Show("Contraseña incorrecta, por favor ingresela nuevamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    TxtContrasena.Text = "";
+                    TxtContrasena.Text = string.Empty;
                     return 1;
                 }
                 //Usuario Validado correctamente
                     UsuarioPersistencia.LimpiarIntentos(user);
-                    MessageBox.Show("Usuario logueado correctamente");
-                    //REDIRECCIONAR AL HOME DE ADMINISTRADOR
+                    var dialogAnswer2 = MessageBox.Show("Usuario logueado correctamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (dialogAnswer2 == DialogResult.OK)
+                    {
+                        Hide();
+                        HomeAdministrador homeAdmin = new HomeAdministrador();
+                        homeAdmin.ShowDialog();
+                        Close();
+                    }
 
                 return 0;
         }
@@ -94,21 +107,39 @@ namespace AerolineaFrba.LogIn
         {
             //Validacion que exista el usuario antes de cambiar contrasenia
             Usuario user = UsuarioPersistencia.ObtenerPorUserName(TxtUsuario.Text);
-            if (user == null) {
-                MessageBox.Show("El usuario ingresado no existe en el sistema, por favor registrese","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
-                     LimpiarCampos();
+            if (user == null)
+            {
+                MessageBox.Show("El usuario ingresado no existe en el sistema, por favor registrese", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                LimpiarCampos();
             }
+            else
+            {
 
-            Hide();
-            ResetearContrasena reset = new ResetearContrasena(user);
-            reset.ShowDialog();
-            Close();
+                Hide();
+                ResetearContrasena reset = new ResetearContrasena(user);
+                reset.ShowDialog();
+                Close();
+            }
         }
 
         private void TxtUsuario_TextChanged(object sender, EventArgs e)
         {
             if (!String.IsNullOrEmpty(TxtUsuario.Text)) {
                 btnNuevo.Enabled = true;
+            }
+        }
+
+        private void TxtContrasena_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TxtContrasena_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //Cuando presiona la tecla 'Enter', realizo el login
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+            {
+                Loggear(TxtUsuario.Text, TxtContrasena.Text);
             }
         }
     }

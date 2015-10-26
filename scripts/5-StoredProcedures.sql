@@ -5,7 +5,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE [EL_PUNTERO].[GetAFuncionalidadesPorRol]
+CREATE PROCEDURE [EL_PUNTERO].[GetFuncionalidadesPorRol]
 @ID_Rol int
 AS
 BEGIN
@@ -128,5 +128,66 @@ BEGIN
 	WHERE Descripcion = @Descripcion
 END
 GO
+
+CREATE PROCEDURE [EL_PUNTERO].[ActualizarContrasena]
+@ID_User int,
+@Password nvarchar(64)
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	UPDATE [EL_PUNTERO].[TL_Usuario]
+	SET Password = @Password
+	WHERE ID_Usuario = @ID_User
+	
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[GetCiudades]
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	SELECT *
+	FROM [EL_PUNTERO].[TL_Ciudad]
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[EliminarCiudad]
+@ID_Ciudad int
+AS
+BEGIN
+	IF(NOT(
+	(@ID_Ciudad IN (SELECT ID_Ciudad_Origen FROM [EL_PUNTERO].[TL_Ruta] WHERE ID_Ruta IN (SELECT ID_Ruta FROM [EL_PUNTERO].[TL_Viaje] WHERE Fecha_Salida >= GETDATE())))
+	OR
+	(@ID_Ciudad IN (SELECT ID_Ciudad_Destino FROM [EL_PUNTERO].[TL_Ruta] WHERE ID_Ruta IN (SELECT ID_Ruta FROM [EL_PUNTERO].[TL_Viaje] WHERE Fecha_Salida >= GETDATE())))
+	))
+	BEGIN
+	DELETE 
+	FROM [EL_PUNTERO].[TL_Ciudad]
+	WHERE ID_Ciudad = @ID_Ciudad
+	END 
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[GetCiudadesPorParametros]
+@Nombre nvarchar(20)
+AS
+BEGIN
+	SET NOCOUNT ON;
+	SELECT * FROM [EL_PUNTERO].[TL_Ciudad]
+	WHERE Nombre_Ciudad = @Nombre
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[GetCiudadesPorParametrosComo]
+@Nombre nvarchar(20)
+AS
+BEGIN
+	SELECT * FROM [EL_PUNTERO].[TL_Ciudad]
+	WHERE Nombre_Ciudad LIKE '%' + LOWER(@Nombre) + '%'
+END
+GO
+
 
 COMMIT

@@ -30,8 +30,8 @@ namespace AerolineaFrba.LogIn
             if (TxtContrasena.Text != TxtContrasenaRepetida.Text)
             {
                 MessageBox.Show("Las contrasenas informadas no coinciden.", "Atención",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
-                TxtContrasena.Text = "";
-                TxtContrasenaRepetida.Text = "";
+                TxtContrasena.Text = string.Empty;
+                TxtContrasenaRepetida.Text = string.Empty;
             }
             else
             {
@@ -39,7 +39,8 @@ namespace AerolineaFrba.LogIn
                 var hashContrasena = SHA256Encriptador.Encode(TxtContrasena.Text);
 
                 //Impacto el cambio en la base de datos
-                //UsuarioPersistencia.CambiarContrasena(usuario, hashContrasena);
+                UsuarioPersistencia.CambiarContrasena(usuario, hashContrasena);
+                MessageBox.Show("Las contrasenas informadas no coinciden.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
                 Close();
             }
@@ -48,6 +49,24 @@ namespace AerolineaFrba.LogIn
         private void ResetearContrasena_Load(object sender, EventArgs e)
         {
            
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            var dialogAnswer = MessageBox.Show("Esta seguro que quiere cancelar la operacion?", "Atencion", MessageBoxButtons.YesNo);
+            if (DialogResult.Yes == dialogAnswer)
+            {
+                InicioAdministrador inic;
+                Hide();
+                inic = new InicioAdministrador();
+                inic.ShowDialog();
+                Close();
+            }
+        }
+
+        private void TxtContrasena_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

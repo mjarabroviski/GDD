@@ -73,7 +73,7 @@ namespace Persistencia
             sp.ExecuteNonQuery(null);
         }
 
-        public static void InsertarUsuario(Usuario user)
+        public static int InsertarUsuario(Usuario user, SqlTransaction transaction)
         {
             var param = new List<SPParameter>
                 {
@@ -82,7 +82,23 @@ namespace Persistencia
                     new SPParameter("ID_Rol", user.Rol.ID)
                 };
 
-            var sp = new StoreProcedure(DBQueries.Usuario.SPInsertarUsuario, param);
+            var sp = (transaction != null)
+                        ? new StoreProcedure(DBQueries.Usuario.SPInsertarUsuario, param, transaction)
+                        : new StoreProcedure(DBQueries.Usuario.SPInsertarUsuario, param);
+
+            //user.ID = (int)sp.ExecuteScalar(transaction);
+
+            return sp.ExecuteNonQuery(transaction);
+        }
+
+        public static void CambiarContrasena(Usuario user, string password)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("ID_User", user.ID),
+                    new SPParameter("Password", password)
+                };
+            var sp = new StoreProcedure(DBQueries.Usuario.SPActualizarContrasena, param);
 
             sp.ExecuteNonQuery(null);
         }

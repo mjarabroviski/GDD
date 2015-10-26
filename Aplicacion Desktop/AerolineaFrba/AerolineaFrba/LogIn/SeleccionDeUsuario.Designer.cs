@@ -54,13 +54,13 @@
             // 
             // btnEntrar
             // 
-            this.btnEntrar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.btnEntrar.BackColor = System.Drawing.Color.DodgerBlue;
             this.btnEntrar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.btnEntrar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEntrar.ForeColor = System.Drawing.Color.White;
-            this.btnEntrar.Location = new System.Drawing.Point(162, 126);
+            this.btnEntrar.Location = new System.Drawing.Point(139, 126);
             this.btnEntrar.Name = "btnEntrar";
-            this.btnEntrar.Size = new System.Drawing.Size(88, 32);
+            this.btnEntrar.Size = new System.Drawing.Size(119, 32);
             this.btnEntrar.TabIndex = 13;
             this.btnEntrar.Text = "LISTO";
             this.btnEntrar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -75,7 +75,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnEntrar);
             this.Name = "SeleccionDeUsuario";
-            this.Text = "SeleccionDeUsuario";
+            this.Text = "Seleccion de Usuario";
             this.Load += new System.EventHandler(this.SeleccionDeUsuario_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

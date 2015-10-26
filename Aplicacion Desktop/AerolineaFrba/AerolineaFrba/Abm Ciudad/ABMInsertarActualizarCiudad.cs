@@ -7,14 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Persistencia.Entidades;
+using Persistencia;
 
 namespace AerolineaFrba.Abm_Ciudad
 {
-    public partial class Form1 : Form
+    public partial class ABMInsertarActualizarCiudad : Form
     {
-        public Form1()
+        public Ciudad ciudadActual { get; set; }
+        public bool accionTerminada = false;
+
+        public ABMInsertarActualizarCiudad(Ciudad ciudad)
         {
             InitializeComponent();
+            ciudadActual = ciudad;
         }
     }
 }

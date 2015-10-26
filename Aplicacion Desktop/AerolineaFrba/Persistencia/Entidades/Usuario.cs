@@ -16,6 +16,7 @@ namespace Persistencia.Entidades
         public bool Habilitado { get; set; }
         public int CantIntentos { get; set; }
 
+        //Implementacion de IMapable
         public IMapable Map(SqlDataReader reader)
         {
             return new Usuario
