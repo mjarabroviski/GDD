@@ -21,7 +21,7 @@ namespace AerolineaFrba.Generacion_Viaje
 
         private void GenercionViaje_Load(object sender, EventArgs e)
         {
-            ActualizarPantalla(null);
+            ActualizarPantalla();
         }
 
         private void ActualizarPantalla()
@@ -29,6 +29,10 @@ namespace AerolineaFrba.Generacion_Viaje
              CboCiudadOrigen.DisplayMember = "Nombre_Ciudad";
              CboCiudadOrigen.ValueMember = "ID_Ciudad";
              CboCiudadOrigen.DataSource = CiudadPersistencia.ObtenerTodos();
+             CboMatriculasAeronaves.DisplayMember = "Matricula_Aeronave";
+             CboMatriculasAeronaves.ValueMember = "ID_Aeronave";
+             //CboMatriculasAeronaves.DataSource = 
+
         }
 
 

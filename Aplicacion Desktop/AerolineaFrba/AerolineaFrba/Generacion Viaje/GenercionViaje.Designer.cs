@@ -121,6 +121,7 @@
             // CboCiudadDestino
             // 
             this.CboCiudadDestino.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CboCiudadDestino.Enabled = false;
             this.CboCiudadDestino.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CboCiudadDestino.FormattingEnabled = true;
             this.CboCiudadDestino.Items.AddRange(new object[] {
@@ -372,6 +373,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "GenercionViaje";
             this.Text = "GenercionViaje";
+            this.Load += new System.EventHandler(this.GenercionViaje_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

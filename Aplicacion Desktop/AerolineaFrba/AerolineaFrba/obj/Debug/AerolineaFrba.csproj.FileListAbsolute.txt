@@ -68,3 +68,4 @@ C:\Iara UTN\3\GestionDeDatos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\
 C:\Iara UTN\3\GestionDeDatos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.csproj.GenerateResource.Cache
 C:\Iara UTN\3\GestionDeDatos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.exe
 C:\Iara UTN\3\GestionDeDatos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.pdb
+C:\Iara UTN\3\GestionDeDatos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Generacion_Viaje.GenercionViaje.resources
