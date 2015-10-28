@@ -182,6 +182,9 @@
     <EmbeddedResource Include="Abm Ruta\FrmABMRuta.resx">
       <DependentUpon>FrmABMRuta.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Home Cliente\HomeCliente.resx">
+      <DependentUpon>HomeCliente.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LogIn\ResetearContrasena.resx">
       <DependentUpon>ResetearContrasena.cs</DependentUpon>
     </EmbeddedResource>
