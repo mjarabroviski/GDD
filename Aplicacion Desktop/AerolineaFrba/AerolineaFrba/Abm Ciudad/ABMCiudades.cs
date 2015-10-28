@@ -225,6 +225,7 @@ namespace AerolineaFrba.Abm_Ciudad
 
         private void LblLimpiar_Click(object sender, EventArgs e)
         {
+            //Vaciar grilla y limpiar los filtros
             LimpiarFiltros();
             ActualizarPantalla(null);
         }

@@ -24,19 +24,19 @@ END
 COMMIT
 
 BEGIN TRANSACTION
-INSERT INTO EL_PUNTERO.TL_AERONAVE (Matricula,Fabricante,Modelo,ID_Servicio,Baja_Por_Fuera_De_Servicio,Baja_Por_Vida_Util,Fecha_Fuera_De_Servicio,Fecha_Reinicio_Servicio,Fecha_Baja_Defenitiva,Fecha_Alta,KG_Totales)
+INSERT INTO EL_PUNTERO.TL_AERONAVE (Matricula,Fabricante,Modelo,ID_Servicio,Fecha_Baja_Definitiva,KG_Totales)
 (SELECT DISTINCT [Aeronave_Matricula]
 	  ,[Aeronave_Fabricante]
 	  ,[Aeronave_Modelo]
 	  ,(SELECT [ID_Servicio] FROM [EL_PUNTERO].[TL_SERVICIO] WHERE Nombre = gd_esquema.Maestra.Tipo_Servicio)
       ,NULL
-      ,NULL
-      ,NULL
-      ,NULL
-	  ,NULL
-	  ,NULL
 	  ,[Aeronave_KG_Disponibles]
  FROM gd_esquema.Maestra);
+ COMMIT
+
+BEGIN TRANSACTION
+INSERT INTO EL_PUNTERO.TL_BAJA_SERVICIO_AERONAVE (ID_Aeronave)
+SELECT [ID_Aeronave] FROM [EL_PUNTERO].[TL_AERONAVE]
  COMMIT
 
  BEGIN TRANSACTION

@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Persistencia.Entidades;
 using Persistencia;
 
 namespace AerolineaFrba.Abm_Ruta
