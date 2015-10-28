@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AeronavePersistencia.cs" />
     <Compile Include="CiudadPersistencia.cs" />
     <Compile Include="Entidades\Aeronave.cs" />
     <Compile Include="Entidades\Ciudad.cs" />

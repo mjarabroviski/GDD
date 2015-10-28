@@ -30,7 +30,11 @@
         {
             this.LblListo = new System.Windows.Forms.Label();
             this.GroupFiltros = new System.Windows.Forms.GroupBox();
+            this.dtpAlta = new System.Windows.Forms.DateTimePicker();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.CboServicio = new System.Windows.Forms.ComboBox();
+            this.TxtModelo = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.TxtFabricante = new System.Windows.Forms.TextBox();
             this.ChkBusquedaExacta = new System.Windows.Forms.CheckBox();
@@ -41,10 +45,6 @@
             this.TxtMatricula = new System.Windows.Forms.TextBox();
             this.LblNuevo = new System.Windows.Forms.Label();
             this.DgvAeronaves = new System.Windows.Forms.DataGridView();
-            this.label6 = new System.Windows.Forms.Label();
-            this.TxtModelo = new System.Windows.Forms.TextBox();
-            this.dtpAlta = new System.Windows.Forms.DateTimePicker();
-            this.label8 = new System.Windows.Forms.Label();
             this.GroupFiltros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvAeronaves)).BeginInit();
             this.SuspendLayout();
@@ -85,6 +85,32 @@
             this.GroupFiltros.TabStop = false;
             this.GroupFiltros.Text = "FILTROS DE BUSQUEDA";
             // 
+            // dtpAlta
+            // 
+            this.dtpAlta.Location = new System.Drawing.Point(382, 56);
+            this.dtpAlta.Name = "dtpAlta";
+            this.dtpAlta.Size = new System.Drawing.Size(195, 20);
+            this.dtpAlta.TabIndex = 55;
+            this.dtpAlta.Value = new System.DateTime(2015, 10, 28, 18, 9, 0, 0);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(304, 59);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(72, 13);
+            this.label8.TabIndex = 54;
+            this.label8.Text = "FECHA ALTA";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(14, 92);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(53, 13);
+            this.label6.TabIndex = 48;
+            this.label6.Text = "MODELO";
+            // 
             // CboServicio
             // 
             this.CboServicio.FormattingEnabled = true;
@@ -92,6 +118,13 @@
             this.CboServicio.Name = "CboServicio";
             this.CboServicio.Size = new System.Drawing.Size(195, 21);
             this.CboServicio.TabIndex = 41;
+            // 
+            // TxtModelo
+            // 
+            this.TxtModelo.Location = new System.Drawing.Point(89, 92);
+            this.TxtModelo.Name = "TxtModelo";
+            this.TxtModelo.Size = new System.Drawing.Size(193, 20);
+            this.TxtModelo.TabIndex = 47;
             // 
             // label3
             // 
@@ -129,7 +162,7 @@
             this.LblLimpiar.Name = "LblLimpiar";
             this.LblLimpiar.Size = new System.Drawing.Size(124, 32);
             this.LblLimpiar.TabIndex = 35;
-            this.LblLimpiar.Text = "LIMPIAR/REFRESCAR";
+            this.LblLimpiar.Text = "LIMPIAR";
             this.LblLimpiar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.LblLimpiar.Click += new System.EventHandler(this.LblLimpiar_Click);
             // 
@@ -145,6 +178,7 @@
             this.LblBuscar.TabIndex = 34;
             this.LblBuscar.Text = "BUSCAR";
             this.LblBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LblBuscar.Click += new System.EventHandler(this.LblBuscar_Click);
             // 
             // label2
             // 
@@ -190,7 +224,7 @@
             this.DgvAeronaves.AllowUserToDeleteRows = false;
             this.DgvAeronaves.AllowUserToResizeColumns = false;
             this.DgvAeronaves.AllowUserToResizeRows = false;
-            this.DgvAeronaves.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.DgvAeronaves.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.DgvAeronaves.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DgvAeronaves.Location = new System.Drawing.Point(20, 172);
             this.DgvAeronaves.MultiSelect = false;
@@ -200,43 +234,11 @@
             this.DgvAeronaves.Size = new System.Drawing.Size(783, 342);
             this.DgvAeronaves.TabIndex = 43;
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(14, 92);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(53, 13);
-            this.label6.TabIndex = 48;
-            this.label6.Text = "MODELO";
-            // 
-            // TxtModelo
-            // 
-            this.TxtModelo.Location = new System.Drawing.Point(89, 92);
-            this.TxtModelo.Name = "TxtModelo";
-            this.TxtModelo.Size = new System.Drawing.Size(193, 20);
-            this.TxtModelo.TabIndex = 47;
-            // 
-            // dtpAlta
-            // 
-            this.dtpAlta.Location = new System.Drawing.Point(382, 56);
-            this.dtpAlta.Name = "dtpAlta";
-            this.dtpAlta.Size = new System.Drawing.Size(195, 20);
-            this.dtpAlta.TabIndex = 55;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(304, 59);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(72, 13);
-            this.label8.TabIndex = 54;
-            this.label8.Text = "FECHA ALTA";
-            // 
             // ABMAeronaves
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(814, 572);
+            this.ClientSize = new System.Drawing.Size(823, 572);
             this.Controls.Add(this.LblListo);
             this.Controls.Add(this.GroupFiltros);
             this.Controls.Add(this.LblNuevo);

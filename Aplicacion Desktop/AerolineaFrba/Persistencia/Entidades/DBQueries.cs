@@ -24,6 +24,7 @@ namespace Persistencia.Entidades
         public static class Servicio
         {
             public static String SPGetServicios = "EL_PUNTERO.GetServicios";
+            public static String SPGetServicioPorID = "EL_PUNTERO.GetServicioPorID";
         }
 
         public static class Funcionalidad
@@ -58,6 +59,13 @@ namespace Persistencia.Entidades
             public static String SPObtenerCiudadesPorParametrosComo = "EL_PUNTERO.GetCiudadesPorParametrosComo";
             public static String SPInsertarCiudad = "EL_PUNTERO.InsertarCiudad";
             public static String SPActualizarCiudad = "EL_PUNTERO.ActualizarCiudad";
+        }
+
+        public static class Aeronave
+        {
+            public static String SPGetAeronaves = "EL_PUNTERO.GetAeronaves";
+            public static String SPGetAeronavesPorParametros = "EL_PUNTERO.GetAeronavesPorParametros";
+            public static String SPGetAeronavesPorParametrosComo = "EL_PUNTERO.GetAeronavesPorParametrosComo";
         }
     }
 }
