@@ -16,6 +16,7 @@ namespace Persistencia
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
         }
     }
 }

@@ -41,3 +41,8 @@ DROP PROCEDURE [EL_PUNTERO].[GetCiudadesPorParametrosComo];
 DROP TRIGGER [EL_PUNTERO].[Tr_DeshabilitarUsuariosConRolDeshabilitado];
 
 DROP SCHEMA [EL_PUNTERO];
+
+DROP TABLE gd_esquema.Maestra; 
+
+DROP SCHEMA gd_esquema;
+

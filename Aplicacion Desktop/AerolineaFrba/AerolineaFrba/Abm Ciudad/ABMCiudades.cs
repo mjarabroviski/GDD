@@ -84,6 +84,7 @@ namespace AerolineaFrba.Abm_Ciudad
                 UseColumnTextForButtonValue = true,
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
             };
+           
             //Creo la columna de borrar
             var columnaEliminar = new DataGridViewButtonColumn
             {
@@ -109,14 +110,16 @@ namespace AerolineaFrba.Abm_Ciudad
             if (ciudadSeleccionada != null)
             {
                 //El usuario tocó el botón de modificar
-                if (e.ColumnIndex == 1)
+                if (e.ColumnIndex == 1 )
                 {
-                    var insertarModificarCiudad = new ABMInsertarActualizarCiudad(ciudadSeleccionada);
-                    insertarModificarCiudad.ShowDialog();
+                    
+                    var insertarActualizarCiudad = new ABMInsertarActualizarCiudad(ciudadSeleccionada);
+                    insertarActualizarCiudad.ShowDialog();
 
-                    //Si modificó satisfactoriamante la ciudad, actualizo la grilla
-                    if (insertarModificarCiudad.accionTerminada)
+                    //Paso NULL para volver a obtener todos los registros de la base
+                    if (insertarActualizarCiudad.accionTerminada)
                         ActualizarPantalla(null);
+                    
                 }
                 else
                 {
@@ -224,6 +227,11 @@ namespace AerolineaFrba.Abm_Ciudad
         {
             LimpiarFiltros();
             ActualizarPantalla(null);
+        }
+
+        private void TxtNombre_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

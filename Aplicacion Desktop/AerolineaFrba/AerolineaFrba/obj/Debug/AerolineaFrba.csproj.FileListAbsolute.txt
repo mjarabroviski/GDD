@@ -43,3 +43,28 @@ C:\Users\Melanie Jarabroviski\Documents\UTN\3ro\Gestion de Datos\GDD\Aplicacion 
 C:\Users\Melanie Jarabroviski\Documents\UTN\3ro\Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ciudad.ABMInsertarActualizarCiudad.resources
 C:\Users\Melanie Jarabroviski\Documents\UTN\3ro\Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\bin\Debug\Filtros.exe
 C:\Users\Melanie Jarabroviski\Documents\UTN\3ro\Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\bin\Debug\Filtros.pdb
+C:\Iara UTN\3\GestionDeDatos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\bin\Debug\AerolineaFrba.exe.config
+C:\Iara UTN\3\GestionDeDatos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\bin\Debug\AerolineaFrba.exe
+C:\Iara UTN\3\GestionDeDatos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\bin\Debug\AerolineaFrba.pdb
+C:\Iara UTN\3\GestionDeDatos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\bin\Debug\Configuracion.exe
+C:\Iara UTN\3\GestionDeDatos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\bin\Debug\Filtros.exe
+C:\Iara UTN\3\GestionDeDatos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\bin\Debug\Herramientas.exe
+C:\Iara UTN\3\GestionDeDatos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\bin\Debug\Persistencia.exe
+C:\Iara UTN\3\GestionDeDatos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\bin\Debug\Configuracion.pdb
+C:\Iara UTN\3\GestionDeDatos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\bin\Debug\Filtros.pdb
+C:\Iara UTN\3\GestionDeDatos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\bin\Debug\Herramientas.pdb
+C:\Iara UTN\3\GestionDeDatos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\bin\Debug\Persistencia.pdb
+C:\Iara UTN\3\GestionDeDatos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.csprojResolveAssemblyReference.cache
+C:\Iara UTN\3\GestionDeDatos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ciudad.ABMCiudades.resources
+C:\Iara UTN\3\GestionDeDatos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ciudad.ABMInsertarActualizarCiudad.resources
+C:\Iara UTN\3\GestionDeDatos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Rol.FrmABMRol.resources
+C:\Iara UTN\3\GestionDeDatos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Rol.FrmABMRolAltasModificaciones.resources
+C:\Iara UTN\3\GestionDeDatos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ruta.FrmABMRuta.resources
+C:\Iara UTN\3\GestionDeDatos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.LogIn.ResetearContrasena.resources
+C:\Iara UTN\3\GestionDeDatos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.LogIn.InicioAdministrador.resources
+C:\Iara UTN\3\GestionDeDatos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.LogIn.SeleccionDeUsuario.resources
+C:\Iara UTN\3\GestionDeDatos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Properties.Resources.resources
+C:\Iara UTN\3\GestionDeDatos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Registro_de_Usuario.RegistroDeUsuario.resources
+C:\Iara UTN\3\GestionDeDatos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.csproj.GenerateResource.Cache
+C:\Iara UTN\3\GestionDeDatos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.exe
+C:\Iara UTN\3\GestionDeDatos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.pdb

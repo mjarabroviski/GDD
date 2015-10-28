@@ -18,6 +18,7 @@ namespace Persistencia.Entidades
             public static String SPEliminarFuncionalidadesPorRol = "EL_PUNTERO.EliminarFuncionalidadesPorRol";
             public static String SPInsertarRol = "EL_PUNTERO.InsertarRol";
             public static String SPActualizarRolPorID = "EL_PUNTERO.ActualizarRolPorID";
+            
         }
 
         public static class Funcionalidad
@@ -50,6 +51,8 @@ namespace Persistencia.Entidades
             public static String SPEliminarCiudad = "EL_PUNTERO.EliminarCiudad";
             public static String SPObtenerCiudadesPorParametros = "EL_PUNTERO.GetCiudadesPorParametros";
             public static String SPObtenerCiudadesPorParametrosComo = "EL_PUNTERO.GetCiudadesPorParametrosComo";
+            public static String SPInsertarCiudad = "EL_PUNTERO.InsertarCiudad";
+            public static String SPActualizarCiudad = "EL_PUNTERO.ActualizarCiudad";
         }
     }
 }
