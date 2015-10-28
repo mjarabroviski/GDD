@@ -21,6 +21,11 @@ namespace Persistencia.Entidades
             
         }
 
+        public static class Servicio
+        {
+            public static String SPGetServicios = "EL_PUNTERO.GetServicios";
+        }
+
         public static class Funcionalidad
         {
             public static String SPGetFuncionalidades = "EL_PUNTERO.GetFuncionalidades";

@@ -17,12 +17,9 @@ BEGIN TRANSACTION
 		FROM gd_esquema.Maestra);
 
  UPDATE EL_PUNTERO.TL_SERVICIO
- SET Porcentaje = CASE WHEN Nombre = 'Cama' THEN 10
-					   WHEN Nombre = 'Semi-Cama' THEN 5
-					   WHEN Nombre = 'Ejecutivo' THEN 15
-					   WHEN Nombre = 'Premium' THEN 20
-					   WHEN Nombre = 'Común' THEN 0
-					   WHEN Nombre = 'Primera Clase' THEN 15
+ SET Porcentaje = CASE WHEN Nombre = 'Ejecutivo' THEN 50
+					   WHEN Nombre = 'Turista' THEN 20
+					   WHEN Nombre = 'Primera Clase' THEN 100
 END 
 COMMIT
 
