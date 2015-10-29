@@ -190,5 +190,58 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE [EL_PUNTERO].[GetServicios]
+AS
+BEGIN
+	SET NOCOUNT ON;
+	SELECT *
+	FROM [EL_PUNTERO].[TL_SERVICIO]
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[GetAeronaves]
+AS
+BEGIN
+	SET NOCOUNT ON;
+	SELECT *
+	FROM [EL_PUNTERO].[TL_Aeronave]
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[GetServicioPorID]
+@ID_Servicio int
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	SELECT *
+	FROM [EL_PUNTERO].[TL_SERVICIO]
+	WHERE @ID_Servicio = ID_Servicio
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[GetAeronavesPorParametros]
+	@Matricula nvarchar(7) = NULL,
+	@Fabricante nvarchar (30) = NULL,
+	@Modelo nvarchar(30) = NULL,
+	@Nombre_Servicio nvarchar(255) = NULL,
+	@Fecha_Alta datetime = NULL
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	SELECT A.*
+	FROM [EL_PUNTERO].[TL_AERONAVE] AS A
+	INNER JOIN [EL_PUNTERO].[TL_Servicio] AS S ON A.ID_Servicio = S.ID_Servicio
+
+	WHERE 
+	(A.Matricula = @Matricula OR @Matricula is NULL)
+	AND (A.Fabricante = @Fabricante OR @Fabricante is NULL)
+	AND (A.Modelo = @Modelo OR @Modelo is NULL)
+	AND (S.Nombre = @Nombre_Servicio OR @Nombre_Servicio is NULL)
+	AND (A.Fecha_Alta = @Fecha_Alta OR @Fecha_Alta = 01/01/0001)
+END
+GO
+
 
 COMMIT

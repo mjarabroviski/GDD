@@ -73,5 +73,30 @@ namespace Persistencia
 
             return sp.ExecuteReader<Ciudad>();
         }
+
+        public static int InsertarCiudad(Ciudad ciudadNueva)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("Nombre_Ciudad", ciudadNueva.Nombre), 
+                };
+
+                  var sp=  new StoreProcedure(DBQueries.Ciudad.SPInsertarCiudad, param);
+
+            return sp.ExecuteNonQuery(null);
+        }
+
+        public static int ActualizarCiudad(Ciudad ciudadNueva)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("Nombre_Ciudad", ciudadNueva.Nombre), 
+                    new SPParameter("ID_Ciudad", ciudadNueva.ID)
+                };
+
+            var sp = new StoreProcedure(DBQueries.Ciudad.SPActualizarCiudad, param);
+
+            return sp.ExecuteNonQuery(null);
+        }
     }
 }

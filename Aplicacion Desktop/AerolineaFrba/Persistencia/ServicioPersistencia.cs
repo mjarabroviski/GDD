@@ -11,7 +11,7 @@ namespace Persistencia
     {
         public static List<Servicio> ObtenerTodos()
         {
-            //Obtengo la lista de ciudades almacenadas en la base de datos
+            //Obtengo la lista de servicios almacenados en la base de datos
             var sp = new StoreProcedure(DBQueries.Servicio.SPGetServicios);
             return sp.ExecuteReader<Servicio>();
         }
@@ -29,6 +29,18 @@ namespace Persistencia
 
             return servicios[0].ID_Servicio; ;
 
+        public static Servicio ObtenerServicioPorID(int ID)
+        {
+            //Traigo el servicio cuyo id coincida con el del parametro
+            var param = new List<SPParameter> { new SPParameter("ID_Servicio", ID) };
+            var sp = new StoreProcedure(DBQueries.Servicio.SPGetServicioPorID, param);
+
+            List<Servicio> servicios = sp.ExecuteReader<Servicio>();
+
+            if (servicios == null || servicios.Count == 0)
+                return null;
+
+            return servicios[0];
         }
     }
 }

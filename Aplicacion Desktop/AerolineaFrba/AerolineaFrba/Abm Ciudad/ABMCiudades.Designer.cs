@@ -109,6 +109,7 @@
             this.TxtNombre.Name = "TxtNombre";
             this.TxtNombre.Size = new System.Drawing.Size(118, 20);
             this.TxtNombre.TabIndex = 0;
+            this.TxtNombre.TextChanged += new System.EventHandler(this.TxtNombre_TextChanged);
             // 
             // DgvCiudad
             // 

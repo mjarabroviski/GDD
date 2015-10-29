@@ -84,6 +84,7 @@ namespace AerolineaFrba.Abm_Ciudad
                 UseColumnTextForButtonValue = true,
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
             };
+           
             //Creo la columna de borrar
             var columnaEliminar = new DataGridViewButtonColumn
             {
@@ -101,7 +102,7 @@ namespace AerolineaFrba.Abm_Ciudad
         {
             int cant = 0;
             //Solo funciona cuando el usuario hace click en los botones (columnas 1 y 2)
-            if (e.ColumnIndex < 2 || e.RowIndex == -1)
+            if (e.RowIndex == -1)
                 return;
 
             var ciudadSeleccionada = Listaciudades.Find(ciudad => ciudad.Nombre == (string)DgvCiudad.Rows[e.RowIndex].Cells[0].Value);
@@ -109,16 +110,18 @@ namespace AerolineaFrba.Abm_Ciudad
             if (ciudadSeleccionada != null)
             {
                 //El usuario tocó el botón de modificar
-                if (e.ColumnIndex == 1)
+                if (e.ColumnIndex == 1 )
                 {
-                    var insertarModificarCiudad = new ABMInsertarActualizarCiudad(ciudadSeleccionada);
-                    insertarModificarCiudad.ShowDialog();
+                    
+                    var insertarActualizarCiudad = new ABMInsertarActualizarCiudad(ciudadSeleccionada);
+                    insertarActualizarCiudad.ShowDialog();
 
-                    //Si modificó satisfactoriamante la ciudad, actualizo la grilla
-                    if (insertarModificarCiudad.accionTerminada)
+                    //Paso NULL para volver a obtener todos los registros de la base
+                    if (insertarActualizarCiudad.accionTerminada)
                         ActualizarPantalla(null);
+                    
                 }
-                else
+                else if (e.ColumnIndex == 2)
                 {
                     //El usuario tocó el botón de eliminar
                     using (var transaccion = DBManager.Instance().Connection.BeginTransaction(IsolationLevel.Serializable))
@@ -222,8 +225,14 @@ namespace AerolineaFrba.Abm_Ciudad
 
         private void LblLimpiar_Click(object sender, EventArgs e)
         {
+            //Vaciar grilla y limpiar los filtros
             LimpiarFiltros();
             ActualizarPantalla(null);
+        }
+
+        private void TxtNombre_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

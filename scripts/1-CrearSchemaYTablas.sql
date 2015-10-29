@@ -3,17 +3,22 @@ GO
 BEGIN TRANSACTION
 CREATE TABLE [EL_PUNTERO].[TL_AERONAVE](
 	[ID_Aeronave] int IDENTITY (1,1),
-	[Matricula] nvarchar(7) NOT NULL,
+	[Matricula] nvarchar(7) UNIQUE,
 	[Fabricante] nvarchar (30) NOT NULL,
 	[Modelo] nvarchar(30) NOT NULL,
 	[ID_Servicio] int NOT NULL,
 	[Baja_Por_Fuera_De_Servicio] bit DEFAULT 0,
 	[Baja_Por_Vida_Util] bit DEFAULT 0,
+	[Fecha_Baja_Definitiva] datetime, 
+	[Fecha_Alta] datetime NOT NULL DEFAULT 01/01/1990,
+	[KG_Totales] int NOT NULL
+);
+
+CREATE TABLE [EL_PUNTERO].[TL_BAJA_SERVICIO_AERONAVE](
+	[ID_Baja_Servicio] int IDENTITY (1,1),
+	[ID_Aeronave] int NOT NULL,
 	[Fecha_Fuera_De_Servicio] datetime,
 	[Fecha_Reinicio_Servicio] datetime, 
-	[Fecha_Baja_Defenitiva] datetime, 
-	[Fecha_Alta] datetime,
-	[KG_Totales] int NOT NULL
 );
 
 CREATE TABLE [EL_PUNTERO].[TL_PASAJE](
