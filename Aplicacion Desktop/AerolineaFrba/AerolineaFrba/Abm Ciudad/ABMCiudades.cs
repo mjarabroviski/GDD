@@ -102,7 +102,7 @@ namespace AerolineaFrba.Abm_Ciudad
         {
             int cant = 0;
             //Solo funciona cuando el usuario hace click en los botones (columnas 1 y 2)
-            if (e.ColumnIndex < 2 || e.RowIndex == -1)
+            if (e.RowIndex == -1)
                 return;
 
             var ciudadSeleccionada = Listaciudades.Find(ciudad => ciudad.Nombre == (string)DgvCiudad.Rows[e.RowIndex].Cells[0].Value);
@@ -121,7 +121,7 @@ namespace AerolineaFrba.Abm_Ciudad
                         ActualizarPantalla(null);
                     
                 }
-                else
+                else if (e.ColumnIndex == 2)
                 {
                     //El usuario tocó el botón de eliminar
                     using (var transaccion = DBManager.Instance().Connection.BeginTransaction(IsolationLevel.Serializable))
