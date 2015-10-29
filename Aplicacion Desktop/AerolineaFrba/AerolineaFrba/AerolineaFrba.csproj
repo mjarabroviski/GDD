@@ -196,6 +196,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Home Cliente\HomeCliente.resx">
       <DependentUpon>HomeCliente.cs</DependentUpon>
+	</EmbeddedResource>
     <EmbeddedResource Include="Generacion Viaje\GenercionViaje.resx">
       <DependentUpon>GenercionViaje.cs</DependentUpon>
 	</EmbeddedResource>
