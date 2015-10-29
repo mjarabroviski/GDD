@@ -16,7 +16,7 @@ namespace AerolineaFrba.Abm_Rol
     {
         public bool modoModificacion { get; set; }
 
-        public Rol CurrentRole { get; set; }
+        public Rol RolActual { get; set; }
 
         public bool AccionCompleta = false;
 
@@ -28,13 +28,13 @@ namespace AerolineaFrba.Abm_Rol
             modoModificacion = !(rol == null);
 
             if (modoModificacion)
-                CurrentRole = rol;
+                RolActual = rol;
 
         }
 
         private void FrmABMRolAltasModificaciones_Load(object sender, EventArgs e)
         {
-            this.Text = (!modoModificacion) ? string.Format("{0} - {1}", "FrbaCommerce", "Nuevo rol") : string.Format("{0} - {1}", "FrbaCommerce", "Modificar rol");
+            this.Text = (!modoModificacion) ? string.Format("{0} - {1}", "AerolineaFrba", "Nuevo rol") : string.Format("{0} - {1}", "AerolineaFrba", "Modificar rol");
 
             //Obtengo todas las funcionalidades de la base de datos
             LstFuncionalidades.DataSource = FuncionalidadPersistencia.ObtenerTodas();
@@ -46,11 +46,11 @@ namespace AerolineaFrba.Abm_Rol
             if (modoModificacion)
             {
                 //Esta trabajando en modo modificación
-                TxtRol.Text = CurrentRole.Descripcion;
-                ChkInhabilitado.Checked = !(CurrentRole.Habilitado);
+                TxtRol.Text = RolActual.Descripcion;
+                ChkInhabilitado.Checked = !(RolActual.Habilitado);
 
                 //Obtengo la lista de funcionalidades a partir del rol recibido por parametro
-                var featuresRol = FuncionalidadPersistencia.ObtenerPorRol(CurrentRole);
+                var featuresRol = FuncionalidadPersistencia.ObtenerPorRol(RolActual);
 
                 //Marco como chequeados unicamente las funcionalidades del rol
                 for (int j = 0; j < LstFuncionalidades.Items.Count; j++)
@@ -127,22 +127,22 @@ namespace AerolineaFrba.Abm_Rol
                 {
                     #region Modifico un rol existente y sus funcionalidades
 
-                    CurrentRole.Habilitado = !(ChkInhabilitado.Checked);
-                    CurrentRole.Descripcion = TxtRol.Text;
-                    CurrentRole.Funcionalidades = new List<Funcionalidad>();
+                    RolActual.Habilitado = !(ChkInhabilitado.Checked);
+                    RolActual.Descripcion = TxtRol.Text;
+                    RolActual.Funcionalidades = new List<Funcionalidad>();
 
                     //A partir de los items chequeados, seteo las funcionalidades del objeto a insertar
                     foreach (var checkedItem in LstFuncionalidades.CheckedItems)
                     {
                         var feature = (Funcionalidad)checkedItem;
-                        CurrentRole.Funcionalidades.Add(feature);
+                        RolActual.Funcionalidades.Add(feature);
                     }
 
-                    var dialogAnswer = MessageBox.Show(string.Format("Esta seguro que quiere modificar el rol {0}?", CurrentRole.Descripcion), "Atencion", MessageBoxButtons.YesNo);
+                    var dialogAnswer = MessageBox.Show(string.Format("Esta seguro que quiere modificar el rol {0}?", RolActual.Descripcion), "Atencion", MessageBoxButtons.YesNo);
                     if (dialogAnswer == DialogResult.Yes)
                     {
                         //Impacto en la base
-                        RolPersistencia.ModificarRolYFuncionalidades(CurrentRole);
+                        RolPersistencia.ModificarRolYFuncionalidades(RolActual);
                         AccionCompleta = true;
                         Close();
                     }

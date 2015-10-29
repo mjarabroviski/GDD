@@ -37,6 +37,7 @@ DROP PROCEDURE [EL_PUNTERO].[GetCiudades];
 DROP PROCEDURE [EL_PUNTERO].[EliminarCiudad];
 DROP PROCEDURE [EL_PUNTERO].[GetCiudadesPorParametros];
 DROP PROCEDURE [EL_PUNTERO].[GetCiudadesPorParametrosComo];
+DROP PROCEDURE [EL_PUNTERO].[FiltrarRutas];
 
 DROP TRIGGER [EL_PUNTERO].[Tr_DeshabilitarUsuariosConRolDeshabilitado];
 

@@ -150,6 +150,7 @@ BEGIN
 	
 	SELECT *
 	FROM [EL_PUNTERO].[TL_Ciudad]
+	ORDER BY Nombre_Ciudad
 END
 GO
 

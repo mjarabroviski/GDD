@@ -34,6 +34,21 @@ namespace Persistencia
             return sp.ExecuteNonQuery(transaccion);
         }
 
+        public static int ObtenerIDPorNombreDeCiudad(string ciudad)
+        {
+            var param = new List<SPParameter>
+            {
+                new SPParameter("Nombre_Ciudad",ciudad),
+            };
+
+            var sp = new StoreProcedure(DBQueries.Ciudad.SPObtenerIDPorNombreDeCiudad, param);
+
+            List <Ciudad> ciudades= sp.ExecuteReader<Ciudad>();
+
+            return ciudades[0].ID;
+
+        }
+
         public static List<Ciudad> ObtenerTodasPorParametro(CiudadFiltros filtros) {
             //Obtengo la lista de ciudades que cumplen ciertos filtros (busqueda exacta)
             var param = new List<SPParameter>

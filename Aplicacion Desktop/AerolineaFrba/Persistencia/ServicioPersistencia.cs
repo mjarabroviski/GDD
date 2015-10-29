@@ -15,5 +15,20 @@ namespace Persistencia
             var sp = new StoreProcedure(DBQueries.Servicio.SPGetServicios);
             return sp.ExecuteReader<Servicio>();
         }
+
+        public static int ObtenerIDPorNombreDeServicio(string servicio)
+        {
+            var param = new List<SPParameter>
+            {
+                new SPParameter("TipoServicio",servicio),
+            };
+
+            var sp = new StoreProcedure(DBQueries.Servicio.SPObtenerIDPorNombreDeServicio, param);
+
+            List<Servicio> servicios = sp.ExecuteReader<Servicio>();
+
+            return servicios[0].ID_Servicio; ;
+
+        }
     }
 }

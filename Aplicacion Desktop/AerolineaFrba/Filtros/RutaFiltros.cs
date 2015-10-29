@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Filtros
 {
-    public class ClienteFiltros
+    public class RutaFiltros
     {
         public int? Codigo { get; set; }
         public string TipoServicio { get; set; }

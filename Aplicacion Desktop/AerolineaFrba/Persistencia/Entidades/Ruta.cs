@@ -21,6 +21,9 @@ namespace Persistencia.Entidades
 
         public IMapable Map(SqlDataReader reader)
         {
+            bool hab;
+            if (reader["Habilitado"].ToString() == "1") hab = true;
+            else hab = false;
             return new Ruta
             {
                 ID = Int32.Parse(reader["ID_Ruta"].ToString()),
@@ -29,8 +32,8 @@ namespace Persistencia.Entidades
                 ID_Ciudad_Origen = Int32.Parse(reader["ID_Ciudad_Origen"].ToString()),
                 ID_Ciudad_Destino = Int32.Parse(reader["ID_Ciudad_Destino"].ToString()),
                 Precio_Base_KG = double.Parse(reader["Precio_Base_KG"].ToString()),
-                Precio_Base_Pasaje = double.Parse(reader["Precio_Base_Destino"].ToString()),
-                Habilitado = bool.Parse(reader["Habilitado"].ToString())
+                Precio_Base_Pasaje = double.Parse(reader["Precio_Base_Pasaje"].ToString()),
+                Habilitado = hab
             };
         }
 

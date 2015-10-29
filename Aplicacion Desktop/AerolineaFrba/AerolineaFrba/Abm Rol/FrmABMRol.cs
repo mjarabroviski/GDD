@@ -199,7 +199,7 @@ namespace AerolineaFrba.Abm_Rol
                 }
                 else if (e.ColumnIndex == 3)
                 {
-                    //El usuario tocó el botón de eliminar
+                    //El usuario tocó el botón de inhabilitar
 
                     //El rol seleccionado ya se encuentra eliminado (baja lógica)
                     if (!rolSeleccionado.Habilitado)

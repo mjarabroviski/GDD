@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.BtnLimpiar = new System.Windows.Forms.Label();
+            this.BtnBuscar = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.TxtHastaPasaje = new System.Windows.Forms.TextBox();
@@ -42,10 +46,6 @@
             this.CmbTipoServicio = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.TxtCodigo = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.BtnLimpiar = new System.Windows.Forms.Label();
-            this.BtnBuscar = new System.Windows.Forms.Label();
             this.DgvRuta = new System.Windows.Forms.DataGridView();
             this.BtnListo = new System.Windows.Forms.Label();
             this.BtnNuevo = new System.Windows.Forms.Label();
@@ -79,6 +79,52 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "FILTROS DE BUSQUEDA";
             // 
+            // BtnLimpiar
+            // 
+            this.BtnLimpiar.BackColor = System.Drawing.Color.DodgerBlue;
+            this.BtnLimpiar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.BtnLimpiar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnLimpiar.ForeColor = System.Drawing.Color.White;
+            this.BtnLimpiar.Location = new System.Drawing.Point(817, 59);
+            this.BtnLimpiar.Name = "BtnLimpiar";
+            this.BtnLimpiar.Size = new System.Drawing.Size(84, 32);
+            this.BtnLimpiar.TabIndex = 27;
+            this.BtnLimpiar.Text = "LIMPIAR";
+            this.BtnLimpiar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.BtnLimpiar.Click += new System.EventHandler(this.BtnLimpiar_Click);
+            // 
+            // BtnBuscar
+            // 
+            this.BtnBuscar.BackColor = System.Drawing.Color.DodgerBlue;
+            this.BtnBuscar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.BtnBuscar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnBuscar.ForeColor = System.Drawing.Color.White;
+            this.BtnBuscar.Location = new System.Drawing.Point(815, 21);
+            this.BtnBuscar.Name = "BtnBuscar";
+            this.BtnBuscar.Size = new System.Drawing.Size(88, 32);
+            this.BtnBuscar.TabIndex = 26;
+            this.BtnBuscar.Text = "BUSCAR";
+            this.BtnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.BtnBuscar.Click += new System.EventHandler(this.BtnBuscar_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(724, 12);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(43, 13);
+            this.label7.TabIndex = 16;
+            this.label7.Text = "HASTA";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(616, 12);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(44, 13);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "DESDE";
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -103,8 +149,6 @@
             this.TxtHastaPasaje.Name = "TxtHastaPasaje";
             this.TxtHastaPasaje.Size = new System.Drawing.Size(76, 20);
             this.TxtHastaPasaje.TabIndex = 12;
-            this.TxtHastaPasaje.Click += new System.EventHandler(this.TxtHastaPasaje_Click);
-            this.TxtHastaPasaje.TextChanged += new System.EventHandler(this.TxtHastaPasaje_TextChanged);
             // 
             // TxtHastaKg
             // 
@@ -112,7 +156,6 @@
             this.TxtHastaKg.Name = "TxtHastaKg";
             this.TxtHastaKg.Size = new System.Drawing.Size(76, 20);
             this.TxtHastaKg.TabIndex = 11;
-            this.TxtHastaKg.Click += new System.EventHandler(this.TxtHastaKg_Click);
             // 
             // TxtDesdePasaje
             // 
@@ -120,8 +163,6 @@
             this.TxtDesdePasaje.Name = "TxtDesdePasaje";
             this.TxtDesdePasaje.Size = new System.Drawing.Size(76, 20);
             this.TxtDesdePasaje.TabIndex = 10;
-            this.TxtDesdePasaje.Click += new System.EventHandler(this.TxtDesdePasaje_Click);
-            this.TxtDesdePasaje.TextChanged += new System.EventHandler(this.TxtDesdePasaje_TextChanged);
             // 
             // TxtDesdeKg
             // 
@@ -129,8 +170,6 @@
             this.TxtDesdeKg.Name = "TxtDesdeKg";
             this.TxtDesdeKg.Size = new System.Drawing.Size(76, 20);
             this.TxtDesdeKg.TabIndex = 9;
-            this.TxtDesdeKg.Click += new System.EventHandler(this.TxtDesdeKg_Click);
-            this.TxtDesdeKg.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label3
             // 
@@ -157,7 +196,7 @@
             this.CmbCiudadDestino.Name = "CmbCiudadDestino";
             this.CmbCiudadDestino.Size = new System.Drawing.Size(167, 21);
             this.CmbCiudadDestino.TabIndex = 6;
-            this.CmbCiudadDestino.Text = "CIUDAD DE DESTINO";
+            this.CmbCiudadDestino.Text = "CIUDAD DESTINO";
             // 
             // CmbCiudadOrigen
             // 
@@ -166,7 +205,7 @@
             this.CmbCiudadOrigen.Name = "CmbCiudadOrigen";
             this.CmbCiudadOrigen.Size = new System.Drawing.Size(167, 21);
             this.CmbCiudadOrigen.TabIndex = 5;
-            this.CmbCiudadOrigen.Text = "CIUDAD DE ORIGEN";
+            this.CmbCiudadOrigen.Text = "CIUDAD ORIGEN";
             // 
             // CmbTipoServicio
             // 
@@ -175,7 +214,7 @@
             this.CmbTipoServicio.Name = "CmbTipoServicio";
             this.CmbTipoServicio.Size = new System.Drawing.Size(221, 21);
             this.CmbTipoServicio.TabIndex = 4;
-            this.CmbTipoServicio.Text = "TIPO DE SERVICIO";
+            this.CmbTipoServicio.Text = "SERVICIO";
             // 
             // label1
             // 
@@ -192,50 +231,6 @@
             this.TxtCodigo.Name = "TxtCodigo";
             this.TxtCodigo.Size = new System.Drawing.Size(118, 20);
             this.TxtCodigo.TabIndex = 2;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(616, 12);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(44, 13);
-            this.label6.TabIndex = 15;
-            this.label6.Text = "DESDE";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(724, 12);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(43, 13);
-            this.label7.TabIndex = 16;
-            this.label7.Text = "HASTA";
-            // 
-            // BtnLimpiar
-            // 
-            this.BtnLimpiar.BackColor = System.Drawing.Color.DodgerBlue;
-            this.BtnLimpiar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.BtnLimpiar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BtnLimpiar.ForeColor = System.Drawing.Color.White;
-            this.BtnLimpiar.Location = new System.Drawing.Point(817, 59);
-            this.BtnLimpiar.Name = "BtnLimpiar";
-            this.BtnLimpiar.Size = new System.Drawing.Size(84, 32);
-            this.BtnLimpiar.TabIndex = 27;
-            this.BtnLimpiar.Text = "LIMPIAR";
-            this.BtnLimpiar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // BtnBuscar
-            // 
-            this.BtnBuscar.BackColor = System.Drawing.Color.DodgerBlue;
-            this.BtnBuscar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.BtnBuscar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BtnBuscar.ForeColor = System.Drawing.Color.White;
-            this.BtnBuscar.Location = new System.Drawing.Point(815, 21);
-            this.BtnBuscar.Name = "BtnBuscar";
-            this.BtnBuscar.Size = new System.Drawing.Size(88, 32);
-            this.BtnBuscar.TabIndex = 26;
-            this.BtnBuscar.Text = "BUSCAR";
-            this.BtnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // DgvRuta
             // 
@@ -279,6 +274,7 @@
             this.BtnNuevo.TabIndex = 37;
             this.BtnNuevo.Text = "NUEVA RUTA";
             this.BtnNuevo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.BtnNuevo.Click += new System.EventHandler(this.BtnNuevo_Click);
             // 
             // FrmABMRuta
             // 

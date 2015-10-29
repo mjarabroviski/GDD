@@ -38,6 +38,7 @@ namespace Persistencia
             return regsAfectados;
         }
 
+
         public static int EliminarPorRol(Rol rol, SqlTransaction transaccion)
         {
             var param = new List<SPParameter> { new SPParameter("ID_Rol", rol.ID) };

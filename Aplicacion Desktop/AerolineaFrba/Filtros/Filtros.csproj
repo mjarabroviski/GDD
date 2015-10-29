@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CiudadFiltros.cs" />
+    <Compile Include="RutaFiltros.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
