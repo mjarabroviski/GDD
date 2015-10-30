@@ -132,5 +132,18 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE [EL_PUNTERO].[GenerarViaje]
+@Fecha_Llegada datetime,
+@Fecha_Salida datetime,
+@Fecha_Llegada_Estimada datetime,
+@ID_Ruta int,
+@ID_Aeronave int
+
+AS
+BEGIN
+	INSERT INTO [EL_PUNTERO].[TL_VIAJE] (Fecha_Llegada,Fecha_Salida,Fecha_Llegada_Estimada,ID_Ruta,ID_Aeronave)
+	VALUES (@Fecha_Llegada,@Fecha_Salida,@Fecha_Llegada_Estimada,@ID_Ruta,@ID_Aeronave);
+END
+GO
 
 COMMIT
