@@ -27,6 +27,7 @@ namespace Persistencia.Entidades
             public static String SPObtenerIDPorNombreDeServicio = "EL_PUNTERO.ObtenerIDPorNombreDeServicio";
             public static String SPGetServicioPorID = "EL_PUNTERO.GetServicioPorID";
             public static String SPObtenerServiciosDeRuta = "EL_PUNTERO.ObtenerServiciosDeRuta";
+            public static String SPObtenerServicioPorNombre = "EL_PUNTERO.ObtenerIDPorNombreDeServicio";
         }
 
         public static class Funcionalidad
@@ -75,6 +76,16 @@ namespace Persistencia.Entidades
             public static String SPGetAeronavesPorParametros = "EL_PUNTERO.GetAeronavesPorParametros";
             public static String SPGetAeronavesPorParametrosComo = "EL_PUNTERO.GetAeronavesPorParametrosComo";
             public static String SPObtenerAeronavesHabilitadas = "EL_PUNTERO.ObtenerAeronavesHabilitadas";
+            public static String SPBajaPorVidaUtil = "EL_PUNTERO.BajaPorVidaUtil";
+            public static String SPSeleccionReemplazo = "EL_PUNTERO.SeleccionReemplazoAeronave";
+            public static String SPGetAeronavePorMatricula = "EL_PUNTERO.GetAeronavePorMatricula";
+            public static String SPInsertarAeronave = "EL_PUNTERO.InsertarAeronave";
+        }
+
+        public static class Butaca
+        {
+            public static String SPGetIdTipoPorDescripcion = "EL_PUNTERO.GetIdTipoPorDescripcion";
+            public static String SPInsertarButaca = "EL_PUNTERO.InsertarButaca";
         }
     }
 }

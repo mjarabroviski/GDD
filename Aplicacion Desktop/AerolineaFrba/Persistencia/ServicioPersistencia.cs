@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SqlClient;
 
 namespace Persistencia
 {
@@ -28,6 +29,19 @@ namespace Persistencia
             List<Servicio> servicios = sp.ExecuteReader<Servicio>();
 
             return servicios[0].ID_Servicio;
+        }
+
+        public static Servicio ObtenerServicioPorNombre(string servicio, SqlTransaction transaction)
+        {
+            var param = new List<SPParameter>{new SPParameter("TipoServicio",servicio),};
+            var sp = new StoreProcedure(DBQueries.Servicio.SPObtenerServicioPorNombre, param, transaction);
+
+            var servicios = sp.ExecuteReaderTransactioned<Servicio>(transaction);
+
+            if (servicios == null || servicios.Count == 0)
+                return null;
+
+            return servicios[0];
         }
 
         public static Servicio ObtenerServicioPorID(int ID)

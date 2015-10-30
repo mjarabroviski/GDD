@@ -22,23 +22,24 @@ namespace AerolineaFrba.Abm_Ciudad
         public ABMInsertarActualizarCiudad(Ciudad ciudad)
         {
             InitializeComponent();
-            //Si no se le pasa ningún rol por parámetro (NULL) se considera que esta trabajando en modo alta
+            //Si no se le pasa ninguna ciudad por parámetro (NULL) se considera que esta trabajando en modo alta
             modoInsertar = ciudad == null;
 
             if (!modoInsertar)
             {
                 ciudadAModificar = ciudad;
+                TxtNombreCiudad.Text = ciudadAModificar.Nombre;
             }
         }
 
         private void LblCancelar_Click(object sender, EventArgs e)
         {
-            var dialogAnswer = MessageBox.Show("Esta seguro que quiere cancelar la operacion?", "Atencion", MessageBoxButtons.YesNo);
+            var dialogAnswer = MessageBox.Show("Esta seguro que quiere salir?", "Atencion", MessageBoxButtons.YesNo);
             if (DialogResult.Yes == dialogAnswer)
             {
-                Hide();
-                ABMCiudades ciudades = new ABMCiudades();
-                ciudades.ShowDialog();
+                //Hide();
+                //ABMCiudades ciudades = new ABMCiudades();
+                //ciudades.ShowDialog();
                 Close();
             }
 
@@ -84,6 +85,7 @@ namespace AerolineaFrba.Abm_Ciudad
                         if (CiudadPersistencia.InsertarCiudad(ciudadNueva) == 1)
                         {
                             MessageBox.Show("Se inserto satisfactoriamente la nueva Ciudad", "Atencion");
+                            TxtNombreCiudad.Text = string.Empty;
                             accionTerminada = true;
                             Close();
                         }
@@ -103,8 +105,9 @@ namespace AerolineaFrba.Abm_Ciudad
                         if (CiudadPersistencia.ActualizarCiudad(ciudadAModificar) == 1)
                         {
                             MessageBox.Show("Se modifico satisfactoriamente la ciudad", "Atencion");
+                            TxtNombreCiudad.Text = string.Empty;
                             accionTerminada = true;
-                            //Close();
+                            Close();
                         }
                     }
                  

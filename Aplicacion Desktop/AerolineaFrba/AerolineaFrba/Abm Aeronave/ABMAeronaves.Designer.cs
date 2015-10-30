@@ -30,8 +30,8 @@
         {
             this.LblListo = new System.Windows.Forms.Label();
             this.GroupFiltros = new System.Windows.Forms.GroupBox();
+            this.chkFecha = new System.Windows.Forms.CheckBox();
             this.dtpAlta = new System.Windows.Forms.DateTimePicker();
-            this.label8 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.CboServicio = new System.Windows.Forms.ComboBox();
             this.TxtModelo = new System.Windows.Forms.TextBox();
@@ -65,8 +65,8 @@
             // 
             // GroupFiltros
             // 
+            this.GroupFiltros.Controls.Add(this.chkFecha);
             this.GroupFiltros.Controls.Add(this.dtpAlta);
-            this.GroupFiltros.Controls.Add(this.label8);
             this.GroupFiltros.Controls.Add(this.label6);
             this.GroupFiltros.Controls.Add(this.CboServicio);
             this.GroupFiltros.Controls.Add(this.TxtModelo);
@@ -85,22 +85,24 @@
             this.GroupFiltros.TabStop = false;
             this.GroupFiltros.Text = "FILTROS DE BUSQUEDA";
             // 
+            // chkFecha
+            // 
+            this.chkFecha.AutoSize = true;
+            this.chkFecha.Location = new System.Drawing.Point(311, 58);
+            this.chkFecha.Name = "chkFecha";
+            this.chkFecha.Size = new System.Drawing.Size(91, 17);
+            this.chkFecha.TabIndex = 56;
+            this.chkFecha.Text = "FECHA ALTA";
+            this.chkFecha.UseVisualStyleBackColor = true;
+            this.chkFecha.Click += new System.EventHandler(this.chkFecha_Click);
+            // 
             // dtpAlta
             // 
-            this.dtpAlta.Location = new System.Drawing.Point(382, 56);
+            this.dtpAlta.Location = new System.Drawing.Point(408, 56);
             this.dtpAlta.Name = "dtpAlta";
             this.dtpAlta.Size = new System.Drawing.Size(195, 20);
             this.dtpAlta.TabIndex = 55;
             this.dtpAlta.Value = new System.DateTime(2015, 10, 28, 18, 9, 0, 0);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(304, 59);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(72, 13);
-            this.label8.TabIndex = 54;
-            this.label8.Text = "FECHA ALTA";
             // 
             // label6
             // 
@@ -114,7 +116,7 @@
             // CboServicio
             // 
             this.CboServicio.FormattingEnabled = true;
-            this.CboServicio.Location = new System.Drawing.Point(382, 23);
+            this.CboServicio.Location = new System.Drawing.Point(408, 23);
             this.CboServicio.Name = "CboServicio";
             this.CboServicio.Size = new System.Drawing.Size(195, 21);
             this.CboServicio.TabIndex = 41;
@@ -145,7 +147,7 @@
             // ChkBusquedaExacta
             // 
             this.ChkBusquedaExacta.AutoSize = true;
-            this.ChkBusquedaExacta.Location = new System.Drawing.Point(307, 95);
+            this.ChkBusquedaExacta.Location = new System.Drawing.Point(311, 95);
             this.ChkBusquedaExacta.Name = "ChkBusquedaExacta";
             this.ChkBusquedaExacta.Size = new System.Drawing.Size(131, 17);
             this.ChkBusquedaExacta.TabIndex = 36;
@@ -183,7 +185,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(304, 26);
+            this.label2.Location = new System.Drawing.Point(308, 26);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(57, 13);
             this.label2.TabIndex = 3;
@@ -217,6 +219,7 @@
             this.LblNuevo.TabIndex = 45;
             this.LblNuevo.Text = "NUEVA AERONAVE";
             this.LblNuevo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LblNuevo.Click += new System.EventHandler(this.LblNuevo_Click);
             // 
             // DgvAeronaves
             // 
@@ -233,6 +236,7 @@
             this.DgvAeronaves.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DgvAeronaves.Size = new System.Drawing.Size(783, 342);
             this.DgvAeronaves.TabIndex = 43;
+            this.DgvAeronaves.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvAeronaves_CellContentClick);
             // 
             // ABMAeronaves
             // 
@@ -244,7 +248,7 @@
             this.Controls.Add(this.LblNuevo);
             this.Controls.Add(this.DgvAeronaves);
             this.Name = "ABMAeronaves";
-            this.Text = "ABMAeronaves";
+            this.Text = "Administracion Aeronaves";
             this.Load += new System.EventHandler(this.ABMAeronaves_Load);
             this.GroupFiltros.ResumeLayout(false);
             this.GroupFiltros.PerformLayout();
@@ -271,6 +275,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox TxtModelo;
         private System.Windows.Forms.DateTimePicker dtpAlta;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.CheckBox chkFecha;
     }
 }
