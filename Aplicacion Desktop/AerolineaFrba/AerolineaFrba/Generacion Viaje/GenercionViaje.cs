@@ -134,19 +134,39 @@ namespace AerolineaFrba.Generacion_Viaje
         
         private void Btn_GenerarViaje_Click(object sender, EventArgs e)
         {
-            /*if (ValidarHorarioDeAeronave() == true)
-            {*/
-                DateTime Fecha_Salida = DateTime.ParseExact("2009-05-08 14:40:52,531", "yyyy-MM-dd HH:mm:ss,fff",
-                                       System.Globalization.CultureInfo.InvariantCulture);
-                DateTime Fecha_Llegada = DateTime.ParseExact("2009-05-08 14:40:52,531", "yyyy-MM-dd HH:mm:ss,fff",
-                                       System.Globalization.CultureInfo.InvariantCulture);
-                int ID_Origen = CiudadPersistencia.ObtenerIDPorNombreDeCiudad(CboCiudadOrigen.Text);
-                int ID_Destino = CiudadPersistencia.ObtenerIDPorNombreDeCiudad(CboCiudadDestino.Text);
-                int ID_Ruta = RutaPersistencia.ObtenerRutaPorOrigenYDestino(ID_Origen, ID_Destino).ID;
-                //int ID_Aeronave = 
-                //GenerarViaje();
-           /* }*/
+            string fechasalida = DtpFechaSalida.ToString() + " " + DtpHoraSalida.ToString();
+            string fechallegada = DtpFechaLlegada.ToString() + " " + DtpHoraLlegada.ToString();
+            string fechallegadaestimada = DtpFechaLlegadaEstimada.ToString() + " " + DtpHoraLlegadaEstimada.ToString();
 
+            DateTime Fecha_Salida = DateTime.ParseExact(fechasalida, "yyyy-MM-dd HH:mm:ss",
+                                        System.Globalization.CultureInfo.InvariantCulture);
+            DateTime Fecha_Llegada = DateTime.ParseExact(fechallegada, "yyyy-MM-dd HH:mm:ss",
+                                   System.Globalization.CultureInfo.InvariantCulture);
+            DateTime Fecha_Llegada_Estimada = DateTime.ParseExact(fechallegadaestimada, "yyyy-MM-dd HH:mm:ss",
+                                   System.Globalization.CultureInfo.InvariantCulture);
+
+            if (ValidarHorarioDeAeronave() == true)
+
+            {
+               
+                int ID_Origen = CiudadPersistencia.ObtenerIDPorNombreDeCiudad(CboCiudadOrigen.Text);
+               
+                int ID_Destino = CiudadPersistencia.ObtenerIDPorNombreDeCiudad(CboCiudadDestino.Text);
+                
+                int ID_Ruta = RutaPersistencia.ObtenerRutaPorOrigenYDestino(ID_Origen, ID_Destino).ID;
+
+                var transaccion = DBManager.Instance().Connection.BeginTransaction(IsolationLevel.Serializable);
+                int ID_Aeronave = AeronavePersistencia.ObtenerPorMatricula(CboAeronave.Text,transaccion).ID;
+                transaccion.Commit();
+
+                ViajePersistencia.GenerarViaje(Fecha_Llegada,Fecha_Salida,Fecha_Llegada_Estimada,ID_Ruta,ID_Aeronave);
+           }
+
+        }
+
+        private bool ValidarHorarioDeAeronave()
+        {
+            return true;
         }
         
         private void DtpHoraSalida_ValueChanged(object sender, EventArgs e)

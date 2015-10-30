@@ -108,6 +108,19 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE [EL_PUNTERO].[GetAeronavePorMatricula]
+@Matricula nvarchar(7)
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	SELECT *
+	FROM [EL_PUNTERO].[TL_AERONAVE]
+	WHERE Matricula = @Matricula
+END
+GO
+
+
 CREATE PROCEDURE [EL_PUNTERO].[ObtenerIDPorNombreDeCiudad]
 @Nombre_Ciudad nvarchar(255)
 AS

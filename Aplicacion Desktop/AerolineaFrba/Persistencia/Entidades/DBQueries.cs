@@ -87,5 +87,10 @@ namespace Persistencia.Entidades
             public static String SPGetIdTipoPorDescripcion = "EL_PUNTERO.GetIdTipoPorDescripcion";
             public static String SPInsertarButaca = "EL_PUNTERO.InsertarButaca";
         }
+
+        public static class Viaje
+        {
+            public static String SPGenerarViaje = "EL_PUNTERO.GenerarViaje";
+        }
     }
 }
