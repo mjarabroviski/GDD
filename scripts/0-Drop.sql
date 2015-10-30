@@ -43,6 +43,11 @@ DROP PROCEDURE [EL_PUNTERO].[GetServicios];
 DROP PROCEDURE [EL_PUNTERO].[GetAeronaves];
 DROP PROCEDURE [EL_PUNTERO].[GetServicioPorID];
 DROP PROCEDURE [EL_PUNTERO].[GetAeronavesPorParametros];
+DROP PROCEDURE [EL_PUNTERO].[ActualizarCiudad];
+DROP PROCEDURE [EL_PUNTERO].[InsertarCiudad];
+DROP PROCEDURE [EL_PUNTERO].[ObtenerIDPorNombreDeCiudad];
+DROP PROCEDURE [EL_PUNTERO].[ObtenerTodasLasCiudadesConOrigen];
+DROP PROCEDURE [EL_PUNTERO].[SPObtenerServiciosDeRuta];
 
 DROP TRIGGER [EL_PUNTERO].[Tr_DeshabilitarUsuariosConRolDeshabilitado];
 

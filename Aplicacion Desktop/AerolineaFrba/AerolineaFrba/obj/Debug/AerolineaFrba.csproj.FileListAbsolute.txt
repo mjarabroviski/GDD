@@ -80,3 +80,6 @@ C:\Iara UTN\3\GestionDeDatos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\
 C:\Users\Melanie Jarabroviski\Documents\UTN\3ro\Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ruta.FrmABMRuta.resources
 C:\Users\Melanie Jarabroviski\Documents\UTN\3ro\Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Aeronave.ABMAeronaves.resources
 C:\Users\Melanie Jarabroviski\Documents\UTN\3ro\Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Generacion_Viaje.GenercionViaje.resources
+C:\Iara UTN\3\GestionDeDatos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Aeronave.ABMAeronaves.resources
+C:\Iara UTN\3\GestionDeDatos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ruta.FrmABMRutaAltasModificaciones.resources
+C:\Iara UTN\3\GestionDeDatos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Home_Cliente.HomeCliente.resources

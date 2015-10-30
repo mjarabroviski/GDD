@@ -17,6 +17,13 @@ namespace Persistencia
             return sp.ExecuteReader<Aeronave>();
         }
 
+        public static List<Aeronave> ObtenerAeronavesHabilitadas()
+        {
+            //Obtengo la lista de ciudades almacenadas en la base de datos
+            var sp = new StoreProcedure(DBQueries.Aeronave.SPObtenerAeronavesHabilitadas);
+            return sp.ExecuteReader<Aeronave>();
+        }
+
         public static List<Aeronave> ObtenerTodasPorParametros(AeronaveFiltros filtros)
         {
             var param = new List<SPParameter> { new SPParameter("Matricula", filtros.Matricula ?? (object)DBNull.Value),

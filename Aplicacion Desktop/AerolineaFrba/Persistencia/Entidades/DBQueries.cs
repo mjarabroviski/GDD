@@ -26,6 +26,7 @@ namespace Persistencia.Entidades
             public static String SPGetServicios = "EL_PUNTERO.GetServicios";
             public static String SPObtenerIDPorNombreDeServicio = "EL_PUNTERO.ObtenerIDPorNombreDeServicio";
             public static String SPGetServicioPorID = "EL_PUNTERO.GetServicioPorID";
+            public static String SPObtenerServiciosDeRuta = "EL_PUNTERO.ObtenerServiciosDeRuta";
         }
 
         public static class Funcionalidad
@@ -41,6 +42,8 @@ namespace Persistencia.Entidades
             public static String SPGetCiudadPorID = "EL_PUNTERO.GetCiudadPorID";
             public static String SPFiltrarRutas = "EL_PUNTERO.FiltrarRutas";
             public static String SPInsertarRuta = "EL_PUNTERO.InsertarRuta";
+            public static String SPObtenerTodasLasCiudadesConOrigen = "EL_PUNTERO.ObtenerTodasLasCiudadesConOrigen";
+            public static String SPObtenerRutaPorOrigenYDestino = "EL_PUNTERO.ObtenerRutaPorOrigenYDestino";
         }
 
         public static class Usuario { 
@@ -63,6 +66,7 @@ namespace Persistencia.Entidades
             public static String SPInsertarCiudad = "EL_PUNTERO.InsertarCiudad";
             public static String SPActualizarCiudad = "EL_PUNTERO.ActualizarCiudad";
             public static String SPObtenerIDPorNombreDeCiudad = "EL_PUNTERO.ObtenerIDPorNombreDeCiudad";
+            public static String SPObtenerCiudadPorId_Ciudad = "EL_PUNTERO.ObtenerCiudadPorId_Ciudad";
         }
 
         public static class Aeronave
@@ -70,6 +74,7 @@ namespace Persistencia.Entidades
             public static String SPGetAeronaves = "EL_PUNTERO.GetAeronaves";
             public static String SPGetAeronavesPorParametros = "EL_PUNTERO.GetAeronavesPorParametros";
             public static String SPGetAeronavesPorParametrosComo = "EL_PUNTERO.GetAeronavesPorParametrosComo";
+            public static String SPObtenerAeronavesHabilitadas = "EL_PUNTERO.ObtenerAeronavesHabilitadas";
         }
     }
 }
