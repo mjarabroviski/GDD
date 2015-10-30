@@ -156,6 +156,8 @@
             // 
             // DtpFechaAlta
             // 
+            this.DtpFechaAlta.CustomFormat = "dd/MM/yyyy HH:mm";
+            this.DtpFechaAlta.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.DtpFechaAlta.Location = new System.Drawing.Point(19, 249);
             this.DtpFechaAlta.Name = "DtpFechaAlta";
             this.DtpFechaAlta.Size = new System.Drawing.Size(277, 20);

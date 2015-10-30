@@ -75,6 +75,7 @@ namespace Persistencia.Entidades
             public static String SPSeleccionReemplazo = "EL_PUNTERO.SeleccionReemplazoAeronave";
             public static String SPGetAeronavePorMatricula = "EL_PUNTERO.GetAeronavePorMatricula";
             public static String SPInsertarAeronave = "EL_PUNTERO.InsertarAeronave";
+            public static String SPEliminarAeronave = "EL_PUNTERO.EliminarAeronave";
         }
 
         public static class Butaca

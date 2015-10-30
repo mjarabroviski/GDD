@@ -16,12 +16,12 @@ namespace Persistencia
             var param = new List<SPParameter> { new SPParameter("Descripcion", descripcion) };
             var sp = new StoreProcedure(DBQueries.Butaca.SPGetIdTipoPorDescripcion, param, transaction);
 
-            var ciudades = sp.ExecuteReaderTransactioned<Butaca>(transaction);
+            var butacas = sp.ExecuteReaderTransactioned<Butaca>(transaction);
 
-            if (ciudades == null || ciudades.Count == 0)
+            if (butacas == null || butacas.Count == 0)
                 return null;
 
-            return ciudades[0];
+            return butacas[0];
         }
 
         public static Butaca InsertarButaca(Butaca butaca, SqlTransaction transaction)

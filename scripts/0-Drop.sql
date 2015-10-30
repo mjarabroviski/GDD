@@ -50,6 +50,7 @@ DROP PROCEDURE [EL_PUNTERO].[InsertarAeronave];
 DROP PROCEDURE [EL_PUNTERO].[GetIdTipoPorDescripcion];
 DROP PROCEDURE [EL_PUNTERO].[InsertarButaca];
 DROP PROCEDURE [EL_PUNTERO].[ObtenerIDPorNombreDeServicio];
+DROP PROCEDURE [EL_PUNTERO].[EliminarAeronave];
 
 DROP TRIGGER [EL_PUNTERO].[Tr_DeshabilitarUsuariosConRolDeshabilitado];
 

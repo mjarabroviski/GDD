@@ -61,7 +61,7 @@ namespace AerolineaFrba.Abm_Aeronave
             {
                 try
                 {
-                    #region Validaciones
+                    #region ValidacionesEnGral
 
                     var exceptionMessage = string.Empty;
 
@@ -89,9 +89,6 @@ namespace AerolineaFrba.Abm_Aeronave
                     if (string.IsNullOrEmpty(DtpFechaAlta.Text))
                         exceptionMessage += "La fecha de alta no puede ser vacia.\n";
 
-                    else if (DtpFechaAlta.Value.Date < DateTime.Today)
-                        exceptionMessage += Environment.NewLine + "La fecha ingresada no es válida.\n";
-
                     if (!string.IsNullOrEmpty(exceptionMessage))
                         throw new Exception(exceptionMessage);
 
@@ -103,6 +100,10 @@ namespace AerolineaFrba.Abm_Aeronave
                             Aeronave a = AeronavePersistencia.ObtenerPorMatricula(TxtMatricula.Text, transaccion);
                             if (a != null)
                                 throw new Exception("Ya existe una aeronave con la matricula ingresada.");
+
+                            //Valido que la fecha de alta sea mayor o igual al dia de hoy
+                            if (DtpFechaAlta.Value.Date >= DateTime.Today)
+                                throw new Exception("La fecha ingresada no es válida.\n");
 
                             #region Inserto la nueva aeronave
 
@@ -124,12 +125,19 @@ namespace AerolineaFrba.Abm_Aeronave
                             if (butacas.accionTerminada)
                             {
                                 transaccion.Commit();
+                                MessageBox.Show("Aeronave insertada satisfactoriamente", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                if (aeronaveAReemplazar != null)
+                                {
+                                    //ASIGNAR LOS VIAJES DE LA AERONAVE A REEMPLAZAR A LA NUEVA
+                                    accionTerminada = true;
+                                }
                                 Close();
                             }
+                            else transaccion.Rollback();
                     }
                     else
                     {
-                        //MODIFICACION
+                        //var cantViajes = AeronavePersistencia.ObtenerViajesPorAeronave(aeronaveAModificar);
                     }
 
                         

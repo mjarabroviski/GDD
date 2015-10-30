@@ -364,4 +364,14 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE [EL_PUNTERO].[EliminarAeronave]
+@ID_Aeronave int
+AS
+BEGIN
+	DELETE 
+	FROM [EL_PUNTERO].[TL_Aeronave]
+	WHERE ID_Aeronave = @ID_Aeronave
+END
+GO
+
 COMMIT

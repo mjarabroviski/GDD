@@ -54,19 +54,33 @@ namespace AerolineaFrba.Abm_Aeronave
 
                     if (aeronave != null)
                     {
-                        #region Inserto las butacas de pasillo
-                        var cantPasillo = Convert.ToInt32(TxtPasillo.Text);
+                            #region Inserto las butacas de pasillo
 
-                        for (int i = 1; i <= cantPasillo; i++)
-                        {      
+                            var cantPasillo = Convert.ToInt32(TxtPasillo.Text);
+                            for (int i = 1; i <= cantPasillo; i++)
+                            {
                                 var pasillo = new Butaca();
                                 pasillo.Numero = i;
                                 pasillo.ID_Tipo = ButacaPersistencia.ObtenerIdTipoPorDescripcion("Pasillo", transaccionConcurrente).ID_Tipo;
                                 pasillo.ID_Aeronave = aeronave.ID;
 
-                                ButacaPersistencia.InsertarButaca(pasillo,transaccionConcurrente); 
-                        }
-                        #endregion
+                                ButacaPersistencia.InsertarButaca(pasillo, transaccionConcurrente);
+                            }
+                            #endregion
+
+                            #region Inserto las butacas de ventanilla
+
+                            var cantVentanilla = Convert.ToInt32(TxtVentanilla.Text);
+                            for (int i = cantPasillo + 1; i <= cantPasillo+cantVentanilla; i++)
+                            {
+                                var ventanilla = new Butaca();
+                                ventanilla.Numero = i;
+                                ventanilla.ID_Tipo = ButacaPersistencia.ObtenerIdTipoPorDescripcion("Ventanilla", transaccionConcurrente).ID_Tipo;
+                                ventanilla.ID_Aeronave = aeronave.ID;
+
+                                ButacaPersistencia.InsertarButaca(ventanilla, transaccionConcurrente);
+                            }
+                            #endregion
 
                         MessageBox.Show("Butacas agregadas satisfactoriamente", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         accionTerminada = true;
@@ -74,16 +88,18 @@ namespace AerolineaFrba.Abm_Aeronave
                     }
                     else
                     {
-                        exceptionMessage += "Hubo un error al agregar las butacas\n";
-                        this.Hide();
-                        var aero = new ABMAeronaves();
-                        aero.ShowDialog();
+                        AeronavePersistencia.eliminarAeronave(aeronave);
+                        exceptionMessage += "Hubo un error al agregar las butacas, no se pudo insertar la aeronave\n";
+                        accionTerminada = false;
                         Close();
                     }
                 }
                 catch (Exception ex)
                 {
+                    accionTerminada = false;
+                    AeronavePersistencia.eliminarAeronave(aeronave);
                     MessageBox.Show(ex.Message, "Atención");
+                    Close();
                 }
         }
 

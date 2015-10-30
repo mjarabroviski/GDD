@@ -44,6 +44,7 @@ namespace AerolineaFrba.Abm_Aeronave
                     MessageBox.Show("No exitsen aeronaves que puedan reemplazar a la seleccionada, debe dar de alta una nueva", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     var insertarActualizarAeronave = new ABMInsertarActualizarAeronave(aeronaveSeleccionada, false);
                     insertarActualizarAeronave.ShowDialog();
+                    if (insertarActualizarAeronave.accionTerminada) MessageBox.Show("La aeronave fue reemplazada por otra satisfactoriamente", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Close();
                 }
                 MessageBox.Show("La aeronave fue reemplazada satisfactoriamente", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
