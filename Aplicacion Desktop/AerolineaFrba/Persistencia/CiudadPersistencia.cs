@@ -37,16 +37,14 @@ namespace Persistencia
         public static int ObtenerIDPorNombreDeCiudad(string ciudad)
         {
             var param = new List<SPParameter>
-            {
-                new SPParameter("Nombre_Ciudad",ciudad),
-            };
-
+             {
+               new SPParameter("Nombre_Ciudad",ciudad),
+             };
             var sp = new StoreProcedure(DBQueries.Ciudad.SPObtenerIDPorNombreDeCiudad, param);
 
             List <Ciudad> ciudades= sp.ExecuteReader<Ciudad>();
 
             return ciudades[0].ID;
-
         }
 
         public static List<Ciudad> ObtenerTodasPorParametro(CiudadFiltros filtros) {
@@ -81,7 +79,7 @@ namespace Persistencia
                     new SPParameter("Nombre_Ciudad", ciudadNueva.Nombre), 
                 };
 
-                  var sp=  new StoreProcedure(DBQueries.Ciudad.SPInsertarCiudad, param);
+           var sp=  new StoreProcedure(DBQueries.Ciudad.SPInsertarCiudad, param);
 
             return sp.ExecuteNonQuery(null);
         }
@@ -97,6 +95,20 @@ namespace Persistencia
             var sp = new StoreProcedure(DBQueries.Ciudad.SPActualizarCiudad, param);
 
             return sp.ExecuteNonQuery(null);
+        }
+
+        public static Ciudad ObtenerCiudadPorId_Ciudad(int idCiudad)
+        {
+            //Obtengo la ciudad
+            var param = new List<SPParameter> { new SPParameter("ID_Ciudad", idCiudad) };
+            var sp = new StoreProcedure(DBQueries.Ciudad.SPObtenerCiudadPorId_Ciudad, param);
+
+            //Retorno una lista de Ciudades a partir de un ExecuteReader
+            List<Ciudad> ciudades = sp.ExecuteReader<Ciudad>();
+            if (ciudades == null || ciudades.Count == 0)
+                return null;
+
+            return ciudades[0];
         }
     }
 }
