@@ -16,5 +16,10 @@ namespace AerolineaFrba.Home_Administrador
         {
             InitializeComponent();
         }
+
+        private void HomeAdministrador_Load(object sender, EventArgs e)
+        {
+            //TODO En el cerrar sesion va a haber que poner AdministradorSesion.BorrarSesionActual();
+        }
     }
 }

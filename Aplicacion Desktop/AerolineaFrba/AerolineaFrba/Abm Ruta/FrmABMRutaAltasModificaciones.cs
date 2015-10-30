@@ -30,6 +30,7 @@ namespace AerolineaFrba.Abm_Ruta
 
             if (modoModificacion)
                 RutaActual = ruta;
+
         }
 
         private void FrmABMRutaAltasModificaciones_Load(object sender, EventArgs e)
@@ -62,6 +63,7 @@ namespace AerolineaFrba.Abm_Ruta
                 CmbCiudadDestino.Text = RutaPersistencia.ObtenerCiudadPorID(RutaActual.ID_Ciudad_Destino);
                 TxtBaseKg.Text = RutaActual.Precio_Base_KG.ToString();
                 TxtBasePasaje.Text = RutaActual.Precio_Base_Pasaje.ToString();
+                if (RutaActual.Habilitado) ChkInhabilitado.Enabled = false;
             }
 
         }
@@ -107,10 +109,11 @@ namespace AerolineaFrba.Abm_Ruta
                     filtro.TipoServicio = CmbTipoServicio.Text;
                     filtro.PrecioDesdeKg = double.Parse(TxtBaseKg.Text);
                     filtro.PrecioHastaKg = double.Parse(TxtBaseKg.Text);
-                    filtro.PrecioDesdePasaje = double.Parse(TxtBaseKg.Text);
-                    filtro.PrecioHastaPasaje = double.Parse(TxtBaseKg.Text);
+                    filtro.PrecioDesdePasaje = double.Parse(TxtBasePasaje.Text);
+                    filtro.PrecioHastaPasaje = double.Parse(TxtBasePasaje.Text);
 
                     var rutas = RutaPersistencia.ObtenerRutasPorParametros(filtro);
+                    var mensajeExcepcion = string.Empty;
 
                     if (rutas.Count!=0)
                         throw new Exception("Ya existe una ruta con los datos ingresados");
@@ -118,16 +121,19 @@ namespace AerolineaFrba.Abm_Ruta
                     #endregion
 
                     if (filtro.CiudadOrigen == filtro.CiudadDestino)
-                        throw new Exception("No puede crear una ruta con la misma ciudad de origen y destino");
+                        mensajeExcepcion += "No puede crear una ruta con la misma ciudad de origen y destino";
 
                     if(!(ValidadorDeTipos.IsNumeric(TxtCodigo.Text)))
-                        throw new Exception("El código de ruta debe ser un número");
+                        mensajeExcepcion += Environment.NewLine + "El código de ruta debe ser un número";
 
                     if (!(ValidadorDeTipos.IsNumeric(TxtBaseKg.Text)))
-                        throw new Exception("El precio base del KG debe ser un número");
+                        mensajeExcepcion += Environment.NewLine + "El precio base del KG debe ser un número";
 
                     if (!(ValidadorDeTipos.IsNumeric(TxtBasePasaje.Text)))
-                        throw new Exception("El precio base del pasaje debe ser un número");
+                        mensajeExcepcion += Environment.NewLine + "El precio base del pasaje debe ser un número";
+
+                    if (!ValidadorDeTipos.IsEmpty(mensajeExcepcion))
+                        throw new Exception(mensajeExcepcion);
 
                     //TODO Por qué no me muestra el mensaje de error que le dije??
 
@@ -158,13 +164,23 @@ namespace AerolineaFrba.Abm_Ruta
                 {
                     #region Modifico una ruta existente
 
+                    var rutaAModificar = RutaActual;
                     RutaActual.Codigo_Ruta = Int32.Parse(TxtCodigo.Text);
                     RutaActual.ID_Ciudad_Origen = CiudadPersistencia.ObtenerIDPorNombreDeCiudad(CmbCiudadOrigen.Text);
                     RutaActual.ID_Ciudad_Destino = CiudadPersistencia.ObtenerIDPorNombreDeCiudad(CmbCiudadDestino.Text);
                     RutaActual.ID_Servicio = ServicioPersistencia.ObtenerIDPorNombreDeServicio(CmbTipoServicio.Text);
-                   // RutaActual.Precio_Base_KG = (double)filtro.PrecioDesdeKg;   //ES INDISTINTO PONER DESDE O HASTA PORQUE EN ESTE CASO SON IGUALES
-                 //   RutaActual.Precio_Base_Pasaje = (double)filtro.PrecioDesdePasaje;  //ES INDISTINTO PONER DESDE O HASTA PORQUE EN ESTE CASO SON IGUALES
+                    RutaActual.Precio_Base_KG = double.Parse(TxtBaseKg.Text);   //ES INDISTINTO PONER DESDE O HASTA PORQUE EN ESTE CASO SON IGUALES
+                    RutaActual.Precio_Base_Pasaje = double.Parse(TxtBasePasaje.Text);  //ES INDISTINTO PONER DESDE O HASTA PORQUE EN ESTE CASO SON IGUALES
                     RutaActual.Habilitado = !(ChkInhabilitado.Checked);
+
+                    var dialogAnswer = MessageBox.Show(string.Format("Esta seguro que quiere modificar la ruta {0} de {1} a {2}?", rutaAModificar.Codigo_Ruta, RutaPersistencia.ObtenerCiudadPorID(rutaAModificar.ID_Ciudad_Origen), RutaPersistencia.ObtenerCiudadPorID(rutaAModificar.ID_Ciudad_Destino)), "Atención", MessageBoxButtons.YesNo);
+                    if (dialogAnswer == DialogResult.Yes)
+                    {
+                        //Impacto en la base
+                        RutaPersistencia.ModificarRuta(RutaActual);
+                        AccionCompleta = true;
+                        Close();
+                    }
 
 
                     #endregion

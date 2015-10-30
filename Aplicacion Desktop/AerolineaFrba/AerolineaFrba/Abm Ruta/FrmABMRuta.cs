@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Persistencia;
 using Filtros;
+using Sesion;
 
 namespace AerolineaFrba.Abm_Ruta
 {
@@ -234,6 +235,61 @@ namespace AerolineaFrba.Abm_Ruta
             //Paso NULL para volver a obtener todos los registros de la base
             //ActualizarPantalla(null); 
         //TODO
+        }
+
+        private void DgvRuta_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //Funciona solo cuando el usuario hace click en una fila (no en la cabecera)
+            if (e.RowIndex == -1)
+                return;
+
+            //Obtengo la ruta correspondiente a la fila seleccionada
+            var rutaSeleccionada = _rutas.Find(r => (r.Codigo_Ruta == (int)DgvRuta.Rows[e.RowIndex].Cells[0].Value) &&
+                                                   (RutaPersistencia.ObtenerServicioPorID(r.ID_Servicio) == (string)DgvRuta.Rows[e.RowIndex].Cells[1].Value) &&
+                                                   (RutaPersistencia.ObtenerCiudadPorID(r.ID_Ciudad_Origen) == (string)DgvRuta.Rows[e.RowIndex].Cells[2].Value) &&
+                                                   (RutaPersistencia.ObtenerCiudadPorID(r.ID_Ciudad_Destino) == (string)DgvRuta.Rows[e.RowIndex].Cells[3].Value) &&
+                                                   (r.Precio_Base_KG == (double)DgvRuta.Rows[e.RowIndex].Cells[4].Value) &&
+                                                   (r.Precio_Base_Pasaje == (double)DgvRuta.Rows[e.RowIndex].Cells[5].Value) &&
+                                                   (r.Habilitado == (bool)DgvRuta.Rows[e.RowIndex].Cells[6].Value)
+                                                   );
+
+            if (rutaSeleccionada != null)
+            {
+                
+                //El usuario tocó el botón de modificar
+                if (e.ColumnIndex == 7)
+                {
+                    var altasModificacionesVisibilidad = new FrmABMRutaAltasModificaciones(rutaSeleccionada);
+                    altasModificacionesVisibilidad.ShowDialog();
+
+                    //Si modificó satisfactoriamante el rol, actualizo la grilla
+                    if (altasModificacionesVisibilidad.AccionCompleta)
+                        ActualizarPantalla(null);
+                }
+                else if (e.ColumnIndex == 8)
+                {
+                    
+                    //El usuario tocó el botón de inhabilitar
+
+                    //La ruta seleccionada ya se encuentra eliminada (baja lógica)
+                    if (!rutaSeleccionada.Habilitado)
+                    {
+                        MessageBox.Show("No se puede eliminar la ruta ya que se encuentra inhabilitada", "Atencion");
+                        return;
+                    }
+                    var dialogAnswer = MessageBox.Show(string.Format("Esta seguro que quiere inhabilitar la ruta {0} de {1} a {2}?", rutaSeleccionada.Codigo_Ruta, RutaPersistencia.ObtenerCiudadPorID(rutaSeleccionada.ID_Ciudad_Origen), RutaPersistencia.ObtenerCiudadPorID(rutaSeleccionada.ID_Ciudad_Destino)), "Atención", MessageBoxButtons.YesNo);
+                    if (dialogAnswer == DialogResult.Yes)
+                    {
+                        //Defino que ya no este más activo el rol e impacto en la base de datos
+                        rutaSeleccionada.Habilitado = false;
+                        RutaPersistencia.ModificarRuta(rutaSeleccionada);
+                        RutaPersistencia.CancelarPasajesYEncomiendasConRutaInhabilitada(rutaSeleccionada,"Cancelacion de ruta");
+
+                        //Vuelvo a cargar la lista de roles
+                        ActualizarPantalla(null);
+                    }
+                }
+            }
         }
 
 

@@ -112,5 +112,112 @@ namespace Persistencia
             return ruta;
         }
 
+        public static void ModificarRuta(Ruta ruta)
+        {
+            /* 
+             * Lo tengo que hacer transaccionado ya que no quiero que pueda llegar a quedar una ruta insertada
+             * por la mitad debido a un error
+             */
+            using (var transaccion = DBManager.Instance().Connection.BeginTransaction(IsolationLevel.Serializable))
+            {
+                try
+                {
+                    Modificar(ruta, transaccion);
+                    transaccion.Commit();
+                }
+                catch (Exception)
+                {
+                    transaccion.Rollback();
+                    throw new Exception("Se produjo un error durante la modificacion de la ruta");
+                }
+            }
+        }
+
+        private static int Modificar(Ruta ruta, SqlTransaction transaccion)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("ID_Ruta",ruta.ID),
+                    new SPParameter("Codigo", ruta.Codigo_Ruta), 
+                    new SPParameter("ID_Ciudad_Destino", ruta.ID_Ciudad_Destino),
+                    new SPParameter("ID_Ciudad_Origen", ruta.ID_Ciudad_Origen),
+                    new SPParameter("ID_Servicio", ruta.ID_Servicio),
+                    new SPParameter("Precio_Base_KG", ruta.Precio_Base_KG),
+                    new SPParameter("Precio_Base_Pasaje", ruta.Precio_Base_Pasaje),
+                    new SPParameter("Habilitado", ruta.Habilitado)
+                };
+
+            var sp = (transaccion != null)
+                        ? new StoreProcedure(DBQueries.Ruta.SPModificarRuta, param, transaccion)
+                        : new StoreProcedure(DBQueries.Ruta.SPModificarRuta, param);
+
+            return sp.ExecuteNonQuery(transaccion);
+        }
+
+        public static void CancelarPasajesYEncomiendasConRutaInhabilitada(Ruta ruta, String motivo)
+        {
+            using (var transaccion = DBManager.Instance().Connection.BeginTransaction(IsolationLevel.Serializable))
+            {
+                try
+                {
+                    Cancelar(ruta, motivo, transaccion);
+                    transaccion.Commit();
+
+                  //  TraerPasajesDevueltos();
+
+                }
+                catch (Exception)
+                {
+                    transaccion.Rollback();
+                    throw new Exception("Se produjo un error durante la cancelación de pasajes y encomiendas");
+                }
+            }
+        }
+
+        private static void TraerPasajesDevueltos()
+        {
+           
+            var param = new List<SPParameter>
+            {
+            };
+
+            var sp = new StoreProcedure(DBQueries.Ruta.SPTraerLosPasajesDevueltos, param);
+
+            //var variable = sp.ExecuteReader<ItemDevuelto>().Count;
+            for (int i = 1; i <= 4351; i++)
+            {
+                InsertarIDDevolucion(i);
+            }
+        }
+
+        private static void InsertarIDDevolucion(int i)
+        {
+            var transaccion = DBManager.Instance().Connection.BeginTransaction(IsolationLevel.Serializable);
+
+            var param = new List<SPParameter>
+            {
+                 new SPParameter("ID_Item_Devuelto",i),
+            };
+
+            var sp = (transaccion != null)
+                            ? new StoreProcedure(DBQueries.Ruta.SPInsertarIDDevolucion, param, transaccion)
+                            : new StoreProcedure(DBQueries.Ruta.SPInsertarIDDevolucion, param);
+        }
+
+        private static int Cancelar(Ruta ruta, String motivo, SqlTransaction transaccion)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("ID_Ruta",ruta.ID),
+                    new SPParameter("Motivo",motivo),
+                    new SPParameter("ID_Usuario",1)
+                };
+            
+            var sp = (transaccion != null)
+                        ? new StoreProcedure(DBQueries.Ruta.SPCancelarPasajesYEncomiendasConRutaInhabilitada, param, transaccion)
+                        : new StoreProcedure(DBQueries.Ruta.SPCancelarPasajesYEncomiendasConRutaInhabilitada, param);
+            
+            return sp.ExecuteNonQuery(transaccion);
+        }
     }
 }
