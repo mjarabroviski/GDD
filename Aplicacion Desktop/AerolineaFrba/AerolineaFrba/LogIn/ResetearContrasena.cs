@@ -46,11 +46,6 @@ namespace AerolineaFrba.LogIn
             }
         }
 
-        private void ResetearContrasena_Load(object sender, EventArgs e)
-        {
-           
-        }
-
         private void btnVolver_Click(object sender, EventArgs e)
         {
             var dialogAnswer = MessageBox.Show("Esta seguro que quiere cancelar la operacion?", "Atencion", MessageBoxButtons.YesNo);

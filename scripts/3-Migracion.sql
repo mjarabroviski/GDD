@@ -46,7 +46,7 @@ SELECT [ID_Aeronave] FROM [EL_PUNTERO].[TL_AERONAVE]
 	  ,[Butaca_Piso]
 	  ,(SELECT [ID_Aeronave] FROM [EL_PUNTERO].[TL_AERONAVE] WHERE Matricula = gd_esquema.Maestra.Aeronave_Matricula)
  FROM gd_esquema.Maestra
- WHERE gd_esquema.Maestra.Butaca_Tipo is not null);
+ WHERE gd_esquema.Maestra.Butaca_Tipo is not null AND gd_esquema.Maestra.Pasaje_Codigo != 0);
  COMMIT
 
  BEGIN TRANSACTION

@@ -114,7 +114,6 @@
             this.Controls.Add(this.LblAceptar);
             this.Name = "ResetearContrasena";
             this.Text = "Resetear Contraseña";
-            this.Load += new System.EventHandler(this.ResetearContrasena_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

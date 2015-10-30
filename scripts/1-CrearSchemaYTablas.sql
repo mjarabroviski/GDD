@@ -10,7 +10,7 @@ CREATE TABLE [EL_PUNTERO].[TL_AERONAVE](
 	[Baja_Por_Fuera_De_Servicio] bit DEFAULT 0,
 	[Baja_Por_Vida_Util] bit DEFAULT 0,
 	[Fecha_Baja_Definitiva] datetime, 
-	[Fecha_Alta] datetime NOT NULL DEFAULT 01/01/1990,
+	[Fecha_Alta] datetime NOT NULL DEFAULT '01/01/1990',
 	[KG_Totales] int NOT NULL
 );
 
@@ -156,7 +156,7 @@ CREATE TABLE [EL_PUNTERO].[TL_BUTACA](
 	[ID_Butaca] int IDENTITY(1,1),
 	[Nro_Butaca] int NOT NULL,
 	[ID_Tipo_Butaca] int,
-	[Piso_Butaca] int NOT NULL,
+	[Piso_Butaca] int DEFAULT 1,
 	[ID_Aeronave] int NOT NULL
 );
 

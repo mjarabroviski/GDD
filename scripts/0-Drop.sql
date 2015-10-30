@@ -43,6 +43,13 @@ DROP PROCEDURE [EL_PUNTERO].[GetServicios];
 DROP PROCEDURE [EL_PUNTERO].[GetAeronaves];
 DROP PROCEDURE [EL_PUNTERO].[GetServicioPorID];
 DROP PROCEDURE [EL_PUNTERO].[GetAeronavesPorParametros];
+DROP PROCEDURE [EL_PUNTERO].[GetAeronavesPorParametrosComo];
+DROP PROCEDURE [EL_PUNTERO].[BajaPorVidaUtil];
+DROP PROCEDURE [EL_PUNTERO].[GetAeronavePorMatricula];
+DROP PROCEDURE [EL_PUNTERO].[InsertarAeronave];
+DROP PROCEDURE [EL_PUNTERO].[GetIdTipoPorDescripcion];
+DROP PROCEDURE [EL_PUNTERO].[InsertarButaca];
+DROP PROCEDURE [EL_PUNTERO].[ObtenerIDPorNombreDeServicio];
 
 DROP TRIGGER [EL_PUNTERO].[Tr_DeshabilitarUsuariosConRolDeshabilitado];
 

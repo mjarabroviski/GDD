@@ -51,6 +51,36 @@
     <Compile Include="Abm Aeronave\ABMAeronaves.Designer.cs">
       <DependentUpon>ABMAeronaves.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm Aeronave\ABMAltaButacas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Aeronave\ABMAltaButacas.Designer.cs">
+      <DependentUpon>ABMAltaButacas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Aeronave\ABMButacas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Aeronave\ABMButacas.Designer.cs">
+      <DependentUpon>ABMButacas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Aeronave\ABMCancelarOReemplazar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Aeronave\ABMCancelarOReemplazar.Designer.cs">
+      <DependentUpon>ABMCancelarOReemplazar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Aeronave\ABMFueraDeServicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Aeronave\ABMFueraDeServicio.Designer.cs">
+      <DependentUpon>ABMFueraDeServicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Aeronave\ABMInsertarActualizarAeronave.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Aeronave\ABMInsertarActualizarAeronave.Designer.cs">
+      <DependentUpon>ABMInsertarActualizarAeronave.cs</DependentUpon>
+    </Compile>
     <Compile Include="Abm Ciudad\ABMCiudades.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -176,6 +206,21 @@
     <EmbeddedResource Include="Abm Aeronave\ABMAeronaves.resx">
       <DependentUpon>ABMAeronaves.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Abm Aeronave\ABMAltaButacas.resx">
+      <DependentUpon>ABMAltaButacas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Aeronave\ABMButacas.resx">
+      <DependentUpon>ABMButacas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Aeronave\ABMCancelarOReemplazar.resx">
+      <DependentUpon>ABMCancelarOReemplazar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Aeronave\ABMFueraDeServicio.resx">
+      <DependentUpon>ABMFueraDeServicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Aeronave\ABMInsertarActualizarAeronave.resx">
+      <DependentUpon>ABMInsertarActualizarAeronave.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Abm Ciudad\ABMCiudades.resx">
       <DependentUpon>ABMCiudades.cs</DependentUpon>
     </EmbeddedResource>
@@ -196,10 +241,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Home Cliente\HomeCliente.resx">
       <DependentUpon>HomeCliente.cs</DependentUpon>
-	</EmbeddedResource>
+    </EmbeddedResource>
     <EmbeddedResource Include="Generacion Viaje\GenercionViaje.resx">
       <DependentUpon>GenercionViaje.cs</DependentUpon>
-	</EmbeddedResource>
+    </EmbeddedResource>
     <EmbeddedResource Include="LogIn\ResetearContrasena.resx">
       <DependentUpon>ResetearContrasena.cs</DependentUpon>
     </EmbeddedResource>

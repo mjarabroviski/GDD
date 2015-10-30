@@ -46,8 +46,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AeronavePersistencia.cs" />
+    <Compile Include="ButacaPersistencia.cs" />
     <Compile Include="CiudadPersistencia.cs" />
     <Compile Include="Entidades\Aeronave.cs" />
+    <Compile Include="Entidades\Butaca.cs" />
     <Compile Include="Entidades\Ciudad.cs" />
     <Compile Include="Entidades\DBManager.cs" />
     <Compile Include="Entidades\DBQueries.cs" />
@@ -65,7 +67,7 @@
     <Compile Include="RolPersistencia.cs" />
     <Compile Include="RutaPersistencia.cs" />
     <Compile Include="ServicioPersistencia.cs" />
-	<Compile Include="UsuarioPersistencia.cs" />
+    <Compile Include="UsuarioPersistencia.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
