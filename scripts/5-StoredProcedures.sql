@@ -282,21 +282,6 @@ BEGIN
 END
 GO
 
-/*CREATE PROCEDURE [EL_PUNTERO].[SeleccionReemplazoAeronave]
-@ID_Aeronave int,
-@Modelo nvarchar(30),
-@Fabricante nvarchar(30),
-@ID_Servicio int
-AS
-BEGIN
-	(SELECT TOP 1 A.ID_Aeronave FROM EL_PUNTERO.TL_AERONAVE A WHERE A.ID_Aeronave IN  
-
-	(SELECT V.ID_AERONAVE FROM EL_PUNTERO.TL_VIAJE V WHERE V.ID_AERONAVE=A.ID_Aeronave))
-
-	 SELECT ID_Viaje FROM EL_PUNTERO.TL_VIAJE V WHERE V.ID_Aeronave = @ID_Aeronave AND V.Fecha_Salida >= GETDATE()
-END
-GO*/
-
 CREATE PROCEDURE [EL_PUNTERO].[GetAeronavePorMatricula]
 @Matricula nvarchar(7)
 AS
@@ -373,5 +358,46 @@ BEGIN
 	WHERE ID_Aeronave = @ID_Aeronave
 END
 GO
+
+CREATE FUNCTION [EL_PUNTERO].[ObtenerAeronaveDeReemplazo](@ID_AeronaveBaja int, @Modelo nvarchar(30), @Servicio int, @Fabricante nvarchar(30))
+RETURNS int
+AS
+BEGIN
+DECLARE @reemplazo int
+DECLARE @maxLlegada datetime
+
+    SELECT @maxLlegada = MAX(V.Fecha_Llegada) FROM [EL_PUNTERO].TL_VIAJE V WHERE V.ID_Aeronave = @ID_AeronaveBaja
+	SELECT TOP 1 @reemplazo = ID_Aeronave FROM [EL_PUNTERO].TL_AERONAVE A WHERE A.ID_Aeronave != @ID_AeronaveBaja 
+																			AND A.Modelo = @Modelo 
+																			AND A.Fabricante = @Fabricante 
+																			AND A.ID_Servicio = @Servicio
+																			AND not exists (SELECT 1 FROM [EL_PUNTERO].TL_VIAJE B WHERE A.ID_Aeronave = B.ID_Aeronave  
+																																	AND B.Fecha_Salida <= @maxLlegada
+																																	AND B.Fecha_Salida >= GETDATE())
+	RETURN @reemplazo	
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[SeleccionReemplazoAeronave]
+@ID_Aeronave int,
+@Modelo nvarchar(30),
+@Fabricante nvarchar(30),
+@ID_Servicio int
+AS
+BEGIN
+DECLARE @reemplazo int
+
+	BEGIN TRY 
+	SET @reemplazo = [EL_PUNTERO].[ObtenerAeronaveDeReemplazo](@ID_Aeronave,@Modelo,@ID_Servicio,@Fabricante)
+	UPDATE EL_PUNTERO.TL_VIAJE 
+	SET ID_Aeronave = @reemplazo
+	WHERE ID_Aeronave = @ID_Aeronave
+	END TRY 
+	BEGIN CATCH
+
+	END CATCH
+END
+GO
+
 
 COMMIT
