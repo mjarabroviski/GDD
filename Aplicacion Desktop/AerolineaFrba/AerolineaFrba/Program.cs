@@ -21,6 +21,7 @@ namespace AerolineaFrba
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Generacion_Viaje.GenercionViaje());
             //Application.Run(new Abm_Ciudad.ABMCiudades());
+            //Application.Run(new Abm_Ciudad.ABMCiudades());
            // Application.Run(new Abm_Aeronave.ABMAeronaves());
             //Application.Run(new Abm_Aeronave.ABMAeronaves());
             //Application.Run(new Registro_de_Usuario.RegistroDeUsuario());

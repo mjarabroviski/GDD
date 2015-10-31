@@ -43,6 +43,10 @@ namespace Persistencia.Entidades
             public static String SPGetCiudadPorID = "EL_PUNTERO.GetCiudadPorID";
             public static String SPFiltrarRutas = "EL_PUNTERO.FiltrarRutas";
             public static String SPInsertarRuta = "EL_PUNTERO.InsertarRuta";
+            public static String SPModificarRuta = "EL_PUNTERO.ModificarRuta";
+            public static String SPCancelarPasajesYEncomiendasConRutaInhabilitada = "EL_PUNTERO.CancelarPasajesYEncomiendasConRutaInhabilitada";
+            public static String SPTraerLosPasajesDevueltos = "EL_PUNTERO.TraerLosPasajesDevueltos";
+            public static String SPInsertarIDDevolucion = "EL_PUNTERO.InsertarIDDevolucion";
             public static String SPObtenerTodasLasCiudadesConOrigen = "EL_PUNTERO.ObtenerTodasLasCiudadesConOrigen";
             public static String SPObtenerRutaPorOrigenYDestino = "EL_PUNTERO.ObtenerRutaPorOrigenYDestino";
         }

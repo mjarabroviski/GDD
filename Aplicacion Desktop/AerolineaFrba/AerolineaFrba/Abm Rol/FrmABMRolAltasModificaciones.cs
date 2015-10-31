@@ -62,6 +62,7 @@ namespace AerolineaFrba.Abm_Rol
                     else
                         LstFuncionalidades.SetItemChecked(j, false);
                 }
+                if (RolActual.Habilitado) ChkInhabilitado.Enabled = false;
             }
         }
 

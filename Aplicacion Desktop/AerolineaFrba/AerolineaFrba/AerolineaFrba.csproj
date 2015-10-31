@@ -239,6 +239,9 @@
     <EmbeddedResource Include="Abm Ruta\FrmABMRutaAltasModificaciones.resx">
       <DependentUpon>FrmABMRutaAltasModificaciones.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Home Administrador\HomeAdministrador.resx">
+      <DependentUpon>HomeAdministrador.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Home Cliente\HomeCliente.resx">
       <DependentUpon>HomeCliente.cs</DependentUpon>
     </EmbeddedResource>
@@ -295,6 +298,10 @@
     <ProjectReference Include="..\Persistencia\Persistencia.csproj">
       <Project>{c6fc2403-073a-47ac-a2d3-15ad24d70fd5}</Project>
       <Name>Persistencia</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sesion\Sesion.csproj">
+      <Project>{1e60ab35-28fd-46b8-8dd5-cc4f65624d56}</Project>
+      <Name>Sesion</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -204,18 +204,18 @@ namespace AerolineaFrba.Abm_Rol
                     //El rol seleccionado ya se encuentra eliminado (baja lógica)
                     if (!rolSeleccionado.Habilitado)
                     {
-                        MessageBox.Show("No se puede eliminar la funcionalidad ya que ya se encuentra desactivada", "Atencion");
+                        MessageBox.Show("No se puede eliminar el rol ya que ya se encuentra inhabilitada", "Atencion");
                         return;
                     }
 
                     //Esta tratando de eliminar el rol administrador (no lo permito)
                     if (rolSeleccionado.Descripcion == "Administrador")
                     {
-                        MessageBox.Show("No se puede eliminar el rol administrador", "Atencion");
+                        MessageBox.Show("No se puede inhabilitar el rol administrador", "Atencion");
                         return;
                     }
 
-                    var dialogAnswer = MessageBox.Show(string.Format("Esta seguro que quiere desactivar el rol {0}?", rolSeleccionado.Descripcion), "Atención", MessageBoxButtons.YesNo);
+                    var dialogAnswer = MessageBox.Show(string.Format("Esta seguro que quiere inhabilitar el rol {0}?", rolSeleccionado.Descripcion), "Atención", MessageBoxButtons.YesNo);
                     if (dialogAnswer == DialogResult.Yes)
                     {
                         //Defino que ya no este más activo el rol e impacto en la base de datos

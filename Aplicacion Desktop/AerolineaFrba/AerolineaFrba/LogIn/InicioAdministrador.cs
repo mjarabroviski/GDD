@@ -11,6 +11,7 @@ using Persistencia;
 using Persistencia.Entidades;
 using Herramientas;
 using AerolineaFrba.Home_Administrador;
+using Sesion;
 
 namespace AerolineaFrba.LogIn
 {
@@ -68,7 +69,7 @@ namespace AerolineaFrba.LogIn
                 //El usuario no se encuentra habilitado
                 else if (!user.Habilitado)
                 {
-                    MessageBox.Show("No puede loguearse. El usuario se encuentra inhabilitado debido a supero el limite de intentos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("No puede loguearse. El usuario se encuentra inhabilitado debido a que supero el limite de intentos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Hide();
                     SeleccionDeUsuario selec = new SeleccionDeUsuario();
                     selec.ShowDialog();
@@ -89,6 +90,7 @@ namespace AerolineaFrba.LogIn
                     var dialogAnswer2 = MessageBox.Show("Usuario logueado correctamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     if (dialogAnswer2 == DialogResult.OK)
                     {
+                        AdministradorSesion.UsuarioActual = user;
                         Hide();
                         HomeAdministrador homeAdmin = new HomeAdministrador();
                         homeAdmin.ShowDialog();

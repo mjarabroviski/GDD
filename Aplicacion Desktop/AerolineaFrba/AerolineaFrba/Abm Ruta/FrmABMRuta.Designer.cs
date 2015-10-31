@@ -247,6 +247,7 @@
             this.DgvRuta.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DgvRuta.Size = new System.Drawing.Size(909, 329);
             this.DgvRuta.TabIndex = 33;
+            this.DgvRuta.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvRuta_CellContentClick);
             // 
             // BtnListo
             // 

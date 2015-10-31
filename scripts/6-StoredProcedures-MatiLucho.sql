@@ -192,6 +192,146 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE [EL_PUNTERO].[ModificarRuta]
+	@ID_Ruta int,
+	@Codigo int,
+	@ID_Ciudad_Destino int,
+	@ID_Ciudad_Origen int,
+	@ID_Servicio int,
+	@Precio_Base_KG numeric(18,2),
+	@Precio_Base_Pasaje numeric(18,2),
+	@Habilitado bit
+AS
+BEGIN
+	SET NOCOUNT ON;
 
+	UPDATE [EL_PUNTERO].[TL_RUTA]
+	SET Codigo_Ruta = @Codigo, 
+		ID_Ciudad_Destino = @ID_Ciudad_Destino,
+		ID_Ciudad_Origen = @ID_Ciudad_Origen,
+		ID_Servicio = @ID_Servicio,
+		Precio_Base_KG = @Precio_Base_KG,
+		Precio_Base_Pasaje = @Precio_Base_Pasaje,
+		Habilitado = @Habilitado
+	WHERE ID_Ruta = @ID_Ruta
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[CancelarPasajesYEncomiendasConRutaInhabilitada]
+	@ID_Ruta int,
+	@Motivo varchar(255),
+	@ID_Usuario int
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	--TODO!!!! SÓLO QUE LO HAGA PARA FECHAS MAYORES A HOY
+
+   /*Insertar los id_compra, fecha y motivo en la tabla de devolución*/
+	INSERT INTO [EL_PUNTERO].[TL_DEVOLUCION] (ID_Compra)
+	  (SELECT DISTINCT ID_Compra FROM [EL_PUNTERO].TL_PASAJE WHERE ID_Viaje IN (SELECT ID_Viaje FROM [EL_PUNTERO].TL_VIAJE WHERE (ID_Ruta=@ID_Ruta) AND (Fecha_Salida>=GETDATE())));
+
+	UPDATE [EL_PUNTERO].TL_DEVOLUCION
+	SET Fecha_Devolucion=GETDATE(),
+		Motivo=@Motivo,
+		ID_Usuario=@ID_Usuario
+	WHERE Fecha_Devolucion is NULL;
+	
+	INSERT INTO [EL_PUNTERO].[TL_DEVOLUCION] (ID_Compra)
+	  (SELECT DISTINCT ID_Compra FROM [EL_PUNTERO].TL_ENCOMIENDA WHERE ID_Viaje IN (SELECT ID_Viaje FROM [EL_PUNTERO].TL_VIAJE WHERE ID_Ruta=@ID_Ruta));
+
+	UPDATE [EL_PUNTERO].TL_DEVOLUCION
+	SET Fecha_Devolucion=GETDATE(),
+		Motivo=@Motivo,
+		ID_Usuario=@ID_Usuario
+	WHERE Fecha_Devolucion is NULL;
+
+	/*Insertar los id_pasaje, id_encomienda y id_devolucion en la tabla de item_devuelto*/ 
+	INSERT INTO [EL_PUNTERO].[TL_ITEM_DEVUELTO] (ID_Pasaje)
+	SELECT ID_Pasaje FROM TL_PASAJE WHERE ID_Viaje IN  (SELECT ID_Viaje FROM TL_VIAJE WHERE ID_Ruta=@ID_Ruta);
+	
+	CREATE TABLE [EL_PUNTERO].[TL_ITEM_DEVUELTO2](
+	[ID_Item_Devuelto] int IDENTITY(1,1),
+	[ID_Pasaje] int,
+	[ID_Devolucion] int
+	);
+
+	INSERT INTO [EL_PUNTERO].[TL_ITEM_DEVUELTO2] (ID_Pasaje)
+	(SELECT ID_Pasaje FROM  [EL_PUNTERO].[TL_ITEM_DEVUELTO]);
+
+	UPDATE [EL_PUNTERO].TL_ITEM_DEVUELTO SET ID_Devolucion = (SELECT ID_Devolucion FROM [EL_PUNTERO].TL_DEVOLUCION WHERE ID_Compra = [EL_PUNTERO].CompraAPartirDePasaje(I2.ID_Pasaje))
+	FROM [EL_PUNTERO].TL_ITEM_DEVUELTO I1 JOIN [EL_PUNTERO].TL_ITEM_DEVUELTO2 I2
+	ON I1.ID_Item_Devuelto = I2.ID_Item_Devuelto;
+
+	DROP TABLE [EL_PUNTERO].[TL_ITEM_DEVUELTO2];
+
+	
+	--Encomienda
+	INSERT INTO [EL_PUNTERO].[TL_ITEM_DEVUELTO] (ID_Encomienda)
+	SELECT ID_Encomienda FROM TL_ENCOMIENDA WHERE ID_Viaje IN  (SELECT ID_Viaje FROM TL_VIAJE WHERE (ID_Ruta=@ID_Ruta)  AND (Fecha_Salida>=GETDATE()));
+
+	CREATE TABLE [EL_PUNTERO].[TL_ITEM_DEVUELTO2](
+	[ID_Item_Devuelto] int IDENTITY(1,1),
+	[ID_Encomienda] int,
+	[ID_Devolucion] int
+	);
+
+	INSERT INTO [EL_PUNTERO].[TL_ITEM_DEVUELTO2] (ID_Encomienda)
+	(SELECT ID_Encomienda FROM  [EL_PUNTERO].[TL_ITEM_DEVUELTO]);
+
+	UPDATE [EL_PUNTERO].TL_ITEM_DEVUELTO SET ID_Devolucion = (SELECT ID_Devolucion FROM [EL_PUNTERO].TL_DEVOLUCION WHERE ID_Compra = [EL_PUNTERO].CompraAPartirDeEncomienda(I2.ID_Encomienda))
+	FROM [EL_PUNTERO].TL_ITEM_DEVUELTO I1 JOIN [EL_PUNTERO].TL_ITEM_DEVUELTO2 I2
+	ON I1.ID_Item_Devuelto = I2.ID_Item_Devuelto
+	WHERE ID_Pasaje IS NULL;
+
+	DROP TABLE [EL_PUNTERO].[TL_ITEM_DEVUELTO2];
+
+END
+GO
+
+CREATE FUNCTION [EL_PUNTERO].[CompraAPartirDePasaje](@ID_Pasaje int)
+RETURNS int
+AS
+BEGIN
+	RETURN (SELECT ID_Compra FROM [EL_PUNTERO].TL_PASAJE WHERE ID_Pasaje=@ID_Pasaje)
+END
+GO
+
+CREATE FUNCTION [EL_PUNTERO].[CompraAPartirDeEncomienda](@ID_Encomienda int)
+RETURNS int
+AS
+BEGIN
+	RETURN (SELECT ID_Compra FROM [EL_PUNTERO].TL_ENCOMIENDA WHERE ID_Encomienda=@ID_Encomienda)
+END
+GO
+
+CREATE FUNCTION [EL_PUNTERO].[DevolucionAPartirDePasaje](@ID_Pasaje int)
+RETURNS int
+AS 
+BEGIN
+	RETURN (SELECT ID_Devolucion FROM [EL_PUNTERO].TL_DEVOLUCION WHERE ID_Compra=[EL_PUNTERO].CompraAPartirDePasaje(@ID_Pasaje))
+
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[TraerLosPasajesDevueltos]
+AS
+BEGIN
+	SET NOCOUNT ON;
+	SELECT *
+	FROM [EL_PUNTERO].TL_ITEM_DEVUELTO
+	WHERE ID_Pasaje IS NOT NULL;
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[InsertarIDDevolucion]
+@ID_Item_Devuelto int
+AS
+BEGIN
+	SET NOCOUNT ON;
+	UPDATE [EL_PUNTERO].TL_ITEM_DEVUELTO SET ID_Devolucion = [EL_PUNTERO].DevolucionAPartirDePasaje(ID_Pasaje)
+	WHERE ID_Item_Devuelto = @ID_Item_Devuelto
+END
+GO
 
 COMMIT
