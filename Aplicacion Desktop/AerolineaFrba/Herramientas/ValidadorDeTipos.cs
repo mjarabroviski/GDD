@@ -42,5 +42,35 @@ namespace Persistencia
                 return false;
             }
         }
+
+        //Valido si el dato es una matricula
+        public static bool IsMatriculaValida(string value)
+        {
+            if (value.Length == 0 || value.Length != 7) return false;
+
+            for (int i = 0; i < 3; i++)
+            {
+                char Ch = value[i];
+                if (IsNumeric(Ch.ToString()) || IsDecimal(Ch.ToString()))
+                {
+                    return false;
+                }
+            }
+
+            if (value[3] != '-') return false;
+
+            for (int i = 4; i < 7; i++)
+            {
+                char Ch = value[i];
+                if (!IsNumeric(Ch.ToString()))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+
     }
 }

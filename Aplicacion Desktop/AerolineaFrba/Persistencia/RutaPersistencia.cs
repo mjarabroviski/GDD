@@ -219,5 +219,29 @@ namespace Persistencia
             
             return sp.ExecuteNonQuery(transaccion);
         }
+        public static List<Ciudad> ObtenerTodasLasCiudadesConOrigen(int ID_Origen)
+        {
+            //Obtengo la lista de destinos de un determinado origen
+            var param = new List<SPParameter> { new SPParameter("ID_Origen", ID_Origen) };
+            var sp = new StoreProcedure(DBQueries.Ruta.SPObtenerTodasLasCiudadesConOrigen, param);
+            return sp.ExecuteReader<Ciudad>();
+        }
+
+        public static Ruta ObtenerRutaPorOrigenYDestino(int ID_Origen, int ID_Destino)
+        {
+            var param = new List<SPParameter>
+            { 
+                new SPParameter("ID_Ciudad_Origen", ID_Origen),
+                new SPParameter("ID_Ciudad_Destino", ID_Destino),
+            };
+            var sp = new StoreProcedure(DBQueries.Ruta.SPObtenerRutaPorOrigenYDestino, param);
+            List<Ruta> rutas = sp.ExecuteReader<Ruta>();
+
+            if (rutas == null || rutas.Count == 0)return null;
+
+            return rutas[0];
+
+        }
+
     }
 }

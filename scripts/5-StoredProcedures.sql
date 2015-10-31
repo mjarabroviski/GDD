@@ -221,11 +221,11 @@ END
 GO
 
 CREATE PROCEDURE [EL_PUNTERO].[GetAeronavesPorParametros]
-	@Matricula nvarchar(7) = NULL,
-	@Fabricante nvarchar (30) = NULL,
-	@Modelo nvarchar(30) = NULL,
-	@Nombre_Servicio nvarchar(255) = NULL,
-	@Fecha_Alta datetime = NULL
+@Matricula nvarchar(7) = NULL,
+@Fabricante nvarchar (30) = NULL,
+@Modelo nvarchar(30) = NULL,
+@Nombre_Servicio nvarchar(255) = NULL,
+@Fecha_Alta datetime = NULL
 AS
 BEGIN
 	SET NOCOUNT ON;
@@ -243,5 +243,135 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE [EL_PUNTERO].[GetAeronavesPorParametrosComo]
+@Matricula nvarchar(7) = NULL,
+@Fabricante nvarchar (30) = NULL,
+@Modelo nvarchar(30) = NULL,
+@Nombre_Servicio nvarchar(255) = NULL,
+@Fecha_Alta datetime = NULL
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	SELECT A.*
+	FROM [EL_PUNTERO].[TL_AERONAVE] AS A
+	INNER JOIN [EL_PUNTERO].[TL_Servicio] AS S ON A.ID_Servicio = S.ID_Servicio
+	
+	WHERE 
+	(A.Matricula LIKE ('%' + @Matricula + '%') OR @Matricula is NULL)
+	AND (A.Fabricante LIKE ('%' + @Fabricante + '%') OR @Fabricante is NULL)
+	AND (A.Modelo LIKE ('%' + @Modelo + '%') OR @Modelo is NULL)
+	AND (S.Nombre LIKE ('%' + @Nombre_Servicio + '%') OR @Nombre_Servicio is NULL)
+	AND ((A.Fecha_Alta BETWEEN @Fecha_Alta AND GETDATE()) OR @Fecha_Alta = 01/01/0001)
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[BajaPorVidaUtil]
+@ID_Aeronave int
+AS
+BEGIN
+	IF(NOT(@ID_Aeronave IN (SELECT ID_Aeronave FROM EL_PUNTERO.TL_VIAJE V WHERE V.Fecha_Salida >= GETDATE()
+	 AND (V.ID_Viaje IN (SELECT ID_Viaje FROM EL_PUNTERO.TL_ENCOMIENDA) 
+	 OR V.ID_Viaje IN (SELECT ID_Viaje FROM EL_PUNTERO.TL_PASAJE)))))
+	BEGIN
+	UPDATE EL_PUNTERO.TL_AERONAVE
+	SET Baja_Por_Vida_Util = 1,
+		Fecha_Baja_Definitiva = GETDATE()
+	WHERE ID_Aeronave = @ID_Aeronave
+	END
+END
+GO
+
+/*CREATE PROCEDURE [EL_PUNTERO].[SeleccionReemplazoAeronave]
+@ID_Aeronave int,
+@Modelo nvarchar(30),
+@Fabricante nvarchar(30),
+@ID_Servicio int
+AS
+BEGIN
+	(SELECT TOP 1 A.ID_Aeronave FROM EL_PUNTERO.TL_AERONAVE A WHERE A.ID_Aeronave IN  
+
+	(SELECT V.ID_AERONAVE FROM EL_PUNTERO.TL_VIAJE V WHERE V.ID_AERONAVE=A.ID_Aeronave))
+
+	 SELECT ID_Viaje FROM EL_PUNTERO.TL_VIAJE V WHERE V.ID_Aeronave = @ID_Aeronave AND V.Fecha_Salida >= GETDATE()
+END
+GO*/
+
+CREATE PROCEDURE [EL_PUNTERO].[GetAeronavePorMatricula]
+@Matricula nvarchar(7)
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	SELECT *
+	FROM [EL_PUNTERO].[TL_AERONAVE]
+	WHERE Matricula = @Matricula
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[InsertarAeronave]
+@Matricula nvarchar(7),
+@Fabricante nvarchar (30),
+@Modelo nvarchar(30),
+@ID_Servicio int,
+@KG_Totales int,
+@Fecha_Alta datetime
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	INSERT INTO [EL_PUNTERO].[TL_Aeronave](Matricula,Fabricante,Modelo,ID_Servicio,KG_Totales,Fecha_Alta)
+	OUTPUT inserted.ID_Aeronave
+	VALUES(@Matricula,@Fabricante,@Modelo,@ID_Servicio,@KG_Totales,@Fecha_Alta)
+	
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[ObtenerIDPorNombreDeServicio]
+@TipoServicio nvarchar(255)
+AS
+BEGIN
+	SET NOCOUNT ON;
+	SELECT *
+	FROM [EL_PUNTERO].TL_SERVICIO
+	WHERE Nombre = @TipoServicio
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[GetIdTipoPorDescripcion]
+@Descripcion nvarchar(30)
+AS
+BEGIN
+	SET NOCOUNT ON;
+	SELECT *
+	FROM [EL_PUNTERO].[TL_BUTACA] AS B INNER JOIN [EL_PUNTERO].[TL_TIPO_BUTACA] AS T ON B.ID_Tipo_Butaca = T.ID_Tipo_Butaca 
+	WHERE T.Descripcion = @Descripcion
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[InsertarButaca]
+@Numero int,
+@Tipo int,
+@ID_Aeronave int
+
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	INSERT INTO [EL_PUNTERO].[TL_Butaca](Nro_Butaca,ID_Tipo_Butaca,ID_Aeronave)
+	OUTPUT inserted.ID_Aeronave
+	VALUES(@Numero,@Tipo,@ID_Aeronave)
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[EliminarAeronave]
+@ID_Aeronave int
+AS
+BEGIN
+	DELETE 
+	FROM [EL_PUNTERO].[TL_Aeronave]
+	WHERE ID_Aeronave = @ID_Aeronave
+END
+GO
 
 COMMIT

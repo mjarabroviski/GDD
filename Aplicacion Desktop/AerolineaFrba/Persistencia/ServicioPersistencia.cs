@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SqlClient;
 
 namespace Persistencia
 {
@@ -27,7 +28,20 @@ namespace Persistencia
 
             List<Servicio> servicios = sp.ExecuteReader<Servicio>();
 
-            return servicios[0].ID_Servicio; ;
+            return servicios[0].ID_Servicio;
+        }
+
+        public static Servicio ObtenerServicioPorNombre(string servicio, SqlTransaction transaction)
+        {
+            var param = new List<SPParameter>{new SPParameter("TipoServicio",servicio),};
+            var sp = new StoreProcedure(DBQueries.Servicio.SPObtenerServicioPorNombre, param, transaction);
+
+            var servicios = sp.ExecuteReaderTransactioned<Servicio>(transaction);
+
+            if (servicios == null || servicios.Count == 0)
+                return null;
+
+            return servicios[0];
         }
 
         public static Servicio ObtenerServicioPorID(int ID)
@@ -42,6 +56,16 @@ namespace Persistencia
                 return null;
 
             return servicios[0];
+        }
+
+        public static List<Servicio> ObtenerServiciosDeRuta(int origen,int destino,string matricula)
+        {
+            var param = new List<SPParameter> { 
+                new SPParameter("ID_Ciudad_Origen", origen),
+                new SPParameter("ID_Ciudad_Destino", destino),
+                new SPParameter("Matricula", matricula) };
+            var sp = new StoreProcedure(DBQueries.Servicio.SPObtenerServiciosDeRuta,param);
+            return sp.ExecuteReader<Servicio>();
         }
     }
 }
