@@ -108,3 +108,6 @@ C:\Users\Mati\Desktop\UTN\Gestion de Datos\TP Gestion de Datos\GDD\Aplicacion De
 C:\Users\Melanie Jarabroviski\Documents\UTN\3ro\Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\bin\Debug\Sesion.exe
 C:\Users\Melanie Jarabroviski\Documents\UTN\3ro\Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\bin\Debug\Sesion.pdb
 C:\Users\Melanie Jarabroviski\Documents\UTN\3ro\Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Home_Administrador.HomeAdministrador.resources
+C:\Iara UTN\3\GestionDeDatos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Home_Administrador.HomeAdministrador.resources
+C:\Iara UTN\3\GestionDeDatos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\bin\Debug\Sesion.exe
+C:\Iara UTN\3\GestionDeDatos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\bin\Debug\Sesion.pdb
