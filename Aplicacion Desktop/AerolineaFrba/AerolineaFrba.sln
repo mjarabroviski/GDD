@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio Express 2012 for Windows Desktop
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AerolineaFrba", "AerolineaFrba\AerolineaFrba.csproj", "{8AFC41B8-7879-445C-A791-66EA9C7CC274}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configuracion", "Configuracion\Configuracion.csproj", "{E9A2F36A-7E2E-44DF-BABF-89871AF8CA5B}"
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Herramientas", "Herramientas\Herramientas.csproj", "{79E8AFFA-74FD-44B7-9DB5-A31373EF2F60}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Filtros", "Filtros\Filtros.csproj", "{F18628EB-770E-46EC-A4FC-7A5F574B0465}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sesion", "Sesion\Sesion.csproj", "{1E60AB35-28FD-46B8-8DD5-CC4F65624D56}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +39,10 @@ Global
 		{F18628EB-770E-46EC-A4FC-7A5F574B0465}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F18628EB-770E-46EC-A4FC-7A5F574B0465}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F18628EB-770E-46EC-A4FC-7A5F574B0465}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E60AB35-28FD-46B8-8DD5-CC4F65624D56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E60AB35-28FD-46B8-8DD5-CC4F65624D56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E60AB35-28FD-46B8-8DD5-CC4F65624D56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E60AB35-28FD-46B8-8DD5-CC4F65624D56}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

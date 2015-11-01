@@ -156,6 +156,8 @@
             // 
             // DtpFechaAlta
             // 
+            this.DtpFechaAlta.CustomFormat = "dd/MM/yyyy HH:mm";
+            this.DtpFechaAlta.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.DtpFechaAlta.Location = new System.Drawing.Point(19, 249);
             this.DtpFechaAlta.Name = "DtpFechaAlta";
             this.DtpFechaAlta.Size = new System.Drawing.Size(277, 20);
@@ -175,9 +177,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(302, 30);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(109, 13);
+            this.label1.Size = new System.Drawing.Size(108, 13);
             this.label1.TabIndex = 84;
-            this.label1.Text = "FORMATO: FGR-589";
+            this.label1.Text = "FORMATO: XYZ-123";
             // 
             // ABMInsertarActualizarAeronave
             // 

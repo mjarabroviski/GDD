@@ -13,7 +13,7 @@ namespace Persistencia
     {
         public static List<Aeronave> ObtenerTodas()
         {
-            //Obtengo la lista de ciudades almacenadas en la base de datos
+            //Obtengo la lista de aeronaves almacenadas en la base de datos
             var sp = new StoreProcedure(DBQueries.Aeronave.SPGetAeronaves);
             return sp.ExecuteReader<Aeronave>();
         }
@@ -113,5 +113,34 @@ namespace Persistencia
 
             return aeronave;
         }
+
+        public static int eliminarAeronave(Aeronave aeronave)
+        {
+            var param = new List<SPParameter> { new SPParameter("ID_Aeronave", aeronave.ID) };
+            var sp =  new StoreProcedure(DBQueries.Aeronave.SPEliminarAeronave, param);
+            return sp.ExecuteNonQuery(null);
+        }
+
+        public static int ModificarAeronave(Aeronave aeronave, SqlTransaction transaccion)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("ID_Aeronave", aeronave.ID),
+                    new SPParameter("Matricula", aeronave.Matricula),
+                    new SPParameter("Fabricante", aeronave.Fabricante),
+                    new SPParameter("Modelo", aeronave.Modelo),
+                    new SPParameter("ID_Servicio", aeronave.ID_Servicio), 
+                    new SPParameter("KG_Totales", aeronave.KG_Totales),
+                    new SPParameter("Fecha_Alta", aeronave.Fecha_Alta),
+                };
+
+            var sp = (transaccion != null)
+                        ? new StoreProcedure(DBQueries.Aeronave.SPModificarAeronave, param, transaccion)
+                        : new StoreProcedure(DBQueries.Aeronave.SPModificarAeronave, param);
+
+            return sp.ExecuteNonQuery(transaccion);
+        }
+
+
     }
 }

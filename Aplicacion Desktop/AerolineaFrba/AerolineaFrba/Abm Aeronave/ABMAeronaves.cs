@@ -265,7 +265,7 @@ namespace AerolineaFrba.Abm_Aeronave
         {
             var insertarActualizarAeronave = new ABMInsertarActualizarAeronave(null, false);
             insertarActualizarAeronave.ShowDialog();
-            Close();
+            ActualizarPantalla(null);
         }
     }
 }

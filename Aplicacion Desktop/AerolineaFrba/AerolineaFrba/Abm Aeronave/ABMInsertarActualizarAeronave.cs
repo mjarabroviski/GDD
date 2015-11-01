@@ -50,6 +50,8 @@ namespace AerolineaFrba.Abm_Aeronave
                 TxtFabricante.Text = aeronaveAModificar.Fabricante;
                 TxtKG.Text = aeronaveAModificar.KG_Totales.ToString();
                 DtpFechaAlta.Text = aeronaveAModificar.Fecha_Alta.ToString();
+
+                DtpFechaAlta.Enabled = false;
                 #endregion
             }
 
@@ -61,7 +63,7 @@ namespace AerolineaFrba.Abm_Aeronave
             {
                 try
                 {
-                    #region Validaciones
+                    #region ValidacionesEnGral
 
                     var exceptionMessage = string.Empty;
 
@@ -89,20 +91,22 @@ namespace AerolineaFrba.Abm_Aeronave
                     if (string.IsNullOrEmpty(DtpFechaAlta.Text))
                         exceptionMessage += "La fecha de alta no puede ser vacia.\n";
 
-                    else if (DtpFechaAlta.Value.Date < DateTime.Today)
-                        exceptionMessage += Environment.NewLine + "La fecha ingresada no es válida.\n";
-
                     if (!string.IsNullOrEmpty(exceptionMessage))
                         throw new Exception(exceptionMessage);
 
                     #endregion
 
+                    //El usuario va a dar de alta una aeronave
                     if (modoInsertarComun || aeronaveAReemplazar != null)
                     {
+                            //Valido que la fecha de alta sea menor al dia de hoy
+                            if (DtpFechaAlta.Value.Date < DateTime.Today)
+                                throw new Exception("La fecha ingresada no es válida.\n");
+
                             //Valido que no se dupliquen las matriculas
                             Aeronave a = AeronavePersistencia.ObtenerPorMatricula(TxtMatricula.Text, transaccion);
                             if (a != null)
-                                throw new Exception("Ya existe una aeronave con la matricula ingresada.");
+                                 throw new Exception("Ya existe una aeronave con la matricula ingresada.");
 
                             #region Inserto la nueva aeronave
 
@@ -124,17 +128,70 @@ namespace AerolineaFrba.Abm_Aeronave
                             if (butacas.accionTerminada)
                             {
                                 transaccion.Commit();
+                                MessageBox.Show("Aeronave insertada satisfactoriamente", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                if (aeronaveAReemplazar != null)
+                                {
+                                    //ASIGNAR LOS VIAJES DE LA AERONAVE A REEMPLAZAR A LA NUEVA
+                                    accionTerminada = true;
+                                }
+                                Close();
+                            }
+                            else
+                            {
+                                transaccion.Rollback();
+                                MessageBox.Show("La Aeronave no fue insertada correctamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 Close();
                             }
                     }
-                    else
+                    else if (aeronaveAModificar != null)
                     {
-                        //MODIFICACION
-                    }
+                        //Verifico que no modifique la matricula por otra que ya exista
+                        Aeronave a = AeronavePersistencia.ObtenerPorMatricula(TxtMatricula.Text, transaccion);
+                        if (a != null && a.ID != aeronaveAModificar.ID)
+                            MessageBox.Show("Ya existe una aeronave con la matricula ingresada.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                        
+                        //El usuario va a modificar una aeronave, verifico que no tenga viajes asignados
+                        var viajes = ViajePersistencia.ObtenerViajesFuturosPorAeronave(aeronaveAModificar, transaccion);
+                        if (viajes != null)
+                        {
+                            MessageBox.Show("La aeronave no puede ser modificada porque tiene viajes asignados", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            transaccion.Rollback();
+                            accionTerminada = false;
+                            Close();
+                        }
+                        else
+                        {
+                            #region Modifico la aeronave
 
+                            aeronaveAModificar.Matricula = TxtMatricula.Text;
+                            aeronaveAModificar.Fabricante = TxtFabricante.Text;
+                            aeronaveAModificar.Modelo = TxtModelo.Text;
+                            aeronaveAModificar.ID_Servicio = ServicioPersistencia.ObtenerServicioPorNombre(CboServicio.Text, transaccion).ID_Servicio;
+                            aeronaveAModificar.Fecha_Alta = DtpFechaAlta.Value;
+                            aeronaveAModificar.KG_Totales = Convert.ToInt32(TxtKG.Text);
+
+                            AeronavePersistencia.ModificarAeronave(aeronaveAModificar, transaccion);
+
+                            #endregion
+
+                            var butacas = new ABMButacas(aeronaveAModificar, transaccion);
+                            butacas.ShowDialog();
+
+                            if (butacas.accionTerminada)
+                            {
+                                transaccion.Commit();
+                                accionTerminada = true;
+                                MessageBox.Show("Aeronave modificada satisfactoriamente", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                Close();
+                            }
+                            else{
+                                transaccion.Rollback();
+                                MessageBox.Show("La Aeronave no fue modificada correctamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                Close();
+                            }
+                        }
                     }
+                }
                 catch (Exception ex)
                 {
                     transaccion.Rollback();

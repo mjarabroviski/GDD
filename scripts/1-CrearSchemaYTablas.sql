@@ -173,15 +173,15 @@ CREATE TABLE [EL_PUNTERO].[TL_ITEM_DEVUELTO](
 	[ID_Item_Devuelto] int IDENTITY(1,1),
 	[ID_Encomienda] int,
 	[ID_Pasaje] int,
-	[ID_Devolucion] int NOT NULL
+	[ID_Devolucion] int 
 );
 
 CREATE TABLE [EL_PUNTERO].[TL_DEVOLUCION](
 	[ID_Devolucion] int IDENTITY(1,1),
-	[Fecha_Devolucion] datetime NOT NULL,
+	[Fecha_Devolucion] datetime,
 	[Motivo] nvarchar(100),
 	[ID_Compra] int NOT NULL,
-	[ID_Usuario] int NOT NULL,
+	[ID_Usuario] int,
 );
 
 CREATE TABLE [EL_PUNTERO].[TL_ENCOMIENDA](
