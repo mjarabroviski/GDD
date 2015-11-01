@@ -108,7 +108,7 @@
             this.Controls.Add(this.TxtPasillo);
             this.Controls.Add(this.label4);
             this.Name = "ABMAltaButacas";
-            this.Text = "ABMAltaButacas";
+            this.Text = "Alta de Butacas";
             this.ResumeLayout(false);
             this.PerformLayout();
 

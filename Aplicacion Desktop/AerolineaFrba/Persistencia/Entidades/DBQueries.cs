@@ -85,12 +85,17 @@ namespace Persistencia.Entidades
             public static String SPGetAeronavePorMatricula = "EL_PUNTERO.GetAeronavePorMatricula";
             public static String SPInsertarAeronave = "EL_PUNTERO.InsertarAeronave";
             public static String SPEliminarAeronave = "EL_PUNTERO.EliminarAeronave";
+            public static String SPModificarAeronave = "EL_PUNTERO.ModificarAeronave";
         }
 
         public static class Butaca
         {
             public static String SPGetIdTipoPorDescripcion = "EL_PUNTERO.GetIdTipoPorDescripcion";
             public static String SPInsertarButaca = "EL_PUNTERO.InsertarButaca";
+            public static String SPGetButacasDeAeronave = "EL_PUNTERO.GetButacasDeAeronave";
+            public static String SPModificarButaca = "EL_PUNTERO.ModificarButaca";
+            public static String SPDarDeBajaButaca = "EL_PUNTERO.DarDeBajaButaca";
+            public static String SPGetMaxNroButaca = "EL_PUNTERO.GetMaxNroButaca";
         }
 
         public static class Viaje
@@ -101,6 +106,15 @@ namespace Persistencia.Entidades
             public static String SPCiudadDestinoPorIDRuta = "EL_PUNTERO.CiudadDestinoPorIDRuta";
             public static String SPObtenerButacasDisponibles = "EL_PUNTERO.ObtenerButacasDisponibles";
             public static String SPObtenerKGSDisponibles = "EL_PUNTERO.ObtenerKGSDisponibles";
+            public static String SPGetViajesPorAeronave = "EL_PUNTERO.GetViajesPorAeronave";
+            public static String SPValidarHorarioDeAeronave = "EL_PUNTERO.ValidarHorarioDeAeronave";
+        }
+
+        public static class TipoButaca
+        {
+            public static String SPGetTipoButacaPorButaca = "EL_PUNTERO.GetTipoButacaPorButaca";
+            public static String SPGetTiposButacas = "EL_PUNTERO.GetTiposButacas";
+            public static String SPGetTipoPorDescripcion = "EL_PUNTERO.GetTipoPorDescripcion";
         }
     }
 }

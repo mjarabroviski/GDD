@@ -18,42 +18,51 @@ namespace AerolineaFrba.Abm_Aeronave
         public Aeronave aeronave { get; set; }
         public SqlTransaction transaccionConcurrente;
         public bool accionTerminada = false;
+        public int ult = 0;
 
-        public ABMAltaButacas(Aeronave aeronaveIncompleta, SqlTransaction transaccion)
+        public ABMAltaButacas(Aeronave aeronaveIncompleta, SqlTransaction transaccion, bool modifica)
         {
             InitializeComponent();
             aeronave = aeronaveIncompleta;
             transaccionConcurrente = transaccion;
+
+            if (modifica)
+            {
+                ult = ButacaPersistencia.ObtenerMaxNroButaca(aeronave, transaccionConcurrente);
+            }
         }
 
         private void BtnGrabar_Click(object sender, EventArgs e)
         {
-            
-                try
-                {
-                    #region Validaciones
 
-                    var exceptionMessage = string.Empty;
+            try
+            {
+                #region Validaciones
 
-                    if (string.IsNullOrEmpty(TxtPasillo.Text))
-                        exceptionMessage += "La cantidad de pasillo no puede ser vacia, si no desea tener este tipo de butacas ingrese cero.\n";
+                var exceptionMessage = string.Empty;
 
-                    else if (!ValidadorDeTipos.IsNumeric(TxtPasillo.Text))
-                        exceptionMessage += "El valor de pasillo no es valido, debe ser un numero entero.\n";
+                if (string.IsNullOrEmpty(TxtPasillo.Text))
+                    exceptionMessage += "La cantidad de pasillo no puede ser vacia, si no desea tener este tipo de butacas ingrese cero.\n";
 
-                    if (string.IsNullOrEmpty(TxtVentanilla.Text))
-                        exceptionMessage += "La cantidad de ventanilla no puede ser vacia, si no desea tener este tipo de butacas ingrese cero.\n";
+                else if (!ValidadorDeTipos.IsNumeric(TxtPasillo.Text))
+                    exceptionMessage += "El valor de pasillo no es valido, debe ser un numero entero.\n";
 
-                    else if (!ValidadorDeTipos.IsNumeric(TxtVentanilla.Text))
-                        exceptionMessage += "El valor de ventanilla no es valido, debe ser un numero entero.\n";
+                if (string.IsNullOrEmpty(TxtVentanilla.Text))
+                    exceptionMessage += "La cantidad de ventanilla no puede ser vacia, si no desea tener este tipo de butacas ingrese cero.\n";
 
-                    if (!string.IsNullOrEmpty(exceptionMessage))
-                        throw new Exception(exceptionMessage);
+                else if (!ValidadorDeTipos.IsNumeric(TxtVentanilla.Text))
+                    exceptionMessage += "El valor de ventanilla no es valido, debe ser un numero entero.\n";
 
-                    #endregion
+                if (!string.IsNullOrEmpty(exceptionMessage))
+                    throw new Exception(exceptionMessage);
+
+                #endregion
 
                     if (aeronave != null)
                     {
+                        //Alta aeronave
+                        if (ult == 0)
+                        {
                             #region Inserto las butacas de pasillo
 
                             var cantPasillo = Convert.ToInt32(TxtPasillo.Text);
@@ -71,7 +80,7 @@ namespace AerolineaFrba.Abm_Aeronave
                             #region Inserto las butacas de ventanilla
 
                             var cantVentanilla = Convert.ToInt32(TxtVentanilla.Text);
-                            for (int i = cantPasillo + 1; i <= cantPasillo+cantVentanilla; i++)
+                            for (int i = cantPasillo + 1; i <= cantPasillo + cantVentanilla; i++)
                             {
                                 var ventanilla = new Butaca();
                                 ventanilla.Numero = i;
@@ -82,13 +91,49 @@ namespace AerolineaFrba.Abm_Aeronave
                             }
                             #endregion
 
-                        MessageBox.Show("Butacas agregadas satisfactoriamente", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        accionTerminada = true;
-                        Close();
+                            MessageBox.Show("Butacas agregadas satisfactoriamente", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            accionTerminada = true;
+                            Close();
+                        }
+                        else
+                        {
+                            //Modificacion aeronave
+                            #region Inserto las butacas de pasillo
+                            int i;
+                            var cantPasillo = Convert.ToInt32(TxtPasillo.Text);
+                            for (i = ult+1 ; i <= cantPasillo+ult; i++)
+                            {
+                                var pasillo = new Butaca();
+                                pasillo.Numero = i;
+                                pasillo.ID_Tipo = ButacaPersistencia.ObtenerIdTipoPorDescripcion("Pasillo", transaccionConcurrente).ID_Tipo;
+                                pasillo.ID_Aeronave = aeronave.ID;
+
+                                ButacaPersistencia.InsertarButaca(pasillo, transaccionConcurrente);
+                            }
+                            #endregion
+
+                            #region Inserto las butacas de ventanilla
+
+                            var cantVentanilla = Convert.ToInt32(TxtVentanilla.Text);
+                            for (int j = i; j < i  + cantVentanilla; j++)
+                            {
+                                var ventanilla = new Butaca();
+                                ventanilla.Numero = j;
+                                ventanilla.ID_Tipo = ButacaPersistencia.ObtenerIdTipoPorDescripcion("Ventanilla", transaccionConcurrente).ID_Tipo;
+                                ventanilla.ID_Aeronave = aeronave.ID;
+
+                                ButacaPersistencia.InsertarButaca(ventanilla, transaccionConcurrente);
+                            }
+                            #endregion
+
+                            MessageBox.Show("Butacas agregadas satisfactoriamente", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            accionTerminada = true;
+                            Close();
+                        }
                     }
-                    else
+                    else if (ult == 0)
                     {
-                        AeronavePersistencia.eliminarAeronave(aeronave);
+                        AeronavePersistencia.eliminarAeronave(aeronave,transaccionConcurrente);
                         exceptionMessage += "Hubo un error al agregar las butacas, no se pudo insertar la aeronave\n";
                         accionTerminada = false;
                         Close();
@@ -96,10 +141,7 @@ namespace AerolineaFrba.Abm_Aeronave
                 }
                 catch (Exception ex)
                 {
-                    accionTerminada = false;
-                    AeronavePersistencia.eliminarAeronave(aeronave);
                     MessageBox.Show(ex.Message, "Atención");
-                    Close();
                 }
         }
 
@@ -108,8 +150,12 @@ namespace AerolineaFrba.Abm_Aeronave
             var dialogAnswer = MessageBox.Show("Esta seguro que quiere cancelar la operacion?", "Atencion", MessageBoxButtons.YesNo);
             if (DialogResult.Yes == dialogAnswer)
             {
-                var aero = new ABMAeronaves();
-                aero.ShowDialog();
+                if (ult == 0)
+                {
+                    AeronavePersistencia.eliminarAeronave(aeronave,transaccionConcurrente);
+                    accionTerminada = false;
+                    Close();
+                }
                 Close();
             }  
         }

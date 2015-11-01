@@ -282,21 +282,6 @@ BEGIN
 END
 GO
 
-/*CREATE PROCEDURE [EL_PUNTERO].[SeleccionReemplazoAeronave]
-@ID_Aeronave int,
-@Modelo nvarchar(30),
-@Fabricante nvarchar(30),
-@ID_Servicio int
-AS
-BEGIN
-	(SELECT TOP 1 A.ID_Aeronave FROM EL_PUNTERO.TL_AERONAVE A WHERE A.ID_Aeronave IN  
-
-	(SELECT V.ID_AERONAVE FROM EL_PUNTERO.TL_VIAJE V WHERE V.ID_AERONAVE=A.ID_Aeronave))
-
-	 SELECT ID_Viaje FROM EL_PUNTERO.TL_VIAJE V WHERE V.ID_Aeronave = @ID_Aeronave AND V.Fecha_Salida >= GETDATE()
-END
-GO*/
-
 CREATE PROCEDURE [EL_PUNTERO].[GetAeronavePorMatricula]
 @Matricula nvarchar(7)
 AS
@@ -370,6 +355,152 @@ AS
 BEGIN
 	DELETE 
 	FROM [EL_PUNTERO].[TL_Aeronave]
+	WHERE ID_Aeronave = @ID_Aeronave
+END
+GO
+
+CREATE FUNCTION [EL_PUNTERO].[ObtenerAeronaveDeReemplazo](@ID_AeronaveBaja int, @Modelo nvarchar(30), @Servicio int, @Fabricante nvarchar(30))
+RETURNS int
+AS
+BEGIN
+DECLARE @reemplazo int
+DECLARE @maxLlegada datetime
+
+    SELECT @maxLlegada = MAX(V.Fecha_Llegada) FROM [EL_PUNTERO].TL_VIAJE V WHERE V.ID_Aeronave = @ID_AeronaveBaja
+	SELECT TOP 1 @reemplazo = ID_Aeronave FROM [EL_PUNTERO].TL_AERONAVE A WHERE A.ID_Aeronave != @ID_AeronaveBaja 
+																			AND A.Modelo = @Modelo 
+																			AND A.Fabricante = @Fabricante 
+																			AND A.ID_Servicio = @Servicio
+																			AND not exists (SELECT 1 FROM [EL_PUNTERO].TL_VIAJE B WHERE A.ID_Aeronave = B.ID_Aeronave  
+																																	AND B.Fecha_Salida <= @maxLlegada
+																																	AND B.Fecha_Salida >= GETDATE())
+	RETURN @reemplazo	
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[SeleccionReemplazoAeronave]
+@ID_Aeronave int,
+@Modelo nvarchar(30),
+@Fabricante nvarchar(30),
+@ID_Servicio int
+AS
+BEGIN
+DECLARE @reemplazo int
+
+	BEGIN TRY 
+	SET @reemplazo = [EL_PUNTERO].[ObtenerAeronaveDeReemplazo](@ID_Aeronave,@Modelo,@ID_Servicio,@Fabricante)
+	UPDATE EL_PUNTERO.TL_VIAJE 
+	SET ID_Aeronave = @reemplazo
+	WHERE ID_Aeronave = @ID_Aeronave
+	END TRY 
+	BEGIN CATCH
+
+	END CATCH
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[GetViajesPorAeronave]
+@ID_Aeronave int
+AS
+BEGIN
+	SET NOCOUNT ON;
+	SELECT *
+	FROM [EL_PUNTERO].[TL_Viaje] 
+	WHERE ID_Aeronave = @ID_Aeronave
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[ModificarAeronave]
+@ID_Aeronave int,
+@Matricula nvarchar(7),
+@Fabricante nvarchar (30),
+@Modelo nvarchar(30),
+@ID_Servicio int,
+@KG_Totales int,
+@Fecha_Alta datetime
+AS
+BEGIN
+	UPDATE [EL_PUNTERO].[TL_Aeronave]
+	SET Matricula = @Matricula,
+		Fabricante = @Fabricante,
+		Modelo = @Modelo,
+		ID_Servicio = @ID_Servicio,
+		KG_Totales = @KG_Totales,
+		Fecha_Alta = @Fecha_Alta
+	WHERE ID_Aeronave = @ID_Aeronave	
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[GetTipoButacaPorButaca]
+@ID_Tipo int
+AS
+BEGIN
+	SET NOCOUNT ON;
+	SELECT *
+	FROM [EL_PUNTERO].[TL_TIPO_BUTACA] 
+	WHERE ID_Tipo_Butaca = @ID_Tipo
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[GetButacasDeAeronave]
+@ID_Aeronave int
+AS
+BEGIN
+	SET NOCOUNT ON;
+	SELECT *
+	FROM [EL_PUNTERO].[TL_BUTACA] 
+	WHERE ID_Aeronave = @ID_Aeronave
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[GetTiposButacas]
+AS
+BEGIN
+	SET NOCOUNT ON;
+	SELECT *
+	FROM [EL_PUNTERO].[TL_TIPO_BUTACA] 
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[GetTipoPorDescripcion]
+@Tipo nvarchar(30)
+AS
+BEGIN
+	SET NOCOUNT ON;
+	SELECT *
+	FROM [EL_PUNTERO].[TL_TIPO_BUTACA]
+	WHERE Descripcion = @Tipo 
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[ModificarButaca]
+@ID_Butaca int,
+@Tipo int
+AS
+BEGIN
+	UPDATE [EL_PUNTERO].[TL_BUTACA]
+	SET ID_Tipo_Butaca = @Tipo
+	WHERE ID_Butaca = @ID_Butaca	
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[DarDeBajaButaca]
+@ID_Butaca int
+AS
+BEGIN
+	UPDATE [EL_PUNTERO].[TL_BUTACA]
+	SET Habilitado = 0
+	WHERE ID_Butaca = @ID_Butaca	
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[GetMaxNroButaca]
+@ID_Aeronave int
+AS
+BEGIN
+	SET NOCOUNT ON;
+	SELECT MAX(Nro_Butaca)
+	FROM [EL_PUNTERO].[TL_BUTACA]
 	WHERE ID_Aeronave = @ID_Aeronave
 END
 GO

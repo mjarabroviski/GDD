@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using Persistencia.Entidades;
 using Persistencia;
 using AerolineaFrba.Home_Administrador;
+using System.Globalization;
+
 
 namespace AerolineaFrba.Generacion_Viaje
 {
@@ -51,17 +53,11 @@ namespace AerolineaFrba.Generacion_Viaje
             DtpFechaSalida.MinDate = DateTime.Now;
             DtpFechaLlegadaEstimada.MinDate = DateTime.Now;
             DtpFechaLlegada.MinDate = DateTime.Now;
-
+            DtpHoraSalida.MinDate = DateTime.Now;
+            DtpFechaLlegadaEstimada.MaxDate = DateTime.Now.AddDays(1);
+            DtpFechaLlegada.MaxDate = DateTime.Now.AddDays(1);
         }
 
-        private void DtpFechaSalida_ValueChanged(object sender, EventArgs e)
-        {
-            DtpFechaLlegadaEstimada.MinDate = DtpFechaSalida.Value.Date;
-            DtpFechaLlegada.MinDate = DtpFechaSalida.Value.Date;
-            DtpFechaLlegadaEstimada.MaxDate = DtpFechaSalida.Value.Date.AddDays(1);
-            DtpFechaLlegada.MaxDate = DtpFechaSalida.Value.Date.AddDays(1);
-
-        }
 
         private void DtpFechaLlegadaEstimada_ValueChanged(object sender, EventArgs e)
         {
@@ -114,8 +110,8 @@ namespace AerolineaFrba.Generacion_Viaje
             DtpFechaLlegadaEstimada.Value = DateTime.Now;
             DtpFechaLlegada.Value = DateTime.Now;
             DtpHoraSalida.Value = DateTime.Now;
-            DtpHoraLlegadaEstimada.Value = DtpHoraSalida.Value;
-            DtpHoraLlegada.Value = DtpHoraSalida.Value;
+            DtpHoraLlegadaEstimada.Value = DateTime.Now;
+            DtpHoraLlegada.Value = DateTime.Now;
             DtpHoraLlegadaEstimada.Enabled = false;
             DtpFechaLlegadaEstimada.Enabled = false;
          }
@@ -134,46 +130,55 @@ namespace AerolineaFrba.Generacion_Viaje
         
         private void Btn_GenerarViaje_Click(object sender, EventArgs e)
         {
-            string fechasalida = DtpFechaSalida.ToString() + " " + DtpHoraSalida.ToString();
-            string fechallegada = DtpFechaLlegada.ToString() + " " + DtpHoraLlegada.ToString();
-            string fechallegadaestimada = DtpFechaLlegadaEstimada.ToString() + " " + DtpHoraLlegadaEstimada.ToString();
+            #region validacionesCmposCompletos
+            #endregion
 
-            DateTime Fecha_Salida = DateTime.ParseExact(fechasalida, "yyyy-MM-dd HH:mm:ss",
-                                        System.Globalization.CultureInfo.InvariantCulture);
-            DateTime Fecha_Llegada = DateTime.ParseExact(fechallegada, "yyyy-MM-dd HH:mm:ss",
-                                   System.Globalization.CultureInfo.InvariantCulture);
-            DateTime Fecha_Llegada_Estimada = DateTime.ParseExact(fechallegadaestimada, "yyyy-MM-dd HH:mm:ss",
-                                   System.Globalization.CultureInfo.InvariantCulture);
+            //UNO LA FECHA CON LAS HORA      
+            DateTime Fecha_Salida = new DateTime(DtpFechaSalida.Value.Year,DtpFechaSalida.Value.Month,DtpFechaSalida.Value.Day,
+                                             DtpHoraSalida.Value.Hour,DtpHoraSalida.Value.Minute,DtpHoraSalida.Value.Second);
+            DateTime Fecha_Llegada = new DateTime(DtpFechaLlegada.Value.Year, DtpFechaLlegada.Value.Month, DtpFechaLlegada.Value.Day,
+                                             DtpHoraLlegada.Value.Hour, DtpHoraLlegada.Value.Minute, DtpHoraLlegada.Value.Second);
+            DateTime Fecha_Llegada_Estimada = new DateTime(DtpFechaLlegadaEstimada.Value.Year, DtpFechaLlegadaEstimada.Value.Month, DtpFechaLlegadaEstimada.Value.Day,
+                                             DtpHoraLlegadaEstimada.Value.Hour, DtpHoraLlegadaEstimada.Value.Minute, DtpHoraLlegadaEstimada.Value.Second);
 
-            if (ValidarHorarioDeAeronave() == true)
 
+            if (ValidarHorarioDeAeronave(Fecha_Salida, Fecha_Llegada_Estimada) == true)
             {
-               
+
                 int ID_Origen = CiudadPersistencia.ObtenerIDPorNombreDeCiudad(CboCiudadOrigen.Text);
-               
                 int ID_Destino = CiudadPersistencia.ObtenerIDPorNombreDeCiudad(CboCiudadDestino.Text);
-                
                 int ID_Ruta = RutaPersistencia.ObtenerRutaPorOrigenYDestino(ID_Origen, ID_Destino).ID;
 
                 var transaccion = DBManager.Instance().Connection.BeginTransaction(IsolationLevel.Serializable);
-                int ID_Aeronave = AeronavePersistencia.ObtenerPorMatricula(CboAeronave.Text,transaccion).ID;
+                int ID_Aeronave = AeronavePersistencia.ObtenerPorMatricula(CboAeronave.Text, transaccion).ID;
                 transaccion.Commit();
 
-                ViajePersistencia.GenerarViaje(Fecha_Llegada,Fecha_Salida,Fecha_Llegada_Estimada,ID_Ruta,ID_Aeronave);
-           }
+                ViajePersistencia.GenerarViaje(Fecha_Llegada, Fecha_Salida, Fecha_Llegada_Estimada, ID_Ruta, ID_Aeronave);
+                var dialogAnswer = MessageBox.Show("Esta seguro que desea generar el viaje?", "Atencion", MessageBoxButtons.YesNo);
+                if (DialogResult.Yes == dialogAnswer)
+                {
+                    var dialogAnswer2 = MessageBox.Show("Viaje generado satisfactoriamente", "Informacion", MessageBoxButtons.OK);
+                    Hide();
+                    var home = new HomeAdministrador();
+                    home.ShowDialog();
+                    Close();
+                }
 
+            }
+            else
+            {
+                var dialogAnswer = MessageBox.Show("La Aeronave se encuentra ocupada para las fechas seleccionada.", "Error", MessageBoxButtons.OK);
+            }
+
+            
         }
 
-        private bool ValidarHorarioDeAeronave()
+        private bool ValidarHorarioDeAeronave(DateTime fechaSalida, DateTime fechaLlegadaEstimada)
         {
-            return true;
-        }
-        
-        private void DtpHoraSalida_ValueChanged(object sender, EventArgs e)
-        {
-            DtpHoraLlegadaEstimada.MaxDate = DtpHoraSalida.Value;
-            DtpHoraLlegadaEstimada.Enabled = true;
-            DtpFechaLlegadaEstimada.Enabled = true;
+            var transaccion = DBManager.Instance().Connection.BeginTransaction(IsolationLevel.Serializable);
+            int ID_Aeronave = AeronavePersistencia.ObtenerPorMatricula(CboAeronave.Text, transaccion).ID;
+            transaccion.Commit();
+            return ViajePersistencia.ValidarHorarioDeAeronave(fechaSalida, fechaLlegadaEstimada,ID_Aeronave);
         }
 
         private void ObtenerServiciosDisponibles()
@@ -188,6 +193,10 @@ namespace AerolineaFrba.Generacion_Viaje
                 CboTipoServicio.DisplayMember = "Nombre";
                 if (CboAeronave.Text != "MATRICULA AERONAVE") CboTipoServicio.Enabled = true;
             }
+            else if (CboAeronave.Text == "MATRICULA AERONAVE")
+            {
+                MessageBox.Show("Ingrese la Matrícula.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             else
             {
                 MessageBox.Show("Los datos ingresados no tienen servicios disponibles pruebe otra combincación.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -199,6 +208,8 @@ namespace AerolineaFrba.Generacion_Viaje
         {
             if(CboCiudadDestino.Text != "CIUDAD DESTINO"){
                 ObtenerServiciosDisponibles();
+                DtpFechaSalida.Enabled = true;
+                DtpHoraSalida.Enabled = true;
             }
         }
 
@@ -209,6 +220,90 @@ namespace AerolineaFrba.Generacion_Viaje
                 ObtenerServiciosDisponibles();
             }
         }
+
+
+          private void DtpFechaSalida_ValueChanged_1(object sender, EventArgs e)
+          {
+              #region vuelvo a bloquear la fecha llegada estimada
+              DtpHoraLlegadaEstimada.Enabled = false;
+              DtpFechaLlegadaEstimada.Enabled = false;
+              #endregion
+              if (DtpHoraSalida.Value != DateTime.Now)
+              {
+                  String horaMinimo = "00:00:00";
+                  DtpHoraSalida.MinDate = DateTime.ParseExact(horaMinimo, "HH:mm:ss", CultureInfo.InvariantCulture);
+               }
+
+
+          }
+
+
+          private void Btn_OK_FS_Click(object sender, EventArgs e)
+          {
+              #region MAXIMOS Y MINIMOS DE FECHAS
+              
+              if (DtpFechaSalida.Value.Date.AddDays(1) <= DtpFechaLlegadaEstimada.MinDate)
+              {
+                  DtpFechaLlegadaEstimada.MinDate = DtpFechaSalida.Value.Date;
+                  DtpFechaLlegada.MinDate = DtpFechaSalida.Value.Date;
+                  DtpFechaLlegadaEstimada.MaxDate = DtpFechaSalida.Value.Date.AddDays(1);
+                  DtpFechaLlegada.MaxDate = DtpFechaSalida.Value.Date.AddDays(1);
+              }
+
+              if ( DtpFechaSalida.Value.Date >= DtpFechaLlegadaEstimada.MaxDate)
+              {
+                  DtpFechaLlegadaEstimada.MaxDate = DtpFechaSalida.Value.Date.AddDays(1);
+                  DtpFechaLlegada.MaxDate = DtpFechaSalida.Value.Date.AddDays(1);
+                  DtpFechaLlegadaEstimada.MinDate = DtpFechaSalida.Value.Date;
+                  DtpFechaLlegada.MinDate = DtpFechaSalida.Value.Date;
+              }
+              #endregion
+
+              #region habilito fecha llegada estimada 
+              actualizarFechaEstimada();
+              DtpHoraLlegadaEstimada.Enabled = true;
+              DtpFechaLlegadaEstimada.Enabled = true;
+              #endregion
+
+
+          }
+
+          private void DtpHoraSalida_ValueChanged(object sender, EventArgs e)
+          {
+          }
+
+          private void DtpHoraLlegadaEstimada_ValueChanged(object sender, EventArgs e)
+          {
+              actualizarFechaEstimada();
+              DtpHoraLlegada.Value = DtpHoraLlegadaEstimada.Value;
+          }
+
+          private void DtpFechaLlegadaEstimada_ValueChanged_1(object sender, EventArgs e)
+          {
+              actualizarFechaEstimada();
+              DtpFechaLlegada.Value = DtpFechaLlegadaEstimada.Value;
+          }
+
+
+          private void actualizarFechaEstimada()
+          {
+              if (DtpFechaSalida.Value.Day != DtpFechaLlegadaEstimada.Value.Day)
+              {
+                  DtpHoraLlegadaEstimada.MaxDate = DtpHoraSalida.Value;
+                  String horaMinimo = "00:00:00";
+                  DtpHoraLlegadaEstimada.MinDate = DateTime.ParseExact(horaMinimo, "HH:mm:ss", CultureInfo.InvariantCulture);
+
+
+                  
+              }
+              else if (DtpFechaSalida.Value.Day == DtpFechaLlegadaEstimada.Value.Day)
+              {
+                  DtpHoraLlegadaEstimada.MinDate = DtpHoraSalida.Value;
+                  String horaMaximo ="23:59:59";
+                  DtpHoraLlegadaEstimada.MaxDate = DateTime.ParseExact(horaMaximo, "HH:mm:ss", CultureInfo.InvariantCulture);
+                  
+              }
+          }
 
     }
 }

@@ -74,7 +74,50 @@ DROP PROCEDURE [EL_PUNTERO].[ObtenerIDPorNombreDeServicio];
 DROP PROCEDURE [EL_PUNTERO].[EliminarAeronave];
 DROP PROCEDURE [EL_PUNTERO].[ObtenerButacasDisponibles];
 DROP PROCEDURE [EL_PUNTERO].[ObtenerKGSDisponibles];
+DROP PROCEDURE [EL_PUNTERO].[GetViajesPorAeronave];
+DROP PROCEDURE [EL_PUNTERO].[ModificarAeronave];
+DROP PROCEDURE [EL_PUNTERO].[GetTipoButacaPorButaca];
+DROP PROCEDURE [EL_PUNTERO].[GetButacasDeAeronave];
+DROP PROCEDURE [EL_PUNTERO].[InsertarIDDevolucion];
+DROP PROCEDURE [EL_PUNTERO].[SeleccionReemplazoAeronave];
+DROP PROCEDURE [EL_PUNTERO].[TraerLosPasajesDevueltos];
+DROP PROCEDURE [EL_PUNTERO].[GetTiposButacas];
+DROP PROCEDURE [EL_PUNTERO].[GetTipoPorDescripcion];
+DROP PROCEDURE [EL_PUNTERO].[ModificarButaca];
+DROP PROCEDURE [EL_PUNTERO].[DarDeBajaButaca];
+DROP PROCEDURE [EL_PUNTERO].[GetMaxNroButaca];
+DROP PROCEDURE [EL_PUNTERO].[ObtenerButacasDisponibles];
+DROP PROCEDURE [EL_PUNTERO].[ObtenerKGSDisponibles];
+
+DROP PROCEDURE [EL_PUNTERO].[ActualizarRolPorID];
+DROP PROCEDURE [EL_PUNTERO].[EliminarFuncionalidadesPorRol];
+DROP PROCEDURE [EL_PUNTERO].[GetAllRoles];
+DROP PROCEDURE [EL_PUNTERO].[GetAllRutas];
+DROP PROCEDURE [EL_PUNTERO].[GetCiudadPorID];
+DROP PROCEDURE [EL_PUNTERO].[GetFuncionalidades];
+DROP PROCEDURE [EL_PUNTERO].[GetRolPorNombreComo];
+DROP PROCEDURE [EL_PUNTERO].[InsertarFuncionalidadPorRol];
+DROP PROCEDURE [EL_PUNTERO].[InsertarRol];
+DROP PROCEDURE [EL_PUNTERO].[InsertarRuta];
+DROP PROCEDURE [EL_PUNTERO].[ObtenerTodasLasRutasConOrigen];
+
+DROP PROCEDURE [EL_PUNTERO].[InsertarCiudad];
+DROP PROCEDURE [EL_PUNTERO].[ActualizarCiudad];
+DROP PROCEDURE [EL_PUNTERO].[ObtenerTodasLasCiudadesConOrigen];
+DROP PROCEDURE [EL_PUNTERO].[GetCiudades];
+DROP PROCEDURE [EL_PUNTERO].[ObtenerCiudadPorId_Ciudad];
+DROP PROCEDURE [EL_PUNTERO].[ObtenerAeronavesHabilitadas];
+DROP PROCEDURE [EL_PUNTERO].[ObtenerServiciosDeRuta];
+DROP PROCEDURE [EL_PUNTERO].[ObtenerRutaPorOrigenYDestino];
+DROP PROCEDURE [EL_PUNTERO].[GetAeronavePorMatricula];
+DROP PROCEDURE [EL_PUNTERO].[ObtenerIDPorNombreDeCiudad];
+DROP PROCEDURE [EL_PUNTERO].[GenerarViaje];
 
 DROP TRIGGER [EL_PUNTERO].[Tr_DeshabilitarUsuariosConRolDeshabilitado];
+
+DROP FUNCTION [EL_PUNTERO].[CompraAPartirDeEncomienda];
+DROP FUNCTION [EL_PUNTERO].[CompraAPartirDePasaje];
+DROP FUNCTION [EL_PUNTERO].[DevolucionAPartirDePasaje];
+DROP FUNCTION [EL_PUNTERO].[ObtenerAeronaveDeReemplazo];
 
 DROP SCHEMA [EL_PUNTERO];
