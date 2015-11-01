@@ -28,7 +28,7 @@ namespace Persistencia
 
         public static bool ValidarHorarioDeAeronave(DateTime fechaSalida, DateTime fechaLlegadaEstimada, int ID_Aeronave)
         {
-            
+
             var param = new List<SPParameter>
                 {
                     new SPParameter("Fecha_Salida", fechaSalida), 
@@ -39,6 +39,7 @@ namespace Persistencia
             var sp = new StoreProcedure(DBQueries.Viaje.SPValidarHorarioDeAeronave, param);
 
             return sp.ExecuteNonQuery(null) == 0;
+        }
 
         public static List<Viaje> ObtenerViajesFuturosPorAeronave(Aeronave aeronave, SqlTransaction transaction)
         {
