@@ -399,5 +399,58 @@ DECLARE @reemplazo int
 END
 GO
 
+CREATE PROCEDURE [EL_PUNTERO].[GetViajesFuturosPorAeronave]
+@ID_Aeronave int
+AS
+BEGIN
+	SET NOCOUNT ON;
+	SELECT *
+	FROM [EL_PUNTERO].[TL_Viaje] 
+	WHERE ID_Aeronave = @ID_Aeronave AND Fecha_Salida >= GETDATE()
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[ModificarAeronave]
+@ID_Aeronave int,
+@Matricula nvarchar(7),
+@Fabricante nvarchar (30),
+@Modelo nvarchar(30),
+@ID_Servicio int,
+@KG_Totales int,
+@Fecha_Alta datetime
+AS
+BEGIN
+	UPDATE [EL_PUNTERO].[TL_Aeronave]
+	SET Matricula = @Matricula,
+		Fabricante = @Fabricante,
+		Modelo = @Modelo,
+		ID_Servicio = @ID_Servicio,
+		KG_Totales = @KG_Totales,
+		Fecha_Alta = @Fecha_Alta
+	WHERE ID_Aeronave = @ID_Aeronave	
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[GetTipoButacaPorButaca]
+@ID_Tipo int
+AS
+BEGIN
+	SET NOCOUNT ON;
+	SELECT *
+	FROM [EL_PUNTERO].[TL_TIPO_BUTACA] 
+	WHERE ID_Tipo_Butaca = @ID_Tipo
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[GetButacasDeAeronave]
+@ID_Aeronave int
+AS
+BEGIN
+	SET NOCOUNT ON;
+	SELECT *
+	FROM [EL_PUNTERO].[TL_BUTACA] 
+	WHERE ID_Aeronave = @ID_Aeronave
+END
+GO
 
 COMMIT

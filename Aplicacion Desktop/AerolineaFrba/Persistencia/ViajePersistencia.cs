@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Persistencia.Entidades;
+using System.Data.SqlClient;
 
 namespace Persistencia
 {
@@ -23,6 +24,19 @@ namespace Persistencia
             var sp = new StoreProcedure(DBQueries.Viaje.SPGenerarViaje, param);
 
             return sp.ExecuteNonQuery(null);
+        }
+
+        public static List<Viaje> ObtenerViajesFuturosPorAeronave(Aeronave aeronave, SqlTransaction transaction)
+        {
+            var param = new List<SPParameter> { new SPParameter("ID_Aeronave", aeronave.ID) };
+            var sp = new StoreProcedure(DBQueries.Viaje.SPGetViajesFuturosPorAeronave, param, transaction);
+
+            var viajes = sp.ExecuteReaderTransactioned<Viaje>(transaction);
+
+            if (viajes == null || viajes.Count == 0)
+                return null;
+
+            return viajes;
         }
     }
 }

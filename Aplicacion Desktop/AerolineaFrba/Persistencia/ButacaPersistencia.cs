@@ -40,5 +40,17 @@ namespace Persistencia
             butaca.ID = (int)sp.ExecuteScalar(transaction);
             return butaca;
         }
+
+        public static List<Butaca> ObtenerTodasDeAeronave(Aeronave aeronave, SqlTransaction transaction)
+        {
+            //Obtengo la lista de butacas de una aeronave
+            var param = new List<SPParameter>{ new SPParameter("ID_Aeronave",aeronave.ID) };
+
+            var sp = (transaction != null)
+                    ? new StoreProcedure(DBQueries.Butaca.SPGetButacasDeAeronave, param, transaction)
+                    : new StoreProcedure(DBQueries.Butaca.SPGetButacasDeAeronave, param);
+
+            return sp.ExecuteReaderTransactioned<Butaca>(transaction);
+        }
     }
 }
