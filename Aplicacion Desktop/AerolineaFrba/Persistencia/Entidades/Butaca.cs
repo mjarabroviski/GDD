@@ -14,6 +14,7 @@ namespace Persistencia.Entidades
         public int ID_Tipo { get; set; }
         public int Piso { get; set; }
         public int ID_Aeronave { get; set; }
+        public bool Habilitado { get; set; }
 
         //Implementacion de IMapable
         public IMapable Map(SqlDataReader reader)
@@ -24,7 +25,8 @@ namespace Persistencia.Entidades
                 Numero = Int32.Parse(reader["Nro_Butaca"].ToString()),
                 ID_Tipo = Int32.Parse(reader["ID_Tipo_Butaca"].ToString()),
                 Piso = Int32.Parse(reader["Piso_Butaca"].ToString()),
-                ID_Aeronave = Int32.Parse(reader["ID_Aeronave"].ToString())
+                ID_Aeronave = Int32.Parse(reader["ID_Aeronave"].ToString()),
+                Habilitado = bool.Parse(reader["Habilitado"].ToString())
             };
         }
 

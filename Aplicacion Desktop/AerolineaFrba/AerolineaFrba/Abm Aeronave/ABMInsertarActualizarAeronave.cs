@@ -50,6 +50,7 @@ namespace AerolineaFrba.Abm_Aeronave
                 TxtFabricante.Text = aeronaveAModificar.Fabricante;
                 TxtKG.Text = aeronaveAModificar.KG_Totales.ToString();
                 DtpFechaAlta.Text = aeronaveAModificar.Fecha_Alta.ToString();
+                CboServicio.SelectedValue = aeronaveAModificar.ID_Servicio;
 
                 DtpFechaAlta.Enabled = false;
                 #endregion
@@ -122,7 +123,7 @@ namespace AerolineaFrba.Abm_Aeronave
 
                             #endregion
 
-                            var butacas = new ABMAltaButacas(aeronaveNueva, transaccion);
+                            var butacas = new ABMAltaButacas(aeronaveNueva, transaccion, false);
                             butacas.ShowDialog();
 
                             if (butacas.accionTerminada)
@@ -151,7 +152,7 @@ namespace AerolineaFrba.Abm_Aeronave
                             MessageBox.Show("Ya existe una aeronave con la matricula ingresada.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                         //El usuario va a modificar una aeronave, verifico que no tenga viajes asignados
-                        var viajes = ViajePersistencia.ObtenerViajesFuturosPorAeronave(aeronaveAModificar, transaccion);
+                        var viajes = ViajePersistencia.ObtenerViajesPorAeronave(aeronaveAModificar, transaccion);
                         if (viajes != null)
                         {
                             MessageBox.Show("La aeronave no puede ser modificada porque tiene viajes asignados", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

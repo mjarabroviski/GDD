@@ -93,17 +93,22 @@ namespace Persistencia.Entidades
             public static String SPGetIdTipoPorDescripcion = "EL_PUNTERO.GetIdTipoPorDescripcion";
             public static String SPInsertarButaca = "EL_PUNTERO.InsertarButaca";
             public static String SPGetButacasDeAeronave = "EL_PUNTERO.GetButacasDeAeronave";
+            public static String SPModificarButaca = "EL_PUNTERO.ModificarButaca";
+            public static String SPDarDeBajaButaca = "EL_PUNTERO.DarDeBajaButaca";
+            public static String SPGetMaxNroButaca = "EL_PUNTERO.GetMaxNroButaca";
         }
 
         public static class Viaje
         {
             public static String SPGenerarViaje = "EL_PUNTERO.GenerarViaje";
-            public static String SPGetViajesFuturosPorAeronave = "EL_PUNTERO.GetViajesFuturosPorAeronave";
+            public static String SPGetViajesPorAeronave = "EL_PUNTERO.GetViajesPorAeronave";
         }
 
         public static class TipoButaca
         {
             public static String SPGetTipoButacaPorButaca = "EL_PUNTERO.GetTipoButacaPorButaca";
+            public static String SPGetTiposButacas = "EL_PUNTERO.GetTiposButacas";
+            public static String SPGetTipoPorDescripcion = "EL_PUNTERO.GetTipoPorDescripcion";
         }
     }
 }

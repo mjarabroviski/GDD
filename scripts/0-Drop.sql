@@ -72,11 +72,24 @@ DROP PROCEDURE [EL_PUNTERO].[GetIdTipoPorDescripcion];
 DROP PROCEDURE [EL_PUNTERO].[InsertarButaca];
 DROP PROCEDURE [EL_PUNTERO].[ObtenerIDPorNombreDeServicio];
 DROP PROCEDURE [EL_PUNTERO].[EliminarAeronave];
-DROP PROCEDURE [EL_PUNTERO].[GetViajesFuturosPorAeronave];
+DROP PROCEDURE [EL_PUNTERO].[GetViajesPorAeronave];
 DROP PROCEDURE [EL_PUNTERO].[ModificarAeronave];
 DROP PROCEDURE [EL_PUNTERO].[GetTipoButacaPorButaca];
 DROP PROCEDURE [EL_PUNTERO].[GetButacasDeAeronave];
+DROP PROCEDURE [EL_PUNTERO].[InsertarIDDevolucion];
+DROP PROCEDURE [EL_PUNTERO].[SeleccionReemplazoAeronave];
+DROP PROCEDURE [EL_PUNTERO].[TraerLosPasajesDevueltos];
+DROP PROCEDURE [EL_PUNTERO].[GetTiposButacas];
+DROP PROCEDURE [EL_PUNTERO].[GetTipoPorDescripcion];
+DROP PROCEDURE [EL_PUNTERO].[ModificarButaca];
+DROP PROCEDURE [EL_PUNTERO].[DarDeBajaButaca];
+DROP PROCEDURE [EL_PUNTERO].[GetMaxNroButaca];
 
 DROP TRIGGER [EL_PUNTERO].[Tr_DeshabilitarUsuariosConRolDeshabilitado];
+
+DROP FUNCTION [EL_PUNTERO].[CompraAPartirDeEncomienda];
+DROP FUNCTION [EL_PUNTERO].[CompraAPartirDePasaje];
+DROP FUNCTION [EL_PUNTERO].[DevolucionAPartirDePasaje];
+DROP FUNCTION [EL_PUNTERO].[ObtenerAeronaveDeReemplazo];
 
 DROP SCHEMA [EL_PUNTERO];

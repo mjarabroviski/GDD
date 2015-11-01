@@ -399,14 +399,14 @@ DECLARE @reemplazo int
 END
 GO
 
-CREATE PROCEDURE [EL_PUNTERO].[GetViajesFuturosPorAeronave]
+CREATE PROCEDURE [EL_PUNTERO].[GetViajesPorAeronave]
 @ID_Aeronave int
 AS
 BEGIN
 	SET NOCOUNT ON;
 	SELECT *
 	FROM [EL_PUNTERO].[TL_Viaje] 
-	WHERE ID_Aeronave = @ID_Aeronave AND Fecha_Salida >= GETDATE()
+	WHERE ID_Aeronave = @ID_Aeronave
 END
 GO
 
@@ -449,6 +449,58 @@ BEGIN
 	SET NOCOUNT ON;
 	SELECT *
 	FROM [EL_PUNTERO].[TL_BUTACA] 
+	WHERE ID_Aeronave = @ID_Aeronave
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[GetTiposButacas]
+AS
+BEGIN
+	SET NOCOUNT ON;
+	SELECT *
+	FROM [EL_PUNTERO].[TL_TIPO_BUTACA] 
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[GetTipoPorDescripcion]
+@Tipo nvarchar(30)
+AS
+BEGIN
+	SET NOCOUNT ON;
+	SELECT *
+	FROM [EL_PUNTERO].[TL_TIPO_BUTACA]
+	WHERE Descripcion = @Tipo 
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[ModificarButaca]
+@ID_Butaca int,
+@Tipo int
+AS
+BEGIN
+	UPDATE [EL_PUNTERO].[TL_BUTACA]
+	SET ID_Tipo_Butaca = @Tipo
+	WHERE ID_Butaca = @ID_Butaca	
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[DarDeBajaButaca]
+@ID_Butaca int
+AS
+BEGIN
+	UPDATE [EL_PUNTERO].[TL_BUTACA]
+	SET Habilitado = 0
+	WHERE ID_Butaca = @ID_Butaca	
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[GetMaxNroButaca]
+@ID_Aeronave int
+AS
+BEGIN
+	SET NOCOUNT ON;
+	SELECT MAX(Nro_Butaca)
+	FROM [EL_PUNTERO].[TL_BUTACA]
 	WHERE ID_Aeronave = @ID_Aeronave
 END
 GO

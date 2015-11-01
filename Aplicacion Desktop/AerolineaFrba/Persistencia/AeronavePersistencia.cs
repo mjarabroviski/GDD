@@ -114,11 +114,11 @@ namespace Persistencia
             return aeronave;
         }
 
-        public static int eliminarAeronave(Aeronave aeronave)
+        public static int eliminarAeronave(Aeronave aeronave, SqlTransaction transaccion)
         {
             var param = new List<SPParameter> { new SPParameter("ID_Aeronave", aeronave.ID) };
-            var sp =  new StoreProcedure(DBQueries.Aeronave.SPEliminarAeronave, param);
-            return sp.ExecuteNonQuery(null);
+            var sp =  new StoreProcedure(DBQueries.Aeronave.SPEliminarAeronave, param,transaccion);
+            return sp.ExecuteNonQuery(transaccion);
         }
 
         public static int ModificarAeronave(Aeronave aeronave, SqlTransaction transaccion)

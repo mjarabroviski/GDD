@@ -157,7 +157,8 @@ CREATE TABLE [EL_PUNTERO].[TL_BUTACA](
 	[Nro_Butaca] int NOT NULL,
 	[ID_Tipo_Butaca] int,
 	[Piso_Butaca] int DEFAULT 1,
-	[ID_Aeronave] int NOT NULL
+	[ID_Aeronave] int NOT NULL,
+	[Habilitado] bit DEFAULT 1
 );
 
 CREATE TABLE [EL_PUNTERO].[TL_TIPO_BUTACA](

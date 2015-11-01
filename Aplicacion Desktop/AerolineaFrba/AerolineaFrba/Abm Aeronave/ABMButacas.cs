@@ -19,6 +19,7 @@ namespace AerolineaFrba.Abm_Aeronave
         public SqlTransaction transaccionConcurrente;
         public bool accionTerminada = false;
         private List<Butaca> ListaButacas = new List<Butaca>();
+        public Butaca butacaSeleccionada { get; set; }
 
         public ABMButacas(Aeronave aeronaveAModificar, SqlTransaction transaccion)
         {
@@ -29,11 +30,19 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void ABMButacas_Load(object sender, EventArgs e)
         {
+            #region Cargar Tipos
+
+            //Carga el combobox de tipos
+            CboTipo.DataSource = TipoButacaPersistencia.ObtenerTodos(transaccionConcurrente);
+            CboTipo.DisplayMember = "Descripcion";
+            CboTipo.ValueMember = "ID";
+            
+            #endregion
+
             CboTipo.Enabled = false;
             BtnGrabar.Enabled = false;
             ActualizarPantalla(null);
             Limpiar();
-
         }
 
         private void BtnCancelar_Click(object sender, EventArgs e)
@@ -48,7 +57,7 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void BtnLimpiar_Click(object sender, EventArgs e)
         {
-            //Vaciar grilla y limpiar los filtros
+            //Vaciar grilla y limpiar 
             Limpiar();
             ActualizarPantalla(null);
         }
@@ -88,7 +97,8 @@ namespace AerolineaFrba.Abm_Aeronave
             var bind = diccionarioDeButacas.Values.Select(a => new
             {
                 Numero = a.Numero,
-                Tipo = TipoButacaPersistencia.ObtenerTipoPorButaca(a, transaccionConcurrente).Descripcion
+                Tipo = TipoButacaPersistencia.ObtenerTipoPorButaca(a, transaccionConcurrente).Descripcion,
+                Habilitado = a.Habilitado
             });
 
             #endregion
@@ -109,9 +119,94 @@ namespace AerolineaFrba.Abm_Aeronave
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells
             };
 
-            //Agrego la columna nueva
+            //Creo la columna de baja 
+            var columnaBaja = new DataGridViewButtonColumn
+            {
+                Text = "Baja Butaca",
+                UseColumnTextForButtonValue = true,
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells
+            };
+
+            //Agrego las columnas nuevas
             DgvButacas.Columns.Add(columnaActualizar);
+            DgvButacas.Columns.Add(columnaBaja);
         }
 
+        private void DgvButacas_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int cant = 0;
+            //Solo funciona cuando el usuario hace click en los botones de la columnas
+            if (e.RowIndex == -1 || e.ColumnIndex >= 0 && e.ColumnIndex < 3)
+                return;
+
+            butacaSeleccionada = ListaButacas.Find(butaca => butaca.Numero == Convert.ToInt32(DgvButacas.Rows[e.RowIndex].Cells[0].Value));
+
+            if (butacaSeleccionada != null)
+            {
+                //El usuario tocó el botón de modificar
+                if (e.ColumnIndex == 3)
+                {
+                    CboTipo.Enabled = true;
+                    CboTipo.SelectedValue = butacaSeleccionada.ID_Tipo;
+                    BtnGrabar.Enabled = true;                  
+                }
+                //El usuario tocó el botón de baja
+                else if (e.ColumnIndex == 4)
+                {
+                    CboTipo.SelectedValue = butacaSeleccionada.ID_Tipo;
+                    var dialogAnswer = MessageBox.Show("Esta seguro que desea dar de baja la butaca?", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                    if (dialogAnswer == DialogResult.Yes)
+                    {
+                        cant = ButacaPersistencia.DarDeBajaButaca(butacaSeleccionada, transaccionConcurrente);
+                        if (cant != -1)
+                        {
+                            MessageBox.Show("La butaca fue dada de baja satisfactoriamente", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            ActualizarPantalla(null);
+                        }
+                        else
+                        {
+                            MessageBox.Show("La butaca no pudo darse de baja", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void BtnGrabar_Click(object sender, EventArgs e)
+        {
+            int cant = 0;
+            butacaSeleccionada.ID_Tipo = TipoButacaPersistencia.ObtenerTipoPorDescripcion(CboTipo.Text,transaccionConcurrente).ID;
+            var dialogAnswer = MessageBox.Show("Esta seguro que desea modificar la butaca?", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+            if (dialogAnswer == DialogResult.Yes)
+            {
+                cant = ButacaPersistencia.ModificarButaca(butacaSeleccionada,transaccionConcurrente);
+                if (cant != -1)
+                {
+                    MessageBox.Show("La butaca fue modificada satisfactoriamente", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    BtnGrabar.Enabled = false;
+                    CboTipo.Enabled = false;
+                    ActualizarPantalla(null);
+                }
+                else
+                {
+                    MessageBox.Show("La butaca no fue modificada satisfactoriamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    BtnGrabar.Enabled = false;
+                    CboTipo.Enabled = false;
+                }
+            }
+        }
+
+        private void BtnAgregarButacas_Click(object sender, EventArgs e)
+        {
+            var alta = new ABMAltaButacas(aeronave, transaccionConcurrente, true);
+            alta.ShowDialog();
+
+            if (alta.accionTerminada)
+            {
+                accionTerminada = true;
+                //Close();
+            }
+
+        }
     }
 }
