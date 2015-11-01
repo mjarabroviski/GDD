@@ -24,5 +24,20 @@ namespace Persistencia
 
             return sp.ExecuteNonQuery(null);
         }
+
+        public static bool ValidarHorarioDeAeronave(DateTime fechaSalida, DateTime fechaLlegadaEstimada, int ID_Aeronave)
+        {
+            
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("Fecha_Salida", fechaSalida), 
+                    new SPParameter("Fecha_Llegada_Estimada", fechaLlegadaEstimada), 
+                    new SPParameter("ID_Aeronave",ID_Aeronave),
+                };
+
+            var sp = new StoreProcedure(DBQueries.Viaje.SPValidarHorarioDeAeronave, param);
+
+            return sp.ExecuteNonQuery(null) == 0;
+        }
     }
 }

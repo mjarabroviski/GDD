@@ -9,10 +9,8 @@ CREATE PROCEDURE [EL_PUNTERO].[InsertarCiudad]
 @Nombre_Ciudad nvarchar(20)
 AS
 BEGIN
-
 	INSERT INTO [EL_PUNTERO].[TL_CIUDAD](Nombre_Ciudad)
-	VALUES(@Nombre_Ciudad)
-	
+	VALUES(@Nombre_Ciudad);	
 END
 GO
 
@@ -21,7 +19,6 @@ CREATE PROCEDURE [EL_PUNTERO].[ActualizarCiudad]
 @ID_Ciudad int
 AS
 BEGIN
-
 	UPDATE [EL_PUNTERO].[TL_CIUDAD]
 	SET Nombre_Ciudad = @Nombre_Ciudad
 	WHERE ID_Ciudad = @iD_Ciudad; 
@@ -68,7 +65,7 @@ CREATE PROCEDURE [EL_PUNTERO].[ObtenerAeronavesHabilitadas]
 AS
 BEGIN
 	SET NOCOUNT ON;
-	
+	EXECUTE [EL_PUNTERO].[HabilitarAeronavesQueVolvieronDeBaja];
 	SELECT *
 	FROM [EL_PUNTERO].[TL_Aeronave]
 	WHERE Baja_Por_Fuera_De_Servicio = 0 AND Baja_Por_Vida_Util=0
@@ -90,7 +87,7 @@ BEGIN
 			AND @ID_Ciudad_Destino =R.ID_Ciudad_Destino 
 			AND @Matricula = A.Matricula
 			AND A.ID_Servicio = R.ID_Servicio
-	ORDER BY Nombre;
+	ORDER BY Nombre
 END
 GO
 
@@ -128,7 +125,7 @@ BEGIN
 	SET NOCOUNT ON;
 	SELECT *
 	FROM [EL_PUNTERO].[TL_CIUDAD]  
-	WHERE Nombre_Ciudad = @Nombre_Ciudad
+	WHERE Nombre_Ciudad = @Nombre_Ciudad;
 END
 GO
 
@@ -141,9 +138,40 @@ CREATE PROCEDURE [EL_PUNTERO].[GenerarViaje]
 
 AS
 BEGIN
+	SET NOCOUNT ON;
 	INSERT INTO [EL_PUNTERO].[TL_VIAJE] (Fecha_Llegada,Fecha_Salida,Fecha_Llegada_Estimada,ID_Ruta,ID_Aeronave)
 	VALUES (@Fecha_Llegada,@Fecha_Salida,@Fecha_Llegada_Estimada,@ID_Ruta,@ID_Aeronave);
 END
 GO
+
+CREATE PROCEDURE [EL_PUNTERO].[HabilitarAeronavesQueVolvieronDeBaja]
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	UPDATE [EL_PUNTERO].[TL_AERONAVE] 
+	SET Baja_Por_Fuera_De_Servicio = 0
+	WHERE Baja_Por_Fuera_De_Servicio = 1
+	AND ID_AERONAVE IN (SELECT ID_Aeronave FROM [EL_PUNTERO].[TL_BAJA_SERVICIO_AERONAVE]
+					WHERE [EL_PUNTERO].[TL_AERONAVE].ID_AERONAVE = ID_AERONAVE
+					AND Fecha_Reinicio_Servicio < GETDATE()
+					AND [EL_PUNTERO].[TL_AERONAVE].BAJA_POR_FUERA_DE_SERVICIO > FECHA_FUERA_DE_SERVICIO)
+	END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[ValidarHorarioDeAeronave]
+@Fecha_Salida datetime,
+@Fecha_Llegada_Estimada datetime,
+@ID_Aeronave int
+
+AS
+BEGIN
+
+	SELECT *
+	FROM [EL_PUNTERO].[TL_VIAJE] V
+	WHERE V.Fecha_Salida= @Fecha_Salida 
+			AND V.Fecha_Llegada_Estimada = @Fecha_Llegada_Estimada
+			AND V.ID_Aeronave = @ID_Aeronave
+END
 
 COMMIT

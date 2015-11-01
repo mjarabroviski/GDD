@@ -91,6 +91,7 @@ namespace Persistencia.Entidades
         public static class Viaje
         {
             public static String SPGenerarViaje = "EL_PUNTERO.GenerarViaje";
+            public static String SPValidarHorarioDeAeronave = "EL_PUNTERO.ValidarHorarioDeAeronave";
         }
     }
 }

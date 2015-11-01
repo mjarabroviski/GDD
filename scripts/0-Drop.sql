@@ -22,7 +22,7 @@ DROP TABLE [EL_PUNTERO].[TL_AERONAVE];
 DROP TABLE [EL_PUNTERO].[TL_BAJA_SERVICIO_AERONAVE];
 DROP TABLE [EL_PUNTERO].[TL_CIUDAD];
 DROP TABLE [EL_PUNTERO].[TL_SERVICIO];
-
+/*
 DROP PROCEDURE [EL_PUNTERO].[GetFuncionalidadesPorRol];
 DROP PROCEDURE [EL_PUNTERO].[GetRoles];
 DROP PROCEDURE [EL_PUNTERO].[GetUsuarios];
@@ -56,6 +56,31 @@ DROP PROCEDURE [EL_PUNTERO].[GetIdTipoPorDescripcion];
 DROP PROCEDURE [EL_PUNTERO].[InsertarButaca];
 DROP PROCEDURE [EL_PUNTERO].[ObtenerIDPorNombreDeServicio];
 
-DROP TRIGGER [EL_PUNTERO].[Tr_DeshabilitarUsuariosConRolDeshabilitado];
+DROP PROCEDURE [EL_PUNTERO].[ActualizarRolPorID];
+DROP PROCEDURE [EL_PUNTERO].[EliminarFuncionalidadesPorRol];
+DROP PROCEDURE [EL_PUNTERO].[GetAllRoles];
+DROP PROCEDURE [EL_PUNTERO].[GetAllRutas];
+DROP PROCEDURE [EL_PUNTERO].[GetCiudadPorID];
+DROP PROCEDURE [EL_PUNTERO].[GetFuncionalidades];
+DROP PROCEDURE [EL_PUNTERO].[GetRolPorNombreComo];
+DROP PROCEDURE [EL_PUNTERO].[InsertarFuncionalidadPorRol];
+DROP PROCEDURE [EL_PUNTERO].[InsertarRol];
+DROP PROCEDURE [EL_PUNTERO].[InsertarRuta];
+DROP PROCEDURE [EL_PUNTERO].[ObtenerTodasLasRutasConOrigen];
+*/
+
+DROP PROCEDURE [EL_PUNTERO].[InsertarCiudad];
+DROP PROCEDURE [EL_PUNTERO].[ActualizarCiudad];
+DROP PROCEDURE [EL_PUNTERO].[ObtenerTodasLasCiudadesConOrigen];
+DROP PROCEDURE [EL_PUNTERO].[GetCiudades];
+DROP PROCEDURE [EL_PUNTERO].[ObtenerCiudadPorId_Ciudad];
+DROP PROCEDURE [EL_PUNTERO].[ObtenerAeronavesHabilitadas];
+DROP PROCEDURE [EL_PUNTERO].[ObtenerServiciosDeRuta];
+DROP PROCEDURE [EL_PUNTERO].[ObtenerRutaPorOrigenYDestino];
+DROP PROCEDURE [EL_PUNTERO].[GetAeronavePorMatricula];
+DROP PROCEDURE [EL_PUNTERO].[ObtenerIDPorNombreDeCiudad];
+DROP PROCEDURE [EL_PUNTERO].[GenerarViaje];
+
+/*DROP TRIGGER [EL_PUNTERO].[Tr_DeshabilitarUsuariosConRolDeshabilitado];*/
 
 DROP SCHEMA [EL_PUNTERO];
