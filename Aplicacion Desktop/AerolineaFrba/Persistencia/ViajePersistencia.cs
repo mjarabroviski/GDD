@@ -24,5 +24,77 @@ namespace Persistencia
 
             return sp.ExecuteNonQuery(null);
         }
+
+        public static List<Viaje> ObtenerViajePorParametros(Filtros.ViajeFiltros filtros)
+        {
+            var param = new List<SPParameter>
+            { 
+                new SPParameter("Fecha_Salida",filtros.FechaSalida),
+                new SPParameter("Ciudad_Origen", filtros.CiudadOrigen),
+                new SPParameter("Ciudad_Destino", filtros.CiudadDestino),
+            };
+
+            var sp = new StoreProcedure(DBQueries.Viaje.SPFiltrarViajes, param);
+
+            return sp.ExecuteReader<Viaje>();
+        }
+
+        public static String ObtenerCiudadOrigenPorIDRuta(int p)
+        {
+            var param = new List<SPParameter>
+            { 
+                new SPParameter("ID_Ruta",p)
+            };
+
+            var sp = new StoreProcedure(DBQueries.Viaje.SPCiudadOrigenPorIDRuta, param);
+
+            List<Ciudad> ciudades = sp.ExecuteReader<Ciudad>();
+
+            if (ciudades == null || ciudades.Count == 0)
+                return null;
+
+            return ciudades[0].Nombre;
+        }
+
+        public static String ObtenerCiudadDestinoPorIDRuta(int p)
+        {
+            var param = new List<SPParameter>
+            { 
+                new SPParameter("ID_Ruta",p)
+            };
+
+            var sp = new StoreProcedure(DBQueries.Viaje.SPCiudadDestinoPorIDRuta, param);
+
+            List<Ciudad> ciudades = sp.ExecuteReader<Ciudad>();
+
+            if (ciudades == null || ciudades.Count == 0)
+                return null;
+
+            return ciudades[0].Nombre;
+        }
+
+        public static int ObtenerButacasDisponibles(int p)
+        {
+            var param = new List<SPParameter>
+            { 
+                new SPParameter("ID_Viaje",p)
+            };
+
+            var sp = new StoreProcedure(DBQueries.Viaje.SPObtenerButacasDisponibles, param);
+
+            return (int)sp.ExecuteScalar(null);
+        }
+
+        public static int ObtenerKGSDisponibles(int p)
+        {
+                var param = new List<SPParameter>
+            { 
+                new SPParameter("ID_Viaje",p)
+            };
+
+            var sp = new StoreProcedure(DBQueries.Viaje.SPObtenerKGSDisponibles, param);
+
+            return (int)sp.ExecuteScalar(null);   
+        }
     }
 }

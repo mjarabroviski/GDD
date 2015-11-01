@@ -225,8 +225,6 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 
-	--TODO!!!! SÓLO QUE LO HAGA PARA FECHAS MAYORES A HOY
-
    /*Insertar los id_compra, fecha y motivo en la tabla de devolución*/
 	INSERT INTO [EL_PUNTERO].[TL_DEVOLUCION] (ID_Compra)
 	  (SELECT DISTINCT ID_Compra FROM [EL_PUNTERO].TL_PASAJE WHERE ID_Viaje IN (SELECT ID_Viaje FROM [EL_PUNTERO].TL_VIAJE WHERE (ID_Ruta=@ID_Ruta) AND (Fecha_Salida>=GETDATE())));
@@ -305,14 +303,6 @@ BEGIN
 END
 GO
 
-CREATE FUNCTION [EL_PUNTERO].[DevolucionAPartirDePasaje](@ID_Pasaje int)
-RETURNS int
-AS 
-BEGIN
-	RETURN (SELECT ID_Devolucion FROM [EL_PUNTERO].TL_DEVOLUCION WHERE ID_Compra=[EL_PUNTERO].CompraAPartirDePasaje(@ID_Pasaje))
-
-END
-GO
 
 CREATE PROCEDURE [EL_PUNTERO].[TraerLosPasajesDevueltos]
 AS
@@ -333,5 +323,99 @@ BEGIN
 	WHERE ID_Item_Devuelto = @ID_Item_Devuelto
 END
 GO
+
+CREATE PROCEDURE [EL_PUNTERO].[FiltrarViajes]
+@Fecha_Salida dateTime,
+@Ciudad_Origen varchar(255),
+@Ciudad_Destino varchar(255)
+AS
+BEGIN
+	SET NOCOUNT ON;
+	SELECT *
+	FROM [EL_PUNTERO].TL_VIAJE V
+	WHERE DAY(V.Fecha_Salida) = DAY(@Fecha_Salida)
+	  AND MONTH(V.Fecha_Salida) = MONTH(@Fecha_Salida)
+	  AND YEAR(V.Fecha_Salida) = YEAR(@Fecha_Salida)
+	  AND (((SELECT Nombre_Ciudad FROM [EL_PUNTERO].TL_CIUDAD C WHERE C.ID_Ciudad = (SELECT ID_Ciudad_Origen FROM TL_RUTA R WHERE R.ID_Ruta = V.ID_Ruta)) = @Ciudad_Origen) OR (@Ciudad_Origen is NULL)) 
+	  AND (((SELECT Nombre_Ciudad FROM [EL_PUNTERO].TL_CIUDAD C WHERE C.ID_Ciudad = (SELECT ID_Ciudad_Destino FROM TL_RUTA R WHERE R.ID_Ruta = V.ID_Ruta)) = @Ciudad_Destino) OR (@Ciudad_Destino is NULL))
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[CiudadOrigenPorIDRuta]
+@ID_Ruta int
+AS
+BEGIN
+	SET NOCOUNT ON;
+	SELECT * 
+	FROM [EL_PUNTERO].TL_CIUDAD C
+	WHERE C.ID_Ciudad = (SELECT R.ID_Ciudad_Origen FROM [EL_PUNTERO].TL_RUTA R WHERE R.ID_Ruta=@ID_Ruta)
+END
+GO
+
+
+CREATE PROCEDURE [EL_PUNTERO].[CiudadDestinoPorIDRuta]
+@ID_Ruta int
+AS
+BEGIN
+	SET NOCOUNT ON;
+	SELECT * 
+	FROM [EL_PUNTERO].TL_CIUDAD C
+	WHERE C.ID_Ciudad = (SELECT R.ID_Ciudad_Destino FROM [EL_PUNTERO].TL_RUTA R WHERE R.ID_Ruta=@ID_Ruta)
+END
+GO
+
+
+
+
+--Acordarse de descomentar
+CREATE PROCEDURE [EL_PUNTERO].[ObtenerButacasDisponibles]
+@ID_Viaje int
+AS
+BEGIN
+	SET NOCOUNT ON;
+	DECLARE @ButacasTotales int
+	DECLARE @ButacasOcupadas int
+	
+		CREATE TABLE [EL_PUNTERO].[TL_BUTACAAUX](
+			[ID_ButacaAux] int IDENTITY(1,1),
+			[ButacasDisponibles] int
+		);
+
+		SET @ButacasTotales = (SELECT COUNT(*) FROM [EL_PUNTERO].TL_BUTACA B WHERE B.ID_Aeronave=(SELECT V.ID_Aeronave FROM [EL_PUNTERO].TL_VIAJE V WHERE V.ID_Viaje=@ID_Viaje)) /*AND B.Habilitado=1*/
+
+		SET @ButacasOcupadas = (SELECT COUNT(*) FROM [EL_PUNTERO].TL_PASAJE P WHERE P.ID_Viaje=@ID_Viaje)	
+		
+		INSERT INTO [EL_PUNTERO].TL_BUTACAAUX(ButacasDisponibles) VALUES (@ButacasTotales-@ButacasOcupadas)
+		
+
+		SELECT ButacasDisponibles FROM [EL_PUNTERO].TL_BUTACAAUX WHERE ID_ButacaAux = 1
+
+		DROP TABLE [EL_PUNTERO].[TL_BUTACAAUX]
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[ObtenerKGSDisponibles]
+@ID_Viaje int
+AS
+BEGIN
+	SET NOCOUNT ON;
+	DECLARE @KGSTotales int
+	DECLARE @KGSOcupados int
+
+	
+	SET @KGSTOTALES = (SELECT A.KG_TOTALES From [EL_PUNTERO].TL_AERONAVE A WHERE A.ID_Aeronave = (SELECT V.ID_Aeronave FROM [EL_PUNTERO].TL_VIAJE V WHERE ID_Viaje=@ID_Viaje))
+	SET @KGSOcupados = (SELECT SUM(E.KG) FROM [EL_PUNTERO].TL_ENCOMIENDA E WHERE E.ID_Viaje=@ID_Viaje)
+
+	CREATE TABLE [EL_PUNTERO].[TL_ENCOMIENDAAUX](
+		[ID_EncomiendaAux] int IDENTITY(1,1),
+		[KGSDisponibles] int
+	)
+
+	INSERT INTO  [EL_PUNTERO].[TL_ENCOMIENDAAUX] (KGSDisponibles) VALUES (@KGSTotales-@KGSOcupados)
+
+	SELECT KGSDisponibles FROM [EL_PUNTERO].TL_ENCOMIENDAAUX WHERE ID_EncomiendaAux=1
+
+	DROP TABLE [EL_PUNTERO].TL_ENCOMIENDAAUX
+END
 
 COMMIT

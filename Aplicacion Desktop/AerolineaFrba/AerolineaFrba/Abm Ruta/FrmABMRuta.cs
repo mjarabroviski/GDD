@@ -55,7 +55,7 @@ namespace AerolineaFrba.Abm_Ruta
 
             #region Obtengo el diccionario de rutas
 
-            //El datasource debe ser todos los registros de roles almacenados en la base de datos
+            //El datasource debe ser todos los registros de rutas almacenadas en la base de datos
             if (rutas == null)
             {
                 BorrarFiltrosUI();
@@ -87,7 +87,7 @@ namespace AerolineaFrba.Abm_Ruta
             });
             DgvRuta.DataSource = bind.ToList();
 
-            //Agrego los botones a cada fila para poder modificar/borrar cada rol
+            //Agrego los botones a cada fila para poder modificar/borrar cada ruta
             AgregarBotonesColumnas();
         }
 
@@ -233,8 +233,7 @@ namespace AerolineaFrba.Abm_Ruta
             frmABMRutaAM.ShowDialog();
 
             //Paso NULL para volver a obtener todos los registros de la base
-            //ActualizarPantalla(null); 
-        //TODO
+            ActualizarPantalla(null); 
         }
 
         private void DgvRuta_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -262,7 +261,7 @@ namespace AerolineaFrba.Abm_Ruta
                     var altasModificacionesVisibilidad = new FrmABMRutaAltasModificaciones(rutaSeleccionada);
                     altasModificacionesVisibilidad.ShowDialog();
 
-                    //Si modificó satisfactoriamante el rol, actualizo la grilla
+                    //Si modificó satisfactoriamante la ruta, actualizo la grilla
                     if (altasModificacionesVisibilidad.AccionCompleta)
                         ActualizarPantalla(null);
                 }
@@ -280,12 +279,13 @@ namespace AerolineaFrba.Abm_Ruta
                     var dialogAnswer = MessageBox.Show(string.Format("Esta seguro que quiere inhabilitar la ruta {0} de {1} a {2}?", rutaSeleccionada.Codigo_Ruta, RutaPersistencia.ObtenerCiudadPorID(rutaSeleccionada.ID_Ciudad_Origen), RutaPersistencia.ObtenerCiudadPorID(rutaSeleccionada.ID_Ciudad_Destino)), "Atención", MessageBoxButtons.YesNo);
                     if (dialogAnswer == DialogResult.Yes)
                     {
-                        //Defino que ya no este más activo el rol e impacto en la base de datos
+                        //Defino que ya no este más activa la ruta e impacto en la base de datos
                         rutaSeleccionada.Habilitado = false;
                         RutaPersistencia.ModificarRuta(rutaSeleccionada);
-                        RutaPersistencia.CancelarPasajesYEncomiendasConRutaInhabilitada(rutaSeleccionada,"Cancelacion de ruta");
-
-                        //Vuelvo a cargar la lista de roles
+                        RutaPersistencia.CancelarPasajesYEncomiendasConRutaInhabilitada(rutaSeleccionada,"Cancelacion de ruta",AdministradorSesion.UsuarioActual);
+                        //OJO!!! EL CANCELARPASAJES... SOLO VA A FUNCIONAR SI HAGO EL LOGIN ANTES
+                        
+                        //Vuelvo a cargar la lista de rutas
                         ActualizarPantalla(null);
                     }
                 }

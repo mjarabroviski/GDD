@@ -105,3 +105,4 @@ C:\Users\Mati\Desktop\UTN\Gestion de Datos\TP Gestion de Datos\GDD\Aplicacion De
 C:\Users\Mati\Desktop\UTN\Gestion de Datos\TP Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Aeronave.ABMCancelarOReemplazar.resources
 C:\Users\Mati\Desktop\UTN\Gestion de Datos\TP Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Aeronave.ABMFueraDeServicio.resources
 C:\Users\Mati\Desktop\UTN\Gestion de Datos\TP Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Aeronave.ABMInsertarActualizarAeronave.resources
+C:\Users\Mati\Desktop\UTN\Gestion de Datos\TP Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Compra.FrmCompra.resources
