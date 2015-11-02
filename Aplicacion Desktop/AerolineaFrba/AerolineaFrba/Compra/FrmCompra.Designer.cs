@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.DtpFechaSalida = new System.Windows.Forms.DateTimePicker();
             this.BtnLimpiar = new System.Windows.Forms.Label();
             this.BtnBuscar = new System.Windows.Forms.Label();
             this.CmbCiudadDestino = new System.Windows.Forms.ComboBox();
             this.CmbCiudadOrigen = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.DtpFechaSalida = new System.Windows.Forms.DateTimePicker();
             this.DgvViaje = new System.Windows.Forms.DataGridView();
             this.BtnCancelar = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
@@ -49,13 +49,20 @@
             this.groupBox1.Controls.Add(this.CmbCiudadDestino);
             this.groupBox1.Controls.Add(this.CmbCiudadOrigen);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Location = new System.Drawing.Point(110, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(504, 104);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "FILTROS DE BUSQUEDA";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // DtpFechaSalida
+            // 
+            this.DtpFechaSalida.Location = new System.Drawing.Point(136, 27);
+            this.DtpFechaSalida.Name = "DtpFechaSalida";
+            this.DtpFechaSalida.Size = new System.Drawing.Size(231, 20);
+            this.DtpFechaSalida.TabIndex = 28;
             // 
             // BtnLimpiar
             // 
@@ -112,13 +119,6 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "FECHA DE SALIDA";
             // 
-            // DtpFechaSalida
-            // 
-            this.DtpFechaSalida.Location = new System.Drawing.Point(136, 27);
-            this.DtpFechaSalida.Name = "DtpFechaSalida";
-            this.DtpFechaSalida.Size = new System.Drawing.Size(231, 20);
-            this.DtpFechaSalida.TabIndex = 28;
-            // 
             // DgvViaje
             // 
             this.DgvViaje.AllowUserToAddRows = false;
@@ -132,7 +132,7 @@
             this.DgvViaje.Name = "DgvViaje";
             this.DgvViaje.RowHeadersVisible = false;
             this.DgvViaje.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DgvViaje.Size = new System.Drawing.Size(504, 269);
+            this.DgvViaje.Size = new System.Drawing.Size(718, 269);
             this.DgvViaje.TabIndex = 34;
             this.DgvViaje.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvViaje_CellContentClick);
             // 
@@ -154,7 +154,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(525, 448);
+            this.ClientSize = new System.Drawing.Size(743, 448);
             this.Controls.Add(this.BtnCancelar);
             this.Controls.Add(this.DgvViaje);
             this.Controls.Add(this.groupBox1);

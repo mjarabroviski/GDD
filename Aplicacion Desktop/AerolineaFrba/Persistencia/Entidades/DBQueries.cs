@@ -108,6 +108,7 @@ namespace Persistencia.Entidades
             public static String SPObtenerKGSDisponibles = "EL_PUNTERO.ObtenerKGSDisponibles";
             public static String SPGetViajesPorAeronave = "EL_PUNTERO.GetViajesPorAeronave";
             public static String SPValidarHorarioDeAeronave = "EL_PUNTERO.ValidarHorarioDeAeronave";
+            public static String SPServicioPorIDRuta = "EL_PUNTERO.ServicioPorIDRuta";
         }
 
         public static class TipoButaca

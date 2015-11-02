@@ -127,6 +127,7 @@ namespace AerolineaFrba.Compra
                     FechaSalida = a.Fecha_Salida,
                     CiudadOrigen = ViajePersistencia.ObtenerCiudadOrigenPorIDRuta(a.ID_Ruta),
                     CiudadDestino = ViajePersistencia.ObtenerCiudadDestinoPorIDRuta(a.ID_Ruta),
+                    TipoServicio = ViajePersistencia.ObtenerServicioPorIDRuta(a.ID_Ruta),
                     ButacasDisponibles = ViajePersistencia.ObtenerButacasDisponibles(a.ID) >=0 ? ViajePersistencia.ObtenerButacasDisponibles(a.ID) : 0 ,
                     KGsDisponibles = ViajePersistencia.ObtenerKGSDisponibles(a.ID) >=0 ? ViajePersistencia.ObtenerKGSDisponibles(a.ID) : 0
                 });

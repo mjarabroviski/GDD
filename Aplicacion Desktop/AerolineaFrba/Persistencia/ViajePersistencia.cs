@@ -125,5 +125,22 @@ namespace Persistencia
 
             return viajes;
         }
+
+        public static object ObtenerServicioPorIDRuta(int p)
+        {
+            var param = new List<SPParameter>
+            { 
+                new SPParameter("ID_Ruta",p)
+            };
+
+            var sp = new StoreProcedure(DBQueries.Viaje.SPServicioPorIDRuta, param);
+
+            List<Servicio> servicios = sp.ExecuteReader<Servicio>();
+
+            if (servicios == null || servicios.Count == 0)
+                return null;
+
+            return servicios[0].Nombre;
+        }
     }
 }
