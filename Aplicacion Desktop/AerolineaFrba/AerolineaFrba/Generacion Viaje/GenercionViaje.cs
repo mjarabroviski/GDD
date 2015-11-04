@@ -305,5 +305,10 @@ namespace AerolineaFrba.Generacion_Viaje
               }
           }
 
+          private void label8_Click(object sender, EventArgs e)
+          {
+              CboCiudadOrigen.Enabled = true;
+          }
+
     }
 }

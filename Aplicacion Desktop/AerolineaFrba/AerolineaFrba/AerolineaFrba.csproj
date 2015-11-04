@@ -197,11 +197,23 @@
     <Compile Include="Registro de Usuario\RegistroDeUsuario.Designer.cs">
       <DependentUpon>RegistroDeUsuario.cs</DependentUpon>
     </Compile>
-    <Compile Include="Registro Llegada Destino\Form1.cs">
+    <Compile Include="Registro Llegada Destino\AgregarFechaLlegada.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Registro Llegada Destino\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Registro Llegada Destino\AgregarFechaLlegada.Designer.cs">
+      <DependentUpon>AgregarFechaLlegada.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Registro Llegada Destino\InformacionAeronave.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Registro Llegada Destino\InformacionAeronave.Designer.cs">
+      <DependentUpon>InformacionAeronave.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Registro Llegada Destino\RegistroLlegadaDestino.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Registro Llegada Destino\RegistroLlegadaDestino.Designer.cs">
+      <DependentUpon>RegistroLlegadaDestino.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Abm Aeronave\ABMAeronaves.resx">
       <DependentUpon>ABMAeronaves.cs</DependentUpon>
@@ -268,6 +280,15 @@
     </Compile>
     <EmbeddedResource Include="Registro de Usuario\RegistroDeUsuario.resx">
       <DependentUpon>RegistroDeUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Registro Llegada Destino\AgregarFechaLlegada.resx">
+      <DependentUpon>AgregarFechaLlegada.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Registro Llegada Destino\InformacionAeronave.resx">
+      <DependentUpon>InformacionAeronave.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Registro Llegada Destino\RegistroLlegadaDestino.resx">
+      <DependentUpon>RegistroLlegadaDestino.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config">
       <SubType>Designer</SubType>

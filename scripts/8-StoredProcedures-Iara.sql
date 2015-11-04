@@ -61,6 +61,23 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE [EL_PUNTERO].[HabilitarAeronavesQueVolvieronDeBaja]
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	UPDATE [EL_PUNTERO].[TL_AERONAVE] 
+	SET Baja_Por_Fuera_De_Servicio = 0
+	WHERE Baja_Por_Fuera_De_Servicio = 1
+	AND ID_AERONAVE IN (
+					SELECT ID_Aeronave FROM [EL_PUNTERO].[TL_BAJA_SERVICIO_AERONAVE]
+					WHERE [EL_PUNTERO].[TL_AERONAVE].ID_AERONAVE = ID_AERONAVE
+					AND Fecha_Reinicio_Servicio < GETDATE()
+					AND [EL_PUNTERO].[TL_AERONAVE].BAJA_POR_FUERA_DE_SERVICIO > FECHA_FUERA_DE_SERVICIO)
+	END
+GO
+
+
 CREATE PROCEDURE [EL_PUNTERO].[ObtenerAeronavesHabilitadas]
 AS
 BEGIN
@@ -144,21 +161,6 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE [EL_PUNTERO].[HabilitarAeronavesQueVolvieronDeBaja]
-AS
-BEGIN
-	SET NOCOUNT ON;
-
-	UPDATE [EL_PUNTERO].[TL_AERONAVE] 
-	SET Baja_Por_Fuera_De_Servicio = 0
-	WHERE Baja_Por_Fuera_De_Servicio = 1
-	AND ID_AERONAVE IN (SELECT ID_Aeronave FROM [EL_PUNTERO].[TL_BAJA_SERVICIO_AERONAVE]
-					WHERE [EL_PUNTERO].[TL_AERONAVE].ID_AERONAVE = ID_AERONAVE
-					AND Fecha_Reinicio_Servicio < GETDATE()
-					AND [EL_PUNTERO].[TL_AERONAVE].BAJA_POR_FUERA_DE_SERVICIO > FECHA_FUERA_DE_SERVICIO)
-	END
-GO
-
 CREATE PROCEDURE [EL_PUNTERO].[ValidarHorarioDeAeronave]
 @Fecha_Salida datetime,
 @Fecha_Llegada_Estimada datetime,
@@ -173,5 +175,30 @@ BEGIN
 			AND V.Fecha_Llegada_Estimada = @Fecha_Llegada_Estimada
 			AND V.ID_Aeronave = @ID_Aeronave
 END
+
+CREATE PROCEDURE [EL_PUNTERO].[ValidarAeronaveDelViaje]
+@Fecha_Salida datetime,
+@ID_Ruta int,
+@ID_Aeronave int
+
+AS 
+BEGIN
+	SELECT *
+	FROM [EL_PUNTERO].[TL_AERONAVE] A
+	INNER JOIN [EL_PUNTERO].[TL_VIAJE] V ON A.ID_Aeronave = V.ID_Aeronave
+	WHERE V.Fecha_Salida = @Fecha_Salida AND V.ID_Ruta = @ID_Ruta
+END
+GO
+
+//AGREGAR AL DE MELU EL ORDEN
+CREATE PROCEDURE [EL_PUNTERO].[GetAeronaves]
+AS
+BEGIN
+	SET NOCOUNT ON;
+	SELECT *
+	FROM [EL_PUNTERO].[TL_Aeronave] A
+	ORDER BY A.Matricula
+END
+GO
 
 COMMIT

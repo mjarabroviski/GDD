@@ -63,5 +63,10 @@ namespace AerolineaFrba.LogIn
         {
 
         }
+
+        private void ResetearContrasena_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

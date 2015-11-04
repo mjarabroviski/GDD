@@ -53,5 +53,24 @@ namespace Persistencia
 
             return viajes;
         }
+
+        public static List<Aeronave> ValidarAeronaveDelViaje(int ID_Aeronave, int ID_Ruta, DateTime fechasalida, SqlTransaction transaction)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("Fecha_Salida", fechasalida), 
+                    new SPParameter("ID_Ruta",ID_Ruta),
+                    new SPParameter("ID_Aeronave",ID_Aeronave),
+                };
+
+            var sp = new StoreProcedure(DBQueries.Viaje.SPValidarAeronaveDelViaje, param);
+
+            List<Aeronave> aeronaves = sp.ExecuteReaderTransactioned<Aeronave>(transaction);
+
+             if (aeronaves == null || aeronaves.Count == 0)
+                return null;
+
+            return aeronaves;
+        }
     }
 }

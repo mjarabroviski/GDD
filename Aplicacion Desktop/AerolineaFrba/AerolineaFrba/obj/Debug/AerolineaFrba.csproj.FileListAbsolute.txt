@@ -111,3 +111,6 @@ C:\Users\Melanie Jarabroviski\Documents\UTN\3ro\Gestion de Datos\GDD\Aplicacion 
 C:\Iara UTN\3\GestionDeDatos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Home_Administrador.HomeAdministrador.resources
 C:\Iara UTN\3\GestionDeDatos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\bin\Debug\Sesion.exe
 C:\Iara UTN\3\GestionDeDatos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\bin\Debug\Sesion.pdb
+C:\Iara UTN\3\GestionDeDatos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Registro_Llegada_Destino.AgregarFechaLlegada.resources
+C:\Iara UTN\3\GestionDeDatos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Registro_Llegada_Destino.InformacionAeronave.resources
+C:\Iara UTN\3\GestionDeDatos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Registro_Llegada_Destino.RegistroLlegadaDestino.resources
