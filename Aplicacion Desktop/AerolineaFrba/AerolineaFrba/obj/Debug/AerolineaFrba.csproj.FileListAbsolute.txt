@@ -115,3 +115,4 @@ C:\Iara UTN\3\GestionDeDatos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\
 C:\Iara UTN\3\GestionDeDatos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Registro_Llegada_Destino.AgregarFechaLlegada.resources
 C:\Iara UTN\3\GestionDeDatos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Registro_Llegada_Destino.InformacionAeronave.resources
 C:\Iara UTN\3\GestionDeDatos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Registro_Llegada_Destino.RegistroLlegadaDestino.resources
+C:\Iara UTN\3\GestionDeDatos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Compra.FrmCompra.resources

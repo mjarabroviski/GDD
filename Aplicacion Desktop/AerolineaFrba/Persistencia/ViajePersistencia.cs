@@ -144,6 +144,7 @@ namespace Persistencia
                 return null;
 
             return aeronaves;
+        }
 
         public static int ReemplazarViajesDePor(Aeronave aeronaveAReemplazar, Aeronave aeronaveNueva)
         {
@@ -156,6 +157,7 @@ namespace Persistencia
             var sp = new StoreProcedure(DBQueries.Aeronave.SPReemplazo, param);
 
             return sp.ExecuteNonQuery(null);
+        }
 
         public static object ObtenerServicioPorIDRuta(int p)
         {
