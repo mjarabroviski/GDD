@@ -90,6 +90,7 @@ DROP PROCEDURE [EL_PUNTERO].[DarDeBajaPorVidaUtil];
 DROP PROCEDURE [EL_PUNTERO].[ReemplazoAeronave];
 DROP PROCEDURE [EL_PUNTERO].[ObtenerButacasDisponibles];
 DROP PROCEDURE [EL_PUNTERO].[ObtenerKGSDisponibles];
+DROP PROCEDURE [EL_PUNTERO].[CancelarPasajesYEncomiendasPorBajaAeronave];
 
 DROP PROCEDURE [EL_PUNTERO].[ActualizarRolPorID];
 DROP PROCEDURE [EL_PUNTERO].[EliminarFuncionalidadesPorRol];

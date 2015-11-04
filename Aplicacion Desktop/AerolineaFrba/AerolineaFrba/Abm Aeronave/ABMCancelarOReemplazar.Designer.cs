@@ -31,6 +31,7 @@
             this.LblReemplazar = new System.Windows.Forms.Label();
             this.LblCancelar = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.LblVolver = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // LblReemplazar
@@ -39,9 +40,9 @@
             this.LblReemplazar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblReemplazar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.LblReemplazar.ForeColor = System.Drawing.Color.White;
-            this.LblReemplazar.Location = new System.Drawing.Point(208, 107);
+            this.LblReemplazar.Location = new System.Drawing.Point(158, 107);
             this.LblReemplazar.Name = "LblReemplazar";
-            this.LblReemplazar.Size = new System.Drawing.Size(145, 32);
+            this.LblReemplazar.Size = new System.Drawing.Size(140, 32);
             this.LblReemplazar.TabIndex = 39;
             this.LblReemplazar.Text = "REEMPLAZAR AERONAVE";
             this.LblReemplazar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -53,9 +54,9 @@
             this.LblCancelar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.LblCancelar.ForeColor = System.Drawing.Color.White;
-            this.LblCancelar.Location = new System.Drawing.Point(57, 107);
+            this.LblCancelar.Location = new System.Drawing.Point(12, 107);
             this.LblCancelar.Name = "LblCancelar";
-            this.LblCancelar.Size = new System.Drawing.Size(145, 32);
+            this.LblCancelar.Size = new System.Drawing.Size(140, 32);
             this.LblCancelar.TabIndex = 38;
             this.LblCancelar.Text = "CANCELAR PASAJES/ENCOMIENDAS";
             this.LblCancelar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -72,11 +73,26 @@
             this.label2.Text = "La aeronave seleccionada tiene viajes programados a futuro. \r\nQue accion desea re" +
     "alizar?";
             // 
+            // LblVolver
+            // 
+            this.LblVolver.BackColor = System.Drawing.Color.DodgerBlue;
+            this.LblVolver.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.LblVolver.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.LblVolver.ForeColor = System.Drawing.Color.White;
+            this.LblVolver.Location = new System.Drawing.Point(304, 107);
+            this.LblVolver.Name = "LblVolver";
+            this.LblVolver.Size = new System.Drawing.Size(145, 32);
+            this.LblVolver.TabIndex = 40;
+            this.LblVolver.Text = "CANCELAR";
+            this.LblVolver.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LblVolver.Click += new System.EventHandler(this.LblVolver_Click);
+            // 
             // ABMCancelarOReemplazar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(427, 168);
+            this.ClientSize = new System.Drawing.Size(463, 168);
+            this.Controls.Add(this.LblVolver);
             this.Controls.Add(this.LblReemplazar);
             this.Controls.Add(this.LblCancelar);
             this.Controls.Add(this.label2);
@@ -92,5 +108,6 @@
         private System.Windows.Forms.Label LblReemplazar;
         private System.Windows.Forms.Label LblCancelar;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label LblVolver;
     }
 }

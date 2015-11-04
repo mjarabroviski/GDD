@@ -119,5 +119,10 @@ namespace Persistencia.Entidades
             public static String SPGetTiposButacas = "EL_PUNTERO.GetTiposButacas";
             public static String SPGetTipoPorDescripcion = "EL_PUNTERO.GetTipoPorDescripcion";
         }
+
+        public static class Devolucion
+        {
+            public static String SPCancelarPasajesYEncomiendasPorBajaAeronave = "EL_PUNTERO.CancelarPasajesYEncomiendasPorBajaAeronave";
+        }
     }
 }

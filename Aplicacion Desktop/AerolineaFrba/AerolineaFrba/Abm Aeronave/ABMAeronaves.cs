@@ -233,13 +233,18 @@ namespace AerolineaFrba.Abm_Aeronave
                 //El usuario tocó el botón de dar de baja por vida util
                 else if (e.ColumnIndex == 11)
                 {
+                    if (aeronaveSeleccionada.Baja_Vida_Util)
+                    {
+                        MessageBox.Show("No se puede puede dar de baja una aeronave que ya se encuentra dada de baja", "Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                        return;
+                    }
                     var dialogAnswer = MessageBox.Show(string.Format("Esta seguro que quiere dar de baja por fin de vida util la aeronave {0}?", aeronaveSeleccionada.Matricula), "Atención", MessageBoxButtons.YesNo);
                     if (dialogAnswer == DialogResult.Yes)
                     {
                         cant = AeronavePersistencia.BajaPorVidaUtil(aeronaveSeleccionada);
-                        if ( cant == -1)
+                        if ( cant == -1 || cant == 0)
                         {
-                            var cancelarOReemplazar = new ABMCancelarOReemplazar(aeronaveSeleccionada);
+                            var cancelarOReemplazar = new ABMCancelarOReemplazar(aeronaveSeleccionada, true);
                             cancelarOReemplazar.ShowDialog();
 
                             if (cancelarOReemplazar.accionTerminada)
@@ -258,11 +263,24 @@ namespace AerolineaFrba.Abm_Aeronave
                 //El usuario toco el boton de dar baja por fuera de servicio
                 else if (e.ColumnIndex == 10)
                 {
+                    if (aeronaveSeleccionada.Baja_Fuera_De_Servicio)
+                    {
+                        MessageBox.Show("No se puede puede dar de baja una aeronave que ya se encuentra dada de baja", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
                     var dialogAnswer = MessageBox.Show(string.Format("Esta seguro que quiere dar de baja por fuera de servicio la aeronave {0}?", aeronaveSeleccionada.Matricula), "Atención", MessageBoxButtons.YesNo);
                     if (dialogAnswer == DialogResult.Yes)
                     {
+                            //FALTA PASAR A LA DE CANCELAR/REEMPLAZAR EL FALSE
                             var fueraDeServicio = new ABMFueraDeServicio(aeronaveSeleccionada);
                             fueraDeServicio.ShowDialog();
+
+                            if (fueraDeServicio.accionTerminada)
+                            {
+                               // AeronavePersistencia.DarDeBajaPorFueraDeServucui(aeronaveSeleccionada);
+                                ActualizarPantalla(null);
+                            }
                     }
                 }
             }
