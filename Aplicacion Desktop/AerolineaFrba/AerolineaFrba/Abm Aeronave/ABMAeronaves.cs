@@ -241,6 +241,12 @@ namespace AerolineaFrba.Abm_Aeronave
                         {
                             var cancelarOReemplazar = new ABMCancelarOReemplazar(aeronaveSeleccionada);
                             cancelarOReemplazar.ShowDialog();
+
+                            if (cancelarOReemplazar.accionTerminada)
+                            {
+                                AeronavePersistencia.DarDeBajaPorVidaUtil(aeronaveSeleccionada);
+                                ActualizarPantalla(null);
+                            }
                         }
                         else
                         {
@@ -249,6 +255,7 @@ namespace AerolineaFrba.Abm_Aeronave
                         }
                     }
                 }
+                //El usuario toco el boton de dar baja por fuera de servicio
                 else if (e.ColumnIndex == 10)
                 {
                     var dialogAnswer = MessageBox.Show(string.Format("Esta seguro que quiere dar de baja por fuera de servicio la aeronave {0}?", aeronaveSeleccionada.Matricula), "Atención", MessageBoxButtons.YesNo);

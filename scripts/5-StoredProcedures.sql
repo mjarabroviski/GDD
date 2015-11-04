@@ -499,9 +499,30 @@ CREATE PROCEDURE [EL_PUNTERO].[GetMaxNroButaca]
 AS
 BEGIN
 	SET NOCOUNT ON;
-	SELECT MAX(Nro_Butaca)
+	SELECT *
 	FROM [EL_PUNTERO].[TL_BUTACA]
-	WHERE ID_Aeronave = @ID_Aeronave
+	WHERE ID_Aeronave = @ID_Aeronave AND Nro_Butaca = (SELECT MAX(Nro_Butaca)FROM [EL_PUNTERO].[TL_BUTACA] WHERE ID_Aeronave = @ID_Aeronave)
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[DarDeBajaPorVidaUtil]
+@ID_Aeronave int
+AS
+BEGIN
+	UPDATE [EL_PUNTERO].[TL_AERONAVE]
+	SET Baja_Por_Vida_Util = 1
+	WHERE ID_Aeronave = @ID_Aeronave	
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[ReemplazoAeronave]
+@ID_Reemplazo int,
+@ID_Nueva int
+AS
+BEGIN
+	UPDATE [EL_PUNTERO].TL_VIAJE 
+	SET ID_Aeronave = @ID_Nueva
+	WHERE ID_Aeronave = @ID_Reemplazo AND Fecha_Salida >= GETDATE();
 END
 GO
 

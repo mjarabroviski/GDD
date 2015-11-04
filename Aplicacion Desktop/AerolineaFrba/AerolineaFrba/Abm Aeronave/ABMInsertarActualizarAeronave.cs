@@ -132,7 +132,8 @@ namespace AerolineaFrba.Abm_Aeronave
                                 MessageBox.Show("Aeronave insertada satisfactoriamente", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                                 if (aeronaveAReemplazar != null)
                                 {
-                                    //ASIGNAR LOS VIAJES DE LA AERONAVE A REEMPLAZAR A LA NUEVA
+                                    //ASIGNA LOS VIAJES DE LA AERONAVE A REEMPLAZAR A LA NUEVA
+                                    ViajePersistencia.ReemplazarViajesDePor(aeronaveAReemplazar,aeronaveNueva);
                                     accionTerminada = true;
                                 }
                                 Close();

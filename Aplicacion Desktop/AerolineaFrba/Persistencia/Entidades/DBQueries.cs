@@ -86,6 +86,8 @@ namespace Persistencia.Entidades
             public static String SPInsertarAeronave = "EL_PUNTERO.InsertarAeronave";
             public static String SPEliminarAeronave = "EL_PUNTERO.EliminarAeronave";
             public static String SPModificarAeronave = "EL_PUNTERO.ModificarAeronave";
+            public static String SPDarDeBajaPorVidaUtil = "EL_PUNTERO.DarDeBajaPorVidaUtil";
+            public static String SPReemplazo = "EL_PUNTERO.ReemplazoAeronave";
         }
 
         public static class Butaca

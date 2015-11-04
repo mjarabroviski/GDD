@@ -53,5 +53,18 @@ namespace Persistencia
 
             return viajes;
         }
+
+        public static int ReemplazarViajesDePor(Aeronave aeronaveAReemplazar, Aeronave aeronaveNueva)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("ID_Reemplazo", aeronaveAReemplazar.ID), 
+                    new SPParameter("ID_Nueva", aeronaveNueva.ID), 
+                };
+
+            var sp = new StoreProcedure(DBQueries.Aeronave.SPReemplazo, param);
+
+            return sp.ExecuteNonQuery(null);
+        }
     }
 }

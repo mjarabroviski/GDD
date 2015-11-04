@@ -65,6 +65,18 @@ namespace Persistencia
             return sp.ExecuteNonQuery(null);
         }
 
+        public static int DarDeBajaPorVidaUtil(Aeronave aeronave)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("ID_Aeronave", aeronave.ID), 
+                };
+
+            var sp = new StoreProcedure(DBQueries.Aeronave.SPDarDeBajaPorVidaUtil, param);
+
+            return sp.ExecuteNonQuery(null);
+        }
+
         public static int SeleccionarAeronaveParaReemplazar(Aeronave aeronave)
         {
             var param = new List<SPParameter>
