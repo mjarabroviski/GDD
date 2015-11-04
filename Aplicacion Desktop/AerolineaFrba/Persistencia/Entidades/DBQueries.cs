@@ -103,8 +103,14 @@ namespace Persistencia.Entidades
         public static class Viaje
         {
             public static String SPGenerarViaje = "EL_PUNTERO.GenerarViaje";
+            public static String SPFiltrarViajes = "EL_PUNTERO.FiltrarViajes";
+            public static String SPCiudadOrigenPorIDRuta = "EL_PUNTERO.CiudadOrigenPorIDRuta";
+            public static String SPCiudadDestinoPorIDRuta = "EL_PUNTERO.CiudadDestinoPorIDRuta";
+            public static String SPObtenerButacasDisponibles = "EL_PUNTERO.ObtenerButacasDisponibles";
+            public static String SPObtenerKGSDisponibles = "EL_PUNTERO.ObtenerKGSDisponibles";
             public static String SPGetViajesPorAeronave = "EL_PUNTERO.GetViajesPorAeronave";
             public static String SPValidarHorarioDeAeronave = "EL_PUNTERO.ValidarHorarioDeAeronave";
+            public static String SPServicioPorIDRuta = "EL_PUNTERO.ServicioPorIDRuta";
         }
 
         public static class TipoButaca

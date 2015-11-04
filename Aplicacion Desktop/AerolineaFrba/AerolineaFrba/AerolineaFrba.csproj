@@ -123,11 +123,11 @@
     <Compile Include="Canje Millas\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Compra\Form1.cs">
+    <Compile Include="Compra\FrmCompra.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Compra\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Compra\FrmCompra.Designer.cs">
+      <DependentUpon>FrmCompra.cs</DependentUpon>
     </Compile>
     <Compile Include="Consulta Millas\Form1.cs">
       <SubType>Form</SubType>
@@ -239,6 +239,9 @@
     <EmbeddedResource Include="Abm Ruta\FrmABMRutaAltasModificaciones.resx">
       <DependentUpon>FrmABMRutaAltasModificaciones.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Compra\FrmCompra.resx">
+      <DependentUpon>FrmCompra.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Home Administrador\HomeAdministrador.resx">
       <DependentUpon>HomeAdministrador.cs</DependentUpon>
     </EmbeddedResource>
@@ -304,6 +307,7 @@
       <Name>Sesion</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

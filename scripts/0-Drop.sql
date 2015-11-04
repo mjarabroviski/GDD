@@ -72,6 +72,8 @@ DROP PROCEDURE [EL_PUNTERO].[GetIdTipoPorDescripcion];
 DROP PROCEDURE [EL_PUNTERO].[InsertarButaca];
 DROP PROCEDURE [EL_PUNTERO].[ObtenerIDPorNombreDeServicio];
 DROP PROCEDURE [EL_PUNTERO].[EliminarAeronave];
+DROP PROCEDURE [EL_PUNTERO].[ObtenerButacasDisponibles];
+DROP PROCEDURE [EL_PUNTERO].[ObtenerKGSDisponibles];
 DROP PROCEDURE [EL_PUNTERO].[GetViajesPorAeronave];
 DROP PROCEDURE [EL_PUNTERO].[ModificarAeronave];
 DROP PROCEDURE [EL_PUNTERO].[GetTipoButacaPorButaca];
@@ -86,6 +88,8 @@ DROP PROCEDURE [EL_PUNTERO].[DarDeBajaButaca];
 DROP PROCEDURE [EL_PUNTERO].[GetMaxNroButaca];
 DROP PROCEDURE [EL_PUNTERO].[DarDeBajaPorVidaUtil];
 DROP PROCEDURE [EL_PUNTERO].[ReemplazoAeronave];
+DROP PROCEDURE [EL_PUNTERO].[ObtenerButacasDisponibles];
+DROP PROCEDURE [EL_PUNTERO].[ObtenerKGSDisponibles];
 
 DROP PROCEDURE [EL_PUNTERO].[ActualizarRolPorID];
 DROP PROCEDURE [EL_PUNTERO].[EliminarFuncionalidadesPorRol];

@@ -85,9 +85,9 @@
             this.BtnLimpiar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.BtnLimpiar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnLimpiar.ForeColor = System.Drawing.Color.White;
-            this.BtnLimpiar.Location = new System.Drawing.Point(817, 59);
+            this.BtnLimpiar.Location = new System.Drawing.Point(815, 59);
             this.BtnLimpiar.Name = "BtnLimpiar";
-            this.BtnLimpiar.Size = new System.Drawing.Size(84, 32);
+            this.BtnLimpiar.Size = new System.Drawing.Size(86, 32);
             this.BtnLimpiar.TabIndex = 27;
             this.BtnLimpiar.Text = "LIMPIAR";
             this.BtnLimpiar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
