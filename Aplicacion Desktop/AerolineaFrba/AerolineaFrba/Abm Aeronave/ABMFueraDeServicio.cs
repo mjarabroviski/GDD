@@ -25,7 +25,30 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void ABMFueraDeServicio_Load(object sender, EventArgs e)
         {
+            txtAeronave.Enabled = false;
+            txtAeronave.Text = aeronaveAModificar.Matricula;
+            dtpFechaReinicio.MinDate = DtpFechaComienzo.Value.Date;
+        }
 
+        private void BtnCancelar_Click(object sender, EventArgs e)
+        {
+            var dialogAnswer = MessageBox.Show("Esta seguro que quiere cancelar la operacion?", "Atencion", MessageBoxButtons.YesNo);
+            if (DialogResult.Yes == dialogAnswer)
+            {
+                    accionTerminada = false;
+                    Close();
+            }  
+        }
+
+        private void BtnGrabar_Click(object sender, EventArgs e)
+        {
+            //VALIDAR FECHAS Y VIAJES DE LA AERONAVE
+            //LLEVAR A CANCELAROREEMPLAZAR
+        }
+
+        private void DtpFechaComienzo_ValueChanged(object sender, EventArgs e)
+        {
+            dtpFechaReinicio.MinDate = DtpFechaComienzo.Value.Date;
         }
     }
 }

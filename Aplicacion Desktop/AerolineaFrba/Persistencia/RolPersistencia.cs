@@ -18,6 +18,13 @@ namespace Persistencia
             return sp.ExecuteReader<Rol>();
         }
 
+        public static List<Rol> ObtenerTodosHabilitados()
+        {
+            //Obtengo la lista de roles almacenadas en la base de datos
+            var sp = new StoreProcedure(DBQueries.Rol.SPGetRoles);
+            return sp.ExecuteReader<Rol>();
+        }
+
         public static Rol ObtenerRolPorUsuario(Usuario usuario) {
             //Obtengo el rol del usuario
             var param = new List<SPParameter> { new SPParameter("ID_User", usuario.ID) };

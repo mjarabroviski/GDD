@@ -367,7 +367,9 @@ DECLARE @reemplazo int
 DECLARE @maxLlegada datetime
 
     SELECT @maxLlegada = MAX(V.Fecha_Llegada) FROM [EL_PUNTERO].TL_VIAJE V WHERE V.ID_Aeronave = @ID_AeronaveBaja
-	SELECT TOP 1 @reemplazo = ID_Aeronave FROM [EL_PUNTERO].TL_AERONAVE A WHERE A.ID_Aeronave != @ID_AeronaveBaja 
+	SELECT TOP 1 @reemplazo = ID_Aeronave FROM [EL_PUNTERO].TL_AERONAVE A WHERE A.ID_Aeronave != @ID_AeronaveBaja
+																			AND Baja_Por_Fuera_De_Servicio = 0
+																			AND Baja_Por_Vida_Util = 0 
 																			AND A.Modelo = @Modelo 
 																			AND A.Fabricante = @Fabricante 
 																			AND A.ID_Servicio = @Servicio
@@ -388,10 +390,15 @@ BEGIN
 DECLARE @reemplazo int
 
 	BEGIN TRY 
+
 	SET @reemplazo = [EL_PUNTERO].[ObtenerAeronaveDeReemplazo](@ID_Aeronave,@Modelo,@ID_Servicio,@Fabricante)
+	IF(@reemplazo is not null)
+	BEGIN
 	UPDATE EL_PUNTERO.TL_VIAJE 
 	SET ID_Aeronave = @reemplazo
 	WHERE ID_Aeronave = @ID_Aeronave
+	END
+	
 	END TRY 
 	BEGIN CATCH
 
@@ -523,6 +530,72 @@ BEGIN
 	UPDATE [EL_PUNTERO].TL_VIAJE 
 	SET ID_Aeronave = @ID_Nueva
 	WHERE ID_Aeronave = @ID_Reemplazo AND Fecha_Salida >= GETDATE();
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[CancelarPasajesYEncomiendasPorBajaAeronave]
+	@ID_Aeronave int,
+	@Motivo varchar(255),
+	@ID_Usuario int
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+   /*Insertar los id_compra, fecha y motivo en la tabla de devolución*/
+   --Pasajes
+	INSERT INTO [EL_PUNTERO].[TL_DEVOLUCION] (ID_Compra)
+	  (SELECT DISTINCT ID_Compra FROM [EL_PUNTERO].TL_PASAJE WHERE ID_Viaje IN (SELECT ID_Viaje FROM [EL_PUNTERO].TL_VIAJE WHERE ID_Aeronave=@ID_Aeronave AND (Fecha_Salida>=GETDATE())));
+	
+	--Encomiendas
+	INSERT INTO [EL_PUNTERO].[TL_DEVOLUCION] (ID_Compra)
+	  (SELECT DISTINCT ID_Compra FROM [EL_PUNTERO].TL_ENCOMIENDA WHERE ID_Viaje IN (SELECT ID_Viaje FROM [EL_PUNTERO].TL_VIAJE WHERE ID_Aeronave=@ID_Aeronave AND (Fecha_Salida>=GETDATE())));
+
+	UPDATE [EL_PUNTERO].TL_DEVOLUCION
+	SET Fecha_Devolucion=GETDATE(),
+		Motivo=@Motivo,
+		ID_Usuario=@ID_Usuario
+	WHERE Fecha_Devolucion is NULL;
+
+	/*Insertar los id_pasaje, id_encomienda y id_devolucion en la tabla de item_devuelto*/ 
+	--Pasajes
+	INSERT INTO [EL_PUNTERO].[TL_ITEM_DEVUELTO] (ID_Pasaje)
+	SELECT ID_Pasaje FROM TL_PASAJE WHERE ID_Viaje IN  (SELECT ID_Viaje FROM TL_VIAJE WHERE ID_Aeronave=@ID_Aeronave AND Fecha_Salida>=GETDATE());
+	
+	CREATE TABLE [EL_PUNTERO].[TL_ITEM_DEVUELTO2](
+	[ID_Item_Devuelto] int IDENTITY(1,1),
+	[ID_Pasaje] int,
+	[ID_Devolucion] int
+	);
+
+	INSERT INTO [EL_PUNTERO].[TL_ITEM_DEVUELTO2] (ID_Pasaje)
+	(SELECT ID_Pasaje FROM  [EL_PUNTERO].[TL_ITEM_DEVUELTO]);
+
+	UPDATE [EL_PUNTERO].TL_ITEM_DEVUELTO SET ID_Devolucion = (SELECT ID_Devolucion FROM [EL_PUNTERO].TL_DEVOLUCION WHERE ID_Compra = [EL_PUNTERO].CompraAPartirDePasaje(I2.ID_Pasaje))
+	FROM [EL_PUNTERO].TL_ITEM_DEVUELTO I1 JOIN [EL_PUNTERO].TL_ITEM_DEVUELTO2 I2
+	ON I1.ID_Item_Devuelto = I2.ID_Item_Devuelto;
+
+	DROP TABLE [EL_PUNTERO].[TL_ITEM_DEVUELTO2];
+	
+	--Encomiendas
+	INSERT INTO [EL_PUNTERO].[TL_ITEM_DEVUELTO] (ID_Encomienda)
+	SELECT ID_Encomienda FROM TL_ENCOMIENDA WHERE ID_Viaje IN  (SELECT ID_Viaje FROM TL_VIAJE WHERE ID_Aeronave=@ID_Aeronave AND (Fecha_Salida>=GETDATE()));
+
+	CREATE TABLE [EL_PUNTERO].[TL_ITEM_DEVUELTO2](
+	[ID_Item_Devuelto] int IDENTITY(1,1),
+	[ID_Encomienda] int,
+	[ID_Devolucion] int
+	);
+
+	INSERT INTO [EL_PUNTERO].[TL_ITEM_DEVUELTO2] (ID_Encomienda)
+	(SELECT ID_Encomienda FROM  [EL_PUNTERO].[TL_ITEM_DEVUELTO]);
+
+	UPDATE [EL_PUNTERO].TL_ITEM_DEVUELTO SET ID_Devolucion = (SELECT ID_Devolucion FROM [EL_PUNTERO].TL_DEVOLUCION WHERE ID_Compra = [EL_PUNTERO].CompraAPartirDeEncomienda(I2.ID_Encomienda))
+	FROM [EL_PUNTERO].TL_ITEM_DEVUELTO I1 JOIN [EL_PUNTERO].TL_ITEM_DEVUELTO2 I2
+	ON I1.ID_Item_Devuelto = I2.ID_Item_Devuelto
+	WHERE ID_Pasaje IS NULL;
+
+	DROP TABLE [EL_PUNTERO].[TL_ITEM_DEVUELTO2];
+
 END
 GO
 

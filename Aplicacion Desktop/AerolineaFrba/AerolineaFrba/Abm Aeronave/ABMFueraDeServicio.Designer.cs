@@ -28,20 +28,127 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.label4 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.DtpFechaComienzo = new System.Windows.Forms.DateTimePicker();
+            this.dtpFechaReinicio = new System.Windows.Forms.DateTimePicker();
+            this.BtnGrabar = new System.Windows.Forms.Label();
+            this.BtnCancelar = new System.Windows.Forms.Label();
+            this.txtAeronave = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 52);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(131, 13);
+            this.label4.TabIndex = 64;
+            this.label4.Text = "FECHA COMIENZO BAJA";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 94);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(145, 13);
+            this.label1.TabIndex = 65;
+            this.label1.Text = "FECHA REINICIO SERVICIO";
+            // 
+            // DtpFechaComienzo
+            // 
+            this.DtpFechaComienzo.CustomFormat = "dd/MM/yyyy HH:mm";
+            this.DtpFechaComienzo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.DtpFechaComienzo.Location = new System.Drawing.Point(164, 49);
+            this.DtpFechaComienzo.Name = "DtpFechaComienzo";
+            this.DtpFechaComienzo.Size = new System.Drawing.Size(153, 20);
+            this.DtpFechaComienzo.TabIndex = 84;
+            this.DtpFechaComienzo.ValueChanged += new System.EventHandler(this.DtpFechaComienzo_ValueChanged);
+            // 
+            // dtpFechaReinicio
+            // 
+            this.dtpFechaReinicio.CustomFormat = "dd/MM/yyyy HH:mm";
+            this.dtpFechaReinicio.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFechaReinicio.Location = new System.Drawing.Point(164, 89);
+            this.dtpFechaReinicio.Name = "dtpFechaReinicio";
+            this.dtpFechaReinicio.Size = new System.Drawing.Size(153, 20);
+            this.dtpFechaReinicio.TabIndex = 85;
+            // 
+            // BtnGrabar
+            // 
+            this.BtnGrabar.BackColor = System.Drawing.Color.DodgerBlue;
+            this.BtnGrabar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.BtnGrabar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnGrabar.ForeColor = System.Drawing.Color.White;
+            this.BtnGrabar.Location = new System.Drawing.Point(56, 129);
+            this.BtnGrabar.Name = "BtnGrabar";
+            this.BtnGrabar.Size = new System.Drawing.Size(106, 36);
+            this.BtnGrabar.TabIndex = 86;
+            this.BtnGrabar.Text = "GRABAR";
+            this.BtnGrabar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.BtnGrabar.Click += new System.EventHandler(this.BtnGrabar_Click);
+            // 
+            // BtnCancelar
+            // 
+            this.BtnCancelar.BackColor = System.Drawing.Color.DodgerBlue;
+            this.BtnCancelar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.BtnCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnCancelar.ForeColor = System.Drawing.Color.White;
+            this.BtnCancelar.Location = new System.Drawing.Point(168, 129);
+            this.BtnCancelar.Name = "BtnCancelar";
+            this.BtnCancelar.Size = new System.Drawing.Size(104, 36);
+            this.BtnCancelar.TabIndex = 87;
+            this.BtnCancelar.Text = "CANCELAR";
+            this.BtnCancelar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.BtnCancelar.Click += new System.EventHandler(this.BtnCancelar_Click);
+            // 
+            // txtAeronave
+            // 
+            this.txtAeronave.Location = new System.Drawing.Point(164, 12);
+            this.txtAeronave.Name = "txtAeronave";
+            this.txtAeronave.Size = new System.Drawing.Size(100, 20);
+            this.txtAeronave.TabIndex = 88;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(77, 15);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(66, 13);
+            this.label2.TabIndex = 89;
+            this.label2.Text = "AERONAVE";
             // 
             // ABMFueraDeServicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(334, 183);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.txtAeronave);
+            this.Controls.Add(this.BtnGrabar);
+            this.Controls.Add(this.BtnCancelar);
+            this.Controls.Add(this.dtpFechaReinicio);
+            this.Controls.Add(this.DtpFechaComienzo);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.label4);
             this.Name = "ABMFueraDeServicio";
             this.Text = "ABMFueraDeServicio";
             this.Load += new System.EventHandler(this.ABMFueraDeServicio_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
+
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DateTimePicker DtpFechaComienzo;
+        private System.Windows.Forms.DateTimePicker dtpFechaReinicio;
+        private System.Windows.Forms.Label BtnGrabar;
+        private System.Windows.Forms.Label BtnCancelar;
+        private System.Windows.Forms.TextBox txtAeronave;
+        private System.Windows.Forms.Label label2;
     }
 }

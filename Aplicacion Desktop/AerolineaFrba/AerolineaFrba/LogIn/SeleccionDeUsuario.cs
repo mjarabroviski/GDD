@@ -59,7 +59,7 @@ namespace AerolineaFrba.LogIn
         {
             CboRoles.DisplayMember = "Descripcion";
             CboRoles.ValueMember = "ID_Rol";
-            CboRoles.DataSource = RolPersistencia.ObtenerTodos();
+            CboRoles.DataSource = RolPersistencia.ObtenerTodosHabilitados();
             AdministradorSesion.UsuarioActual = null;
         }
     }
