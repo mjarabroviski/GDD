@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Persistencia;
 using Persistencia.Entidades;
 using AerolineaFrba.Home_Cliente;
+using Sesion;
 
 namespace AerolineaFrba.LogIn
 {
@@ -59,6 +60,7 @@ namespace AerolineaFrba.LogIn
             CboRoles.DisplayMember = "Descripcion";
             CboRoles.ValueMember = "ID_Rol";
             CboRoles.DataSource = RolPersistencia.ObtenerTodos();
+            AdministradorSesion.UsuarioActual = null;
         }
     }
 }

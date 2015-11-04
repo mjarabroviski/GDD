@@ -154,16 +154,14 @@ namespace Persistencia
             return sp.ExecuteNonQuery(transaccion);
         }
 
-        public static void CancelarPasajesYEncomiendasConRutaInhabilitada(Ruta ruta, String motivo)
+        public static void CancelarPasajesYEncomiendasConRutaInhabilitada(Ruta ruta, String motivo, Usuario usuario)
         {
             using (var transaccion = DBManager.Instance().Connection.BeginTransaction(IsolationLevel.Serializable))
             {
                 try
                 {
-                    Cancelar(ruta, motivo, transaccion);
+                    Cancelar(ruta, motivo, usuario, transaccion);
                     transaccion.Commit();
-
-                  //  TraerPasajesDevueltos();
 
                 }
                 catch (Exception)
@@ -174,43 +172,13 @@ namespace Persistencia
             }
         }
 
-        private static void TraerPasajesDevueltos()
-        {
-           
-            var param = new List<SPParameter>
-            {
-            };
-
-            var sp = new StoreProcedure(DBQueries.Ruta.SPTraerLosPasajesDevueltos, param);
-
-            //var variable = sp.ExecuteReader<ItemDevuelto>().Count;
-            for (int i = 1; i <= 4351; i++)
-            {
-                InsertarIDDevolucion(i);
-            }
-        }
-
-        private static void InsertarIDDevolucion(int i)
-        {
-            var transaccion = DBManager.Instance().Connection.BeginTransaction(IsolationLevel.Serializable);
-
-            var param = new List<SPParameter>
-            {
-                 new SPParameter("ID_Item_Devuelto",i),
-            };
-
-            var sp = (transaccion != null)
-                            ? new StoreProcedure(DBQueries.Ruta.SPInsertarIDDevolucion, param, transaccion)
-                            : new StoreProcedure(DBQueries.Ruta.SPInsertarIDDevolucion, param);
-        }
-
-        private static int Cancelar(Ruta ruta, String motivo, SqlTransaction transaccion)
+        private static int Cancelar(Ruta ruta, String motivo, Usuario usuario, SqlTransaction transaccion)
         {
             var param = new List<SPParameter>
                 {
                     new SPParameter("ID_Ruta",ruta.ID),
                     new SPParameter("Motivo",motivo),
-                    new SPParameter("ID_Usuario",1)
+                    new SPParameter("ID_Usuario",usuario.ID)
                 };
             
             var sp = (transaccion != null)
@@ -219,6 +187,7 @@ namespace Persistencia
             
             return sp.ExecuteNonQuery(transaccion);
         }
+
         public static List<Ciudad> ObtenerTodasLasCiudadesConOrigen(int ID_Origen)
         {
             //Obtengo la lista de destinos de un determinado origen

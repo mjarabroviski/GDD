@@ -55,11 +55,12 @@
             this.DgvButacas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DgvButacas.Size = new System.Drawing.Size(366, 208);
             this.DgvButacas.TabIndex = 44;
+            this.DgvButacas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvButacas_CellContentClick);
             // 
             // GroupFiltros
             // 
+            this.GroupFiltros.Controls.Add(this.BtnGrabar);
             this.GroupFiltros.Controls.Add(this.CboTipo);
-            this.GroupFiltros.Controls.Add(this.BtnLimpiar);
             this.GroupFiltros.Controls.Add(this.label1);
             this.GroupFiltros.Location = new System.Drawing.Point(12, 12);
             this.GroupFiltros.Name = "GroupFiltros";
@@ -82,11 +83,11 @@
             this.BtnLimpiar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.BtnLimpiar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnLimpiar.ForeColor = System.Drawing.Color.White;
-            this.BtnLimpiar.Location = new System.Drawing.Point(255, 23);
+            this.BtnLimpiar.Location = new System.Drawing.Point(136, 330);
             this.BtnLimpiar.Name = "BtnLimpiar";
-            this.BtnLimpiar.Size = new System.Drawing.Size(88, 32);
+            this.BtnLimpiar.Size = new System.Drawing.Size(118, 36);
             this.BtnLimpiar.TabIndex = 35;
-            this.BtnLimpiar.Text = "ACTUALIZAR";
+            this.BtnLimpiar.Text = "ACTUALIZAR PANTALLA";
             this.BtnLimpiar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.BtnLimpiar.Click += new System.EventHandler(this.BtnLimpiar_Click);
             // 
@@ -105,12 +106,13 @@
             this.BtnAgregarButacas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.BtnAgregarButacas.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnAgregarButacas.ForeColor = System.Drawing.Color.White;
-            this.BtnAgregarButacas.Location = new System.Drawing.Point(137, 330);
+            this.BtnAgregarButacas.Location = new System.Drawing.Point(12, 330);
             this.BtnAgregarButacas.Name = "BtnAgregarButacas";
             this.BtnAgregarButacas.Size = new System.Drawing.Size(117, 36);
             this.BtnAgregarButacas.TabIndex = 69;
             this.BtnAgregarButacas.Text = "AGREGAR BUTACAS";
             this.BtnAgregarButacas.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.BtnAgregarButacas.Click += new System.EventHandler(this.BtnAgregarButacas_Click);
             // 
             // BtnCancelar
             // 
@@ -132,19 +134,20 @@
             this.BtnGrabar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.BtnGrabar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnGrabar.ForeColor = System.Drawing.Color.White;
-            this.BtnGrabar.Location = new System.Drawing.Point(12, 330);
+            this.BtnGrabar.Location = new System.Drawing.Point(249, 25);
             this.BtnGrabar.Name = "BtnGrabar";
-            this.BtnGrabar.Size = new System.Drawing.Size(117, 36);
+            this.BtnGrabar.Size = new System.Drawing.Size(88, 29);
             this.BtnGrabar.TabIndex = 71;
-            this.BtnGrabar.Text = "GRABAR";
+            this.BtnGrabar.Text = "GUARDAR CAMBIOS";
             this.BtnGrabar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.BtnGrabar.Click += new System.EventHandler(this.BtnGrabar_Click);
             // 
             // ABMButacas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(392, 396);
-            this.Controls.Add(this.BtnGrabar);
+            this.Controls.Add(this.BtnLimpiar);
             this.Controls.Add(this.BtnAgregarButacas);
             this.Controls.Add(this.BtnCancelar);
             this.Controls.Add(this.GroupFiltros);

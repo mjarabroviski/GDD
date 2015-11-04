@@ -52,5 +52,46 @@ namespace Persistencia
 
             return sp.ExecuteReaderTransactioned<Butaca>(transaction);
         }
+
+        public static int ModificarButaca(Butaca butaca, SqlTransaction transaccion)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("ID_Butaca", butaca.ID),
+                    new SPParameter("Tipo", butaca.ID_Tipo)
+                };
+
+            var sp = (transaccion != null)
+                        ? new StoreProcedure(DBQueries.Butaca.SPModificarButaca, param, transaccion)
+                        : new StoreProcedure(DBQueries.Butaca.SPModificarButaca, param);
+
+            return sp.ExecuteNonQuery(transaccion);
+        }
+
+        public static int DarDeBajaButaca(Butaca butaca, SqlTransaction transaccion)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("ID_Butaca", butaca.ID),
+                };
+
+            var sp = (transaccion != null)
+                        ? new StoreProcedure(DBQueries.Butaca.SPDarDeBajaButaca, param, transaccion)
+                        : new StoreProcedure(DBQueries.Butaca.SPDarDeBajaButaca, param);
+
+            return sp.ExecuteNonQuery(transaccion);
+        }
+
+        public static int ObtenerMaxNroButaca(Aeronave aeronave, SqlTransaction transaction)
+        {
+            var param = new List<SPParameter> { new SPParameter("ID_Aeronave", aeronave.ID)};
+
+            var sp = (transaction != null)
+                    ? new StoreProcedure(DBQueries.Butaca.SPGetMaxNroButaca, param, transaction)
+                    : new StoreProcedure(DBQueries.Butaca.SPGetMaxNroButaca, param);
+
+            var butacas = sp.ExecuteReaderTransactioned<Butaca>(transaction);
+            return butacas[0].Numero;
+        }
     }
 }

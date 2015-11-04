@@ -29,6 +29,9 @@ namespace AerolineaFrba.Abm_Aeronave
             if (dialogAnswer == DialogResult.Yes)
             {
                 //TODO copiar mati y lucho
+                accionTerminada = true;
+                MessageBox.Show("Los pasajes y encomiendas de la aeronave fueron cancelados satisfactoriamente", "Informacion", MessageBoxButtons.OK,MessageBoxIcon.Information);
+                Close();
             }
         }
 
@@ -45,9 +48,11 @@ namespace AerolineaFrba.Abm_Aeronave
                     var insertarActualizarAeronave = new ABMInsertarActualizarAeronave(aeronaveSeleccionada, false);
                     insertarActualizarAeronave.ShowDialog();
                     if (insertarActualizarAeronave.accionTerminada) MessageBox.Show("La aeronave fue reemplazada por otra satisfactoriamente", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    accionTerminada = true;
                     Close();
                 }
                 MessageBox.Show("La aeronave fue reemplazada satisfactoriamente", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                accionTerminada = true;
                 Close();
             }
 

@@ -21,5 +21,25 @@ namespace Persistencia
             var tipos = sp.ExecuteReaderTransactioned<TipoButaca>(transaction);
             return tipos[0];
         }
+
+        public static List<TipoButaca> ObtenerTodos(SqlTransaction transaction)
+        {
+            //Obtengo la lista de tipos de butacas almacenadas en la base de datos
+            var sp = new StoreProcedure(DBQueries.TipoButaca.SPGetTiposButacas,null,transaction);
+            return sp.ExecuteReaderTransactioned<TipoButaca>(transaction);
+        }
+
+        public static TipoButaca ObtenerTipoPorDescripcion(string tipo, SqlTransaction transaction)
+        {
+            var param = new List<SPParameter> { new SPParameter("Tipo", tipo)};
+            var sp = new StoreProcedure(DBQueries.TipoButaca.SPGetTipoPorDescripcion, param, transaction);
+
+            var tipos = sp.ExecuteReaderTransactioned<TipoButaca>(transaction);
+
+            if (tipos == null || tipos.Count == 0)
+                return null;
+
+            return tipos[0];
+        }
     }
 }
