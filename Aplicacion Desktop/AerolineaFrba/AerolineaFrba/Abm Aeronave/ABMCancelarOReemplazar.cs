@@ -18,13 +18,17 @@ namespace AerolineaFrba.Abm_Aeronave
         public Aeronave aeronaveSeleccionada { get; set; }
         public bool accionTerminada = false;
         public bool vidaUtil = false;
+        public DateTime FechaComienzo;
+        public DateTime FechaReinicio;
 
-        public ABMCancelarOReemplazar(Aeronave aeronave, Boolean vida)
+        public ABMCancelarOReemplazar(Aeronave aeronave, Boolean vida, DateTime comienzo, DateTime fin)
         {
             InitializeComponent();
             if (vida) vidaUtil = true;
             else vidaUtil = false;
             aeronaveSeleccionada = aeronave;
+            FechaComienzo = comienzo;
+            FechaReinicio = fin;
         }
 
         private void LblCancelar_Click(object sender, EventArgs e)
@@ -32,10 +36,22 @@ namespace AerolineaFrba.Abm_Aeronave
             var dialogAnswer = MessageBox.Show("Esta seguro que desea cancelar todos los pasajes y encomiendas de los viajes?", "Atención", MessageBoxButtons.YesNo);
             if (dialogAnswer == DialogResult.Yes)
             {
-                DevolucionPersistencia.CancelarPasajesYEncomiendasPorBajaAeronave(aeronaveSeleccionada, "Aeronave dada de baja", AdministradorSesion.UsuarioActual);
-                accionTerminada = true;
-                MessageBox.Show("Los pasajes y encomiendas de la aeronave fueron cancelados satisfactoriamente", "Informacion", MessageBoxButtons.OK,MessageBoxIcon.Information);
-                Close();
+                //Baja por fin de vida util
+                if (vidaUtil)
+                {
+                    DevolucionPersistencia.CancelarPasajesYEncomiendasPorBajaAeronave(aeronaveSeleccionada, "Aeronave dada de baja por fin de vida util", AdministradorSesion.UsuarioActual);
+                    accionTerminada = true;
+                    MessageBox.Show("Los pasajes y encomiendas de la aeronave fueron cancelados satisfactoriamente", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Close();
+                }
+                //Baja por fuera de servicio
+                else
+                {
+                    DevolucionPersistencia.CancelarPasajesYEncomiendasPorBajaServicioAeronave(aeronaveSeleccionada,"Aeronave dada de baja por fuera de servicio", FechaComienzo, FechaReinicio, AdministradorSesion.UsuarioActual);
+                    accionTerminada = true;
+                    MessageBox.Show("Los pasajes y encomiendas de la aeronave fueron cancelados satisfactoriamente", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Close();
+                }
             }
         }
 
@@ -45,7 +61,7 @@ namespace AerolineaFrba.Abm_Aeronave
             var dialogAnswer = MessageBox.Show("Esta seguro que desea reemplazar la aeronave?", "Atención", MessageBoxButtons.YesNo);
             if (dialogAnswer == DialogResult.Yes)
             {
-                //FALTA FUERA DE SERVICIO
+                //Baja por fin de vida util
                 if (vidaUtil)
                 {
                     cant = AeronavePersistencia.SeleccionarAeronaveParaReemplazar(aeronaveSeleccionada);
@@ -54,6 +70,30 @@ namespace AerolineaFrba.Abm_Aeronave
                         MessageBox.Show("No existen aeronaves que puedan reemplazar a la seleccionada, debe dar de alta una nueva", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         var insertarActualizarAeronave = new ABMInsertarActualizarAeronave(aeronaveSeleccionada, false);
                         insertarActualizarAeronave.ShowDialog();
+                        if (insertarActualizarAeronave.accionTerminada)
+                        {
+                            MessageBox.Show("La aeronave fue reemplazada por otra satisfactoriamente", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            accionTerminada = true;
+                            Close();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("La aeronave fue reemplazada satisfactoriamente", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        accionTerminada = true;
+                        Close();
+                    }
+                }
+                //Baja por fuera de servicio
+                else
+                {
+                    cant = AeronavePersistencia.SeleccionarAeronaveParaReemplazarPorServicio(aeronaveSeleccionada,FechaComienzo,FechaReinicio);
+                    if (cant == -1 || cant == 0)
+                    {
+                        MessageBox.Show("No existen aeronaves que puedan reemplazar a la seleccionada, debe dar de alta una nueva", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        var insertarActualizarAeronave = new ABMInsertarActualizarAeronave(aeronaveSeleccionada,FechaComienzo,FechaReinicio);
+                        insertarActualizarAeronave.ShowDialog();
+
                         if (insertarActualizarAeronave.accionTerminada)
                         {
                             MessageBox.Show("La aeronave fue reemplazada por otra satisfactoriamente", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);

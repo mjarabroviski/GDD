@@ -153,6 +153,49 @@ namespace Persistencia
             return sp.ExecuteNonQuery(transaccion);
         }
 
+        public static int DarDeBajaPorFueraDeServicio(Aeronave aeronave, DateTime comienzo, DateTime reinicio)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("ID_Aeronave", aeronave.ID), 
+                    new SPParameter("Comienzo", comienzo), 
+                    new SPParameter("Reinicio", reinicio) 
+                };
 
+            var sp = new StoreProcedure(DBQueries.Aeronave.SPDarDeBajaPorFueraDeServicio, param);
+
+            return sp.ExecuteNonQuery(null);
+        }
+
+        public static int BajaPorFueraDeServicio(Aeronave aeronave, DateTime comienzo, DateTime reinicio)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("ID_Aeronave", aeronave.ID),
+                    new SPParameter("Comienzo", comienzo), 
+                    new SPParameter("Reinicio", reinicio) 
+                };
+
+            var sp = new StoreProcedure(DBQueries.Aeronave.SPBajaPorFueraDeServicio, param);
+
+            return sp.ExecuteNonQuery(null);
+        }
+
+        public static int SeleccionarAeronaveParaReemplazarPorServicio(Aeronave aeronave, DateTime comienzo, DateTime fin)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("ID_Aeronave", aeronave.ID), 
+                    new SPParameter("Modelo", aeronave.Modelo), 
+                    new SPParameter("Fabricante", aeronave.Fabricante), 
+                    new SPParameter("ID_Servicio", aeronave.ID_Servicio),
+                    new SPParameter("Comienzo", comienzo),
+                    new SPParameter("Reinicio", fin)
+                };
+
+            var sp = new StoreProcedure(DBQueries.Aeronave.SPSeleccionReemplazoPorServicio, param);
+
+            return sp.ExecuteNonQuery(null);
+        }
     }
 }

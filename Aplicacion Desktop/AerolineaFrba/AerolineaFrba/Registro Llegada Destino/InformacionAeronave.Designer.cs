@@ -45,7 +45,7 @@
             this.Txt_FechaBajaDef = new System.Windows.Forms.TextBox();
             this.Txt_FechaAlta = new System.Windows.Forms.TextBox();
             this.Txt_KG = new System.Windows.Forms.TextBox();
-            this.BtnValidar = new System.Windows.Forms.Label();
+            this.BtnAgregarFecha = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.Btn_Volver = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -153,6 +153,7 @@
             this.Txt_TipoServicio.Name = "Txt_TipoServicio";
             this.Txt_TipoServicio.Size = new System.Drawing.Size(164, 20);
             this.Txt_TipoServicio.TabIndex = 13;
+            this.Txt_TipoServicio.TextChanged += new System.EventHandler(this.Txt_TipoServicio_TextChanged);
             // 
             // Txt_BajaFuera
             // 
@@ -196,17 +197,17 @@
             // 
             // BtnValidar
             // 
-            this.BtnValidar.BackColor = System.Drawing.Color.DodgerBlue;
-            this.BtnValidar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.BtnValidar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BtnValidar.ForeColor = System.Drawing.Color.White;
-            this.BtnValidar.Location = new System.Drawing.Point(188, 297);
-            this.BtnValidar.Name = "BtnValidar";
-            this.BtnValidar.Size = new System.Drawing.Size(106, 39);
-            this.BtnValidar.TabIndex = 92;
-            this.BtnValidar.Text = "AGREGAR FECHA LLEGADA";
-            this.BtnValidar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.BtnValidar.Click += new System.EventHandler(this.BtnValidar_Click);
+            this.BtnAgregarFecha.BackColor = System.Drawing.Color.DodgerBlue;
+            this.BtnAgregarFecha.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.BtnAgregarFecha.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnAgregarFecha.ForeColor = System.Drawing.Color.White;
+            this.BtnAgregarFecha.Location = new System.Drawing.Point(188, 297);
+            this.BtnAgregarFecha.Name = "BtnValidar";
+            this.BtnAgregarFecha.Size = new System.Drawing.Size(106, 39);
+            this.BtnAgregarFecha.TabIndex = 92;
+            this.BtnAgregarFecha.Text = "AGREGAR FECHA LLEGADA";
+            this.BtnAgregarFecha.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.BtnAgregarFecha.Click += new System.EventHandler(this.BtnAgregarFecha_Click);
             // 
             // label6
             // 
@@ -238,7 +239,7 @@
             this.ClientSize = new System.Drawing.Size(365, 345);
             this.Controls.Add(this.Btn_Volver);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.BtnValidar);
+            this.Controls.Add(this.BtnAgregarFecha);
             this.Controls.Add(this.Txt_KG);
             this.Controls.Add(this.Txt_FechaAlta);
             this.Controls.Add(this.Txt_FechaBajaDef);
@@ -283,7 +284,7 @@
         private System.Windows.Forms.TextBox Txt_FechaBajaDef;
         private System.Windows.Forms.TextBox Txt_FechaAlta;
         private System.Windows.Forms.TextBox Txt_KG;
-        private System.Windows.Forms.Label BtnValidar;
+        private System.Windows.Forms.Label BtnAgregarFecha;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label Btn_Volver;
 

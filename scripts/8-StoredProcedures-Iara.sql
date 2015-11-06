@@ -21,7 +21,7 @@ AS
 BEGIN
 	UPDATE [EL_PUNTERO].[TL_CIUDAD]
 	SET Nombre_Ciudad = @Nombre_Ciudad
-	WHERE ID_Ciudad = @iD_Ciudad; 
+	WHERE ID_Ciudad = @ID_Ciudad; 
 END
 GO
 
@@ -198,6 +198,42 @@ BEGIN
 	SELECT *
 	FROM [EL_PUNTERO].[TL_Aeronave] A
 	ORDER BY A.Matricula
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[GetServicioPorID]
+@ID_Servicio int
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	SELECT *
+	FROM [EL_PUNTERO].[TL_SERVICIO]
+	WHERE @ID_Servicio = ID_Servicio
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[ObtenerViaje]
+@Fecha_Salida datetime,
+@ID_Ruta int,
+@ID_Aeronave int
+
+AS 
+BEGIN
+	SELECT *
+	FROM [EL_PUNTERO].[TL_VIAJE] V
+	WHERE V.Fecha_Salida = @Fecha_Salida AND V.ID_Ruta = @ID_Ruta AND V.ID_Aeronave = @ID_Aeronave
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[ActualizarFechaLlegada]
+@ID int,
+@FechaLlegada datetime
+AS
+BEGIN
+	UPDATE [EL_PUNTERO].[TL_VIAJE]
+	SET Fecha_Llegada = @FechaLlegada
+	WHERE ID_Viaje = @ID; 
 END
 GO
 

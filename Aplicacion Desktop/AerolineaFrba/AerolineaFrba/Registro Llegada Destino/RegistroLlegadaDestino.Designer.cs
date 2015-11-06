@@ -34,15 +34,18 @@
             this.CboCiudadOrigen = new System.Windows.Forms.ComboBox();
             this.label21 = new System.Windows.Forms.Label();
             this.RegistroLlegadaADestino = new System.Windows.Forms.GroupBox();
+            this.Btn_Registrar = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.DtpFechaLlegada = new System.Windows.Forms.DateTimePicker();
+            this.Btn_Limpiar = new System.Windows.Forms.Label();
             this.Btn_Cancelar = new System.Windows.Forms.Label();
-            this.Btn_Aceptar = new System.Windows.Forms.Label();
+            this.Btn_Finalizar = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.Btn_Limpiar = new System.Windows.Forms.Label();
             this.RegistroLlegadaADestino.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -94,9 +97,12 @@
             // 
             // RegistroLlegadaADestino
             // 
+            this.RegistroLlegadaADestino.Controls.Add(this.Btn_Registrar);
+            this.RegistroLlegadaADestino.Controls.Add(this.label1);
+            this.RegistroLlegadaADestino.Controls.Add(this.DtpFechaLlegada);
             this.RegistroLlegadaADestino.Controls.Add(this.Btn_Limpiar);
             this.RegistroLlegadaADestino.Controls.Add(this.Btn_Cancelar);
-            this.RegistroLlegadaADestino.Controls.Add(this.Btn_Aceptar);
+            this.RegistroLlegadaADestino.Controls.Add(this.Btn_Finalizar);
             this.RegistroLlegadaADestino.Controls.Add(this.label4);
             this.RegistroLlegadaADestino.Controls.Add(this.label3);
             this.RegistroLlegadaADestino.Controls.Add(this.label2);
@@ -110,10 +116,58 @@
             this.RegistroLlegadaADestino.Controls.Add(this.label14);
             this.RegistroLlegadaADestino.Location = new System.Drawing.Point(11, 12);
             this.RegistroLlegadaADestino.Name = "RegistroLlegadaADestino";
-            this.RegistroLlegadaADestino.Size = new System.Drawing.Size(314, 250);
+            this.RegistroLlegadaADestino.Size = new System.Drawing.Size(380, 306);
             this.RegistroLlegadaADestino.TabIndex = 48;
             this.RegistroLlegadaADestino.TabStop = false;
             this.RegistroLlegadaADestino.Text = "REGISTRO LLEGADA A DESTINO";
+            // 
+            // Btn_Registrar
+            // 
+            this.Btn_Registrar.BackColor = System.Drawing.Color.DodgerBlue;
+            this.Btn_Registrar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Btn_Registrar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Btn_Registrar.ForeColor = System.Drawing.Color.White;
+            this.Btn_Registrar.Location = new System.Drawing.Point(285, 193);
+            this.Btn_Registrar.Name = "Btn_Registrar";
+            this.Btn_Registrar.Size = new System.Drawing.Size(82, 20);
+            this.Btn_Registrar.TabIndex = 99;
+            this.Btn_Registrar.Text = "REGISTRAR";
+            this.Btn_Registrar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Btn_Registrar.Click += new System.EventHandler(this.Btn_Registrar_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(19, 200);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(94, 13);
+            this.label1.TabIndex = 98;
+            this.label1.Text = "FECHA LLEGADA";
+            // 
+            // DtpFechaLlegada
+            // 
+            this.DtpFechaLlegada.CustomFormat = "d/MM/yyyy   HH:mm:ss";
+            this.DtpFechaLlegada.Enabled = false;
+            this.DtpFechaLlegada.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.DtpFechaLlegada.Location = new System.Drawing.Point(129, 193);
+            this.DtpFechaLlegada.Name = "DtpFechaLlegada";
+            this.DtpFechaLlegada.Size = new System.Drawing.Size(150, 20);
+            this.DtpFechaLlegada.TabIndex = 97;
+            this.DtpFechaLlegada.Value = new System.DateTime(2015, 10, 29, 0, 0, 0, 0);
+            // 
+            // Btn_Limpiar
+            // 
+            this.Btn_Limpiar.BackColor = System.Drawing.Color.DodgerBlue;
+            this.Btn_Limpiar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Btn_Limpiar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Btn_Limpiar.ForeColor = System.Drawing.Color.White;
+            this.Btn_Limpiar.Location = new System.Drawing.Point(150, 256);
+            this.Btn_Limpiar.Name = "Btn_Limpiar";
+            this.Btn_Limpiar.Size = new System.Drawing.Size(76, 23);
+            this.Btn_Limpiar.TabIndex = 96;
+            this.Btn_Limpiar.Text = "LIMPIAR";
+            this.Btn_Limpiar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Btn_Limpiar.Click += new System.EventHandler(this.Btn_Limpiar_Click);
             // 
             // Btn_Cancelar
             // 
@@ -121,27 +175,28 @@
             this.Btn_Cancelar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Btn_Cancelar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_Cancelar.ForeColor = System.Drawing.Color.White;
-            this.Btn_Cancelar.Location = new System.Drawing.Point(114, 206);
+            this.Btn_Cancelar.Location = new System.Drawing.Point(57, 256);
             this.Btn_Cancelar.Name = "Btn_Cancelar";
             this.Btn_Cancelar.Size = new System.Drawing.Size(76, 23);
             this.Btn_Cancelar.TabIndex = 95;
-            this.Btn_Cancelar.Text = "CANCELAR";
+            this.Btn_Cancelar.Text = "HOME";
             this.Btn_Cancelar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.Btn_Cancelar.Click += new System.EventHandler(this.Btn_Cancelar_Click_1);
             // 
-            // Btn_Aceptar
+            // Btn_Finalizar
             // 
-            this.Btn_Aceptar.BackColor = System.Drawing.Color.DodgerBlue;
-            this.Btn_Aceptar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Btn_Aceptar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Btn_Aceptar.ForeColor = System.Drawing.Color.White;
-            this.Btn_Aceptar.Location = new System.Drawing.Point(196, 206);
-            this.Btn_Aceptar.Name = "Btn_Aceptar";
-            this.Btn_Aceptar.Size = new System.Drawing.Size(76, 23);
-            this.Btn_Aceptar.TabIndex = 94;
-            this.Btn_Aceptar.Text = "ACEPTAR";
-            this.Btn_Aceptar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.Btn_Aceptar.Click += new System.EventHandler(this.Btn_Aceptar_Click);
+            this.Btn_Finalizar.BackColor = System.Drawing.Color.DodgerBlue;
+            this.Btn_Finalizar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Btn_Finalizar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Btn_Finalizar.Enabled = false;
+            this.Btn_Finalizar.ForeColor = System.Drawing.Color.White;
+            this.Btn_Finalizar.Location = new System.Drawing.Point(246, 256);
+            this.Btn_Finalizar.Name = "Btn_Finalizar";
+            this.Btn_Finalizar.Size = new System.Drawing.Size(76, 23);
+            this.Btn_Finalizar.TabIndex = 94;
+            this.Btn_Finalizar.Text = "FINALIZAR";
+            this.Btn_Finalizar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Btn_Finalizar.Click += new System.EventHandler(this.Btn_Finalizar_Click);
             // 
             // label4
             // 
@@ -207,25 +262,11 @@
             this.label14.Size = new System.Drawing.Size(0, 13);
             this.label14.TabIndex = 22;
             // 
-            // Btn_Limpiar
-            // 
-            this.Btn_Limpiar.BackColor = System.Drawing.Color.DodgerBlue;
-            this.Btn_Limpiar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Btn_Limpiar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Btn_Limpiar.ForeColor = System.Drawing.Color.White;
-            this.Btn_Limpiar.Location = new System.Drawing.Point(32, 206);
-            this.Btn_Limpiar.Name = "Btn_Limpiar";
-            this.Btn_Limpiar.Size = new System.Drawing.Size(76, 23);
-            this.Btn_Limpiar.TabIndex = 96;
-            this.Btn_Limpiar.Text = "LIMPIAR";
-            this.Btn_Limpiar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.Btn_Limpiar.Click += new System.EventHandler(this.Btn_Limpiar_Click);
-            // 
             // RegistroLlegadaDestino
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(337, 270);
+            this.ClientSize = new System.Drawing.Size(404, 330);
             this.Controls.Add(this.RegistroLlegadaADestino);
             this.Name = "RegistroLlegadaDestino";
             this.Text = "RegistroLlegadaDestino";
@@ -251,8 +292,11 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label Btn_Cancelar;
-        private System.Windows.Forms.Label Btn_Aceptar;
+        private System.Windows.Forms.Label Btn_Finalizar;
         private System.Windows.Forms.Label Btn_Limpiar;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DateTimePicker DtpFechaLlegada;
+        private System.Windows.Forms.Label Btn_Registrar;
 
     }
 }

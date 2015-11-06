@@ -599,4 +599,168 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE [EL_PUNTERO].[DarDeBajaPorFueraDeServicio]
+@ID_Aeronave int,
+@Comienzo datetime,
+@Reinicio datetime
+AS
+BEGIN
+	UPDATE [EL_PUNTERO].[TL_AERONAVE]
+	SET Baja_Por_Fuera_De_Servicio = 1
+	WHERE ID_Aeronave = @ID_Aeronave
+	
+	INSERT INTO [EL_PUNTERO].[TL_BAJA_SERVICIO_AERONAVE] (ID_Aeronave,Fecha_Fuera_De_Servicio,Fecha_Reinicio_Servicio)
+	VALUES (@ID_Aeronave,@Comienzo,@Reinicio)
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[BajaPorFueraDeServicio]
+@ID_Aeronave int,
+@Comienzo datetime,
+@Reinicio datetime
+AS
+BEGIN
+	IF(NOT(@ID_Aeronave IN (SELECT ID_Aeronave FROM EL_PUNTERO.TL_VIAJE V WHERE (V.Fecha_Salida >= @Comienzo AND V.Fecha_Salida < @Reinicio)
+	 AND (V.ID_Viaje IN (SELECT ID_Viaje FROM EL_PUNTERO.TL_ENCOMIENDA) 
+	 OR V.ID_Viaje IN (SELECT ID_Viaje FROM EL_PUNTERO.TL_PASAJE)))))
+	BEGIN
+	UPDATE EL_PUNTERO.TL_AERONAVE
+	SET Baja_Por_Fuera_De_Servicio = 1
+	WHERE ID_Aeronave = @ID_Aeronave
+
+	INSERT INTO [EL_PUNTERO].[TL_BAJA_SERVICIO_AERONAVE] (ID_Aeronave,Fecha_Fuera_De_Servicio,Fecha_Reinicio_Servicio)
+	VALUES (@ID_Aeronave,@Comienzo,@Reinicio)
+	END
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[CancelarPasajesYEncomiendasPorBajaServicioAeronave]
+	@ID_Aeronave int,
+	@Motivo varchar(255),
+	@ID_Usuario int,
+	@Comienzo datetime,
+	@Reinicio datetime
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+   /*Insertar los id_compra, fecha y motivo en la tabla de devolución*/
+   --Pasajes
+	INSERT INTO [EL_PUNTERO].[TL_DEVOLUCION] (ID_Compra)
+	  (SELECT DISTINCT ID_Compra FROM [EL_PUNTERO].TL_PASAJE WHERE ID_Viaje IN (SELECT ID_Viaje FROM [EL_PUNTERO].TL_VIAJE WHERE ID_Aeronave=@ID_Aeronave AND (Fecha_Salida>=@Comienzo AND Fecha_Salida<@Reinicio)));
+	
+	--Encomiendas
+	INSERT INTO [EL_PUNTERO].[TL_DEVOLUCION] (ID_Compra)
+	  (SELECT DISTINCT ID_Compra FROM [EL_PUNTERO].TL_ENCOMIENDA WHERE ID_Viaje IN (SELECT ID_Viaje FROM [EL_PUNTERO].TL_VIAJE WHERE ID_Aeronave=@ID_Aeronave AND (Fecha_Salida>=@Comienzo AND Fecha_Salida<@Reinicio)));
+
+	UPDATE [EL_PUNTERO].TL_DEVOLUCION
+	SET Fecha_Devolucion=GETDATE(),
+		Motivo=@Motivo,
+		ID_Usuario=@ID_Usuario
+	WHERE Fecha_Devolucion is NULL;
+
+	/*Insertar los id_pasaje, id_encomienda y id_devolucion en la tabla de item_devuelto*/ 
+	--Pasajes
+	INSERT INTO [EL_PUNTERO].[TL_ITEM_DEVUELTO] (ID_Pasaje)
+	SELECT ID_Pasaje FROM TL_PASAJE WHERE ID_Viaje IN  (SELECT ID_Viaje FROM TL_VIAJE WHERE ID_Aeronave=@ID_Aeronave AND (Fecha_Salida>=@Comienzo AND Fecha_Salida<@Reinicio));
+	
+	CREATE TABLE [EL_PUNTERO].[TL_ITEM_DEVUELTO2](
+	[ID_Item_Devuelto] int IDENTITY(1,1),
+	[ID_Pasaje] int,
+	[ID_Devolucion] int
+	);
+
+	INSERT INTO [EL_PUNTERO].[TL_ITEM_DEVUELTO2] (ID_Pasaje)
+	(SELECT ID_Pasaje FROM  [EL_PUNTERO].[TL_ITEM_DEVUELTO]);
+
+	UPDATE [EL_PUNTERO].TL_ITEM_DEVUELTO SET ID_Devolucion = (SELECT ID_Devolucion FROM [EL_PUNTERO].TL_DEVOLUCION WHERE ID_Compra = [EL_PUNTERO].CompraAPartirDePasaje(I2.ID_Pasaje))
+	FROM [EL_PUNTERO].TL_ITEM_DEVUELTO I1 JOIN [EL_PUNTERO].TL_ITEM_DEVUELTO2 I2
+	ON I1.ID_Item_Devuelto = I2.ID_Item_Devuelto;
+
+	DROP TABLE [EL_PUNTERO].[TL_ITEM_DEVUELTO2];
+	
+	--Encomiendas
+	INSERT INTO [EL_PUNTERO].[TL_ITEM_DEVUELTO] (ID_Encomienda)
+	SELECT ID_Encomienda FROM TL_ENCOMIENDA WHERE ID_Viaje IN  (SELECT ID_Viaje FROM TL_VIAJE WHERE ID_Aeronave=@ID_Aeronave AND (Fecha_Salida>=@Comienzo AND Fecha_Salida<@Reinicio));
+
+	CREATE TABLE [EL_PUNTERO].[TL_ITEM_DEVUELTO2](
+	[ID_Item_Devuelto] int IDENTITY(1,1),
+	[ID_Encomienda] int,
+	[ID_Devolucion] int
+	);
+
+	INSERT INTO [EL_PUNTERO].[TL_ITEM_DEVUELTO2] (ID_Encomienda)
+	(SELECT ID_Encomienda FROM  [EL_PUNTERO].[TL_ITEM_DEVUELTO]);
+
+	UPDATE [EL_PUNTERO].TL_ITEM_DEVUELTO SET ID_Devolucion = (SELECT ID_Devolucion FROM [EL_PUNTERO].TL_DEVOLUCION WHERE ID_Compra = [EL_PUNTERO].CompraAPartirDeEncomienda(I2.ID_Encomienda))
+	FROM [EL_PUNTERO].TL_ITEM_DEVUELTO I1 JOIN [EL_PUNTERO].TL_ITEM_DEVUELTO2 I2
+	ON I1.ID_Item_Devuelto = I2.ID_Item_Devuelto
+	WHERE ID_Pasaje IS NULL;
+
+	DROP TABLE [EL_PUNTERO].[TL_ITEM_DEVUELTO2];
+
+END
+GO
+
+CREATE FUNCTION [EL_PUNTERO].[ObtenerAeronaveDeReemplazoPorServicio](@ID_AeronaveBaja int, @Modelo nvarchar(30), @Servicio int, @Fabricante nvarchar(30), @Comienzo datetime, @Reinicio datetime)
+RETURNS int
+AS
+BEGIN
+DECLARE @reemplazo int
+DECLARE @maxLlegada datetime
+
+	SELECT TOP 1 @reemplazo = ID_Aeronave FROM [EL_PUNTERO].TL_AERONAVE A WHERE A.ID_Aeronave != @ID_AeronaveBaja
+																			AND Baja_Por_Fuera_De_Servicio = 0
+																			AND Baja_Por_Vida_Util = 0 
+																			AND A.Modelo = @Modelo 
+																			AND A.Fabricante = @Fabricante 
+																			AND A.ID_Servicio = @Servicio
+																			AND not exists (SELECT 1 FROM [EL_PUNTERO].TL_VIAJE B WHERE A.ID_Aeronave = B.ID_Aeronave  
+																																	AND B.Fecha_Salida >= @Comienzo
+																																	AND B.Fecha_Salida < @Reinicio)
+	RETURN @reemplazo	
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[SeleccionReemplazoAeronavePorServicio]
+@ID_Aeronave int,
+@Modelo nvarchar(30),
+@Fabricante nvarchar(30),
+@ID_Servicio int,
+@Comienzo datetime,
+@Reinicio datetime
+AS
+BEGIN
+DECLARE @reemplazo int
+
+	BEGIN TRY 
+
+	SET @reemplazo = [EL_PUNTERO].[ObtenerAeronaveDeReemplazoPorServicio](@ID_Aeronave,@Modelo,@ID_Servicio,@Fabricante,@Comienzo,@Reinicio)
+	IF(@reemplazo is not null)
+	BEGIN
+	UPDATE EL_PUNTERO.TL_VIAJE 
+	SET ID_Aeronave = @reemplazo
+	WHERE ID_Aeronave = @ID_Aeronave
+	END
+	
+	END TRY 
+	BEGIN CATCH
+
+	END CATCH
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[ReemplazoAeronavePorServicio]
+@ID_Reemplazo int,
+@ID_Nueva int,
+@Comienzo datetime,
+@Reinicio datetime
+AS
+BEGIN
+	UPDATE [EL_PUNTERO].TL_VIAJE 
+	SET ID_Aeronave = @ID_Nueva
+	WHERE ID_Aeronave = @ID_Reemplazo AND Fecha_Salida >= @Comienzo AND Fecha_Salida < @Reinicio;
+END
+GO
+
 COMMIT

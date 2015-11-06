@@ -50,6 +50,7 @@ namespace AerolineaFrba.Registro_Llegada_Destino
             CargarCbos();
             ComenzarConCboVacios();
             DtpFechaSalida.Value = DateTime.Now;
+            DtpFechaLlegada.Value = DateTime.Now;
 
         }
 
@@ -66,74 +67,110 @@ namespace AerolineaFrba.Registro_Llegada_Destino
             }
         }
 
-        private void Btn_Aceptar_Click(object sender, EventArgs e)
+        private void Btn_Finalizar_Click(object sender, EventArgs e)
         {
+            var dialogAnswer = MessageBox.Show("Registro finalizado correctamente","Informacion", MessageBoxButtons.OK);
+            limpiarCampos();
+            Btn_Cancelar.Enabled = true;
+            Btn_Registrar.Enabled = true;
+            DtpFechaSalida.Enabled = true;
+            CboAeronave.Enabled = true;
+            CboCiudadDestino.Enabled = true;
+            CboCiudadOrigen.Enabled = true;
+            Btn_Limpiar.Enabled = true;
 
-            using (var transaccion = DBManager.Instance().Connection.BeginTransaction(IsolationLevel.Serializable))
-            {
-                try
-                {
-                    #region ValidacionesEnGral
-                    var exceptionMessage = string.Empty;
-                    if (CboAeronave.Text == "MATRICULA AERONAVE")
-                        exceptionMessage += "La matricula no puede ser vacia.\n";
-                    if (CboCiudadOrigen.Text == "CIUDAD ORIGEN")
-                        exceptionMessage += "La ciudad origen no puede ser vacia.\n";
-                    if (CboCiudadDestino.Text == "CIUDAD DESTINO")
-                        exceptionMessage += "La ciudad destino no puede ser vacia.\n";
-                    #endregion
-
-                    #region declaraciones
-                    int ID_Aeronave = AeronavePersistencia.ObtenerPorMatricula(CboAeronave.Text, transaccion).ID;
-                    int ID_Origen = CiudadPersistencia.ObtenerIDPorNombreDeCiudad(CboCiudadOrigen.Text);
-                    int ID_Destino = CiudadPersistencia.ObtenerIDPorNombreDeCiudad(CboCiudadDestino.Text);
-                    int ID_Ruta = RutaPersistencia.ObtenerRutaPorOrigenYDestino(ID_Origen, ID_Destino).ID;
-                    #endregion
-
-                    #region busco aeronave
-                    List<Aeronave> aeronaves = ViajePersistencia.ValidarAeronaveDelViaje(ID_Aeronave, ID_Ruta, DtpFechaSalida.Value.Date, transaccion);
-                    if (aeronaves != null)
-                    {
-                        
-                        Aeronave aeronave = aeronaves[0];
-                        var dialogAnswer = MessageBox.Show("Desea registrar la llegada de la aeronave a destino?", "Atencion", MessageBoxButtons.YesNo);
-                        if (DialogResult.Yes == dialogAnswer)
-                        {
-                            //transaccion.Commit();
-                            Hide();
-                            var infoAeronave = new InformacionAeronave(aeronave);
-                            infoAeronave.ShowDialog();
-                            Close();
-                        }
-                    }
-                    else
-                    {
-                        ComenzarConCboVacios();
-                        DtpFechaSalida.Value = DateTime.Now;
-                        throw new Exception("Los campos ingresados no coninciden con un viaje realizado.");
-                        
-                    }
-                #endregion
-
-                }
-                catch (Exception ex)
-                {
-                    transaccion.Commit();
-                    MessageBox.Show(ex.Message, "Atención");
-                }
-
-            }
-
+            Btn_Finalizar.Enabled = false;  
         }
 
         private void Btn_Limpiar_Click(object sender, EventArgs e)
+        {
+            limpiarCampos();
+        }
+
+        private void limpiarCampos()
         {
             CboAeronave.Text = "MATRICULA AERONAVE";
             CboCiudadOrigen.Text = "CIUDAD ORIGEN";
             CboCiudadDestino.Text = "CIUDAD DESTINO";
             DtpFechaSalida.Value = DateTime.Now;
+            DtpFechaLlegada.Value = DateTime.Now;
         }
 
+        private void Btn_Registrar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                #region ValidacionesEnGral
+                var exceptionMessage = string.Empty;
+                if (CboAeronave.Text == "MATRICULA AERONAVE")
+                    exceptionMessage += "La matricula no puede ser vacía.\n";
+                if (CboCiudadOrigen.Text == "CIUDAD ORIGEN")
+                    exceptionMessage += "La ciudad origen no puede ser vacía.\n";
+                if (CboCiudadDestino.Text == "CIUDAD DESTINO")
+                    exceptionMessage += "La ciudad destino no puede ser vacía.\n";
+                if (!string.IsNullOrEmpty(exceptionMessage))
+                    throw new Exception(exceptionMessage);
 
+                #endregion
+
+                #region declaraciones
+                var transaccion = DBManager.Instance().Connection.BeginTransaction(IsolationLevel.Serializable);
+                int ID_Aeronave = AeronavePersistencia.ObtenerPorMatricula(CboAeronave.Text,transaccion).ID;
+                transaccion.Commit();
+                int ID_Origen = CiudadPersistencia.ObtenerIDPorNombreDeCiudad(CboCiudadOrigen.Text);
+                int ID_Destino = CiudadPersistencia.ObtenerIDPorNombreDeCiudad(CboCiudadDestino.Text);
+                var rutas = RutaPersistencia.ObtenerRutaPorOrigenYDestino(ID_Origen, ID_Destino);
+                int ID_Ruta;
+
+                if (rutas == null || rutas.Count == 0)
+                {
+                    ComenzarConCboVacios();
+                    DtpFechaSalida.Value = DateTime.Now;
+                    throw new Exception("Los campos ingresados no coninciden con un viaje realizado.");
+                }
+                else
+                {
+                    ID_Ruta = rutas[0].ID;
+                }
+
+                #endregion
+
+                #region busco aeronave
+                var aeronaves = ViajePersistencia.ValidarAeronaveDelViaje(ID_Aeronave, ID_Ruta, DtpFechaSalida.Value);
+                var viajes = ViajePersistencia.ObtenerViaje(ID_Aeronave, ID_Ruta, DtpFechaSalida.Value);
+                if (viajes == null || viajes.Count == 0)
+                {
+                    ComenzarConCboVacios();
+                    DtpFechaSalida.Value = DateTime.Now;
+                    throw new Exception("Los campos ingresados no coninciden con un viaje realizado.");
+                }
+
+                Aeronave aeronave = aeronaves[0];
+                Viaje viaje = viajes[0];
+                var infoAeronave = new InformacionAeronave(aeronave,viaje,this);
+                infoAeronave.ShowDialog();
+                #endregion
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Atención");
+            }
+
+        }
+
+        public void actualizarLlegada(DateTime fechallegada)
+        {
+            DtpFechaLlegada.Value = fechallegada;
+            Btn_Finalizar.Enabled = true;
+            Btn_Registrar.Enabled = false;
+            DtpFechaSalida.Enabled = false;
+            CboAeronave.Enabled = false;
+            CboCiudadDestino.Enabled = false;
+            CboCiudadOrigen.Enabled = false;
+            Btn_Cancelar.Enabled = false;
+            Btn_Limpiar.Enabled = false;
+            
+        }
     }
 }

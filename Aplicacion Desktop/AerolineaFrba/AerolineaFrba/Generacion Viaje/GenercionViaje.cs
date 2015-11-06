@@ -147,7 +147,8 @@ namespace AerolineaFrba.Generacion_Viaje
 
                 int ID_Origen = CiudadPersistencia.ObtenerIDPorNombreDeCiudad(CboCiudadOrigen.Text);
                 int ID_Destino = CiudadPersistencia.ObtenerIDPorNombreDeCiudad(CboCiudadDestino.Text);
-                int ID_Ruta = RutaPersistencia.ObtenerRutaPorOrigenYDestino(ID_Origen, ID_Destino).ID;
+                var rutas = RutaPersistencia.ObtenerRutaPorOrigenYDestino(ID_Origen, ID_Destino);
+                int ID_Ruta = rutas[0].ID;
 
                 var transaccion = DBManager.Instance().Connection.BeginTransaction(IsolationLevel.Serializable);
                 int ID_Aeronave = AeronavePersistencia.ObtenerPorMatricula(CboAeronave.Text, transaccion).ID;
@@ -298,7 +299,7 @@ namespace AerolineaFrba.Generacion_Viaje
               }
               else if (DtpFechaSalida.Value.Day == DtpFechaLlegadaEstimada.Value.Day)
               {
-                  DtpHoraLlegadaEstimada.MinDate = DtpHoraSalida.Value;
+                  DtpHoraLlegadaEstimada.MinDate = DtpHoraSalida.Value.AddHours(1);
                   String horaMaximo ="23:59:59";
                   DtpHoraLlegadaEstimada.MaxDate = DateTime.ParseExact(horaMaximo, "HH:mm:ss", CultureInfo.InvariantCulture);
                   

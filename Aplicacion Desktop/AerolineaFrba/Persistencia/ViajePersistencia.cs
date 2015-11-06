@@ -128,7 +128,7 @@ namespace Persistencia
             return viajes;
         }
 
-        public static List<Aeronave> ValidarAeronaveDelViaje(int ID_Aeronave, int ID_Ruta, DateTime fechasalida, SqlTransaction transaction)
+        public static List<Aeronave> ValidarAeronaveDelViaje(int ID_Aeronave, int ID_Ruta, DateTime fechasalida)
         {
             var param = new List<SPParameter>
                 {
@@ -139,7 +139,7 @@ namespace Persistencia
 
             var sp = new StoreProcedure(DBQueries.Viaje.SPValidarAeronaveDelViaje, param);
 
-            List<Aeronave> aeronaves = sp.ExecuteReaderTransactioned<Aeronave>(transaction);
+            List<Aeronave> aeronaves = sp.ExecuteReader<Aeronave>();
 
              if (aeronaves == null || aeronaves.Count == 0)
                 return null;
@@ -178,6 +178,7 @@ namespace Persistencia
             return servicios[0].Nombre;
         }
 
+
         public static List<Viaje> ObtenerTodos()
         {
             //var transaccion = DBManager.Instance().Connection.BeginTransaction(IsolationLevel.Serializable);
@@ -187,10 +188,59 @@ namespace Persistencia
 
             var viajes = sp.ExecuteReader<Viaje>();
 
+            
             if (viajes == null || viajes.Count == 0)
                 return null;
 
             return viajes;
         }
+
+        public static int ReemplazarViajesDePorServicio(Aeronave aeronaveAReemplazar, Aeronave aeronaveNueva, DateTime comienzo, DateTime fin)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("ID_Reemplazo", aeronaveAReemplazar.ID), 
+                    new SPParameter("ID_Nueva", aeronaveNueva.ID),
+                    new SPParameter("Comienzo", comienzo), 
+                    new SPParameter("Reinicio", fin)
+                };
+
+            var sp = new StoreProcedure(DBQueries.Aeronave.SPReemplazoPorServicio, param);
+
+            return sp.ExecuteNonQuery(null);
+        }
+
+        public static List<Viaje> ObtenerViaje(int ID_Aeronave, int ID_Ruta, DateTime fechasalida)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("Fecha_Salida", fechasalida), 
+                    new SPParameter("ID_Ruta",ID_Ruta),
+                    new SPParameter("ID_Aeronave",ID_Aeronave),
+                };
+
+            var sp = new StoreProcedure(DBQueries.Viaje.SPObtenerViaje, param);
+
+            List<Viaje> viajes = sp.ExecuteReader<Viaje>();
+
+
+            if (viajes == null || viajes.Count == 0)
+                return null;
+
+            return viajes;
+        }
+
+        public static void ActualizarFechaLlegada(int idViaje, DateTime fechaLlegada)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("ID", idViaje),
+                    new SPParameter("FechaLlegada", fechaLlegada),
+                };
+            var sp = new StoreProcedure(DBQueries.Viaje.SPActualizarFechaLlegada, param);
+
+            sp.ExecuteNonQuery(null);
+        }
+
     }
 }
