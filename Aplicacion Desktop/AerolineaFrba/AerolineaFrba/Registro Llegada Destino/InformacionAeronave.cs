@@ -16,17 +16,21 @@ namespace AerolineaFrba.Registro_Llegada_Destino
     public partial class InformacionAeronave : Form
     {
         Aeronave aeronave;
+        Viaje viaje;
+        AerolineaFrba.Registro_Llegada_Destino.RegistroLlegadaDestino registro;
 
-        public InformacionAeronave(Aeronave aeronave1)
+        public InformacionAeronave(Aeronave aeronave1, Viaje viaje1, AerolineaFrba.Registro_Llegada_Destino.RegistroLlegadaDestino form1)
         {
             InitializeComponent();
             aeronave = aeronave1;
+            viaje = viaje1;
+            registro = form1;
         }
 
-        private void BtnValidar_Click(object sender, EventArgs e)
+        private void BtnAgregarFecha_Click(object sender, EventArgs e)
         {
             Hide();
-            var agregarFecha = new AgregarFechaLlegada();
+            var agregarFecha = new AgregarFechaLlegada(aeronave,viaje, registro);
             agregarFecha.ShowDialog();
             Close();
          
@@ -37,9 +41,6 @@ namespace AerolineaFrba.Registro_Llegada_Destino
             var dialogAnswer = MessageBox.Show("Esta seguro que desea volver al formulario ?", "Atencion", MessageBoxButtons.YesNo);
             if (DialogResult.Yes == dialogAnswer)
             {
-                Hide();
-                var registro = new RegistroLlegadaDestino();
-                registro.ShowDialog();
                 Close();
             }
         }
@@ -62,6 +63,11 @@ namespace AerolineaFrba.Registro_Llegada_Destino
             Servicio serv = ServicioPersistencia.ObtenerServicioPorID(aeronave.ID_Servicio);
             Txt_TipoServicio.Text = serv.Nombre;
             #endregion
+
+        }
+
+        private void Txt_TipoServicio_TextChanged(object sender, EventArgs e)
+        {
 
         }
     }

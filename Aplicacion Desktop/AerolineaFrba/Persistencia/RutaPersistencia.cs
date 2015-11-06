@@ -196,7 +196,7 @@ namespace Persistencia
             return sp.ExecuteReader<Ciudad>();
         }
 
-        public static Ruta ObtenerRutaPorOrigenYDestino(int ID_Origen, int ID_Destino)
+        public static List<Ruta> ObtenerRutaPorOrigenYDestino(int ID_Origen, int ID_Destino)
         {
             var param = new List<SPParameter>
             { 
@@ -204,12 +204,7 @@ namespace Persistencia
                 new SPParameter("ID_Ciudad_Destino", ID_Destino),
             };
             var sp = new StoreProcedure(DBQueries.Ruta.SPObtenerRutaPorOrigenYDestino, param);
-            List<Ruta> rutas = sp.ExecuteReader<Ruta>();
-
-            if (rutas == null || rutas.Count == 0)return null;
-
-            return rutas[0];
-
+            return sp.ExecuteReader<Ruta>();
         }
 
     }

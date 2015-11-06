@@ -31,15 +31,14 @@
             this.DtpFechaLlegada = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.BtnValidar = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.BtnCancelar = new System.Windows.Forms.Label();
+            this.BtnAceptar = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // DtpFechaLlegada
             // 
             this.DtpFechaLlegada.CustomFormat = "dd/M/yyyy     HH:mm:ss";
-            this.DtpFechaLlegada.Enabled = false;
             this.DtpFechaLlegada.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.DtpFechaLlegada.Location = new System.Drawing.Point(118, 41);
             this.DtpFechaLlegada.Name = "DtpFechaLlegada";
@@ -57,8 +56,8 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.BtnValidar);
+            this.groupBox1.Controls.Add(this.BtnCancelar);
+            this.groupBox1.Controls.Add(this.BtnAceptar);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.DtpFechaLlegada);
             this.groupBox1.Location = new System.Drawing.Point(12, 5);
@@ -68,31 +67,33 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "AGREGAR FECHA LLEGADA";
             // 
-            // BtnValidar
+            // BtnCancelar
             // 
-            this.BtnValidar.BackColor = System.Drawing.Color.DodgerBlue;
-            this.BtnValidar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.BtnValidar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BtnValidar.ForeColor = System.Drawing.Color.White;
-            this.BtnValidar.Location = new System.Drawing.Point(153, 88);
-            this.BtnValidar.Name = "BtnValidar";
-            this.BtnValidar.Size = new System.Drawing.Size(76, 23);
-            this.BtnValidar.TabIndex = 92;
-            this.BtnValidar.Text = "ACEPTAR";
-            this.BtnValidar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.BtnCancelar.BackColor = System.Drawing.Color.DodgerBlue;
+            this.BtnCancelar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.BtnCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnCancelar.ForeColor = System.Drawing.Color.White;
+            this.BtnCancelar.Location = new System.Drawing.Point(71, 88);
+            this.BtnCancelar.Name = "BtnCancelar";
+            this.BtnCancelar.Size = new System.Drawing.Size(76, 23);
+            this.BtnCancelar.TabIndex = 93;
+            this.BtnCancelar.Text = "CANCELAR";
+            this.BtnCancelar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.BtnCancelar.Click += new System.EventHandler(this.BtnCancelar_Click);
             // 
-            // label1
+            // BtnAceptar
             // 
-            this.label1.BackColor = System.Drawing.Color.DodgerBlue;
-            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(71, 88);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(76, 23);
-            this.label1.TabIndex = 93;
-            this.label1.Text = "CANCELAR";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.BtnAceptar.BackColor = System.Drawing.Color.DodgerBlue;
+            this.BtnAceptar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.BtnAceptar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnAceptar.ForeColor = System.Drawing.Color.White;
+            this.BtnAceptar.Location = new System.Drawing.Point(153, 88);
+            this.BtnAceptar.Name = "BtnAceptar";
+            this.BtnAceptar.Size = new System.Drawing.Size(76, 23);
+            this.BtnAceptar.TabIndex = 92;
+            this.BtnAceptar.Text = "ACEPTAR";
+            this.BtnAceptar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.BtnAceptar.Click += new System.EventHandler(this.BtnAceptar_Click);
             // 
             // AgregarFechaLlegada
             // 
@@ -113,7 +114,7 @@
         private System.Windows.Forms.DateTimePicker DtpFechaLlegada;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label BtnValidar;
+        private System.Windows.Forms.Label BtnCancelar;
+        private System.Windows.Forms.Label BtnAceptar;
     }
 }
