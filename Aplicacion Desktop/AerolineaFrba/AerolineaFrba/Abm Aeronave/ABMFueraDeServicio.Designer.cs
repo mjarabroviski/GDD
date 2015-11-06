@@ -31,7 +31,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.DtpFechaComienzo = new System.Windows.Forms.DateTimePicker();
-            this.dtpFechaReinicio = new System.Windows.Forms.DateTimePicker();
+            this.DtpFechaReinicio = new System.Windows.Forms.DateTimePicker();
             this.BtnGrabar = new System.Windows.Forms.Label();
             this.BtnCancelar = new System.Windows.Forms.Label();
             this.txtAeronave = new System.Windows.Forms.TextBox();
@@ -66,14 +66,14 @@
             this.DtpFechaComienzo.TabIndex = 84;
             this.DtpFechaComienzo.ValueChanged += new System.EventHandler(this.DtpFechaComienzo_ValueChanged);
             // 
-            // dtpFechaReinicio
+            // DtpFechaReinicio
             // 
-            this.dtpFechaReinicio.CustomFormat = "dd/MM/yyyy HH:mm";
-            this.dtpFechaReinicio.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaReinicio.Location = new System.Drawing.Point(164, 89);
-            this.dtpFechaReinicio.Name = "dtpFechaReinicio";
-            this.dtpFechaReinicio.Size = new System.Drawing.Size(153, 20);
-            this.dtpFechaReinicio.TabIndex = 85;
+            this.DtpFechaReinicio.CustomFormat = "dd/MM/yyyy HH:mm";
+            this.DtpFechaReinicio.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.DtpFechaReinicio.Location = new System.Drawing.Point(164, 89);
+            this.DtpFechaReinicio.Name = "DtpFechaReinicio";
+            this.DtpFechaReinicio.Size = new System.Drawing.Size(153, 20);
+            this.DtpFechaReinicio.TabIndex = 85;
             // 
             // BtnGrabar
             // 
@@ -128,7 +128,7 @@
             this.Controls.Add(this.txtAeronave);
             this.Controls.Add(this.BtnGrabar);
             this.Controls.Add(this.BtnCancelar);
-            this.Controls.Add(this.dtpFechaReinicio);
+            this.Controls.Add(this.DtpFechaReinicio);
             this.Controls.Add(this.DtpFechaComienzo);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label4);
@@ -145,7 +145,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker DtpFechaComienzo;
-        private System.Windows.Forms.DateTimePicker dtpFechaReinicio;
+        private System.Windows.Forms.DateTimePicker DtpFechaReinicio;
         private System.Windows.Forms.Label BtnGrabar;
         private System.Windows.Forms.Label BtnCancelar;
         private System.Windows.Forms.TextBox txtAeronave;

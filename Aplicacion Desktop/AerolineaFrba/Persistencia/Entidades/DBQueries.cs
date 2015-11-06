@@ -87,6 +87,10 @@ namespace Persistencia.Entidades
             public static String SPModificarAeronave = "EL_PUNTERO.ModificarAeronave";
             public static String SPDarDeBajaPorVidaUtil = "EL_PUNTERO.DarDeBajaPorVidaUtil";
             public static String SPReemplazo = "EL_PUNTERO.ReemplazoAeronave";
+            public static String SPDarDeBajaPorFueraDeServicio = "EL_PUNTERO.DarDeBajaPorFueraDeServicio";
+            public static String SPBajaPorFueraDeServicio = "EL_PUNTERO.BajaPorFueraDeServicio";
+            public static String SPSeleccionReemplazoPorServicio = "EL_PUNTERO.SeleccionReemplazoPorServicio";
+            public static String SPReemplazoPorServicio = "EL_PUNTERO.ReemplazoPorServicio";
         }
 
         public static class Butaca
@@ -124,6 +128,7 @@ namespace Persistencia.Entidades
         public static class Devolucion
         {
             public static String SPCancelarPasajesYEncomiendasPorBajaAeronave = "EL_PUNTERO.CancelarPasajesYEncomiendasPorBajaAeronave";
+            public static String SPCancelarPasajesYEncomiendasPorBajaServicioAeronave = "EL_PUNTERO.CancelarPasajesYEncomiendasPorBajaServicioAeronave";
         }
     }
 }

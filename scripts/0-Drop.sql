@@ -93,6 +93,12 @@ DROP PROCEDURE [EL_PUNTERO].[ReemplazoAeronave];
 DROP PROCEDURE [EL_PUNTERO].[ObtenerButacasDisponibles];
 DROP PROCEDURE [EL_PUNTERO].[ObtenerKGSDisponibles];
 DROP PROCEDURE [EL_PUNTERO].[CancelarPasajesYEncomiendasPorBajaAeronave];
+DROP PROCEDURE [EL_PUNTERO].[DarDeBajaPorFueraDeServicio];
+DROP PROCEDURE [EL_PUNTERO].[BajaPorFueraDeServicio];
+DROP PROCEDURE [EL_PUNTERO].[CancelarPasajesYEncomiendasPorBajaServicioAeronave];
+DROP PROCEDURE [EL_PUNTERO].[ReemplazoAeronavePorServicio];
+DROP FUNCTION [EL_PUNTERO].[ObtenerAeronaveDeReemplazoPorServicio];
+DROP PROCEDURE [EL_PUNTERO].[SeleccionReemplazoAeronavePorServicio];
 
 DROP PROCEDURE [EL_PUNTERO].[ActualizarRolPorID];
 DROP PROCEDURE [EL_PUNTERO].[EliminarFuncionalidadesPorRol];

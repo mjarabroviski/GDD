@@ -176,5 +176,20 @@ namespace Persistencia
 
             return servicios[0].Nombre;
         }
+
+        public static int ReemplazarViajesDePorServicio(Aeronave aeronaveAReemplazar, Aeronave aeronaveNueva, DateTime comienzo, DateTime fin)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("ID_Reemplazo", aeronaveAReemplazar.ID), 
+                    new SPParameter("ID_Nueva", aeronaveNueva.ID),
+                    new SPParameter("Comienzo", comienzo), 
+                    new SPParameter("Reinicio", fin)
+                };
+
+            var sp = new StoreProcedure(DBQueries.Aeronave.SPReemplazoPorServicio, param);
+
+            return sp.ExecuteNonQuery(null);
+        }
     }
 }
