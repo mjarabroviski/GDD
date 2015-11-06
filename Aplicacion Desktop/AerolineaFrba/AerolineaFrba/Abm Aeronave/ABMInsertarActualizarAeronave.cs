@@ -38,7 +38,7 @@ namespace AerolineaFrba.Abm_Aeronave
         {
             InitializeComponent();
 
-            aeronaveAModificar = aeronave;
+            aeronaveAReemplazar = aeronave;
             FechaComienzo = comienzo;
             FechaReinicio = fin;          
         }
@@ -53,7 +53,7 @@ namespace AerolineaFrba.Abm_Aeronave
             #endregion
 
             //Es una modificacion
-            if (aeronaveAModificar != null) {
+            if (aeronaveAModificar != null && FechaComienzo == DateTime.MinValue) {
                 #region Cargo los datos de la aeronave
 
                 TxtMatricula.Text = aeronaveAModificar.Matricula;
@@ -134,14 +134,14 @@ namespace AerolineaFrba.Abm_Aeronave
 
                             #endregion
 
-                            var butacas = new ABMAltaButacas(aeronaveNueva, transaccion, false);
+                            var butacas = new ABMAltaButacas(aeronaveNueva, transaccion, false, aeronaveAReemplazar);
                             butacas.ShowDialog();
 
                             if (butacas.accionTerminada)
                             {
                                 transaccion.Commit();
                                 MessageBox.Show("Aeronave insertada satisfactoriamente", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                                if (aeronaveAReemplazar != null)
+                                if (aeronaveAReemplazar != null && FechaReinicio == DateTime.MinValue)
                                 {
                                     //Asigna los viajes de la aeronave a dar de baja por fin de vida util a la nueva
                                     ViajePersistencia.ReemplazarViajesDePor(aeronaveAReemplazar,aeronaveNueva);
@@ -151,8 +151,7 @@ namespace AerolineaFrba.Abm_Aeronave
                                 {
                                     //Asigna los viajes de la aeronave a dar de baja por fuera de servicio a la nueva
                                     ViajePersistencia.ReemplazarViajesDePorServicio(aeronaveAReemplazar, aeronaveNueva,FechaComienzo,FechaReinicio);
-                                    accionTerminada = true;
-                                    
+                                    accionTerminada = true;                                   
                                 }
                                 Close();
                             }

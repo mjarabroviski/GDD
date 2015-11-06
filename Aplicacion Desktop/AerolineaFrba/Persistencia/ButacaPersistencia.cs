@@ -93,5 +93,19 @@ namespace Persistencia
             var butacas = sp.ExecuteReaderTransactioned<Butaca>(transaction);
             return butacas[0].Numero;
         }
+
+        public static int ObtenerCantButacasPorAeronave(Aeronave aeronave, String descripcion, SqlTransaction transaction)
+        {
+            var param = new List<SPParameter> { new SPParameter("ID_Aeronave", aeronave.ID),
+                                                new SPParameter("Descripcion",descripcion)
+                                              };
+
+            var sp = (transaction != null)
+                    ? new StoreProcedure(DBQueries.Butaca.SPGetCantButacasPorAeronave, param, transaction)
+                    : new StoreProcedure(DBQueries.Butaca.SPGetCantButacasPorAeronave, param);
+
+            var butacas = sp.ExecuteReaderTransactioned<Butaca>(transaction);
+            return butacas[0].Numero;
+        }
     }
 }

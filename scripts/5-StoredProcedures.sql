@@ -199,10 +199,38 @@ BEGIN
 END
 GO
 
+CREATE FUNCTION [EL_PUNTERO].[ObtenerIDBajaServicioMax](@ID_AeronaveBaja int)
+RETURNS int
+AS
+BEGIN
+DECLARE @id int
+
+	SELECT @id = MAX(ID_Baja_Servicio) FROM [EL_PUNTERO].[TL_BAJA_SERVICIO_AERONAVE]
+	WHERE ID_Aeronave = @ID_AeronaveBaja
+
+	RETURN @id
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[HabilitarAeronavesQueVolvieronDeBajaServicio]
+AS
+BEGIN
+
+	UPDATE [EL_PUNTERO].[TL_AERONAVE] 
+	SET Baja_Por_Fuera_De_Servicio = 0
+	WHERE Baja_Por_Fuera_De_Servicio = 1
+	AND ID_AERONAVE IN (
+					SELECT ID_Aeronave FROM [EL_PUNTERO].[TL_BAJA_SERVICIO_AERONAVE] 
+					WHERE ID_Baja_Servicio = [EL_PUNTERO].[ObtenerIDBajaServicioMax](ID_AERONAVE)
+					AND Fecha_Reinicio_Servicio <= GETDATE())
+	END
+GO
+
 CREATE PROCEDURE [EL_PUNTERO].[GetAeronaves]
 AS
 BEGIN
 	SET NOCOUNT ON;
+	EXECUTE [EL_PUNTERO].[HabilitarAeronavesQueVolvieronDeBajaServicio];
 	SELECT *
 	FROM [EL_PUNTERO].[TL_Aeronave]
 END
@@ -760,6 +788,20 @@ BEGIN
 	UPDATE [EL_PUNTERO].TL_VIAJE 
 	SET ID_Aeronave = @ID_Nueva
 	WHERE ID_Aeronave = @ID_Reemplazo AND Fecha_Salida >= @Comienzo AND Fecha_Salida < @Reinicio;
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[GetCantButacasPorAeronave]
+@ID_Aeronave int,
+@Descripcion nvarchar(30)
+AS
+BEGIN
+	SET NOCOUNT ON;
+	SELECT *
+	FROM [EL_PUNTERO].[TL_BUTACA]
+	WHERE ID_Aeronave = @ID_Aeronave AND Nro_Butaca = 
+	(SELECT MAX(Nro_Butaca)FROM [EL_PUNTERO].[TL_BUTACA] WHERE ID_Aeronave = @ID_Aeronave AND ID_Tipo_Butaca = 
+	(SELECT ID_Tipo_Butaca FROM [EL_PUNTERO].[TL_TIPO_BUTACA] WHERE Descripcion = @Descripcion))
 END
 GO
 

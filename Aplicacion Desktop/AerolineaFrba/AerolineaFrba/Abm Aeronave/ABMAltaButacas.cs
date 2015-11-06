@@ -19,8 +19,11 @@ namespace AerolineaFrba.Abm_Aeronave
         public SqlTransaction transaccionConcurrente;
         public bool accionTerminada = false;
         public int ult = 0;
+        public Aeronave aeronaveReemplazo { get; set; }
+        public int cantMaxP = 0;
+        public int cantMaxV = 0;
 
-        public ABMAltaButacas(Aeronave aeronaveIncompleta, SqlTransaction transaccion, bool modifica)
+        public ABMAltaButacas(Aeronave aeronaveIncompleta, SqlTransaction transaccion, bool modifica, Aeronave aeronaveAReemplazar)
         {
             InitializeComponent();
             aeronave = aeronaveIncompleta;
@@ -30,11 +33,18 @@ namespace AerolineaFrba.Abm_Aeronave
             {
                 ult = ButacaPersistencia.ObtenerMaxNroButaca(aeronave, transaccionConcurrente);
             }
+            if (aeronaveAReemplazar != null)
+            {
+                aeronaveReemplazo = aeronaveAReemplazar;
+                cantMaxP = ButacaPersistencia.ObtenerCantButacasPorAeronave(aeronaveAReemplazar, "Pasillo",transaccionConcurrente);
+                cantMaxV = ButacaPersistencia.ObtenerCantButacasPorAeronave(aeronaveAReemplazar, "Ventanilla",transaccionConcurrente);
+                TxtPasillo.Text = cantMaxP.ToString();
+                TxtVentanilla.Text = cantMaxV.ToString();
+            }
         }
 
         private void BtnGrabar_Click(object sender, EventArgs e)
         {
-
             try
             {
                 #region Validaciones
@@ -52,6 +62,21 @@ namespace AerolineaFrba.Abm_Aeronave
 
                 else if (!ValidadorDeTipos.IsNumeric(TxtVentanilla.Text))
                     exceptionMessage += "El valor de ventanilla no es valido, debe ser un numero entero.\n";
+
+                if (aeronaveReemplazo != null)
+                {
+                    if (Convert.ToInt32(TxtPasillo.Text) < cantMaxP)
+                    {
+                        exceptionMessage += "Los valores de pasillo no pueden superar a los de la aeronave que estoy reemplazando.\n";
+                        TxtPasillo.Text = cantMaxP.ToString();
+                    }
+
+                    if (Convert.ToInt32(TxtVentanilla.Text) < cantMaxV)
+                    {
+                        exceptionMessage += "Los valores de ventanilla no pueden superar a los de la aeronave que estoy reemplazando.\n";
+                        TxtVentanilla.Text = cantMaxV.ToString();
+                    }
+                }
 
                 if (!string.IsNullOrEmpty(exceptionMessage))
                     throw new Exception(exceptionMessage);

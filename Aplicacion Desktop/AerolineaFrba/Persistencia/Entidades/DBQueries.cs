@@ -89,8 +89,8 @@ namespace Persistencia.Entidades
             public static String SPReemplazo = "EL_PUNTERO.ReemplazoAeronave";
             public static String SPDarDeBajaPorFueraDeServicio = "EL_PUNTERO.DarDeBajaPorFueraDeServicio";
             public static String SPBajaPorFueraDeServicio = "EL_PUNTERO.BajaPorFueraDeServicio";
-            public static String SPSeleccionReemplazoPorServicio = "EL_PUNTERO.SeleccionReemplazoPorServicio";
-            public static String SPReemplazoPorServicio = "EL_PUNTERO.ReemplazoPorServicio";
+            public static String SPSeleccionReemplazoPorServicio = "EL_PUNTERO.SeleccionReemplazoAeronavePorServicio";
+            public static String SPReemplazoPorServicio = "EL_PUNTERO.ReemplazoAeronavePorServicio";
         }
 
         public static class Butaca
@@ -101,6 +101,7 @@ namespace Persistencia.Entidades
             public static String SPModificarButaca = "EL_PUNTERO.ModificarButaca";
             public static String SPDarDeBajaButaca = "EL_PUNTERO.DarDeBajaButaca";
             public static String SPGetMaxNroButaca = "EL_PUNTERO.GetMaxNroButaca";
+            public static String SPGetCantButacasPorAeronave = "EL_PUNTERO.GetCantButacasPorAeronave";
         }
 
         public static class Viaje
