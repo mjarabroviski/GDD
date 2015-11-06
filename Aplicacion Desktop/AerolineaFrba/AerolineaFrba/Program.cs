@@ -26,8 +26,11 @@ namespace AerolineaFrba
             //Application.Run(new Registro_de_Usuario.RegistroDeUsuario());
             //Application.Run(new Abm_Rol.FrmABMRol());
             //Application.Run(new Abm_Ruta.FrmABMRuta());
-            Application.Run(new LogIn.SeleccionDeUsuario());
+            //Application.Run(new LogIn.SeleccionDeUsuario());
             //Application.Run(new Compra.FrmCompra());
+            //Application.Run(new LogIn.SeleccionDeUsuario());
+            Application.Run(new Compra.FrmCompra());
+            //Application.Run(new Compra.FrmIngresoCantidades());
         }
     }
 }

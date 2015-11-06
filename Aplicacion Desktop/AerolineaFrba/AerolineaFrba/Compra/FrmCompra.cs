@@ -128,12 +128,19 @@ namespace AerolineaFrba.Compra
                     CiudadOrigen = ViajePersistencia.ObtenerCiudadOrigenPorIDRuta(a.ID_Ruta),
                     CiudadDestino = ViajePersistencia.ObtenerCiudadDestinoPorIDRuta(a.ID_Ruta),
                     TipoServicio = ViajePersistencia.ObtenerServicioPorIDRuta(a.ID_Ruta),
-                    ButacasDisponibles = ViajePersistencia.ObtenerButacasDisponibles(a.ID) >=0 ? ViajePersistencia.ObtenerButacasDisponibles(a.ID) : 0 ,
+                    ButacasDisponibles = ViajePersistencia.ObtenerButacasDisponibles(a.ID) >=0 ? ViajePersistencia.ObtenerButacasDisponibles(a.ID) : 0,
                     KGsDisponibles = ViajePersistencia.ObtenerKGSDisponibles(a.ID) >=0 ? ViajePersistencia.ObtenerKGSDisponibles(a.ID) : 0
                 });
                 DgvViaje.DataSource = bind.ToList();
                 
                 //Agrego los botones a cada fila para poder modificar/borrar cada ruta
+                for (int i = 0; i < DgvViaje.RowCount; i++)
+                {
+                    if ((int)DgvViaje.Rows[i].Cells[4].Value == 0)
+                    {
+                        DgvViaje.Rows[i].Visible = false;
+                    }
+                }
                 AgregarBotonesColumnas();
                 
             }

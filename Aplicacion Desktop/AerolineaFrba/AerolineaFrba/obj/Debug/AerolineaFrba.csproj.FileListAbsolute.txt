@@ -120,3 +120,45 @@ C:\Users\Melanie Jarabroviski\Documents\UTN\3ro\Gestion de Datos\GDD\Aplicacion 
 C:\Users\Melanie Jarabroviski\Documents\UTN\3ro\Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Registro_Llegada_Destino.AgregarFechaLlegada.resources
 C:\Users\Melanie Jarabroviski\Documents\UTN\3ro\Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Registro_Llegada_Destino.InformacionAeronave.resources
 C:\Users\Melanie Jarabroviski\Documents\UTN\3ro\Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Registro_Llegada_Destino.RegistroLlegadaDestino.resources
+C:\Users\lucho\Desktop\TP GDD\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\bin\Debug\AerolineaFrba.exe.config
+C:\Users\lucho\Desktop\TP GDD\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.exe
+C:\Users\lucho\Desktop\TP GDD\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.pdb
+C:\Users\lucho\Desktop\TP GDD\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\bin\Debug\AerolineaFrba.exe
+C:\Users\lucho\Desktop\TP GDD\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\bin\Debug\AerolineaFrba.pdb
+C:\Users\lucho\Desktop\TP GDD\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\bin\Debug\Configuracion.exe
+C:\Users\lucho\Desktop\TP GDD\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\bin\Debug\Filtros.exe
+C:\Users\lucho\Desktop\TP GDD\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\bin\Debug\Herramientas.exe
+C:\Users\lucho\Desktop\TP GDD\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\bin\Debug\Persistencia.exe
+C:\Users\lucho\Desktop\TP GDD\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\bin\Debug\Sesion.exe
+C:\Users\lucho\Desktop\TP GDD\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\bin\Debug\Configuracion.pdb
+C:\Users\lucho\Desktop\TP GDD\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\bin\Debug\Filtros.pdb
+C:\Users\lucho\Desktop\TP GDD\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\bin\Debug\Herramientas.pdb
+C:\Users\lucho\Desktop\TP GDD\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\bin\Debug\Persistencia.pdb
+C:\Users\lucho\Desktop\TP GDD\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\bin\Debug\Sesion.pdb
+C:\Users\lucho\Desktop\TP GDD\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.csprojResolveAssemblyReference.cache
+C:\Users\lucho\Desktop\TP GDD\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Aeronave.ABMAeronaves.resources
+C:\Users\lucho\Desktop\TP GDD\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Aeronave.ABMAltaButacas.resources
+C:\Users\lucho\Desktop\TP GDD\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Aeronave.ABMButacas.resources
+C:\Users\lucho\Desktop\TP GDD\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Aeronave.ABMCancelarOReemplazar.resources
+C:\Users\lucho\Desktop\TP GDD\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Aeronave.ABMFueraDeServicio.resources
+C:\Users\lucho\Desktop\TP GDD\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Aeronave.ABMInsertarActualizarAeronave.resources
+C:\Users\lucho\Desktop\TP GDD\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ciudad.ABMCiudades.resources
+C:\Users\lucho\Desktop\TP GDD\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ciudad.ABMInsertarActualizarCiudad.resources
+C:\Users\lucho\Desktop\TP GDD\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Rol.FrmABMRol.resources
+C:\Users\lucho\Desktop\TP GDD\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Rol.FrmABMRolAltasModificaciones.resources
+C:\Users\lucho\Desktop\TP GDD\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ruta.FrmABMRuta.resources
+C:\Users\lucho\Desktop\TP GDD\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ruta.FrmABMRutaAltasModificaciones.resources
+C:\Users\lucho\Desktop\TP GDD\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Compra.FrmCompra.resources
+C:\Users\lucho\Desktop\TP GDD\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Compra.FrmIngresoCantidades.resources
+C:\Users\lucho\Desktop\TP GDD\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Home_Administrador.HomeAdministrador.resources
+C:\Users\lucho\Desktop\TP GDD\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Home_Cliente.HomeCliente.resources
+C:\Users\lucho\Desktop\TP GDD\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Generacion_Viaje.GenercionViaje.resources
+C:\Users\lucho\Desktop\TP GDD\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.LogIn.ResetearContrasena.resources
+C:\Users\lucho\Desktop\TP GDD\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.LogIn.InicioAdministrador.resources
+C:\Users\lucho\Desktop\TP GDD\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.LogIn.SeleccionDeUsuario.resources
+C:\Users\lucho\Desktop\TP GDD\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Properties.Resources.resources
+C:\Users\lucho\Desktop\TP GDD\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Registro_de_Usuario.RegistroDeUsuario.resources
+C:\Users\lucho\Desktop\TP GDD\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Registro_Llegada_Destino.AgregarFechaLlegada.resources
+C:\Users\lucho\Desktop\TP GDD\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Registro_Llegada_Destino.InformacionAeronave.resources
+C:\Users\lucho\Desktop\TP GDD\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Registro_Llegada_Destino.RegistroLlegadaDestino.resources
+C:\Users\lucho\Desktop\TP GDD\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.csproj.GenerateResource.Cache
