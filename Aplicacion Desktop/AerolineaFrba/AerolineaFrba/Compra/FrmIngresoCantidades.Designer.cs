@@ -34,6 +34,7 @@
             this.NumPasajes = new System.Windows.Forms.NumericUpDown();
             this.NumEncomiendas = new System.Windows.Forms.NumericUpDown();
             this.BtnAceptar = new System.Windows.Forms.Label();
+            this.BtnCancelar = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.NumPasajes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumEncomiendas)).BeginInit();
             this.SuspendLayout();
@@ -88,18 +89,34 @@
             this.BtnAceptar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.BtnAceptar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnAceptar.ForeColor = System.Drawing.Color.White;
-            this.BtnAceptar.Location = new System.Drawing.Point(99, 179);
+            this.BtnAceptar.Location = new System.Drawing.Point(173, 180);
             this.BtnAceptar.Name = "BtnAceptar";
             this.BtnAceptar.Size = new System.Drawing.Size(88, 32);
             this.BtnAceptar.TabIndex = 27;
             this.BtnAceptar.Text = "ACEPTAR";
             this.BtnAceptar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.BtnAceptar.Click += new System.EventHandler(this.BtnAceptar_Click);
+            // 
+            // BtnCancelar
+            // 
+            this.BtnCancelar.BackColor = System.Drawing.Color.DodgerBlue;
+            this.BtnCancelar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.BtnCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnCancelar.ForeColor = System.Drawing.Color.White;
+            this.BtnCancelar.Location = new System.Drawing.Point(24, 180);
+            this.BtnCancelar.Name = "BtnCancelar";
+            this.BtnCancelar.Size = new System.Drawing.Size(88, 32);
+            this.BtnCancelar.TabIndex = 28;
+            this.BtnCancelar.Text = "CANCELAR";
+            this.BtnCancelar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.BtnCancelar.Click += new System.EventHandler(this.BtnCancelar_Click);
             // 
             // FrmIngresoCantidades
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 233);
+            this.Controls.Add(this.BtnCancelar);
             this.Controls.Add(this.BtnAceptar);
             this.Controls.Add(this.NumEncomiendas);
             this.Controls.Add(this.NumPasajes);
@@ -124,5 +141,6 @@
         private System.Windows.Forms.NumericUpDown NumPasajes;
         private System.Windows.Forms.NumericUpDown NumEncomiendas;
         private System.Windows.Forms.Label BtnAceptar;
+        private System.Windows.Forms.Label BtnCancelar;
     }
 }

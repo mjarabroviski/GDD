@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Persistencia.Entidades;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace Persistencia
 {
@@ -175,6 +176,21 @@ namespace Persistencia
                 return null;
 
             return servicios[0].Nombre;
+        }
+
+        public static List<Viaje> ObtenerTodos()
+        {
+            //var transaccion = DBManager.Instance().Connection.BeginTransaction(IsolationLevel.Serializable);
+            var param = new List<SPParameter>{ };
+            var sp = new StoreProcedure(DBQueries.Viaje.SPObtenerViajes, param);
+
+
+            var viajes = sp.ExecuteReader<Viaje>();
+
+            if (viajes == null || viajes.Count == 0)
+                return null;
+
+            return viajes;
         }
     }
 }

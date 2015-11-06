@@ -159,3 +159,8 @@ C:\Users\lucho\Desktop\TP GDD\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba
 C:\Users\lucho\Desktop\TP GDD\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Registro_Llegada_Destino.InformacionAeronave.resources
 C:\Users\lucho\Desktop\TP GDD\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Registro_Llegada_Destino.RegistroLlegadaDestino.resources
 C:\Users\lucho\Desktop\TP GDD\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.csproj.GenerateResource.Cache
+C:\Users\Mati\Desktop\UTN\Gestion de Datos\TP Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Compra.FrmIngresoCantidades.resources
+C:\Users\Mati\Desktop\UTN\Gestion de Datos\TP Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Registro_Llegada_Destino.AgregarFechaLlegada.resources
+C:\Users\Mati\Desktop\UTN\Gestion de Datos\TP Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Registro_Llegada_Destino.InformacionAeronave.resources
+C:\Users\Mati\Desktop\UTN\Gestion de Datos\TP Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Registro_Llegada_Destino.RegistroLlegadaDestino.resources
+C:\Users\Mati\Desktop\UTN\Gestion de Datos\TP Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Compra.FrmCargaDatosPasajero.resources
