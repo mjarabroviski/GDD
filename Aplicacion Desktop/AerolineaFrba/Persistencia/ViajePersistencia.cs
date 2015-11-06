@@ -190,6 +190,7 @@ namespace Persistencia
             var sp = new StoreProcedure(DBQueries.Aeronave.SPReemplazoPorServicio, param);
 
             return sp.ExecuteNonQuery(null);
+        }
 
         public static List<Viaje> ObtenerViaje(int ID_Aeronave, int ID_Ruta, DateTime fechasalida)
         {
