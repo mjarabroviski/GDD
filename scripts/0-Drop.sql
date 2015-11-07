@@ -101,6 +101,7 @@ DROP PROCEDURE [EL_PUNTERO].[ReemplazoAeronavePorServicio];
 DROP FUNCTION [EL_PUNTERO].[ObtenerAeronaveDeReemplazoPorServicio];
 DROP PROCEDURE [EL_PUNTERO].[SeleccionReemplazoAeronavePorServicio];
 DROP PROCEDURE [EL_PUNTERO].[HabilitarAeronavesQueVolvieronDeBajaServicio];
+DROP PROCEDURE [EL_PUNTERO].[GetFuncionalidadPorNombre];
 
 DROP PROCEDURE [EL_PUNTERO].[ActualizarRolPorID];
 DROP PROCEDURE [EL_PUNTERO].[EliminarFuncionalidadesPorRol];
@@ -128,6 +129,9 @@ DROP PROCEDURE [EL_PUNTERO].[GenerarViaje];
 DROP PROCEDURE [EL_PUNTERO].[HabilitarAeronavesQueVolvieronDeBaja];
 DROP PROCEDURE [EL_PUNTERO].[ValidarHorarioDeAeronave];
 DROP PROCEDURE [EL_PUNTERO].[GetAeronaves]
+DROP PROCEDURE [EL_PUNTERO].[CiudadDestinoPorIDRuta];
+DROP PROCEDURE [EL_PUNTERO].[CiudadOrigenPorIDRuta];
+DROP PROCEDURE [EL_PUNTERO].[FiltrarViajes];
 
 DROP TRIGGER [EL_PUNTERO].[Tr_DeshabilitarUsuariosConRolDeshabilitado];
 

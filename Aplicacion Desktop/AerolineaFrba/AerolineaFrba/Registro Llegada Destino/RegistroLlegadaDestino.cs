@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Persistencia.Entidades;
 using Persistencia;
-using AerolineaFrba.Home_Administrador;
+using AerolineaFrba.Home;
 using System.Globalization;
 
 namespace AerolineaFrba.Registro_Llegada_Destino
@@ -60,9 +60,6 @@ namespace AerolineaFrba.Registro_Llegada_Destino
             var dialogAnswer = MessageBox.Show("Esta seguro que quiere cancelar la operacion?", "Atencion", MessageBoxButtons.YesNo);
             if (DialogResult.Yes == dialogAnswer)
             {
-                Hide();
-                var home = new HomeAdministrador();
-                home.ShowDialog();
                 Close();
             }
         }

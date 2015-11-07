@@ -40,7 +40,7 @@ namespace AerolineaFrba.LogIn
 
                 //Impacto el cambio en la base de datos
                 UsuarioPersistencia.CambiarContrasena(usuario, hashContrasena);
-                MessageBox.Show("Las contrasenas informadas no coinciden.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Contraseña modificada satisfactoriamente.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
                 Close();
             }
@@ -51,22 +51,8 @@ namespace AerolineaFrba.LogIn
             var dialogAnswer = MessageBox.Show("Esta seguro que quiere cancelar la operacion?", "Atencion", MessageBoxButtons.YesNo);
             if (DialogResult.Yes == dialogAnswer)
             {
-                InicioAdministrador inic;
-                Hide();
-                inic = new InicioAdministrador();
-                inic.ShowDialog();
                 Close();
             }
-        }
-
-        private void TxtContrasena_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ResetearContrasena_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

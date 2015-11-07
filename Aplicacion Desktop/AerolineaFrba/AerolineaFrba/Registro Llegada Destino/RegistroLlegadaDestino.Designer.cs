@@ -175,11 +175,11 @@
             this.Btn_Cancelar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Btn_Cancelar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_Cancelar.ForeColor = System.Drawing.Color.White;
-            this.Btn_Cancelar.Location = new System.Drawing.Point(57, 256);
+            this.Btn_Cancelar.Location = new System.Drawing.Point(249, 256);
             this.Btn_Cancelar.Name = "Btn_Cancelar";
             this.Btn_Cancelar.Size = new System.Drawing.Size(76, 23);
             this.Btn_Cancelar.TabIndex = 95;
-            this.Btn_Cancelar.Text = "HOME";
+            this.Btn_Cancelar.Text = "CANCELAR";
             this.Btn_Cancelar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.Btn_Cancelar.Click += new System.EventHandler(this.Btn_Cancelar_Click_1);
             // 
@@ -190,7 +190,7 @@
             this.Btn_Finalizar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_Finalizar.Enabled = false;
             this.Btn_Finalizar.ForeColor = System.Drawing.Color.White;
-            this.Btn_Finalizar.Location = new System.Drawing.Point(246, 256);
+            this.Btn_Finalizar.Location = new System.Drawing.Point(51, 256);
             this.Btn_Finalizar.Name = "Btn_Finalizar";
             this.Btn_Finalizar.Size = new System.Drawing.Size(76, 23);
             this.Btn_Finalizar.TabIndex = 94;
@@ -202,7 +202,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(89)))), ((int)(((byte)(182)))));
+            this.label4.ForeColor = System.Drawing.Color.DodgerBlue;
             this.label4.Location = new System.Drawing.Point(193, 123);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(15, 20);
@@ -214,7 +214,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(89)))), ((int)(((byte)(182)))));
+            this.label3.ForeColor = System.Drawing.Color.DodgerBlue;
             this.label3.Location = new System.Drawing.Point(193, 85);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(15, 20);
@@ -226,7 +226,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(89)))), ((int)(((byte)(182)))));
+            this.label2.ForeColor = System.Drawing.Color.DodgerBlue;
             this.label2.Location = new System.Drawing.Point(192, 43);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(15, 20);
@@ -238,7 +238,7 @@
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(89)))), ((int)(((byte)(182)))));
+            this.label16.ForeColor = System.Drawing.Color.DodgerBlue;
             this.label16.Location = new System.Drawing.Point(99, 173);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(15, 20);

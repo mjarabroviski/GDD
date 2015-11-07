@@ -34,6 +34,8 @@
             this.TxtContrasena = new System.Windows.Forms.TextBox();
             this.LblAceptar = new System.Windows.Forms.Label();
             this.btnVolver = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label3
@@ -71,7 +73,6 @@
             this.TxtContrasena.PasswordChar = '*';
             this.TxtContrasena.Size = new System.Drawing.Size(296, 20);
             this.TxtContrasena.TabIndex = 12;
-            this.TxtContrasena.TextChanged += new System.EventHandler(this.TxtContrasena_TextChanged);
             // 
             // LblAceptar
             // 
@@ -101,11 +102,37 @@
             this.btnVolver.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.label1.Location = new System.Drawing.Point(173, 25);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(15, 20);
+            this.label1.TabIndex = 84;
+            this.label1.Text = "*";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.label4.Location = new System.Drawing.Point(222, 75);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(15, 20);
+            this.label4.TabIndex = 85;
+            this.label4.Text = "*";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // ResetearContrasena
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(408, 206);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -114,7 +141,6 @@
             this.Controls.Add(this.LblAceptar);
             this.Name = "ResetearContrasena";
             this.Text = "Resetear Contraseña";
-            this.Load += new System.EventHandler(this.ResetearContrasena_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -128,5 +154,7 @@
         private System.Windows.Forms.TextBox TxtContrasena;
         private System.Windows.Forms.Label LblAceptar;
         private System.Windows.Forms.Label btnVolver;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label4;
     }
 }

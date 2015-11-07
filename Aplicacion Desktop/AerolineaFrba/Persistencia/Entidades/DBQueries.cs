@@ -33,6 +33,8 @@ namespace Persistencia.Entidades
         {
             public static String SPGetFuncionalidades = "EL_PUNTERO.GetFuncionalidades";
             public static String SPGetFuncionalidadesPorRol = "EL_PUNTERO.GetFuncionalidadesPorRol";
+            public static String SPGetFuncionalidadPorNombre = "EL_PUNTERO.GetFuncionalidadPorNombre";
+            public static String SPGetFuncionalidadesPorNombreRol = "EL_PUNTERO.GetFuncionalidadesPorNombreRol";
         }
 
         public static class Ruta

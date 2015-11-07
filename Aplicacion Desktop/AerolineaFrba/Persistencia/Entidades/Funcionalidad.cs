@@ -30,16 +30,15 @@ namespace Persistencia.Entidades
         public static Funcionalidades? ObtenerPorNombre (string func)
         {
             if (func == "ABM de Rol") return Funcionalidades.ABM_Rol;
-            if (func == "LogIn y Seguridad") return Funcionalidades.LogIn_Seguridad;
             if (func == "Registro de Usuario") return Funcionalidades.Registro_Usuario;
             if (func == "ABM de Ciudad") return Funcionalidades.ABM_Ciudad;
             if (func == "ABM de Ruta Aerea") return Funcionalidades.ABM_Ruta_Aerea;
             if (func == "ABM de Aeronave") return Funcionalidades.ABM_Ruta_Aerea;
             if (func == "Generacion de Viaje") return Funcionalidades.Generacion_Viaje;
             if (func == "Registro de Llegada a Destino") return Funcionalidades.Registro_Llegada_Destino;
-            if (func == "Compra de Pasaje/Encomienda") return Funcionalidades.Compra_Pasaje_Encomienda;
-            if (func == "Devolucion/Cancelacion de Pasaje/Encomienda") return Funcionalidades.Devolucion_Cancelacion_Pasaje_Encomienda;
-            if (func == "Consulta de Millas de Pasajero Frecuente") return Funcionalidades.Consulta_Millas;
+            if (func == "Compra de pasaje/encomienda") return Funcionalidades.Compra_Pasaje_Encomienda;
+            if (func == "Devolucion/Cancelacion de pasaje/encomienda") return Funcionalidades.Devolucion_Cancelacion_Pasaje_Encomienda;
+            if (func == "Consulta de millas de pasajero frecuente") return Funcionalidades.Consulta_Millas;
             if (func == "Canje de Millas") return Funcionalidades.Canje_Millas;
             if (func == "Listado Estadistico") return Funcionalidades.Listado_Estadistico;
 
@@ -50,7 +49,6 @@ namespace Persistencia.Entidades
     public enum Funcionalidades
     {
         ABM_Rol,
-        LogIn_Seguridad,
         Registro_Usuario,
         ABM_Ciudad,
         ABM_Ruta_Aerea,

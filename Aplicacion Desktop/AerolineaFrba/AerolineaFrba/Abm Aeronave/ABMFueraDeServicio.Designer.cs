@@ -36,6 +36,8 @@
             this.BtnCancelar = new System.Windows.Forms.Label();
             this.txtAeronave = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label4
@@ -60,7 +62,7 @@
             // 
             this.DtpFechaComienzo.CustomFormat = "dd/MM/yyyy HH:mm";
             this.DtpFechaComienzo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.DtpFechaComienzo.Location = new System.Drawing.Point(164, 49);
+            this.DtpFechaComienzo.Location = new System.Drawing.Point(169, 49);
             this.DtpFechaComienzo.Name = "DtpFechaComienzo";
             this.DtpFechaComienzo.Size = new System.Drawing.Size(153, 20);
             this.DtpFechaComienzo.TabIndex = 84;
@@ -70,7 +72,7 @@
             // 
             this.DtpFechaReinicio.CustomFormat = "dd/MM/yyyy HH:mm";
             this.DtpFechaReinicio.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.DtpFechaReinicio.Location = new System.Drawing.Point(164, 89);
+            this.DtpFechaReinicio.Location = new System.Drawing.Point(169, 89);
             this.DtpFechaReinicio.Name = "DtpFechaReinicio";
             this.DtpFechaReinicio.Size = new System.Drawing.Size(153, 20);
             this.DtpFechaReinicio.TabIndex = 85;
@@ -105,7 +107,7 @@
             // 
             // txtAeronave
             // 
-            this.txtAeronave.Location = new System.Drawing.Point(164, 12);
+            this.txtAeronave.Location = new System.Drawing.Point(169, 12);
             this.txtAeronave.Name = "txtAeronave";
             this.txtAeronave.Size = new System.Drawing.Size(100, 20);
             this.txtAeronave.TabIndex = 88;
@@ -119,11 +121,37 @@
             this.label2.TabIndex = 89;
             this.label2.Text = "AERONAVE";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.label3.Location = new System.Drawing.Point(143, 49);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(15, 20);
+            this.label3.TabIndex = 90;
+            this.label3.Text = "*";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.label5.Location = new System.Drawing.Point(153, 90);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(15, 20);
+            this.label5.TabIndex = 91;
+            this.label5.Text = "*";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // ABMFueraDeServicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(334, 183);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtAeronave);
             this.Controls.Add(this.BtnGrabar);
@@ -150,5 +178,7 @@
         private System.Windows.Forms.Label BtnCancelar;
         private System.Windows.Forms.TextBox txtAeronave;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label5;
     }
 }

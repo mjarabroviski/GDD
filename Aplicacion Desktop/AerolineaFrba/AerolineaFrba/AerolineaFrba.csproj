@@ -165,17 +165,11 @@
     <Compile Include="Generacion Viaje\GenercionViaje.Designer.cs">
       <DependentUpon>GenercionViaje.cs</DependentUpon>
     </Compile>
-    <Compile Include="Home Administrador\HomeAdministrador.cs">
+    <Compile Include="Home\HomeUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Home Administrador\HomeAdministrador.Designer.cs">
-      <DependentUpon>HomeAdministrador.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Home Cliente\HomeCliente.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Home Cliente\HomeCliente.Designer.cs">
-      <DependentUpon>HomeCliente.cs</DependentUpon>
+    <Compile Include="Home\HomeUsuario.Designer.cs">
+      <DependentUpon>HomeUsuario.cs</DependentUpon>
     </Compile>
     <Compile Include="Listado Estadistico\Form1.cs">
       <SubType>Form</SubType>
@@ -272,14 +266,11 @@
     <EmbeddedResource Include="Compra\FrmIngresoCantidades.resx">
       <DependentUpon>FrmIngresoCantidades.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Home Administrador\HomeAdministrador.resx">
-      <DependentUpon>HomeAdministrador.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Home Cliente\HomeCliente.resx">
-      <DependentUpon>HomeCliente.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Generacion Viaje\GenercionViaje.resx">
       <DependentUpon>GenercionViaje.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Home\HomeUsuario.resx">
+      <DependentUpon>HomeUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LogIn\ResetearContrasena.resx">
       <DependentUpon>ResetearContrasena.cs</DependentUpon>

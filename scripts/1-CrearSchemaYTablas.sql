@@ -91,7 +91,7 @@ INSERT INTO EL_PUNTERO.TL_FUNCIONALIDAD(Descripcion) VALUES ('ABM de Ciudad');
 INSERT INTO EL_PUNTERO.TL_FUNCIONALIDAD(Descripcion) VALUES ('ABM de Ruta Aerea');
 INSERT INTO EL_PUNTERO.TL_FUNCIONALIDAD(Descripcion) VALUES ('ABM de Aeronave');
 INSERT INTO EL_PUNTERO.TL_FUNCIONALIDAD(Descripcion) VALUES ('Generacion de Viaje');
-INSERT INTO EL_PUNTERO.TL_FUNCIONALIDAD(Descripcion) VALUES ('Registro de Llamada a Destino');
+INSERT INTO EL_PUNTERO.TL_FUNCIONALIDAD(Descripcion) VALUES ('Registro de Llegada a Destino');
 INSERT INTO EL_PUNTERO.TL_FUNCIONALIDAD(Descripcion) VALUES ('Compra de pasaje/encomienda');
 INSERT INTO EL_PUNTERO.TL_FUNCIONALIDAD(Descripcion) VALUES ('Devolucion/Cancelacion de pasaje y/o encomienda');
 INSERT INTO EL_PUNTERO.TL_FUNCIONALIDAD(Descripcion) VALUES ('Consulta de millas de pasajero frecuente');
@@ -117,7 +117,6 @@ INSERT INTO EL_PUNTERO.TL_FUNCIONALIDAD_ROL (ID_Rol, ID_Funcionalidad) (
 		FROM EL_PUNTERO.TL_Rol, EL_PUNTERO.TL_Funcionalidad
 		WHERE EL_PUNTERO.TL_Rol.Descripcion = 'Administrador'
 		AND (EL_PUNTERO.TL_Funcionalidad.Descripcion = 'ABM de Rol'
-		OR EL_PUNTERO.TL_Funcionalidad.Descripcion = 'Consulta de millas de pasajero frecuente'
 		OR EL_PUNTERO.TL_Funcionalidad.Descripcion = 'Registro de Usuario'
 		OR EL_PUNTERO.TL_Funcionalidad.Descripcion = 'ABM de Ciudad'
 		OR EL_PUNTERO.TL_Funcionalidad.Descripcion = 'ABM de Ruta Aerea'

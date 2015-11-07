@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Persistencia.Entidades;
 using Persistencia;
-using AerolineaFrba.Home_Administrador;
+using AerolineaFrba.Home;
 using System.Globalization;
 
 
@@ -121,9 +121,6 @@ namespace AerolineaFrba.Generacion_Viaje
             var dialogAnswer = MessageBox.Show("Esta seguro que quiere cancelar la operacion?", "Atencion", MessageBoxButtons.YesNo);
             if (DialogResult.Yes == dialogAnswer)
             {
-                Hide();
-                var home = new HomeAdministrador();
-                home.ShowDialog();
                 Close();
             }
         }
@@ -159,9 +156,6 @@ namespace AerolineaFrba.Generacion_Viaje
                 if (DialogResult.Yes == dialogAnswer)
                 {
                     var dialogAnswer2 = MessageBox.Show("Viaje generado satisfactoriamente", "Informacion", MessageBoxButtons.OK);
-                    Hide();
-                    var home = new HomeAdministrador();
-                    home.ShowDialog();
                     Close();
                 }
 

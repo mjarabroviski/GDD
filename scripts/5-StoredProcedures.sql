@@ -805,4 +805,16 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE [EL_PUNTERO].[GetFuncionalidadPorNombre]
+@Descripcion nvarchar(255)
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	SELECT *
+	FROM [EL_PUNTERO].[TL_Funcionalidad] 
+	WHERE Descripcion = @Descripcion
+END
+GO
+
 COMMIT
