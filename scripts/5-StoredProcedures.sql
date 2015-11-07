@@ -817,4 +817,18 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE [EL_PUNTERO].[GetFuncionalidadesPorNombreRol]
+@Nombre_Rol nvarchar(255)
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	SELECT *
+	FROM [EL_PUNTERO].[TL_Funcionalidad] F
+	INNER JOIN [EL_PUNTERO].TL_FUNCIONALIDAD_ROL FR ON F.ID_Funcionalidad = FR.ID_Funcionalidad 
+	INNER JOIN EL_PUNTERO.TL_ROL R ON R.ID_Rol = FR.ID_Rol 
+	WHERE R.Descripcion = @Nombre_Rol
+END
+GO
+
 COMMIT
