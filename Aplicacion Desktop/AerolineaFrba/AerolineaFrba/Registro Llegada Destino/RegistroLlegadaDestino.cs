@@ -169,5 +169,10 @@ namespace AerolineaFrba.Registro_Llegada_Destino
             Btn_Limpiar.Enabled = false;
             
         }
+
+        private void CboAeronave_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

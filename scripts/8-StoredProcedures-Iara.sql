@@ -61,6 +61,18 @@ BEGIN
 END
 GO
 
+CREATE FUNCTION [EL_PUNTERO].[ObtenerIDBajaServicioMax](@ID_AeronaveBaja int)
+RETURNS int
+AS
+BEGIN
+DECLARE @id int
+
+	SELECT @id = MAX(ID_Baja_Servicio) FROM [EL_PUNTERO].[TL_BAJA_SERVICIO_AERONAVE]
+	WHERE ID_Aeronave = @ID_AeronaveBaja
+
+	RETURN @id
+END
+GO
 
 CREATE PROCEDURE [EL_PUNTERO].[HabilitarAeronavesQueVolvieronDeBajaServicio]
 AS
@@ -74,19 +86,6 @@ BEGIN
 					WHERE ID_Baja_Servicio = [EL_PUNTERO].[ObtenerIDBajaServicioMax](ID_AERONAVE)
 					AND Fecha_Reinicio_Servicio <= GETDATE())
 	END
-GO
-
-CREATE FUNCTION [EL_PUNTERO].[ObtenerIDBajaServicioMax](@ID_AeronaveBaja int)
-RETURNS int
-AS
-BEGIN
-DECLARE @id int
-
-	SELECT @id = MAX(ID_Baja_Servicio) FROM [EL_PUNTERO].[TL_BAJA_SERVICIO_AERONAVE]
-	WHERE ID_Aeronave = @ID_AeronaveBaja
-
-	RETURN @id
-END
 GO
 
 
@@ -187,6 +186,7 @@ BEGIN
 			AND V.Fecha_Llegada_Estimada = @Fecha_Llegada_Estimada
 			AND V.ID_Aeronave = @ID_Aeronave
 END
+GO
 
 CREATE PROCEDURE [EL_PUNTERO].[ValidarAeronaveDelViaje]
 @Fecha_Salida datetime,
@@ -202,7 +202,6 @@ BEGIN
 END
 GO
 
-//AGREGAR AL DE MELU EL ORDEN
 CREATE PROCEDURE [EL_PUNTERO].[GetAeronaves]
 AS
 BEGIN
@@ -248,5 +247,4 @@ BEGIN
 	WHERE ID_Viaje = @ID; 
 END
 GO
-
 COMMIT

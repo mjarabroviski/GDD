@@ -67,6 +67,7 @@
             this.CboAeronave.Size = new System.Drawing.Size(165, 21);
             this.CboAeronave.TabIndex = 70;
             this.CboAeronave.Text = "MATRICULA AERONAVE";
+            this.CboAeronave.SelectedIndexChanged += new System.EventHandler(this.CboAeronave_SelectedIndexChanged);
             // 
             // CboCiudadDestino
             // 
