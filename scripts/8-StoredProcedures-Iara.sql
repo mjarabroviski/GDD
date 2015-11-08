@@ -61,20 +61,32 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE [EL_PUNTERO].[HabilitarAeronavesQueVolvieronDeBaja]
+
+CREATE PROCEDURE [EL_PUNTERO].[HabilitarAeronavesQueVolvieronDeBajaServicio]
 AS
 BEGIN
-	SET NOCOUNT ON;
 
 	UPDATE [EL_PUNTERO].[TL_AERONAVE] 
 	SET Baja_Por_Fuera_De_Servicio = 0
 	WHERE Baja_Por_Fuera_De_Servicio = 1
 	AND ID_AERONAVE IN (
-					SELECT ID_Aeronave FROM [EL_PUNTERO].[TL_BAJA_SERVICIO_AERONAVE]
-					WHERE [EL_PUNTERO].[TL_AERONAVE].ID_AERONAVE = ID_AERONAVE
-					AND Fecha_Reinicio_Servicio < GETDATE()
-					AND [EL_PUNTERO].[TL_AERONAVE].BAJA_POR_FUERA_DE_SERVICIO > FECHA_FUERA_DE_SERVICIO)
+					SELECT ID_Aeronave FROM [EL_PUNTERO].[TL_BAJA_SERVICIO_AERONAVE] 
+					WHERE ID_Baja_Servicio = [EL_PUNTERO].[ObtenerIDBajaServicioMax](ID_AERONAVE)
+					AND Fecha_Reinicio_Servicio <= GETDATE())
 	END
+GO
+
+CREATE FUNCTION [EL_PUNTERO].[ObtenerIDBajaServicioMax](@ID_AeronaveBaja int)
+RETURNS int
+AS
+BEGIN
+DECLARE @id int
+
+	SELECT @id = MAX(ID_Baja_Servicio) FROM [EL_PUNTERO].[TL_BAJA_SERVICIO_AERONAVE]
+	WHERE ID_Aeronave = @ID_AeronaveBaja
+
+	RETURN @id
+END
 GO
 
 
@@ -82,7 +94,7 @@ CREATE PROCEDURE [EL_PUNTERO].[ObtenerAeronavesHabilitadas]
 AS
 BEGIN
 	SET NOCOUNT ON;
-	EXECUTE [EL_PUNTERO].[HabilitarAeronavesQueVolvieronDeBaja];
+	EXECUTE [EL_PUNTERO].[HabilitarAeronavesQueVolvieronDeBajaServicio];
 	SELECT *
 	FROM [EL_PUNTERO].[TL_Aeronave]
 	WHERE Baja_Por_Fuera_De_Servicio = 0 AND Baja_Por_Vida_Util=0

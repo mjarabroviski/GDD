@@ -153,7 +153,6 @@
             this.Txt_TipoServicio.Name = "Txt_TipoServicio";
             this.Txt_TipoServicio.Size = new System.Drawing.Size(164, 20);
             this.Txt_TipoServicio.TabIndex = 13;
-            this.Txt_TipoServicio.TextChanged += new System.EventHandler(this.Txt_TipoServicio_TextChanged);
             // 
             // Txt_BajaFuera
             // 

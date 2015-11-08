@@ -121,9 +121,6 @@ namespace AerolineaFrba.Generacion_Viaje
             var dialogAnswer = MessageBox.Show("Esta seguro que quiere cancelar la operacion?", "Atencion", MessageBoxButtons.YesNo);
             if (DialogResult.Yes == dialogAnswer)
             {
-                Hide();
-                var home = new HomeAdministrador();
-                home.ShowDialog();
                 Close();
             }
         }
@@ -159,9 +156,6 @@ namespace AerolineaFrba.Generacion_Viaje
                 if (DialogResult.Yes == dialogAnswer)
                 {
                     var dialogAnswer2 = MessageBox.Show("Viaje generado satisfactoriamente", "Informacion", MessageBoxButtons.OK);
-                    Hide();
-                    var home = new HomeAdministrador();
-                    home.ShowDialog();
                     Close();
                 }
 
@@ -205,14 +199,6 @@ namespace AerolineaFrba.Generacion_Viaje
             }
          }
 
-        private void Btn_SeleccionarCiudadDestino_Click(object sender, EventArgs e)
-        {
-            if(CboCiudadDestino.Text != "CIUDAD DESTINO"){
-                ObtenerServiciosDisponibles();
-                DtpFechaSalida.Enabled = true;
-                DtpHoraSalida.Enabled = true;
-            }
-        }
 
         private void CboAeronave_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -311,5 +297,20 @@ namespace AerolineaFrba.Generacion_Viaje
               CboCiudadOrigen.Enabled = true;
           }
 
+        private void Btn_SeleccionarCiudadDestino_Click_1(object sender, EventArgs e)
+        {
+            if(CboCiudadDestino.Text != "CIUDAD DESTINO"){
+                ObtenerServiciosDisponibles();
+                DtpFechaSalida.Enabled = true;
+                DtpHoraSalida.Enabled = true;
+            }
+        }
+
+        private void Btn_Matricula_Click(object sender, EventArgs e)
+        {
+            CboCiudadOrigen.Enabled = true;
+        }
+
     }
+
 }

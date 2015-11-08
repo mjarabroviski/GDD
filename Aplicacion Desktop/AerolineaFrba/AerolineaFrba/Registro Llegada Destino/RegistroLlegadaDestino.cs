@@ -36,7 +36,7 @@ namespace AerolineaFrba.Registro_Llegada_Destino
             CboCiudadOrigen.ValueMember = "ID";
             CboCiudadOrigen.DisplayMember = "Nombre";
 
-            CboAeronave.DataSource = AeronavePersistencia.ObtenerTodas();
+            CboAeronave.DataSource = AeronavePersistencia.ObtenerAeronavesHabilitadas();
             CboAeronave.ValueMember = "ID";
             CboAeronave.DisplayMember = "Matricula";
 
