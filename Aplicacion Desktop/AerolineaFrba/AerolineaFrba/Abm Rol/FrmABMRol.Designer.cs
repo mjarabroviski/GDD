@@ -141,7 +141,7 @@
             this.BtnListo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.BtnListo.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnListo.ForeColor = System.Drawing.Color.White;
-            this.BtnListo.Location = new System.Drawing.Point(588, 445);
+            this.BtnListo.Location = new System.Drawing.Point(31, 445);
             this.BtnListo.Name = "BtnListo";
             this.BtnListo.Size = new System.Drawing.Size(88, 32);
             this.BtnListo.TabIndex = 36;
@@ -155,7 +155,7 @@
             this.BtnNuevo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.BtnNuevo.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnNuevo.ForeColor = System.Drawing.Color.White;
-            this.BtnNuevo.Location = new System.Drawing.Point(31, 445);
+            this.BtnNuevo.Location = new System.Drawing.Point(564, 445);
             this.BtnNuevo.Name = "BtnNuevo";
             this.BtnNuevo.Size = new System.Drawing.Size(112, 32);
             this.BtnNuevo.TabIndex = 35;

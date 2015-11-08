@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using Persistencia;
 using Persistencia.Entidades;
 using Herramientas;
-using AerolineaFrba.Home_Administrador;
+using AerolineaFrba.Home;
 
 namespace AerolineaFrba.Registro_de_Usuario
 {
@@ -73,9 +73,6 @@ namespace AerolineaFrba.Registro_de_Usuario
                         
                         var dialogAnswer2 = MessageBox.Show("Usuario registrado correctamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         if (dialogAnswer2 == DialogResult.OK) {
-                            Hide();
-                            HomeAdministrador homeAdmin = new HomeAdministrador();
-                            homeAdmin.ShowDialog();
                             Close(); 
                          }
                     }
@@ -96,9 +93,6 @@ namespace AerolineaFrba.Registro_de_Usuario
             var dialogAnswer = MessageBox.Show("Esta seguro que quiere cancelar la operacion?", "Atencion", MessageBoxButtons.YesNo);
             if (DialogResult.Yes == dialogAnswer)
             {
-                Hide();
-                HomeAdministrador homeAdmin = new HomeAdministrador();
-                homeAdmin.ShowDialog();
                 Close();
             }
         }

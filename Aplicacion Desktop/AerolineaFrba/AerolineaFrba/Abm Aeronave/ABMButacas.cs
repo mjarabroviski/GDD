@@ -198,7 +198,7 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void BtnAgregarButacas_Click(object sender, EventArgs e)
         {
-            var alta = new ABMAltaButacas(aeronave, transaccionConcurrente, true);
+            var alta = new ABMAltaButacas(aeronave, transaccionConcurrente, true, null);
             alta.ShowDialog();
 
             if (alta.accionTerminada)

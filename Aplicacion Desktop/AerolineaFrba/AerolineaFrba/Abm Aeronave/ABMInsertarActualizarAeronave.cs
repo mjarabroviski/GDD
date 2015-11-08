@@ -19,6 +19,8 @@ namespace AerolineaFrba.Abm_Aeronave
         public Aeronave aeronaveNueva { get; set; }
         public bool accionTerminada = false;
         public bool modoInsertarComun = false;
+        public DateTime FechaComienzo = DateTime.MinValue;
+        public DateTime FechaReinicio = DateTime.MinValue;
 
         public ABMInsertarActualizarAeronave(Aeronave aeronave, Boolean modificar)
         {
@@ -32,6 +34,15 @@ namespace AerolineaFrba.Abm_Aeronave
             }     
         }
 
+        public ABMInsertarActualizarAeronave(Aeronave aeronave,DateTime comienzo,DateTime fin)
+        {
+            InitializeComponent();
+
+            aeronaveAReemplazar = aeronave;
+            FechaComienzo = comienzo;
+            FechaReinicio = fin;          
+        }
+
         private void ABMInsertarActualizarAeronave_Load(object sender, EventArgs e)
         {
             #region Cargar Servicios
@@ -42,7 +53,7 @@ namespace AerolineaFrba.Abm_Aeronave
             #endregion
 
             //Es una modificacion
-            if (aeronaveAModificar != null) {
+            if (aeronaveAModificar != null && FechaComienzo == DateTime.MinValue) {
                 #region Cargo los datos de la aeronave
 
                 TxtMatricula.Text = aeronaveAModificar.Matricula;
@@ -123,18 +134,24 @@ namespace AerolineaFrba.Abm_Aeronave
 
                             #endregion
 
-                            var butacas = new ABMAltaButacas(aeronaveNueva, transaccion, false);
+                            var butacas = new ABMAltaButacas(aeronaveNueva, transaccion, false, aeronaveAReemplazar);
                             butacas.ShowDialog();
 
                             if (butacas.accionTerminada)
                             {
                                 transaccion.Commit();
                                 MessageBox.Show("Aeronave insertada satisfactoriamente", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                                if (aeronaveAReemplazar != null)
+                                if (aeronaveAReemplazar != null && FechaReinicio == DateTime.MinValue)
                                 {
-                                    //ASIGNA LOS VIAJES DE LA AERONAVE A REEMPLAZAR A LA NUEVA
+                                    //Asigna los viajes de la aeronave a dar de baja por fin de vida util a la nueva
                                     ViajePersistencia.ReemplazarViajesDePor(aeronaveAReemplazar,aeronaveNueva);
                                     accionTerminada = true;
+                                }
+                                if (FechaReinicio != DateTime.MinValue || FechaComienzo != DateTime.MinValue)
+                                {
+                                    //Asigna los viajes de la aeronave a dar de baja por fuera de servicio a la nueva
+                                    ViajePersistencia.ReemplazarViajesDePorServicio(aeronaveAReemplazar, aeronaveNueva,FechaComienzo,FechaReinicio);
+                                    accionTerminada = true;                                   
                                 }
                                 Close();
                             }

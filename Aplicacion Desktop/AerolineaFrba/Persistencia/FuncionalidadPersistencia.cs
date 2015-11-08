@@ -58,5 +58,32 @@ namespace Persistencia
             //Retorno una lista de Funcionalidad a partir de un ExecuteReader
             return sp.ExecuteReader<Funcionalidad>();
         }
+
+        public static Funcionalidad ObtenerPorNombre(String nombre)
+        {
+            var param = new List<SPParameter> { new SPParameter("Descripcion", nombre) };
+            var sp = new StoreProcedure(DBQueries.Funcionalidad.SPGetFuncionalidadPorNombre, param);
+
+            List<Funcionalidad> func = sp.ExecuteReader<Funcionalidad>();
+
+            if (func == null || func.Count == 0)
+                return null;
+
+            return func[0];
+        }
+
+        public static List<Funcionalidad> ObtenerFuncionalidadesPorNombreRol(String nombre)
+        {
+            var param = new List<SPParameter> { new SPParameter("Nombre_Rol", nombre) };
+            var sp = new StoreProcedure(DBQueries.Funcionalidad.SPGetFuncionalidadesPorNombreRol, param);
+
+            List<Funcionalidad> func = sp.ExecuteReader<Funcionalidad>();
+
+            if (func == null || func.Count == 0)
+                return null;
+
+            return func;
+        }
+
     }
 }

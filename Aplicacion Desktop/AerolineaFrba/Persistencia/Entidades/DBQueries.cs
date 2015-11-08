@@ -33,6 +33,8 @@ namespace Persistencia.Entidades
         {
             public static String SPGetFuncionalidades = "EL_PUNTERO.GetFuncionalidades";
             public static String SPGetFuncionalidadesPorRol = "EL_PUNTERO.GetFuncionalidadesPorRol";
+            public static String SPGetFuncionalidadPorNombre = "EL_PUNTERO.GetFuncionalidadPorNombre";
+            public static String SPGetFuncionalidadesPorNombreRol = "EL_PUNTERO.GetFuncionalidadesPorNombreRol";
         }
 
         public static class Ruta
@@ -87,6 +89,10 @@ namespace Persistencia.Entidades
             public static String SPModificarAeronave = "EL_PUNTERO.ModificarAeronave";
             public static String SPDarDeBajaPorVidaUtil = "EL_PUNTERO.DarDeBajaPorVidaUtil";
             public static String SPReemplazo = "EL_PUNTERO.ReemplazoAeronave";
+            public static String SPDarDeBajaPorFueraDeServicio = "EL_PUNTERO.DarDeBajaPorFueraDeServicio";
+            public static String SPBajaPorFueraDeServicio = "EL_PUNTERO.BajaPorFueraDeServicio";
+            public static String SPSeleccionReemplazoPorServicio = "EL_PUNTERO.SeleccionReemplazoAeronavePorServicio";
+            public static String SPReemplazoPorServicio = "EL_PUNTERO.ReemplazoAeronavePorServicio";
         }
 
         public static class Butaca
@@ -97,6 +103,7 @@ namespace Persistencia.Entidades
             public static String SPModificarButaca = "EL_PUNTERO.ModificarButaca";
             public static String SPDarDeBajaButaca = "EL_PUNTERO.DarDeBajaButaca";
             public static String SPGetMaxNroButaca = "EL_PUNTERO.GetMaxNroButaca";
+            public static String SPGetCantButacasPorAeronave = "EL_PUNTERO.GetCantButacasPorAeronave";
         }
 
         public static class Viaje
@@ -112,6 +119,7 @@ namespace Persistencia.Entidades
             public static String SPGetViajesFuturosPorAeronave = "EL_PUNTERO.GetViajesFuturosPorAeronave";
             public static String SPValidarAeronaveDelViaje = "EL_PUNTERO.ValidarAeronaveDelViaje";
             public static String SPServicioPorIDRuta = "EL_PUNTERO.ServicioPorIDRuta";
+            public static string SPObtenerViajes = "EL_PUNTERO.ObtenerViajes";
             public static String SPObtenerViaje = "EL_PUNTERO.ObtenerViaje";
             public static String SPActualizarFechaLlegada = "EL_PUNTERO.ActualizarFechaLlegada";
         }
@@ -126,6 +134,7 @@ namespace Persistencia.Entidades
         public static class Devolucion
         {
             public static String SPCancelarPasajesYEncomiendasPorBajaAeronave = "EL_PUNTERO.CancelarPasajesYEncomiendasPorBajaAeronave";
+            public static String SPCancelarPasajesYEncomiendasPorBajaServicioAeronave = "EL_PUNTERO.CancelarPasajesYEncomiendasPorBajaServicioAeronave";
         }
     }
 }

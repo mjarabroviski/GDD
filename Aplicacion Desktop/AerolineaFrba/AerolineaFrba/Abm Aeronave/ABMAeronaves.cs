@@ -77,7 +77,7 @@ namespace AerolineaFrba.Abm_Aeronave
             {
                 //El datasource se carga con todos las aeronaves de la BD
                 LimpiarFiltros();
-                ListaAeronaves = AeronavePersistencia.ObtenerTodas();
+                ListaAeronaves = AeronavePersistencia.ObtenerTodas(); //FALTA MODIFICAR LOS QUE VOLVIERON DE FUERA DE SERVICIO
                 diccionarioDeAeronaves = ListaAeronaves.ToDictionary(a => a.ID, a => a);
             }
             else
@@ -244,12 +244,13 @@ namespace AerolineaFrba.Abm_Aeronave
                         cant = AeronavePersistencia.BajaPorVidaUtil(aeronaveSeleccionada);
                         if ( cant == -1 || cant == 0)
                         {
-                            var cancelarOReemplazar = new ABMCancelarOReemplazar(aeronaveSeleccionada, true);
+                            var cancelarOReemplazar = new ABMCancelarOReemplazar(aeronaveSeleccionada, true, DateTime.Today, DateTime.Today);
                             cancelarOReemplazar.ShowDialog();
 
                             if (cancelarOReemplazar.accionTerminada)
                             {
                                 AeronavePersistencia.DarDeBajaPorVidaUtil(aeronaveSeleccionada);
+                                MessageBox.Show("La aeronave fue dada de baja por fin de vida util correctamente", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 ActualizarPantalla(null);
                             }
                         }
@@ -272,15 +273,14 @@ namespace AerolineaFrba.Abm_Aeronave
                     var dialogAnswer = MessageBox.Show(string.Format("Esta seguro que quiere dar de baja por fuera de servicio la aeronave {0}?", aeronaveSeleccionada.Matricula), "Atención", MessageBoxButtons.YesNo);
                     if (dialogAnswer == DialogResult.Yes)
                     {
-                            //FALTA PASAR A LA DE CANCELAR/REEMPLAZAR EL FALSE
-                            var fueraDeServicio = new ABMFueraDeServicio(aeronaveSeleccionada);
-                            fueraDeServicio.ShowDialog();
+                        var fueraDeServicio = new ABMFueraDeServicio(aeronaveSeleccionada);
+                        fueraDeServicio.ShowDialog();
 
-                            if (fueraDeServicio.accionTerminada)
-                            {
-                               // AeronavePersistencia.DarDeBajaPorFueraDeServucui(aeronaveSeleccionada);
-                                ActualizarPantalla(null);
-                            }
+                        if (fueraDeServicio.accionTerminadaDeUna || fueraDeServicio.accionTerminada)
+                        {
+                            MessageBox.Show("La aeronave fue dada de baja por fuera de servicio correctamente", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            ActualizarPantalla(null);
+                        }
                     }
                 }
             }

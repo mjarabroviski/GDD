@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Persistencia;
 using Persistencia.Entidades;
-using AerolineaFrba.Home_Cliente;
+using AerolineaFrba.Home;
 using Sesion;
 
 namespace AerolineaFrba.LogIn
@@ -44,8 +44,8 @@ namespace AerolineaFrba.LogIn
                 if (msg == DialogResult.Yes)
                 {
                     Hide();
-                    HomeCliente homeAdmin = new HomeCliente();
-                    homeAdmin.ShowDialog();
+                    HomeUsuario home = new HomeUsuario();
+                    home.ShowDialog();
                     Close();
                 }
                 

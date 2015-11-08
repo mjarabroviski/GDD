@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using Persistencia;
 using Persistencia.Entidades;
 using Herramientas;
-using AerolineaFrba.Home_Administrador;
+using AerolineaFrba.Home;
 using Sesion;
 
 namespace AerolineaFrba.LogIn
@@ -90,10 +90,11 @@ namespace AerolineaFrba.LogIn
                     var dialogAnswer2 = MessageBox.Show("Usuario logueado correctamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     if (dialogAnswer2 == DialogResult.OK)
                     {
+                        
                         AdministradorSesion.UsuarioActual = user;
                         Hide();
-                        HomeAdministrador homeAdmin = new HomeAdministrador();
-                        homeAdmin.ShowDialog();
+                        HomeUsuario home = new HomeUsuario();
+                        home.ShowDialog();
                         Close();
                     }
 
@@ -116,11 +117,8 @@ namespace AerolineaFrba.LogIn
             }
             else
             {
-
-                Hide();
                 ResetearContrasena reset = new ResetearContrasena(user);
                 reset.ShowDialog();
-                Close();
             }
         }
 

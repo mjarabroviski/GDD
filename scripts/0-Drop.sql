@@ -79,6 +79,7 @@ DROP PROCEDURE [EL_PUNTERO].[ObtenerKGSDisponibles];
 DROP PROCEDURE [EL_PUNTERO].[ModificarAeronave];
 DROP PROCEDURE [EL_PUNTERO].[GetTipoButacaPorButaca];
 DROP PROCEDURE [EL_PUNTERO].[GetButacasDeAeronave];
+DROP PROCEDURE [EL_PUNTERO].[GetCantButacasPorAeronave];
 
 DROP PROCEDURE [EL_PUNTERO].[InsertarIDDevolucion];
 DROP PROCEDURE [EL_PUNTERO].[SeleccionReemplazoAeronave];
@@ -93,6 +94,14 @@ DROP PROCEDURE [EL_PUNTERO].[ReemplazoAeronave];
 DROP PROCEDURE [EL_PUNTERO].[ObtenerButacasDisponibles];
 DROP PROCEDURE [EL_PUNTERO].[ObtenerKGSDisponibles];
 DROP PROCEDURE [EL_PUNTERO].[CancelarPasajesYEncomiendasPorBajaAeronave];
+DROP PROCEDURE [EL_PUNTERO].[DarDeBajaPorFueraDeServicio];
+DROP PROCEDURE [EL_PUNTERO].[BajaPorFueraDeServicio];
+DROP PROCEDURE [EL_PUNTERO].[CancelarPasajesYEncomiendasPorBajaServicioAeronave];
+DROP PROCEDURE [EL_PUNTERO].[ReemplazoAeronavePorServicio];
+DROP FUNCTION [EL_PUNTERO].[ObtenerAeronaveDeReemplazoPorServicio];
+DROP PROCEDURE [EL_PUNTERO].[SeleccionReemplazoAeronavePorServicio];
+DROP PROCEDURE [EL_PUNTERO].[HabilitarAeronavesQueVolvieronDeBajaServicio];
+DROP PROCEDURE [EL_PUNTERO].[GetFuncionalidadPorNombre];
 
 DROP PROCEDURE [EL_PUNTERO].[ActualizarRolPorID];
 DROP PROCEDURE [EL_PUNTERO].[EliminarFuncionalidadesPorRol];
@@ -120,6 +129,9 @@ DROP PROCEDURE [EL_PUNTERO].[GenerarViaje];
 DROP PROCEDURE [EL_PUNTERO].[HabilitarAeronavesQueVolvieronDeBaja];
 DROP PROCEDURE [EL_PUNTERO].[ValidarHorarioDeAeronave];
 DROP PROCEDURE [EL_PUNTERO].[GetAeronaves]
+DROP PROCEDURE [EL_PUNTERO].[CiudadDestinoPorIDRuta];
+DROP PROCEDURE [EL_PUNTERO].[CiudadOrigenPorIDRuta];
+DROP PROCEDURE [EL_PUNTERO].[FiltrarViajes];
 
 DROP TRIGGER [EL_PUNTERO].[Tr_DeshabilitarUsuariosConRolDeshabilitado];
 
@@ -127,5 +139,6 @@ DROP FUNCTION [EL_PUNTERO].[CompraAPartirDeEncomienda];
 DROP FUNCTION [EL_PUNTERO].[CompraAPartirDePasaje];
 DROP FUNCTION [EL_PUNTERO].[DevolucionAPartirDePasaje];
 DROP FUNCTION [EL_PUNTERO].[ObtenerAeronaveDeReemplazo];
+DROP FUNCTION [EL_PUNTERO].[ObtenerIDBajaServicioMax];
 
 DROP SCHEMA [EL_PUNTERO];

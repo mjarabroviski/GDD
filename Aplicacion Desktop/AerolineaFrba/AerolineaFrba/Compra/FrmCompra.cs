@@ -124,6 +124,7 @@ namespace AerolineaFrba.Compra
                 //Creo un bind para luego setearselo directamente a la DataGridView
                 var bind = viajesDictionary.Values.Select(a => new
                 {
+                    ID = a.ID,
                     FechaSalida = a.Fecha_Salida,
                     CiudadOrigen = ViajePersistencia.ObtenerCiudadOrigenPorIDRuta(a.ID_Ruta),
                     CiudadDestino = ViajePersistencia.ObtenerCiudadDestinoPorIDRuta(a.ID_Ruta),
@@ -132,16 +133,26 @@ namespace AerolineaFrba.Compra
                     KGsDisponibles = ViajePersistencia.ObtenerKGSDisponibles(a.ID) >=0 ? ViajePersistencia.ObtenerKGSDisponibles(a.ID) : 0
                 });
                 DgvViaje.DataSource = bind.ToList();
-                
+                DgvViaje.Columns[0].Visible = false;
+
                 //Agrego los botones a cada fila para poder modificar/borrar cada ruta
+                AgregarBotonesColumnas();
+
+                int j = 0;
                 for (int i = 0; i < DgvViaje.RowCount; i++)
                 {
-                    if ((int)DgvViaje.Rows[i].Cells[4].Value == 0)
+                    if (((int)DgvViaje.Rows[i].Cells[5].Value == 0) && ((int)DgvViaje.Rows[i].Cells[6].Value == 0))
                     {
+                        DgvViaje.CurrentCell = null;
                         DgvViaje.Rows[i].Visible = false;
+                        j++;
                     }
                 }
-                AgregarBotonesColumnas();
+                if (j == DgvViaje.RowCount)
+                {
+                    throw new Exception("No se encontraron viajes según los filtros informados.");
+                }
+                
                 
             }
             catch (Exception ex)
@@ -161,7 +172,7 @@ namespace AerolineaFrba.Compra
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
             };
 
-            DgvViaje.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            DgvViaje.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
 
             //Agrego las columnas nuevas
             DgvViaje.Columns.Add(columnaSeleccionar);
@@ -173,32 +184,20 @@ namespace AerolineaFrba.Compra
             if (e.RowIndex == -1)
                 return;
 
+            _viajes = ViajePersistencia.ObtenerTodos();
+
             //Obtengo la ruta correspondiente a la fila seleccionada
-            var viajeSeleccionado = _viajes.Find(v => (v.Fecha_Salida == (DateTime)DgvViaje.Rows[e.RowIndex].Cells[0].Value) &&
-                                                   (ViajePersistencia.ObtenerCiudadOrigenPorIDRuta(v.ID_Ruta) == (string)DgvViaje.Rows[e.RowIndex].Cells[2].Value) &&
-                                                   (ViajePersistencia.ObtenerCiudadDestinoPorIDRuta(v.ID_Ruta) == (string)DgvViaje.Rows[e.RowIndex].Cells[3].Value)
-                                                   );
+            var viajeSeleccionado = _viajes.Find(v => (v.ID == (int)DgvViaje.Rows[e.RowIndex].Cells[0].Value));
             
-/*            if (viajeSeleccionado != null)
+            if (viajeSeleccionado != null)
             {
                 //El usuario tocó el botón de seleccionar
-                if (e.ColumnIndex == 3)
+                if (e.ColumnIndex == 7)
                 {
-                    var altasModificacionesVisibilidad = new FrmABMRutaAltasModificaciones(rutaSeleccionada);
-                    altasModificacionesVisibilidad.ShowDialog();
-
-                    //Si modificó satisfactoriamante la ruta, actualizo la grilla
-                    if (altasModificacionesVisibilidad.AccionCompleta)
-                        ActualizarPantalla();
+                    var ingresoCantidades = new FrmIngresoCantidades(viajeSeleccionado,this);
+                    ingresoCantidades.ShowDialog();
                 }
-            }*/
+            }
         }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-
     }
 }

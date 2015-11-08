@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Persistencia.Entidades;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace Persistencia
 {
@@ -177,6 +178,38 @@ namespace Persistencia
             return servicios[0].Nombre;
         }
 
+
+        public static List<Viaje> ObtenerTodos()
+        {
+            //var transaccion = DBManager.Instance().Connection.BeginTransaction(IsolationLevel.Serializable);
+            var param = new List<SPParameter>{ };
+            var sp = new StoreProcedure(DBQueries.Viaje.SPObtenerViajes, param);
+
+
+            var viajes = sp.ExecuteReader<Viaje>();
+
+            
+            if (viajes == null || viajes.Count == 0)
+                return null;
+
+            return viajes;
+        }
+
+        public static int ReemplazarViajesDePorServicio(Aeronave aeronaveAReemplazar, Aeronave aeronaveNueva, DateTime comienzo, DateTime fin)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("ID_Reemplazo", aeronaveAReemplazar.ID), 
+                    new SPParameter("ID_Nueva", aeronaveNueva.ID),
+                    new SPParameter("Comienzo", comienzo), 
+                    new SPParameter("Reinicio", fin)
+                };
+
+            var sp = new StoreProcedure(DBQueries.Aeronave.SPReemplazoPorServicio, param);
+
+            return sp.ExecuteNonQuery(null);
+        }
+
         public static List<Viaje> ObtenerViaje(int ID_Aeronave, int ID_Ruta, DateTime fechasalida)
         {
             var param = new List<SPParameter>
@@ -189,6 +222,7 @@ namespace Persistencia
             var sp = new StoreProcedure(DBQueries.Viaje.SPObtenerViaje, param);
 
             List<Viaje> viajes = sp.ExecuteReader<Viaje>();
+
 
             if (viajes == null || viajes.Count == 0)
                 return null;
@@ -207,5 +241,6 @@ namespace Persistencia
 
             sp.ExecuteNonQuery(null);
         }
+
     }
 }

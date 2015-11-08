@@ -34,11 +34,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.BtnGrabar = new System.Windows.Forms.Label();
             this.BtnCancelar = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // TxtPasillo
             // 
-            this.TxtPasillo.Location = new System.Drawing.Point(149, 18);
+            this.TxtPasillo.Location = new System.Drawing.Point(162, 18);
             this.TxtPasillo.Name = "TxtPasillo";
             this.TxtPasillo.Size = new System.Drawing.Size(82, 20);
             this.TxtPasillo.TabIndex = 64;
@@ -54,7 +56,7 @@
             // 
             // TxtVentanilla
             // 
-            this.TxtVentanilla.Location = new System.Drawing.Point(149, 48);
+            this.TxtVentanilla.Location = new System.Drawing.Point(162, 48);
             this.TxtVentanilla.Name = "TxtVentanilla";
             this.TxtVentanilla.Size = new System.Drawing.Size(82, 20);
             this.TxtVentanilla.TabIndex = 66;
@@ -88,7 +90,7 @@
             this.BtnCancelar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.BtnCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnCancelar.ForeColor = System.Drawing.Color.White;
-            this.BtnCancelar.Location = new System.Drawing.Point(127, 94);
+            this.BtnCancelar.Location = new System.Drawing.Point(140, 94);
             this.BtnCancelar.Name = "BtnCancelar";
             this.BtnCancelar.Size = new System.Drawing.Size(104, 36);
             this.BtnCancelar.TabIndex = 68;
@@ -96,11 +98,37 @@
             this.BtnCancelar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.BtnCancelar.Click += new System.EventHandler(this.BtnCancelar_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.label2.Location = new System.Drawing.Point(123, 16);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(15, 20);
+            this.label2.TabIndex = 84;
+            this.label2.Text = "*";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.label3.Location = new System.Drawing.Point(145, 46);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(15, 20);
+            this.label3.TabIndex = 85;
+            this.label3.Text = "*";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // ABMAltaButacas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(258, 157);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.BtnGrabar);
             this.Controls.Add(this.BtnCancelar);
             this.Controls.Add(this.TxtVentanilla);
@@ -122,5 +150,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label BtnGrabar;
         private System.Windows.Forms.Label BtnCancelar;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
     }
 }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Persistencia.Entidades;
 using Persistencia;
-using AerolineaFrba.Home_Administrador;
+using AerolineaFrba.Home;
 using System.Globalization;
 
 
