@@ -111,8 +111,8 @@ namespace Persistencia
 
             var sp = new StoreProcedure(DBQueries.Viaje.SPValidarHorarioDeAeronave, param);
 
-            int cant = sp.ExecuteNonQuery(null);
-            return cant == 0;
+            List<Viaje> viajes = sp.ExecuteReader<Viaje>();
+            return viajes.Count == 0;
         }
 
 

@@ -29,13 +29,14 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.Btn_Matricula = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.DtpFechaLlegada = new System.Windows.Forms.DateTimePicker();
             this.DtpFechaLlegadaEstimada = new System.Windows.Forms.DateTimePicker();
             this.DtpFechaSalida = new System.Windows.Forms.DateTimePicker();
             this.Btn_SeleccionarCiudadDestino = new System.Windows.Forms.Label();
-            this.Btn_Seleccionar = new System.Windows.Forms.Label();
             this.CboAeronave = new System.Windows.Forms.ComboBox();
             this.CboTipoServicio = new System.Windows.Forms.ComboBox();
             this.CboCiudadDestino = new System.Windows.Forms.ComboBox();
@@ -48,9 +49,6 @@
             this.Btn_Limpiar = new System.Windows.Forms.Label();
             this.Btn_Cancelar = new System.Windows.Forms.Label();
             this.Btn_GenerarViaje = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,13 +57,11 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.Btn_Matricula);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.DtpFechaLlegada);
             this.groupBox1.Controls.Add(this.DtpFechaLlegadaEstimada);
             this.groupBox1.Controls.Add(this.DtpFechaSalida);
             this.groupBox1.Controls.Add(this.Btn_SeleccionarCiudadDestino);
-            this.groupBox1.Controls.Add(this.Btn_Seleccionar);
             this.groupBox1.Controls.Add(this.CboAeronave);
             this.groupBox1.Controls.Add(this.CboTipoServicio);
             this.groupBox1.Controls.Add(this.CboCiudadDestino);
@@ -82,19 +78,41 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "DATOS DEL VIAJE A GENERAR";
             // 
-            // Btn_Matricula
+            // label3
             // 
-            this.Btn_Matricula.BackColor = System.Drawing.Color.DodgerBlue;
-            this.Btn_Matricula.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Btn_Matricula.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Btn_Matricula.ForeColor = System.Drawing.Color.White;
-            this.Btn_Matricula.Location = new System.Drawing.Point(212, 25);
-            this.Btn_Matricula.Name = "Btn_Matricula";
-            this.Btn_Matricula.Size = new System.Drawing.Size(29, 21);
-            this.Btn_Matricula.TabIndex = 88;
-            this.Btn_Matricula.Text = "OK";
-            this.Btn_Matricula.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.Btn_Matricula.Click += new System.EventHandler(this.Btn_Matricula_Click);
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.label3.Location = new System.Drawing.Point(186, 24);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(15, 20);
+            this.label3.TabIndex = 91;
+            this.label3.Text = "*";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.label2.Location = new System.Drawing.Point(186, 65);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(15, 20);
+            this.label2.TabIndex = 90;
+            this.label2.Text = "*";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.label1.Location = new System.Drawing.Point(186, 107);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(15, 20);
+            this.label1.TabIndex = 89;
+            this.label1.Text = "*";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label7
             // 
@@ -155,20 +173,6 @@
             this.Btn_SeleccionarCiudadDestino.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.Btn_SeleccionarCiudadDestino.Click += new System.EventHandler(this.Btn_SeleccionarCiudadDestino_Click_1);
             // 
-            // Btn_Seleccionar
-            // 
-            this.Btn_Seleccionar.BackColor = System.Drawing.Color.DodgerBlue;
-            this.Btn_Seleccionar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Btn_Seleccionar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Btn_Seleccionar.ForeColor = System.Drawing.Color.White;
-            this.Btn_Seleccionar.Location = new System.Drawing.Point(212, 64);
-            this.Btn_Seleccionar.Name = "Btn_Seleccionar";
-            this.Btn_Seleccionar.Size = new System.Drawing.Size(29, 21);
-            this.Btn_Seleccionar.TabIndex = 71;
-            this.Btn_Seleccionar.Text = "OK";
-            this.Btn_Seleccionar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.Btn_Seleccionar.Click += new System.EventHandler(this.Btn_Seleccionar_Click);
-            // 
             // CboAeronave
             // 
             this.CboAeronave.FormattingEnabled = true;
@@ -178,6 +182,7 @@
             this.CboAeronave.TabIndex = 70;
             this.CboAeronave.Text = "MATRICULA AERONAVE";
             this.CboAeronave.SelectedIndexChanged += new System.EventHandler(this.CboAeronave_SelectedIndexChanged);
+            this.CboAeronave.SelectionChangeCommitted += new System.EventHandler(this.CboAeronave_SelectionChangeCommitted);
             // 
             // CboTipoServicio
             // 
@@ -198,16 +203,17 @@
             this.CboCiudadDestino.Size = new System.Drawing.Size(165, 21);
             this.CboCiudadDestino.TabIndex = 68;
             this.CboCiudadDestino.Text = "CIUDAD DESTINO";
+            this.CboCiudadDestino.SelectionChangeCommitted += new System.EventHandler(this.CboCiudadDestino_SelectionChangeCommitted);
             // 
             // CboCiudadOrigen
             // 
-            this.CboCiudadOrigen.Enabled = false;
             this.CboCiudadOrigen.FormattingEnabled = true;
             this.CboCiudadOrigen.Location = new System.Drawing.Point(15, 65);
             this.CboCiudadOrigen.Name = "CboCiudadOrigen";
             this.CboCiudadOrigen.Size = new System.Drawing.Size(165, 21);
             this.CboCiudadOrigen.TabIndex = 67;
             this.CboCiudadOrigen.Text = "CIUDAD ORIGEN";
+            this.CboCiudadOrigen.SelectionChangeCommitted += new System.EventHandler(this.CboCiudadOrigen_SelectionChangeCommitted);
             this.CboCiudadOrigen.Click += new System.EventHandler(this.CboCiudadOrigen_Click);
             // 
             // label9
@@ -295,42 +301,6 @@
             this.Btn_GenerarViaje.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.Btn_GenerarViaje.Click += new System.EventHandler(this.Btn_GenerarViaje_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.label1.Location = new System.Drawing.Point(186, 107);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(15, 20);
-            this.label1.TabIndex = 89;
-            this.label1.Text = "*";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.label2.Location = new System.Drawing.Point(186, 65);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(15, 20);
-            this.label2.TabIndex = 90;
-            this.label2.Text = "*";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.label3.Location = new System.Drawing.Point(186, 24);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(15, 20);
-            this.label3.TabIndex = 91;
-            this.label3.Text = "*";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // GenercionViaje
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -364,13 +334,11 @@
         private System.Windows.Forms.ComboBox CboCiudadDestino;
         private System.Windows.Forms.ComboBox CboTipoServicio;
         private System.Windows.Forms.ComboBox CboAeronave;
-        private System.Windows.Forms.Label Btn_Seleccionar;
         private System.Windows.Forms.DateTimePicker DtpFechaLlegada;
         private System.Windows.Forms.DateTimePicker DtpFechaLlegadaEstimada;
         private System.Windows.Forms.DateTimePicker DtpFechaSalida;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label Btn_SeleccionarCiudadDestino;
-        private System.Windows.Forms.Label Btn_Matricula;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
