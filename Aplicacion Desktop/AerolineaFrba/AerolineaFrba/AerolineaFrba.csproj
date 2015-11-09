@@ -141,11 +141,11 @@
     <Compile Include="Compra\FrmIngresoCantidades.Designer.cs">
       <DependentUpon>FrmIngresoCantidades.cs</DependentUpon>
     </Compile>
-    <Compile Include="Consulta Millas\Form1.cs">
+    <Compile Include="Consulta Millas\ConsultaMillas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Consulta Millas\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Consulta Millas\ConsultaMillas.Designer.cs">
+      <DependentUpon>ConsultaMillas.cs</DependentUpon>
     </Compile>
     <Compile Include="Devolucion\Form1.cs">
       <SubType>Form</SubType>
@@ -265,6 +265,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Compra\FrmIngresoCantidades.resx">
       <DependentUpon>FrmIngresoCantidades.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Consulta Millas\ConsultaMillas.resx">
+      <DependentUpon>ConsultaMillas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Generacion Viaje\GenercionViaje.resx">
       <DependentUpon>GenercionViaje.cs</DependentUpon>

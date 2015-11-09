@@ -45,11 +45,12 @@ CREATE TABLE [EL_PUNTERO].[TL_CLIENTE](
 	[Nombre] nvarchar(255) NOT NULL,
 	[Apellido] nvarchar(255) NOT NULL,
 	[ID_Tipo_Documento] int NOT NULL,
-	[Nro_Documento] numeric(18,0) NOT NULL,
+	[Nro_Documento] int NOT NULL,
 	[Mail] nvarchar(255) NOT NULL,
 	[Telefono] nvarchar(255),
 	[Direccion] nvarchar(255) NOT NULL,
-	[Fecha_nacimiento] datetime NOT NULL
+	[Fecha_Nacimiento] datetime NOT NULL,
+	[Millas] int DEFAULT 0
 );
 
 CREATE TABLE [EL_PUNTERO].[TL_TIPO_DOCUMENTO] (
@@ -206,16 +207,16 @@ CREATE TABLE [EL_PUNTERO].[TL_COMPRA](
 
 CREATE TABLE [EL_PUNTERO].[TL_REGISTRO_MILLAS](
 	[ID_Registro] int IDENTITY(1,1),
-	[Fecha_Inicio] datetime NOT NULL,
 	[ID_Cliente] int NOT NULL,
-	[ID_Canje] int NOT NULL,
-	[ID_Pasaje] int NOT NULL,
-	[ID_Encomienda] int NOT NULL
+	[Fecha_Compra] datetime NOT NULL,
+	[Codigo_Item] int NOT NULL,
+	[Millas] int NOT NULL
 );
 
 CREATE TABLE [EL_PUNTERO].[TL_CANJE](
 	[ID_Canje] int IDENTITY(1,1),
 	[ID_Producto] int NOT NULL,
+	[ID_Cliente] int NOT NULL,
 	[Cantidad] int NOT NULL CHECK(Cantidad>0),
 	[Fecha_Canje] datetime NOT NULL
 );

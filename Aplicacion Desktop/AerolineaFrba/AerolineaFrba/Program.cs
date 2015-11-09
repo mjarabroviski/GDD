@@ -20,15 +20,9 @@ namespace AerolineaFrba
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new Registro_Llegada_Destino.RegistroLlegadaDestino());
-            Application.Run(new Generacion_Viaje.GenercionViaje());
-            //Application.Run(new Abm_Ciudad.ABMCiudades());
-            //Application.Run(new Abm_Aeronave.ABMAeronaves());
-            //Application.Run(new Registro_de_Usuario.RegistroDeUsuario());
-            //Application.Run(new Abm_Rol.FrmABMRol());
-            //Application.Run(new Abm_Ruta.FrmABMRuta());
+            Application.Run(new Consulta_Millas.ConsultaMillas());
             //Application.Run(new LogIn.SeleccionDeUsuario());
             //Application.Run(new Compra.FrmCompra());
-            //Application.Run(new Compra.FrmIngresoCantidades());
         }
     }
 }

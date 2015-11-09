@@ -132,6 +132,11 @@ DROP PROCEDURE [EL_PUNTERO].[GetAeronaves]
 DROP PROCEDURE [EL_PUNTERO].[CiudadDestinoPorIDRuta];
 DROP PROCEDURE [EL_PUNTERO].[CiudadOrigenPorIDRuta];
 DROP PROCEDURE [EL_PUNTERO].[FiltrarViajes];
+DROP PROCEDURE [EL_PUNTERO].[ValidarAeronaveDelViaje];
+DROP PROCEDURE [EL_PUNTERO].[GetServicioPorID];
+DROP PROCEDURE [EL_PUNTERO].[ObtenerViaje];
+DROP PROCEDURE [EL_PUNTERO].[ActualizarFechaLlegada];
+DROP PROCEDURE [EL_PUNTERO].[GetFuncionalidadesPorNombreRol];
 
 DROP TRIGGER [EL_PUNTERO].[Tr_DeshabilitarUsuariosConRolDeshabilitado];
 
