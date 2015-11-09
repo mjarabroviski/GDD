@@ -37,6 +37,8 @@ namespace AerolineaFrba.Home
         private void Home_Load(object sender, EventArgs e)
         {
             SetMenuPorUsuario();
+            if (AdministradorSesion.UsuarioActual != null) cambioDeContraseñaToolStripMenuItem.Visible = true;
+
         }
 
         private void SetMenuPorUsuario()

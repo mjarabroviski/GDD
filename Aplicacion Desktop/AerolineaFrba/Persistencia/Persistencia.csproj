@@ -66,6 +66,7 @@
     <Compile Include="Entidades\SPParameter.cs" />
     <Compile Include="Entidades\StoreProcedure.cs" />
     <Compile Include="Entidades\TipoButaca.cs" />
+    <Compile Include="Entidades\TipoDocumento.cs" />
     <Compile Include="Entidades\Usuario.cs" />
     <Compile Include="Entidades\Viaje.cs" />
     <Compile Include="FuncionalidadPersistencia.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="RutaPersistencia.cs" />
     <Compile Include="ServicioPersistencia.cs" />
     <Compile Include="TipoButacaPersistencia.cs" />
+    <Compile Include="TipoDocumentoPersistencia.cs" />
     <Compile Include="UsuarioPersistencia.cs" />
     <Compile Include="ViajePersistencia.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">

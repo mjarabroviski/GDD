@@ -123,7 +123,7 @@ INSERT INTO EL_PUNTERO.TL_FUNCIONALIDAD_ROL (ID_Rol, ID_Funcionalidad) (
 		OR EL_PUNTERO.TL_Funcionalidad.Descripcion = 'ABM de Ruta Aerea'
 		OR EL_PUNTERO.TL_Funcionalidad.Descripcion = 'ABM de Aeronave'
 		OR EL_PUNTERO.TL_Funcionalidad.Descripcion = 'Generacion de Viaje'
-		OR EL_PUNTERO.TL_Funcionalidad.Descripcion = 'Registro de Llamada a Destino'
+		OR EL_PUNTERO.TL_Funcionalidad.Descripcion = 'Registro de Llegada a Destino'
 		OR EL_PUNTERO.TL_Funcionalidad.Descripcion = 'Compra de pasaje/encomienda'
 		OR EL_PUNTERO.TL_Funcionalidad.Descripcion = 'Devolucion/Cancelacion de pasaje y/o encomienda'
 		OR EL_PUNTERO.TL_Funcionalidad.Descripcion = 'Canje de Millas'

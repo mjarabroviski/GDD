@@ -33,11 +33,11 @@ namespace Persistencia.Entidades
             if (func == "Registro de Usuario") return Funcionalidades.Registro_Usuario;
             if (func == "ABM de Ciudad") return Funcionalidades.ABM_Ciudad;
             if (func == "ABM de Ruta Aerea") return Funcionalidades.ABM_Ruta_Aerea;
-            if (func == "ABM de Aeronave") return Funcionalidades.ABM_Ruta_Aerea;
+            if (func == "ABM de Aeronave") return Funcionalidades.ABM_Aeronave;
             if (func == "Generacion de Viaje") return Funcionalidades.Generacion_Viaje;
             if (func == "Registro de Llegada a Destino") return Funcionalidades.Registro_Llegada_Destino;
             if (func == "Compra de pasaje/encomienda") return Funcionalidades.Compra_Pasaje_Encomienda;
-            if (func == "Devolucion/Cancelacion de pasaje/encomienda") return Funcionalidades.Devolucion_Cancelacion_Pasaje_Encomienda;
+            if (func == "Devolucion/Cancelacion de pasaje y/o encomienda") return Funcionalidades.Devolucion_Cancelacion_Pasaje_Encomienda;
             if (func == "Consulta de millas de pasajero frecuente") return Funcionalidades.Consulta_Millas;
             if (func == "Canje de Millas") return Funcionalidades.Canje_Millas;
             if (func == "Listado Estadistico") return Funcionalidades.Listado_Estadistico;

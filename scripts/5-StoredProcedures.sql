@@ -831,4 +831,28 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE [EL_PUNTERO].[GetClientePorTipoYDocumento]
+@Documento int,
+@Tipo_Doc int
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	SELECT *
+	FROM [EL_PUNTERO].[TL_CLIENTE] 
+	WHERE Nro_Documento = @Documento 
+	AND ID_Tipo_Documento = @Tipo_Doc
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[GetAllTipoDocumento]
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	SELECT *
+	FROM [EL_PUNTERO].[TL_TIPO_DOCUMENTO] 
+END
+GO
+
 COMMIT

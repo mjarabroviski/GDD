@@ -40,6 +40,8 @@
             this.dgvCanjes = new System.Windows.Forms.DataGridView();
             this.LblListo = new System.Windows.Forms.Label();
             this.LblLimpiar = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.cboTipoDoc = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCompras)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCanjes)).BeginInit();
@@ -48,17 +50,17 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 35);
+            this.label1.Location = new System.Drawing.Point(6, 52);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(95, 13);
+            this.label1.Size = new System.Drawing.Size(77, 13);
             this.label1.TabIndex = 3;
-            this.label1.Text = "INGRESE SU DNI";
+            this.label1.Text = "DOCUMENTO";
             // 
             // TxtDni
             // 
-            this.TxtDni.Location = new System.Drawing.Point(118, 32);
+            this.TxtDni.Location = new System.Drawing.Point(135, 49);
             this.TxtDni.Name = "TxtDni";
-            this.TxtDni.Size = new System.Drawing.Size(171, 20);
+            this.TxtDni.Size = new System.Drawing.Size(149, 20);
             this.TxtDni.TabIndex = 2;
             // 
             // LblBuscar
@@ -73,9 +75,12 @@
             this.LblBuscar.TabIndex = 35;
             this.LblBuscar.Text = "OBTENER MILLAS";
             this.LblBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LblBuscar.Click += new System.EventHandler(this.LblBuscar_Click);
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cboTipoDoc);
+            this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.LbLNac);
             this.groupBox1.Controls.Add(this.dtpNac);
             this.groupBox1.Controls.Add(this.TxtMillas);
@@ -166,6 +171,23 @@
             this.LblLimpiar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.LblLimpiar.Click += new System.EventHandler(this.LblLimpiar_Click);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 27);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(123, 13);
+            this.label3.TabIndex = 40;
+            this.label3.Text = "TIPO DE DOCUMENTO";
+            // 
+            // cboTipoDoc
+            // 
+            this.cboTipoDoc.FormattingEnabled = true;
+            this.cboTipoDoc.Location = new System.Drawing.Point(135, 22);
+            this.cboTipoDoc.Name = "cboTipoDoc";
+            this.cboTipoDoc.Size = new System.Drawing.Size(149, 21);
+            this.cboTipoDoc.TabIndex = 49;
+            // 
             // ConsultaMillas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -201,5 +223,7 @@
         private System.Windows.Forms.DataGridView dgvCanjes;
         private System.Windows.Forms.Label LblListo;
         private System.Windows.Forms.Label LblLimpiar;
+        private System.Windows.Forms.ComboBox cboTipoDoc;
+        private System.Windows.Forms.Label label3;
     }
 }

@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Persistencia;
+using Persistencia.Entidades;
 
 namespace AerolineaFrba.Consulta_Millas
 {
@@ -22,6 +24,15 @@ namespace AerolineaFrba.Consulta_Millas
             TxtMillas.Enabled = false;
             LbLNac.Visible = false;
             dtpNac.Visible = false;
+
+            #region Cargar Tipos de Docuementos
+
+            //Carga el combobox de los tipos de documentos
+            cboTipoDoc.DataSource = TipoDocumentoPersistencia.ObtenerTodos();
+            cboTipoDoc.ValueMember = "ID_Tipo_Documento";
+            cboTipoDoc.DisplayMember = "Descripcion";
+
+            #endregion
         }
 
         private void LblLimpiar_Click(object sender, EventArgs e)
@@ -41,6 +52,13 @@ namespace AerolineaFrba.Consulta_Millas
         private void LblListo_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void LblBuscar_Click(object sender, EventArgs e)
+        {
+            int doc = Convert.ToInt32(TxtDni.Text);
+            int tipo = Convert.ToInt32(cboTipoDoc.SelectedValue);
+            Cliente cliente = ClientePersistencia.ObtenerClientePorDNI(doc,tipo);
         }
     }
 }

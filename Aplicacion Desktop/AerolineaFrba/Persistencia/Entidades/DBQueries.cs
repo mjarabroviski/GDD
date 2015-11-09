@@ -136,5 +136,15 @@ namespace Persistencia.Entidades
             public static String SPCancelarPasajesYEncomiendasPorBajaAeronave = "EL_PUNTERO.CancelarPasajesYEncomiendasPorBajaAeronave";
             public static String SPCancelarPasajesYEncomiendasPorBajaServicioAeronave = "EL_PUNTERO.CancelarPasajesYEncomiendasPorBajaServicioAeronave";
         }
+
+        public static class Cliente
+        {
+            public static String SPGetClientePorTipoYDocumento = "EL_PUNTERO.GetClientePorTipoYDocumento";
+        }
+
+        public static class TipoDocumento {
+
+            public static String SPGetAllTipoDocumento = "EL_PUNTERO.GetAllTipoDocumento";
+        }
     }
 }
