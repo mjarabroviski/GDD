@@ -147,11 +147,23 @@
     <Compile Include="Consulta Millas\ConsultaMillas.Designer.cs">
       <DependentUpon>ConsultaMillas.cs</DependentUpon>
     </Compile>
-    <Compile Include="Devolucion\Form1.cs">
+    <Compile Include="Devolucion\DevolucionEncomienda.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Devolucion\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Devolucion\DevolucionEncomienda.Designer.cs">
+      <DependentUpon>DevolucionEncomienda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Devolucion\DevolucionPasaje.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Devolucion\DevolucionPasaje.Designer.cs">
+      <DependentUpon>DevolucionPasaje.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Devolucion\PasajeEncomienda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Devolucion\PasajeEncomienda.Designer.cs">
+      <DependentUpon>PasajeEncomienda.cs</DependentUpon>
     </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -268,6 +280,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Consulta Millas\ConsultaMillas.resx">
       <DependentUpon>ConsultaMillas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Devolucion\DevolucionEncomienda.resx">
+      <DependentUpon>DevolucionEncomienda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Devolucion\DevolucionPasaje.resx">
+      <DependentUpon>DevolucionPasaje.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Devolucion\PasajeEncomienda.resx">
+      <DependentUpon>PasajeEncomienda.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Generacion Viaje\GenercionViaje.resx">
       <DependentUpon>GenercionViaje.cs</DependentUpon>

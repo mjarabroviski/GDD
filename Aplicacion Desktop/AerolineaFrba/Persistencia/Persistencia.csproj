@@ -50,6 +50,7 @@
     <Compile Include="CiudadPersistencia.cs" />
     <Compile Include="ClientePersistencia.cs" />
     <Compile Include="DevolucionPersistencia.cs" />
+    <Compile Include="EncomiendaPersistencia.cs" />
     <Compile Include="Entidades\Aeronave.cs" />
     <Compile Include="Entidades\Butaca.cs" />
     <Compile Include="Entidades\Ciudad.cs" />
@@ -57,9 +58,11 @@
     <Compile Include="Entidades\DBManager.cs" />
     <Compile Include="Entidades\DBQueries.cs" />
     <Compile Include="Entidades\Devolucion.cs" />
+    <Compile Include="Entidades\Encomienda.cs" />
     <Compile Include="Entidades\Funcionalidad.cs" />
     <Compile Include="Entidades\IMapable.cs" />
     <Compile Include="Entidades\ItemDevuelto.cs" />
+    <Compile Include="Entidades\Pasaje.cs" />
     <Compile Include="Entidades\Rol.cs" />
     <Compile Include="Entidades\Ruta.cs" />
     <Compile Include="Entidades\Servicio.cs" />
@@ -70,6 +73,7 @@
     <Compile Include="Entidades\Usuario.cs" />
     <Compile Include="Entidades\Viaje.cs" />
     <Compile Include="FuncionalidadPersistencia.cs" />
+    <Compile Include="PasajePersistencia.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RolPersistencia.cs" />
