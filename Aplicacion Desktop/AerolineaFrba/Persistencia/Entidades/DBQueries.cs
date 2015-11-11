@@ -18,6 +18,7 @@ namespace Persistencia.Entidades
             public static String SPEliminarFuncionalidadesPorRol = "EL_PUNTERO.EliminarFuncionalidadesPorRol";
             public static String SPInsertarRol = "EL_PUNTERO.InsertarRol";
             public static String SPActualizarRolPorID = "EL_PUNTERO.ActualizarRolPorID";
+            public static String SPGetRolPorID = "EL_PUNTERO.GetRolPorID";
         }
 
         public static class Servicio
@@ -116,7 +117,6 @@ namespace Persistencia.Entidades
             public static String SPObtenerKGSDisponibles = "EL_PUNTERO.ObtenerKGSDisponibles";
             public static String SPGetViajesPorAeronave = "EL_PUNTERO.GetViajesPorAeronave";
             public static String SPValidarHorarioDeAeronave = "EL_PUNTERO.ValidarHorarioDeAeronave";
-            public static String SPGetViajesFuturosPorAeronave = "EL_PUNTERO.GetViajesFuturosPorAeronave";
             public static String SPValidarAeronaveDelViaje = "EL_PUNTERO.ValidarAeronaveDelViaje";
             public static String SPServicioPorIDRuta = "EL_PUNTERO.ServicioPorIDRuta";
             public static string SPObtenerViajes = "EL_PUNTERO.ObtenerViajes";
@@ -140,11 +140,17 @@ namespace Persistencia.Entidades
         public static class Cliente
         {
             public static String SPGetClientePorTipoYDocumento = "EL_PUNTERO.GetClientePorTipoYDocumento";
+            public static String SPGetClientePorTipoYDocumentoYFechaNac = "EL_PUNTERO.GetClientePorTipoYDocumentoYFechaNac";
         }
 
         public static class TipoDocumento {
 
             public static String SPGetAllTipoDocumento = "EL_PUNTERO.GetAllTipoDocumento";
+        }
+
+        public static class RegistroMillas
+        {
+            public static String SPActualizarMillas = "EL_PUNTERO.AgregarRegistroMillas";
         }
     }
 }

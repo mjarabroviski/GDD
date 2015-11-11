@@ -11,6 +11,7 @@ using Persistencia;
 using Persistencia.Entidades;
 using Herramientas;
 using AerolineaFrba.Home;
+using Sesion;
 
 namespace AerolineaFrba.Registro_de_Usuario
 {
@@ -95,6 +96,12 @@ namespace AerolineaFrba.Registro_de_Usuario
             {
                 Close();
             }
+        }
+
+        private void RegistroDeUsuario_Load(object sender, EventArgs e)
+        {
+            txtAdministrador.Enabled = false;
+            txtAdministrador.Text = "ADMINISTRADOR";
         }
     }
 }

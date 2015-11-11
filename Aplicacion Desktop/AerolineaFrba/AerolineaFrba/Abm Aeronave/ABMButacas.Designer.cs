@@ -30,12 +30,12 @@
         {
             this.DgvButacas = new System.Windows.Forms.DataGridView();
             this.GroupFiltros = new System.Windows.Forms.GroupBox();
+            this.BtnGrabar = new System.Windows.Forms.Label();
             this.CboTipo = new System.Windows.Forms.ComboBox();
-            this.BtnLimpiar = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.BtnLimpiar = new System.Windows.Forms.Label();
             this.BtnAgregarButacas = new System.Windows.Forms.Label();
             this.BtnCancelar = new System.Windows.Forms.Label();
-            this.BtnGrabar = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DgvButacas)).BeginInit();
             this.GroupFiltros.SuspendLayout();
             this.SuspendLayout();
@@ -69,6 +69,20 @@
             this.GroupFiltros.TabStop = false;
             this.GroupFiltros.Text = "MODIFICACION DE TIPO";
             // 
+            // BtnGrabar
+            // 
+            this.BtnGrabar.BackColor = System.Drawing.Color.DodgerBlue;
+            this.BtnGrabar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.BtnGrabar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnGrabar.ForeColor = System.Drawing.Color.White;
+            this.BtnGrabar.Location = new System.Drawing.Point(249, 25);
+            this.BtnGrabar.Name = "BtnGrabar";
+            this.BtnGrabar.Size = new System.Drawing.Size(88, 29);
+            this.BtnGrabar.TabIndex = 71;
+            this.BtnGrabar.Text = "GUARDAR CAMBIOS";
+            this.BtnGrabar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.BtnGrabar.Click += new System.EventHandler(this.BtnGrabar_Click);
+            // 
             // CboTipo
             // 
             this.CboTipo.FormattingEnabled = true;
@@ -76,6 +90,15 @@
             this.CboTipo.Name = "CboTipo";
             this.CboTipo.Size = new System.Drawing.Size(124, 21);
             this.CboTipo.TabIndex = 42;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(14, 33);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(78, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "TIPO BUTACA";
             // 
             // BtnLimpiar
             // 
@@ -90,15 +113,6 @@
             this.BtnLimpiar.Text = "ACTUALIZAR PANTALLA";
             this.BtnLimpiar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.BtnLimpiar.Click += new System.EventHandler(this.BtnLimpiar_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(14, 33);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(78, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "TIPO BUTACA";
             // 
             // BtnAgregarButacas
             // 
@@ -127,20 +141,6 @@
             this.BtnCancelar.Text = "FINALIZAR";
             this.BtnCancelar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.BtnCancelar.Click += new System.EventHandler(this.BtnCancelar_Click);
-            // 
-            // BtnGrabar
-            // 
-            this.BtnGrabar.BackColor = System.Drawing.Color.DodgerBlue;
-            this.BtnGrabar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.BtnGrabar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BtnGrabar.ForeColor = System.Drawing.Color.White;
-            this.BtnGrabar.Location = new System.Drawing.Point(249, 25);
-            this.BtnGrabar.Name = "BtnGrabar";
-            this.BtnGrabar.Size = new System.Drawing.Size(88, 29);
-            this.BtnGrabar.TabIndex = 71;
-            this.BtnGrabar.Text = "GUARDAR CAMBIOS";
-            this.BtnGrabar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.BtnGrabar.Click += new System.EventHandler(this.BtnGrabar_Click);
             // 
             // ABMButacas
             // 

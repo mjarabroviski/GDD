@@ -26,7 +26,7 @@ namespace AerolineaFrba.LogIn
             //Obtengo el rol que seleccionó el usuario
             var RolSeleccionado = (Rol)CboRoles.SelectedItem;
 
-            if (RolSeleccionado != null && RolSeleccionado.Descripcion == "Administrador")
+            if (RolSeleccionado != null && RolSeleccionado.Descripcion != "Cliente")
             {
                 var msg = MessageBox.Show(string.Format("Se procederá a loggear con el siguiente rol: {0}. Esta seguro?", RolSeleccionado.Descripcion), "Atención", MessageBoxButtons.YesNo);
                 if (msg == DialogResult.Yes)

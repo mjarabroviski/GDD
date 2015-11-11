@@ -80,6 +80,7 @@ CREATE TABLE [EL_PUNTERO].[TL_ROL](
 
 INSERT INTO EL_PUNTERO.TL_ROL (Descripcion) VALUES ('Cliente');
 INSERT INTO EL_PUNTERO.TL_ROL (Descripcion) VALUES ('Administrador');
+INSERT INTO EL_PUNTERO.TL_ROL (Descripcion) VALUES ('Administrador General');
 
 CREATE TABLE [EL_PUNTERO].[TL_FUNCIONALIDAD](
 	[ID_Funcionalidad] int IDENTITY (1,1),
@@ -126,6 +127,24 @@ INSERT INTO EL_PUNTERO.TL_FUNCIONALIDAD_ROL (ID_Rol, ID_Funcionalidad) (
 		OR EL_PUNTERO.TL_Funcionalidad.Descripcion = 'Registro de Llegada a Destino'
 		OR EL_PUNTERO.TL_Funcionalidad.Descripcion = 'Compra de pasaje/encomienda'
 		OR EL_PUNTERO.TL_Funcionalidad.Descripcion = 'Devolucion/Cancelacion de pasaje y/o encomienda'
+		OR EL_PUNTERO.TL_Funcionalidad.Descripcion = 'Canje de Millas'
+		OR EL_PUNTERO.TL_Funcionalidad.Descripcion = 'Listado Estadistico'))
+);
+
+INSERT INTO EL_PUNTERO.TL_FUNCIONALIDAD_ROL (ID_Rol, ID_Funcionalidad) (
+		(SELECT ID_Rol, ID_Funcionalidad 
+		FROM EL_PUNTERO.TL_Rol, EL_PUNTERO.TL_Funcionalidad
+		WHERE EL_PUNTERO.TL_Rol.Descripcion = 'Administrador General'
+		AND (EL_PUNTERO.TL_Funcionalidad.Descripcion = 'ABM de Rol'
+		OR EL_PUNTERO.TL_Funcionalidad.Descripcion = 'Registro de Usuario'
+		OR EL_PUNTERO.TL_Funcionalidad.Descripcion = 'ABM de Ciudad'
+		OR EL_PUNTERO.TL_Funcionalidad.Descripcion = 'ABM de Ruta Aerea'
+		OR EL_PUNTERO.TL_Funcionalidad.Descripcion = 'ABM de Aeronave'
+		OR EL_PUNTERO.TL_Funcionalidad.Descripcion = 'Generacion de Viaje'
+		OR EL_PUNTERO.TL_Funcionalidad.Descripcion = 'Registro de Llegada a Destino'
+		OR EL_PUNTERO.TL_Funcionalidad.Descripcion = 'Compra de pasaje/encomienda'
+		OR EL_PUNTERO.TL_Funcionalidad.Descripcion = 'Devolucion/Cancelacion de pasaje y/o encomienda'
+		OR EL_PUNTERO.TL_Funcionalidad.Descripcion = 'Consulta de millas de pasajero frecuente'
 		OR EL_PUNTERO.TL_Funcionalidad.Descripcion = 'Canje de Millas'
 		OR EL_PUNTERO.TL_Funcionalidad.Descripcion = 'Listado Estadistico'))
 );
@@ -208,7 +227,7 @@ CREATE TABLE [EL_PUNTERO].[TL_COMPRA](
 CREATE TABLE [EL_PUNTERO].[TL_REGISTRO_MILLAS](
 	[ID_Registro] int IDENTITY(1,1),
 	[ID_Cliente] int NOT NULL,
-	[Fecha_Compra] datetime NOT NULL,
+	[Fecha_Inicio] datetime NOT NULL,
 	[Codigo_Item] int NOT NULL,
 	[Millas] int NOT NULL
 );

@@ -39,7 +39,6 @@
             this.DtpFechaLlegada = new System.Windows.Forms.DateTimePicker();
             this.Btn_Limpiar = new System.Windows.Forms.Label();
             this.Btn_Cancelar = new System.Windows.Forms.Label();
-            this.Btn_Finalizar = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -103,7 +102,6 @@
             this.RegistroLlegadaADestino.Controls.Add(this.DtpFechaLlegada);
             this.RegistroLlegadaADestino.Controls.Add(this.Btn_Limpiar);
             this.RegistroLlegadaADestino.Controls.Add(this.Btn_Cancelar);
-            this.RegistroLlegadaADestino.Controls.Add(this.Btn_Finalizar);
             this.RegistroLlegadaADestino.Controls.Add(this.label4);
             this.RegistroLlegadaADestino.Controls.Add(this.label3);
             this.RegistroLlegadaADestino.Controls.Add(this.label2);
@@ -128,7 +126,7 @@
             this.Btn_Registrar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Btn_Registrar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_Registrar.ForeColor = System.Drawing.Color.White;
-            this.Btn_Registrar.Location = new System.Drawing.Point(285, 193);
+            this.Btn_Registrar.Location = new System.Drawing.Point(292, 193);
             this.Btn_Registrar.Name = "Btn_Registrar";
             this.Btn_Registrar.Size = new System.Drawing.Size(82, 20);
             this.Btn_Registrar.TabIndex = 99;
@@ -162,7 +160,7 @@
             this.Btn_Limpiar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Btn_Limpiar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_Limpiar.ForeColor = System.Drawing.Color.White;
-            this.Btn_Limpiar.Location = new System.Drawing.Point(150, 256);
+            this.Btn_Limpiar.Location = new System.Drawing.Point(94, 256);
             this.Btn_Limpiar.Name = "Btn_Limpiar";
             this.Btn_Limpiar.Size = new System.Drawing.Size(76, 23);
             this.Btn_Limpiar.TabIndex = 96;
@@ -176,28 +174,13 @@
             this.Btn_Cancelar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Btn_Cancelar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_Cancelar.ForeColor = System.Drawing.Color.White;
-            this.Btn_Cancelar.Location = new System.Drawing.Point(249, 256);
+            this.Btn_Cancelar.Location = new System.Drawing.Point(186, 256);
             this.Btn_Cancelar.Name = "Btn_Cancelar";
             this.Btn_Cancelar.Size = new System.Drawing.Size(76, 23);
             this.Btn_Cancelar.TabIndex = 95;
-            this.Btn_Cancelar.Text = "CANCELAR";
+            this.Btn_Cancelar.Text = "LISTO";
             this.Btn_Cancelar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.Btn_Cancelar.Click += new System.EventHandler(this.Btn_Cancelar_Click_1);
-            // 
-            // Btn_Finalizar
-            // 
-            this.Btn_Finalizar.BackColor = System.Drawing.Color.DodgerBlue;
-            this.Btn_Finalizar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Btn_Finalizar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Btn_Finalizar.Enabled = false;
-            this.Btn_Finalizar.ForeColor = System.Drawing.Color.White;
-            this.Btn_Finalizar.Location = new System.Drawing.Point(51, 256);
-            this.Btn_Finalizar.Name = "Btn_Finalizar";
-            this.Btn_Finalizar.Size = new System.Drawing.Size(76, 23);
-            this.Btn_Finalizar.TabIndex = 94;
-            this.Btn_Finalizar.Text = "FINALIZAR";
-            this.Btn_Finalizar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.Btn_Finalizar.Click += new System.EventHandler(this.Btn_Finalizar_Click);
             // 
             // label4
             // 
@@ -293,7 +276,6 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label Btn_Cancelar;
-        private System.Windows.Forms.Label Btn_Finalizar;
         private System.Windows.Forms.Label Btn_Limpiar;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker DtpFechaLlegada;

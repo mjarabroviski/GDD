@@ -32,6 +32,8 @@
             this.TxtDni = new System.Windows.Forms.TextBox();
             this.LblBuscar = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cboTipoDoc = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.LbLNac = new System.Windows.Forms.Label();
             this.dtpNac = new System.Windows.Forms.DateTimePicker();
             this.TxtMillas = new System.Windows.Forms.TextBox();
@@ -40,8 +42,7 @@
             this.dgvCanjes = new System.Windows.Forms.DataGridView();
             this.LblListo = new System.Windows.Forms.Label();
             this.LblLimpiar = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.cboTipoDoc = new System.Windows.Forms.ComboBox();
+            this.btnAceptar = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCompras)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCanjes)).BeginInit();
@@ -79,6 +80,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnAceptar);
             this.groupBox1.Controls.Add(this.cboTipoDoc);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.LbLNac);
@@ -94,6 +96,23 @@
             this.groupBox1.TabIndex = 36;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Millas";
+            // 
+            // cboTipoDoc
+            // 
+            this.cboTipoDoc.FormattingEnabled = true;
+            this.cboTipoDoc.Location = new System.Drawing.Point(135, 22);
+            this.cboTipoDoc.Name = "cboTipoDoc";
+            this.cboTipoDoc.Size = new System.Drawing.Size(149, 21);
+            this.cboTipoDoc.TabIndex = 49;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 27);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(123, 13);
+            this.label3.TabIndex = 40;
+            this.label3.Text = "TIPO DE DOCUMENTO";
             // 
             // LbLNac
             // 
@@ -171,22 +190,19 @@
             this.LblLimpiar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.LblLimpiar.Click += new System.EventHandler(this.LblLimpiar_Click);
             // 
-            // label3
+            // btnAceptar
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 27);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(123, 13);
-            this.label3.TabIndex = 40;
-            this.label3.Text = "TIPO DE DOCUMENTO";
-            // 
-            // cboTipoDoc
-            // 
-            this.cboTipoDoc.FormattingEnabled = true;
-            this.cboTipoDoc.Location = new System.Drawing.Point(135, 22);
-            this.cboTipoDoc.Name = "cboTipoDoc";
-            this.cboTipoDoc.Size = new System.Drawing.Size(149, 21);
-            this.cboTipoDoc.TabIndex = 49;
+            this.btnAceptar.BackColor = System.Drawing.Color.DodgerBlue;
+            this.btnAceptar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.btnAceptar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAceptar.ForeColor = System.Drawing.Color.White;
+            this.btnAceptar.Location = new System.Drawing.Point(479, 56);
+            this.btnAceptar.Name = "btnAceptar";
+            this.btnAceptar.Size = new System.Drawing.Size(86, 21);
+            this.btnAceptar.TabIndex = 50;
+            this.btnAceptar.Text = "ACEPTAR";
+            this.btnAceptar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
             // ConsultaMillas
             // 
@@ -225,5 +241,6 @@
         private System.Windows.Forms.Label LblLimpiar;
         private System.Windows.Forms.ComboBox cboTipoDoc;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label btnAceptar;
     }
 }

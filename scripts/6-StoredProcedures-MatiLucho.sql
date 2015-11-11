@@ -91,18 +91,6 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE [EL_PUNTERO].[GetServicioPorID]
-@ID_Servicio int
-AS
-BEGIN
-	SET NOCOUNT ON;
-	
-	SELECT *
-	FROM [EL_PUNTERO].[TL_SERVICIO]
-	WHERE @ID_Servicio = ID_Servicio
-END
-GO
-
 CREATE PROCEDURE [EL_PUNTERO].[GetCiudadPorID]
 @ID_Ciudad int
 AS
@@ -112,16 +100,6 @@ BEGIN
 	SELECT *
 	FROM [EL_PUNTERO].[TL_CIUDAD]
 	WHERE @ID_Ciudad = ID_Ciudad
-END
-GO
-
-CREATE PROCEDURE [EL_PUNTERO].[GetServicios]
-AS
-BEGIN
-	SET NOCOUNT ON;
-	SELECT *
-	FROM [EL_PUNTERO].TL_SERVICIO
-	ORDER BY Nombre
 END
 GO
 
@@ -158,19 +136,6 @@ BEGIN
 	SELECT *
 	FROM [EL_PUNTERO].TL_CIUDAD
 	WHERE Nombre_Ciudad = @Nombre_Ciudad
-END
-GO
-
-
-
-CREATE PROCEDURE [EL_PUNTERO].[ObtenerIDPorNombreDeServicio]
-@TipoServicio nvarchar(255)
-AS
-BEGIN
-	SET NOCOUNT ON;
-	SELECT *
-	FROM [EL_PUNTERO].TL_SERVICIO
-	WHERE Nombre = @TipoServicio
 END
 GO
 
@@ -364,9 +329,6 @@ BEGIN
 END
 GO
 
-
-
-
 --Acordarse de descomentar
 CREATE PROCEDURE [EL_PUNTERO].[ObtenerButacasDisponibles]
 @ID_Viaje int
@@ -417,6 +379,7 @@ BEGIN
 
 	DROP TABLE [EL_PUNTERO].TL_ENCOMIENDAAUX
 END
+GO
 
 CREATE PROCEDURE [EL_PUNTERO].[ServicioPorIDRuta]
 @ID_Ruta int
@@ -427,6 +390,7 @@ BEGIN
 	FROM [EL_PUNTERO].TL_SERVICIO
 	WHERE ID_Servicio = (SELECT ID_Servicio FROM TL_RUTA WHERE ID_Ruta=@ID_Ruta)
 END
+GO
 
 CREATE PROCEDURE [EL_PUNTERO].[ObtenerViajes]
 AS

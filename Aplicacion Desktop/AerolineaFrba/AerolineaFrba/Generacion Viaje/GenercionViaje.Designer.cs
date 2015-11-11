@@ -265,7 +265,7 @@
             this.Btn_Limpiar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Btn_Limpiar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_Limpiar.ForeColor = System.Drawing.Color.White;
-            this.Btn_Limpiar.Location = new System.Drawing.Point(173, 344);
+            this.Btn_Limpiar.Location = new System.Drawing.Point(120, 344);
             this.Btn_Limpiar.Name = "Btn_Limpiar";
             this.Btn_Limpiar.Size = new System.Drawing.Size(95, 32);
             this.Btn_Limpiar.TabIndex = 54;
@@ -279,7 +279,7 @@
             this.Btn_Cancelar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Btn_Cancelar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_Cancelar.ForeColor = System.Drawing.Color.White;
-            this.Btn_Cancelar.Location = new System.Drawing.Point(274, 344);
+            this.Btn_Cancelar.Location = new System.Drawing.Point(14, 344);
             this.Btn_Cancelar.Name = "Btn_Cancelar";
             this.Btn_Cancelar.Size = new System.Drawing.Size(95, 32);
             this.Btn_Cancelar.TabIndex = 53;
@@ -293,7 +293,7 @@
             this.Btn_GenerarViaje.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Btn_GenerarViaje.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_GenerarViaje.ForeColor = System.Drawing.Color.White;
-            this.Btn_GenerarViaje.Location = new System.Drawing.Point(72, 344);
+            this.Btn_GenerarViaje.Location = new System.Drawing.Point(327, 344);
             this.Btn_GenerarViaje.Name = "Btn_GenerarViaje";
             this.Btn_GenerarViaje.Size = new System.Drawing.Size(95, 32);
             this.Btn_GenerarViaje.TabIndex = 52;

@@ -178,6 +178,7 @@
             this.consultaDeMillasDePasajeroFrecuenteToolStripMenuItem.Size = new System.Drawing.Size(289, 22);
             this.consultaDeMillasDePasajeroFrecuenteToolStripMenuItem.Text = "Consulta de Millas de Pasajero Frecuente";
             this.consultaDeMillasDePasajeroFrecuenteToolStripMenuItem.Visible = false;
+            this.consultaDeMillasDePasajeroFrecuenteToolStripMenuItem.Click += new System.EventHandler(this.consultaDeMillasDePasajeroFrecuenteToolStripMenuItem_Click);
             // 
             // listadoEstadisticoToolStripMenuItem
             // 

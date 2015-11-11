@@ -57,16 +57,10 @@ namespace AerolineaFrba.Registro_Llegada_Destino
 
         private void Btn_Cancelar_Click_1(object sender, EventArgs e)
         {
-            var dialogAnswer = MessageBox.Show("Esta seguro que quiere cancelar la operacion?", "Atencion", MessageBoxButtons.YesNo);
-            if (DialogResult.Yes == dialogAnswer)
-            {
                 Close();
-            }
         }
 
-        private void Btn_Finalizar_Click(object sender, EventArgs e)
-        {
-            var dialogAnswer = MessageBox.Show("Registro finalizado correctamente","Informacion", MessageBoxButtons.OK);
+        public void volverAEstadoInicial(){
             limpiarCampos();
             Btn_Cancelar.Enabled = true;
             Btn_Registrar.Enabled = true;
@@ -75,8 +69,6 @@ namespace AerolineaFrba.Registro_Llegada_Destino
             CboCiudadDestino.Enabled = true;
             CboCiudadOrigen.Enabled = true;
             Btn_Limpiar.Enabled = true;
-
-            Btn_Finalizar.Enabled = false;  
         }
 
         private void Btn_Limpiar_Click(object sender, EventArgs e)
@@ -146,6 +138,7 @@ namespace AerolineaFrba.Registro_Llegada_Destino
                 Viaje viaje = viajes[0];
                 var infoAeronave = new InformacionAeronave(aeronave,viaje,this);
                 infoAeronave.ShowDialog();
+                volverAEstadoInicial();
                 #endregion
 
             }
@@ -159,7 +152,6 @@ namespace AerolineaFrba.Registro_Llegada_Destino
         public void actualizarLlegada(DateTime fechallegada)
         {
             DtpFechaLlegada.Value = fechallegada;
-            Btn_Finalizar.Enabled = true;
             Btn_Registrar.Enabled = false;
             DtpFechaSalida.Enabled = false;
             CboAeronave.Enabled = false;

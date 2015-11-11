@@ -12,7 +12,7 @@ namespace Persistencia
 {
     public static class ClientePersistencia
     {
-        public static Cliente ObtenerClientePorDNI(int doc, int tipo_Doc )
+        public static List<Cliente> ObtenerClientePorDNI(int doc, int tipo_Doc )
         {
             //Traigo el cliente cuyo tipo y nro de documento coincida con los parametros
             var param = new List<SPParameter> { new SPParameter("Documento", doc),
@@ -23,9 +23,23 @@ namespace Persistencia
 
             List<Cliente> users = sp.ExecuteReader<Cliente>();
 
-            if (users == null || users.Count == 0)
-                return null;
+            return users;
+        }
 
+        public static Cliente ObtenerClientePorDNIYFechaNac(int doc, int tipo_Doc, DateTime fecha)
+        {
+            //Traigo el cliente cuyo tipo y nro de documento coincida con los parametros
+            var param = new List<SPParameter> { new SPParameter("Documento", doc),
+                                                new SPParameter("Tipo_Doc", tipo_Doc),
+                                                new SPParameter("Fecha", fecha)
+                                              };
+
+            var sp = new StoreProcedure(DBQueries.Cliente.SPGetClientePorTipoYDocumentoYFechaNac, param);
+
+            List<Cliente> users = sp.ExecuteReader<Cliente>();
+
+            if (users.Count == 0 || users == null) return null;
+                
             return users[0];
         }
     }

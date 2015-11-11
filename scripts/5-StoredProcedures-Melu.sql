@@ -129,6 +129,18 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE [EL_PUNTERO].[GetRolPorID]
+@ID int
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	SELECT *
+	FROM [EL_PUNTERO].[TL_ROL]
+	WHERE ID_Rol = @ID
+END
+GO
+
 CREATE PROCEDURE [EL_PUNTERO].[ActualizarContrasena]
 @ID_User int,
 @Password nvarchar(64)
@@ -852,6 +864,43 @@ BEGIN
 	
 	SELECT *
 	FROM [EL_PUNTERO].[TL_TIPO_DOCUMENTO] 
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[GetClientePorTipoYDocumentoYFechaNac]
+@Documento int,
+@Tipo_Doc int,
+@Fecha datetime
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	SELECT *
+	FROM [EL_PUNTERO].[TL_CLIENTE] 
+	WHERE Nro_Documento = @Documento 
+	AND ID_Tipo_Documento = @Tipo_Doc
+	AND Fecha_Nacimiento = @Fecha
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[AgregarRegistroMillas]
+@ID_Viaje int
+AS
+BEGIN
+	--Agrego Pasajes
+	INSERT INTO EL_PUNTERO.TL_REGISTRO_MILLAS (ID_Cliente,Codigo_Item,Fecha_Inicio,Millas)
+	(SELECT DISTINCT ID_Cliente,Codigo_Pasaje, GETDATE(), (Precio/10) FROM EL_PUNTERO.TL_PASAJE WHERE ID_Viaje = @ID_Viaje
+	AND ID_Pasaje NOT IN (SELECT ID_Pasaje FROM EL_PUNTERO.TL_ITEM_DEVUELTO))
+
+	--Agrego Encomiendas
+	INSERT INTO [EL_PUNTERO].[TL_REGISTRO_MILLAS] (ID_Cliente,Codigo_Item,Fecha_Inicio,Millas)
+	(SELECT DISTINCT ID_Cliente,Codigo_Encomienda, GETDATE(), (Precio/10) FROM EL_PUNTERO.TL_ENCOMIENDA E INNER JOIN EL_PUNTERO.TL_COMPRA C ON C.ID_Compra = E.ID_Compra  
+	WHERE ID_Viaje = @ID_Viaje AND ID_Encomienda NOT IN (SELECT ID_Pasaje FROM EL_PUNTERO.TL_ITEM_DEVUELTO))
+
+	--Sumo las millas del cliente
+	UPDATE C
+	SET C.Millas += (SELECT SUM(R.Millas) FROM EL_PUNTERO.TL_REGISTRO_MILLAS R  WHERE R.ID_Cliente = C.ID_Cliente) 
+	FROM EL_PUNTERO.TL_CLIENTE C
 END
 GO
 

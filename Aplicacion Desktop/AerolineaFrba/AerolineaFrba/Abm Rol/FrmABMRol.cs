@@ -209,7 +209,7 @@ namespace AerolineaFrba.Abm_Rol
                     }
 
                     //Esta tratando de eliminar el rol administrador (no lo permito)
-                    if (rolSeleccionado.Descripcion == "Administrador")
+                    if (rolSeleccionado.Descripcion == "Administrador" || rolSeleccionado.Descripcion == "Administrador General")
                     {
                         MessageBox.Show("No se puede inhabilitar el rol administrador", "Atencion");
                         return;

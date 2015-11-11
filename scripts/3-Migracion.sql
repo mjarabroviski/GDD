@@ -96,7 +96,19 @@ COMMIT
 
  BEGIN TRANSACTION
  INSERT INTO EL_PUNTERO.TL_USUARIO (ID_Rol,Username,Password,Cant_Intentos)
- VALUES (2,'admin1','b221d9dbb083a7f33428d7c2a3c3198ae925614d70210e28716ccaa7cd4ddb79',3);
+ VALUES (2,'admin1','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',3);
+
+ INSERT INTO EL_PUNTERO.TL_USUARIO (ID_Rol,Username,Password,Cant_Intentos)
+ VALUES (2,'admin2','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',3);
+
+ INSERT INTO EL_PUNTERO.TL_USUARIO (ID_Rol,Username,Password,Cant_Intentos)
+ VALUES (2,'admin3','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',3);
+
+ INSERT INTO EL_PUNTERO.TL_USUARIO (ID_Rol,Username,Password,Cant_Intentos)
+ VALUES (2,'admin4','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',3);
+
+ INSERT INTO EL_PUNTERO.TL_USUARIO (ID_Rol,Username,Password,Cant_Intentos)
+ VALUES (3,'admin','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',3);
  COMMIT
  
  BEGIN TRANSACTION

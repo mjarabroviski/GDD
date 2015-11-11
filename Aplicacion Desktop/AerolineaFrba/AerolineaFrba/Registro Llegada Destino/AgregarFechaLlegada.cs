@@ -30,7 +30,6 @@ namespace AerolineaFrba.Registro_Llegada_Destino
 
         private void BtnAceptar_Click(object sender, EventArgs e)
         {
-
             try
             {
                 #region ValidacionesEnGral
@@ -43,7 +42,10 @@ namespace AerolineaFrba.Registro_Llegada_Destino
                     throw new Exception(exceptionMessage);
                 #endregion
 
+                //Se registra la fecha de llegada del viaje y se registran las millas de los pasajeros
                 ViajePersistencia.ActualizarFechaLlegada(viaje.ID,DtpFechaLlegada.Value);
+                RegistroMillasPersistencia.ActualizarMillas(viaje.ID);
+
                 MessageBox.Show("Fecha registrada correctamente", "Informacion", MessageBoxButtons.OK);
                 Hide();
                 registro.actualizarLlegada(DtpFechaLlegada.Value);

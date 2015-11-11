@@ -169,6 +169,22 @@ namespace Persistencia
             return sp.ExecuteNonQuery(transaccion);
         }
 
+        public static Rol ObtenerRolPorID(int ID)
+        {
+            var param = new List<SPParameter> { new SPParameter("ID", ID) };
+            var sp = new StoreProcedure(DBQueries.Rol.SPGetRolPorID, param);
+
+            //Retorno una lista de Roles a partir de un ExecuteReader
+            List<Rol> roles = sp.ExecuteReader<Rol>();
+
+            if (roles == null || roles.Count == 0)
+                return null;
+
+            //Se llena el rol con sus funcionalidades
+            Rol rolARetornar = roles[0].AgregarFuncionalidades();
+            return rolARetornar;
+        }
+
 
     }
 }

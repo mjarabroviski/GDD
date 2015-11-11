@@ -115,12 +115,10 @@
             // txtAdministrador
             // 
             this.txtAdministrador.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtAdministrador.Enabled = false;
             this.txtAdministrador.Location = new System.Drawing.Point(38, 35);
             this.txtAdministrador.Name = "txtAdministrador";
             this.txtAdministrador.Size = new System.Drawing.Size(296, 20);
             this.txtAdministrador.TabIndex = 69;
-            this.txtAdministrador.Text = "ADMINISTRADOR";
             // 
             // label1
             // 
@@ -163,6 +161,7 @@
             this.Controls.Add(this.TxtUsuario);
             this.Name = "RegistroDeUsuario";
             this.Text = "Registro de Usuario";
+            this.Load += new System.EventHandler(this.RegistroDeUsuario_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

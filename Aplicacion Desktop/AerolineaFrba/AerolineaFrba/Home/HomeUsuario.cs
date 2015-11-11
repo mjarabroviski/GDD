@@ -211,5 +211,11 @@ namespace AerolineaFrba.Home
             var cambio = new ResetearContrasena(AdministradorSesion.UsuarioActual);
             cambio.ShowDialog();
         }
+
+        private void consultaDeMillasDePasajeroFrecuenteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var consulta = new ConsultaMillas();
+            consulta.ShowDialog();
+        }
     }
 }
