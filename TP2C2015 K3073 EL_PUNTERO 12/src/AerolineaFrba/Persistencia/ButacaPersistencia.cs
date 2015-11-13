@@ -107,5 +107,15 @@ namespace Persistencia
             var butacas = sp.ExecuteReaderTransactioned<Butaca>(transaction);
             return butacas[0].Numero;
         }
+
+        public static List<Butaca> ObtenerTodasLasLibresDeAeronave(Viaje viaje)
+        {
+            //Obtengo la lista de butacas habilitadas de una aeronave
+            var param = new List<SPParameter> { new SPParameter("ID_Viaje", viaje.ID) };
+
+            var sp = new StoreProcedure(DBQueries.Butaca.SPObtenerInfoButacasDisponibles, param);
+
+            return sp.ExecuteReader<Butaca>();
+        }
     }
 }

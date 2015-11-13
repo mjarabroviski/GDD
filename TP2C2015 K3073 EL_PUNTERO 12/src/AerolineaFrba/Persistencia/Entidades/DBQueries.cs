@@ -8,6 +8,12 @@ namespace Persistencia.Entidades
 {
     public static class DBQueries
     {
+        public static class Compra
+        {
+            public static String SPCrearTablaAuxiliarPasajeros = "EL_PUNTERO.CrearTablaAuxiliarPasajeros";
+            public static String SPBorrarTablaAuxiliarPasajeros = "EL_PUNTERO.BorrarTablaAuxiliarPasajeros";
+        }
+
         public static class Rol
         {
             public static String SPGetRoles = "EL_PUNTERO.GetRoles";
@@ -105,6 +111,7 @@ namespace Persistencia.Entidades
             public static String SPDarDeBajaButaca = "EL_PUNTERO.DarDeBajaButaca";
             public static String SPGetMaxNroButaca = "EL_PUNTERO.GetMaxNroButaca";
             public static String SPGetCantButacasPorAeronave = "EL_PUNTERO.GetCantButacasPorAeronave";
+            public static String SPObtenerInfoButacasDisponibles = "EL_PUNTERO.ObtenerInfoButacasDisponibles";
         }
 
         public static class Viaje
