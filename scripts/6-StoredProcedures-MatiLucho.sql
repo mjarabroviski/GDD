@@ -447,9 +447,51 @@ BEGIN
 		(SELECT ID_Butaca
 		FROM  [EL_PUNTERO].TL_BUTACAAUX
 		WHERE ID_Butaca NOT IN ((SELECT ID_Butaca FROM [EL_PUNTERO].TL_PASAJE P WHERE P.ID_Viaje=@ID_Viaje))  )
+		AND ID_Butaca NOT IN (SELECT C.ID_Butaca FROM [EL_PUNTERO].TL_CLIENTE_AUX C)
 
 
 		DROP TABLE [EL_PUNTERO].[TL_BUTACAAUX]
 END
 GO
+
+CREATE PROCEDURE [EL_PUNTERO].[CargarTablaAuxiliarPasajeros]
+@Tipo_Doc nvarchar(255),
+@Nro_Doc int,
+@Apellidos nvarchar(255),
+@Nombres nvarchar(255),
+@Calle nvarchar(255),
+@Nro_Calle nvarchar(255),
+@Telefono int,
+@Fecha_Nacimiento dateTime,
+@Mail nvarchar(255),
+@ID_Butaca int
+AS
+BEGIN
+	SET NOCOUNT ON;
+	DECLARE @ID_Tipo_Doc int;
+	DECLARE @Direccion varchar(255);
+	SET @ID_Tipo_Doc = (SELECT ID_Tipo_Documento FROM TL_TIPO_DOCUMENTO WHERE Descripcion = @Tipo_Doc);
+	SET @Direccion = @Calle + @Nro_Calle;
+
+	INSERT INTO [EL_PUNTERO].[TL_CLIENTE_AUX](Nombre,Apellido,ID_Tipo_Documento,Nro_Documento,Mail,Telefono,Direccion,Fecha_Nacimiento,ID_Butaca)
+		                              VALUES (@Nombres,@Apellidos,@ID_Tipo_Doc,@Nro_Doc,@Mail,@Telefono,@Direccion,@Fecha_Nacimiento,@ID_Butaca);
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[ObtenerClientePorDoc]
+@Tipo_Doc nvarchar(255),
+@Nro_Doc int
+AS
+BEGIN
+	SET NOCOUNT ON;
+	DECLARE @ID_Tipo_Doc int;
+	SET @ID_Tipo_Doc = (SELECT ID_Tipo_Documento FROM TL_TIPO_DOCUMENTO WHERE Descripcion = @Tipo_Doc);
+
+	SELECT *
+	FROM TL_CLIENTE
+	WHERE ID_Tipo_Documento=@ID_Tipo_Doc AND Nro_Documento=@Nro_Doc
+
+END
+GO
+
 COMMIT

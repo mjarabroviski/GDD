@@ -12,6 +12,8 @@ namespace Persistencia.Entidades
         {
             public static String SPCrearTablaAuxiliarPasajeros = "EL_PUNTERO.CrearTablaAuxiliarPasajeros";
             public static String SPBorrarTablaAuxiliarPasajeros = "EL_PUNTERO.BorrarTablaAuxiliarPasajeros";
+            public static String SPCargarTablaAuxiliarPasajeros = "EL_PUNTERO.CargarTablaAuxiliarPasajeros";
+            public static String SPObtenerClientePorDoc = "EL_PUNTERO.ObtenerClientePorDoc";
         }
 
         public static class Rol
