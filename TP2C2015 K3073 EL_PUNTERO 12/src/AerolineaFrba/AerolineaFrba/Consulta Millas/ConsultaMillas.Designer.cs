@@ -32,6 +32,7 @@
             this.TxtDni = new System.Windows.Forms.TextBox();
             this.LblBuscar = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnAceptar = new System.Windows.Forms.Label();
             this.cboTipoDoc = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.LbLNac = new System.Windows.Forms.Label();
@@ -42,7 +43,8 @@
             this.dgvCanjes = new System.Windows.Forms.DataGridView();
             this.LblListo = new System.Windows.Forms.Label();
             this.LblLimpiar = new System.Windows.Forms.Label();
-            this.btnAceptar = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCompras)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCanjes)).BeginInit();
@@ -97,6 +99,20 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Millas";
             // 
+            // btnAceptar
+            // 
+            this.btnAceptar.BackColor = System.Drawing.Color.DodgerBlue;
+            this.btnAceptar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.btnAceptar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAceptar.ForeColor = System.Drawing.Color.White;
+            this.btnAceptar.Location = new System.Drawing.Point(479, 56);
+            this.btnAceptar.Name = "btnAceptar";
+            this.btnAceptar.Size = new System.Drawing.Size(86, 21);
+            this.btnAceptar.TabIndex = 50;
+            this.btnAceptar.Text = "ACEPTAR";
+            this.btnAceptar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
+            // 
             // cboTipoDoc
             // 
             this.cboTipoDoc.FormattingEnabled = true;
@@ -136,6 +152,7 @@
             this.TxtMillas.Name = "TxtMillas";
             this.TxtMillas.Size = new System.Drawing.Size(86, 20);
             this.TxtMillas.TabIndex = 37;
+            this.TxtMillas.Text = "0";
             // 
             // label2
             // 
@@ -149,7 +166,7 @@
             // dgvCompras
             // 
             this.dgvCompras.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCompras.Location = new System.Drawing.Point(12, 100);
+            this.dgvCompras.Location = new System.Drawing.Point(12, 118);
             this.dgvCompras.Name = "dgvCompras";
             this.dgvCompras.Size = new System.Drawing.Size(454, 404);
             this.dgvCompras.TabIndex = 37;
@@ -157,7 +174,7 @@
             // dgvCanjes
             // 
             this.dgvCanjes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCanjes.Location = new System.Drawing.Point(472, 100);
+            this.dgvCanjes.Location = new System.Drawing.Point(472, 118);
             this.dgvCanjes.Name = "dgvCanjes";
             this.dgvCanjes.Size = new System.Drawing.Size(454, 404);
             this.dgvCanjes.TabIndex = 38;
@@ -168,7 +185,7 @@
             this.LblListo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblListo.Cursor = System.Windows.Forms.Cursors.Hand;
             this.LblListo.ForeColor = System.Drawing.Color.White;
-            this.LblListo.Location = new System.Drawing.Point(12, 515);
+            this.LblListo.Location = new System.Drawing.Point(12, 533);
             this.LblListo.Name = "LblListo";
             this.LblListo.Size = new System.Drawing.Size(124, 32);
             this.LblListo.TabIndex = 47;
@@ -182,7 +199,7 @@
             this.LblLimpiar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblLimpiar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.LblLimpiar.ForeColor = System.Drawing.Color.White;
-            this.LblLimpiar.Location = new System.Drawing.Point(802, 515);
+            this.LblLimpiar.Location = new System.Drawing.Point(802, 533);
             this.LblLimpiar.Name = "LblLimpiar";
             this.LblLimpiar.Size = new System.Drawing.Size(124, 32);
             this.LblLimpiar.TabIndex = 48;
@@ -190,25 +207,31 @@
             this.LblLimpiar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.LblLimpiar.Click += new System.EventHandler(this.LblLimpiar_Click);
             // 
-            // btnAceptar
+            // label4
             // 
-            this.btnAceptar.BackColor = System.Drawing.Color.DodgerBlue;
-            this.btnAceptar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.btnAceptar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAceptar.ForeColor = System.Drawing.Color.White;
-            this.btnAceptar.Location = new System.Drawing.Point(479, 56);
-            this.btnAceptar.Name = "btnAceptar";
-            this.btnAceptar.Size = new System.Drawing.Size(86, 21);
-            this.btnAceptar.TabIndex = 50;
-            this.btnAceptar.Text = "ACEPTAR";
-            this.btnAceptar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 102);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(130, 13);
+            this.label4.TabIndex = 49;
+            this.label4.Text = "COMPRAS REALIZADAS";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(474, 102);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(119, 13);
+            this.label5.TabIndex = 50;
+            this.label5.Text = "CANJES REALIZADOS";
             // 
             // ConsultaMillas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(938, 556);
+            this.ClientSize = new System.Drawing.Size(938, 572);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.LblLimpiar);
             this.Controls.Add(this.LblListo);
             this.Controls.Add(this.dgvCanjes);
@@ -222,6 +245,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvCompras)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCanjes)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -242,5 +266,7 @@
         private System.Windows.Forms.ComboBox cboTipoDoc;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label btnAceptar;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
     }
 }

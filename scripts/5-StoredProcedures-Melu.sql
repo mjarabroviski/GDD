@@ -901,10 +901,47 @@ BEGIN
 	UPDATE C
 	SET C.Millas += (SELECT SUM(R.Millas) FROM EL_PUNTERO.TL_REGISTRO_MILLAS R  WHERE R.ID_Cliente = C.ID_Cliente) 
 	FROM EL_PUNTERO.TL_CLIENTE C
+
+	--Pongo en cero los demas campos de millas
+	UPDATE EL_PUNTERO.TL_CLIENTE
+	SET Millas = 0
+	WHERE Millas is null
 END
 GO
 
 ---------------------------------------------------------------------------------------------------------------
+CREATE PROCEDURE [EL_PUNTERO].[GetAllRegistrosMillas]
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	SELECT *
+	FROM [EL_PUNTERO].[TL_REGISTRO_MILLAS] 
+END
+GO
 
+CREATE PROCEDURE [EL_PUNTERO].[GetRegistrosPorIDCliente]
+@ID_Cliente int
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	SELECT *
+	FROM [EL_PUNTERO].[TL_REGISTRO_MILLAS]
+	WHERE ID_Cliente = @ID_Cliente
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[GetCanjePorIDCliente]
+@ID_Cliente int
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	SELECT *
+	FROM [EL_PUNTERO].[TL_CANJE]
+	WHERE ID_Cliente = @ID_Cliente
+END
+GO
 
 COMMIT
