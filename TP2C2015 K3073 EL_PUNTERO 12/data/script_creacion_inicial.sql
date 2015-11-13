@@ -1546,6 +1546,11 @@ BEGIN
 	UPDATE C
 	SET C.Millas += (SELECT SUM(R.Millas) FROM EL_PUNTERO.TL_REGISTRO_MILLAS R  WHERE R.ID_Cliente = C.ID_Cliente) 
 	FROM EL_PUNTERO.TL_CLIENTE C
+
+	--Pongo en cero los demas campos de millas
+	UPDATE EL_PUNTERO.TL_CLIENTE
+	SET Millas = 0
+	WHERE Millas is null
 END
 GO
 

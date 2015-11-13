@@ -45,7 +45,6 @@ DROP PROCEDURE [EL_PUNTERO].CancelarPasajesYEncomiendasConRutaInhabilitada;
 DROP PROCEDURE [EL_PUNTERO].[GetRolPorID];
 DROP PROCEDURE [EL_PUNTERO].InsertarFuncionalidadPorRol;
 DROP PROCEDURE [EL_PUNTERO].[ModificarRuta];
-
 DROP PROCEDURE [EL_PUNTERO].[GetFuncionalidadesPorRol];
 DROP PROCEDURE [EL_PUNTERO].[ObtenerServiciosDeRuta];
 DROP PROCEDURE [EL_PUNTERO].[GetAeronavesPorParametrosComo];
@@ -84,13 +83,11 @@ DROP PROCEDURE [EL_PUNTERO].[HabilitarAeronavesQueVolvieronDeBajaServicio];
 DROP PROCEDURE [EL_PUNTERO].[GetFuncionalidadPorNombre];
 DROP PROCEDURE [EL_PUNTERO].[ActualizarRolPorID];
 DROP PROCEDURE [EL_PUNTERO].[EliminarFuncionalidadesPorRol];
-
 DROP PROCEDURE [EL_PUNTERO].[GetAllRoles];
 DROP PROCEDURE [EL_PUNTERO].[GetAllRutas];
 DROP PROCEDURE [EL_PUNTERO].[GetCiudadPorID];
 DROP PROCEDURE [EL_PUNTERO].[GetFuncionalidades];
 DROP PROCEDURE [EL_PUNTERO].[GetRolPorNombreComo];
-
 DROP PROCEDURE [EL_PUNTERO].[InsertarFuncionalidadPorRol];
 DROP PROCEDURE [EL_PUNTERO].[InsertarRol];
 DROP PROCEDURE [EL_PUNTERO].[InsertarRuta];
@@ -117,6 +114,9 @@ DROP PROCEDURE [EL_PUNTERO].[GetClientePorTipoYDocumentoYFechaNac];
 DROP PROCEDURE [EL_PUNTERO].[AgregarRegistroMillas];
 DROP PROCEDURE [EL_PUNTERO].[ObtenerViajes];
 DROP PROCEDURE [EL_PUNTERO].[ServicioPorIDRuta];
+DROP PROCEDURE [EL_PUNTERO].[GetAllRegistrosMillas];
+DROP PROCEDURE [EL_PUNTERO].[GetRegistrosPorIDCliente];
+DROP PROCEDURE [EL_PUNTERO].[GetCanjePorIDCliente];
 
 
 DROP TRIGGER [EL_PUNTERO].[Tr_DeshabilitarUsuariosConRolDeshabilitado];
