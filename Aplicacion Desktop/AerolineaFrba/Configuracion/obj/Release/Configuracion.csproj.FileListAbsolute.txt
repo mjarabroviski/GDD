@@ -1,6 +1,0 @@
-C:\Users\Mati\Desktop\UTN\Gestion de Datos\TP Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\Configuracion\bin\Release\Configuracion.exe
-C:\Users\Mati\Desktop\UTN\Gestion de Datos\TP Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\Configuracion\bin\Release\Configuracion.pdb
-C:\Users\Mati\Desktop\UTN\Gestion de Datos\TP Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\Configuracion\obj\Release\Configuracion.Properties.Resources.resources
-C:\Users\Mati\Desktop\UTN\Gestion de Datos\TP Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\Configuracion\obj\Release\Configuracion.csproj.GenerateResource.Cache
-C:\Users\Mati\Desktop\UTN\Gestion de Datos\TP Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\Configuracion\obj\Release\Configuracion.exe
-C:\Users\Mati\Desktop\UTN\Gestion de Datos\TP Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\Configuracion\obj\Release\Configuracion.pdb

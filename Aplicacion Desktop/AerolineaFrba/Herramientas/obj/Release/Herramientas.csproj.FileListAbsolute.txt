@@ -1,8 +1,0 @@
-C:\Users\Mati\Desktop\UTN\Gestion de Datos\TP Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\Herramientas\bin\Release\Herramientas.exe.config
-C:\Users\Mati\Desktop\UTN\Gestion de Datos\TP Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\Herramientas\bin\Release\Herramientas.exe
-C:\Users\Mati\Desktop\UTN\Gestion de Datos\TP Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\Herramientas\bin\Release\Herramientas.pdb
-C:\Users\Mati\Desktop\UTN\Gestion de Datos\TP Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\Herramientas\obj\Release\Herramientas.csprojResolveAssemblyReference.cache
-C:\Users\Mati\Desktop\UTN\Gestion de Datos\TP Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\Herramientas\obj\Release\Herramientas.Properties.Resources.resources
-C:\Users\Mati\Desktop\UTN\Gestion de Datos\TP Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\Herramientas\obj\Release\Herramientas.csproj.GenerateResource.Cache
-C:\Users\Mati\Desktop\UTN\Gestion de Datos\TP Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\Herramientas\obj\Release\Herramientas.exe
-C:\Users\Mati\Desktop\UTN\Gestion de Datos\TP Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\Herramientas\obj\Release\Herramientas.pdb

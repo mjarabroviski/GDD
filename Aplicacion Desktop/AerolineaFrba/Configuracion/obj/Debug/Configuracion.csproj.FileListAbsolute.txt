@@ -1,8 +1,0 @@
-C:\Users\Mati\Desktop\UTN\Gestion de Datos\TP Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\Configuracion\bin\Debug\Configuracion.exe
-C:\Users\Mati\Desktop\UTN\Gestion de Datos\TP Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\Configuracion\bin\Debug\Configuracion.pdb
-C:\Users\Mati\Desktop\UTN\Gestion de Datos\TP Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\Configuracion\obj\Debug\Configuracion.Properties.Resources.resources
-C:\Users\Mati\Desktop\UTN\Gestion de Datos\TP Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\Configuracion\obj\Debug\Configuracion.csproj.GenerateResource.Cache
-C:\Users\Mati\Desktop\UTN\Gestion de Datos\TP Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\Configuracion\obj\Debug\Configuracion.exe
-C:\Users\Mati\Desktop\UTN\Gestion de Datos\TP Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\Configuracion\obj\Debug\Configuracion.pdb
-C:\Users\Mati\Desktop\UTN\Gestion de Datos\TP Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\Configuracion\bin\Debug\Configuracion.exe.CodeAnalysisLog.xml
-C:\Users\Mati\Desktop\UTN\Gestion de Datos\TP Gestion de Datos\GDD\Aplicacion Desktop\AerolineaFrba\Configuracion\bin\Debug\Configuracion.exe.lastcodeanalysissucceeded
