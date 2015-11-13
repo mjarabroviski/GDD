@@ -49,6 +49,7 @@
     <Compile Include="ButacaPersistencia.cs" />
     <Compile Include="CiudadPersistencia.cs" />
     <Compile Include="ClientePersistencia.cs" />
+    <Compile Include="CompraPersistencia.cs" />
     <Compile Include="DevolucionPersistencia.cs" />
     <Compile Include="Entidades\Aeronave.cs" />
     <Compile Include="Entidades\Butaca.cs" />

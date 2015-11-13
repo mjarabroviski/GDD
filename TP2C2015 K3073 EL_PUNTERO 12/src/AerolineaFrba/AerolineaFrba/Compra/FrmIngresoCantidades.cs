@@ -42,6 +42,11 @@ namespace AerolineaFrba.Compra
         {
             try
             {
+                if (NumPasajes.Value > 0)
+                {
+                    CompraPersistencia.CrearTablaDatosPasajeros();
+                }
+
                 int ordenPasaje;
                 if (NumPasajes.Value == 0 && NumEncomiendas.Value == 0) throw new Exception("Debe ingresar cantidades mayores a 0");
                 if (NumPasajes.Value != 0)
@@ -55,6 +60,7 @@ namespace AerolineaFrba.Compra
                     ordenPasaje = 0;
                     //Cargar el formulario de datos del pago (y hacer este invisible)
                 }
+
             }
             catch (Exception ex)
             {

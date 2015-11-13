@@ -399,4 +399,57 @@ BEGIN
 	SELECT *
 	FROM [EL_PUNTERO].TL_VIAJE
 END
+GO
+
+-----------------------------------------------------------------------------------------------------------------------
+
+CREATE PROCEDURE [EL_PUNTERO].[CrearTablaAuxiliarPasajeros]
+AS
+BEGIN
+	SET NOCOUNT ON;
+	CREATE TABLE [EL_PUNTERO].[TL_CLIENTE_AUX](
+	[Nombre] nvarchar(255) NOT NULL,
+	[Apellido] nvarchar(255) NOT NULL,
+	[ID_Tipo_Documento] int NOT NULL,
+	[Nro_Documento] int NOT NULL,
+	[Mail] nvarchar(255),
+	[Telefono] nvarchar(255) NOT NULL,
+	[Direccion] nvarchar(255) NOT NULL,
+	[Fecha_Nacimiento] datetime NOT NULL,
+	[ID_Butaca] int NOT NULL
+	);
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[BorrarTablaAuxiliarPasajeros]
+AS
+BEGIN
+	SET NOCOUNT ON;
+	DROP TABLE [EL_PUNTERO].[TL_CLIENTE_AUX];
+END
+GO
+
+
+CREATE PROCEDURE [EL_PUNTERO].[ObtenerInfoButacasDisponibles]
+@ID_Viaje int
+AS
+BEGIN
+	SET NOCOUNT ON;
+		
+		CREATE TABLE [EL_PUNTERO].[TL_BUTACAAUX](
+			[ID_ButacaAux] int IDENTITY(1,1),
+			[ID_Butaca] int
+		);
+
+		INSERT INTO [EL_PUNTERO].TL_BUTACAAUX(ID_Butaca) ((SELECT B.ID_Butaca FROM [EL_PUNTERO].TL_BUTACA B WHERE B.ID_Aeronave = (SELECT V.ID_Aeronave FROM [EL_PUNTERO].TL_VIAJE V WHERE V.ID_Viaje=@ID_Viaje))) /*AND B.Habilitado=1*/
+
+		SELECT * FROM [EL_PUNTERO].TL_BUTACA WHERE ID_Butaca IN 
+		(SELECT ID_Butaca
+		FROM  [EL_PUNTERO].TL_BUTACAAUX
+		WHERE ID_Butaca NOT IN ((SELECT ID_Butaca FROM [EL_PUNTERO].TL_PASAJE P WHERE P.ID_Viaje=@ID_Viaje))  )
+
+
+		DROP TABLE [EL_PUNTERO].[TL_BUTACAAUX]
+END
+GO
 COMMIT

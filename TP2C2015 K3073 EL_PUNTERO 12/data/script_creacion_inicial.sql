@@ -48,8 +48,8 @@ CREATE TABLE [EL_PUNTERO].[TL_CLIENTE](
 	[Apellido] nvarchar(255) NOT NULL,
 	[ID_Tipo_Documento] int NOT NULL,
 	[Nro_Documento] int NOT NULL,
-	[Mail] nvarchar(255) NOT NULL,
-	[Telefono] nvarchar(255),
+	[Mail] nvarchar(255),
+	[Telefono] nvarchar(255) NOT NULL,
 	[Direccion] nvarchar(255) NOT NULL,
 	[Fecha_Nacimiento] datetime NOT NULL,
 	[Millas] int DEFAULT 0

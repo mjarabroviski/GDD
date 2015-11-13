@@ -41,5 +41,14 @@ namespace Persistencia
 
             return tipos[0];
         }
+
+        public static TipoButaca ObtenerTipoButaca(Butaca butaca)
+        {
+            var param = new List<SPParameter> { new SPParameter("ID_Tipo", butaca.ID_Tipo) };
+            var sp = new StoreProcedure(DBQueries.TipoButaca.SPGetTipoButacaPorButaca, param);
+
+            var tipos = sp.ExecuteReader<TipoButaca>();
+            return tipos[0];
+        }
     }
 }
