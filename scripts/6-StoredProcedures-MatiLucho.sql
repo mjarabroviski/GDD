@@ -408,8 +408,10 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 	CREATE TABLE [EL_PUNTERO].[TL_CLIENTE_AUX](
+	[ID] int IDENTITY (1,1),
 	[Nombre] nvarchar(255) NOT NULL,
 	[Apellido] nvarchar(255) NOT NULL,
+	[NombreYApellido] nvarchar(255) NOT NULL,
 	[ID_Tipo_Documento] int NOT NULL,
 	[Nro_Documento] int NOT NULL,
 	[Mail] nvarchar(255),
@@ -473,8 +475,8 @@ BEGIN
 	SET @ID_Tipo_Doc = (SELECT ID_Tipo_Documento FROM TL_TIPO_DOCUMENTO WHERE Descripcion = @Tipo_Doc);
 	SET @Direccion = @Calle + @Nro_Calle;
 
-	INSERT INTO [EL_PUNTERO].[TL_CLIENTE_AUX](Nombre,Apellido,ID_Tipo_Documento,Nro_Documento,Mail,Telefono,Direccion,Fecha_Nacimiento,ID_Butaca)
-		                              VALUES (@Nombres,@Apellidos,@ID_Tipo_Doc,@Nro_Doc,@Mail,@Telefono,@Direccion,@Fecha_Nacimiento,@ID_Butaca);
+	INSERT INTO [EL_PUNTERO].[TL_CLIENTE_AUX](Nombre,Apellido,NombreYApellido,ID_Tipo_Documento,Nro_Documento,Mail,Telefono,Direccion,Fecha_Nacimiento,ID_Butaca)
+		                              VALUES (@Nombres,@Apellidos,@Apellidos + ', ' + @Nombres,@ID_Tipo_Doc,@Nro_Doc,@Mail,@Telefono,@Direccion,@Fecha_Nacimiento,@ID_Butaca);
 END
 GO
 
@@ -491,6 +493,15 @@ BEGIN
 	FROM TL_CLIENTE
 	WHERE ID_Tipo_Documento=@ID_Tipo_Doc AND Nro_Documento=@Nro_Doc
 
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[GetClientesAuxiliares]
+AS
+BEGIN
+	SET NOCOUNT ON;
+	SELECT *
+	FROM TL_CLIENTE_AUX
 END
 GO
 

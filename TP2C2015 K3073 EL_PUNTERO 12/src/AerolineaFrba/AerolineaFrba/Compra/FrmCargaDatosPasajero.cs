@@ -37,11 +37,11 @@ namespace AerolineaFrba.Compra
                 LblNroPasajero.Text = "#" + ordenPasaje;
                 ordenPasaje++;
             }
-            else
-            {
-                this.Visible = false;
-                //Cargar el formulario de datos del pago
-            }
+            //else
+            //{
+            //    this.Visible = false;
+            //    //Cargar el formulario de datos del pago
+            //}
 
            
         }
@@ -180,7 +180,8 @@ namespace AerolineaFrba.Compra
                 else
                 {
                     this.Visible = false;
-                    //Cargar el formulario de datos del pago
+                    var formularioPago = new FrmCargaDatosPago(null,cantEncomiendasActual,viajeActual);
+                    formularioPago.ShowDialog();
                 }
             }
             catch (Exception ex)
@@ -203,20 +204,43 @@ namespace AerolineaFrba.Compra
 
         private void TxtNroDoc_Leave(object sender, EventArgs e)
         {
-            if (!(ValidadorDeTipos.IsEmpty(TxtNroDoc.Text)))
+            try
             {
-                Cliente cliente = CompraPersistencia.ObtenerClientePorDoc(CmbTipoDoc.Text, Int32.Parse(TxtNroDoc.Text));
-                if (cliente != null)
-                {
-                    string[] split = cliente.Direccion.Split(new Char [] {'0','1','2','3','4','5','6','7','8','9'});
-                    TxtCalle.Text = split[0];
-                    //TODO Arreglar el split para el nro de la calle
+                if (!(ValidadorDeTipos.IsNumeric(TxtNroDoc.Text)) && !(ValidadorDeTipos.IsEmpty(TxtNroDoc.Text)))
+                    throw new Exception("El documento debe ser un número");
 
-                    TxtApellidos.Text = cliente.Apellido;
-                    TxtNombres.Text = cliente.Nombre;
-                    TxtMail.Text = cliente.Mail;
-                    TxtTelefono.Text = cliente.Telefono;
-                    DtpFechaNac.Value = cliente.Fecha_Nacimiento;
+                if (!(ValidadorDeTipos.IsEmpty(TxtNroDoc.Text)))
+                {
+                    Cliente cliente = CompraPersistencia.ObtenerClientePorDoc(CmbTipoDoc.Text, Int32.Parse(TxtNroDoc.Text));
+                    if (cliente != null)
+                    {
+
+                        for (int i = cliente.Direccion.Length-1; i > 0; i--)
+                        {
+                            if(!ValidadorDeTipos.IsNumeric(cliente.Direccion[i].ToString())){
+                                TxtNroCalle.Text = cliente.Direccion.Substring(i + 1, cliente.Direccion.Length - 1 - i);
+                                TxtCalle.Text = cliente.Direccion.Substring(0, i+1);
+                                i = 0;
+                            }
+
+                        }
+
+                        TxtApellidos.Text = cliente.Apellido;
+                        TxtNombres.Text = cliente.Nombre;
+                        TxtMail.Text = cliente.Mail;
+                        TxtTelefono.Text = cliente.Telefono;
+                        DtpFechaNac.Value = cliente.Fecha_Nacimiento;
+                    }
+                    else
+                    {
+                        TxtApellidos.Text = "";
+                        TxtNombres.Text = "";
+                        TxtCalle.Text = "";
+                        TxtNroCalle.Text = "";
+                        TxtMail.Text = "";
+                        TxtTelefono.Text = "";
+                        DtpFechaNac.Value = DateTime.Today;
+                    }
                 }
                 else
                 {
@@ -229,15 +253,9 @@ namespace AerolineaFrba.Compra
                     DtpFechaNac.Value = DateTime.Today;
                 }
             }
-            else
+            catch (Exception ex)
             {
-                TxtApellidos.Text = "";
-                TxtNombres.Text = "";
-                TxtCalle.Text = "";
-                TxtNroCalle.Text = "";
-                TxtMail.Text = "";
-                TxtTelefono.Text = "";
-                DtpFechaNac.Value = DateTime.Today;
+                MessageBox.Show(ex.Message, "Atención");
             }
         }
     }

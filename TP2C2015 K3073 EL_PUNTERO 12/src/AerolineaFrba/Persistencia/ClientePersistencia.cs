@@ -42,5 +42,17 @@ namespace Persistencia
                 
             return users[0];
         }
+
+        public static object ObtenerAuxiliares()
+        {
+            //Traigo los clientes de la tabla auxiliar
+            var param = new List<SPParameter> { };
+
+            var sp = new StoreProcedure(DBQueries.Cliente.SPGetClientesAuxiliares, param);
+
+            List<ClienteAuxiliar> users = sp.ExecuteReader<ClienteAuxiliar>();
+
+            return users;
+        }
     }
 }

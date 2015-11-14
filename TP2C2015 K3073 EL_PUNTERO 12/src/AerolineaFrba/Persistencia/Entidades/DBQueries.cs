@@ -150,6 +150,7 @@ namespace Persistencia.Entidades
         {
             public static String SPGetClientePorTipoYDocumento = "EL_PUNTERO.GetClientePorTipoYDocumento";
             public static String SPGetClientePorTipoYDocumentoYFechaNac = "EL_PUNTERO.GetClientePorTipoYDocumentoYFechaNac";
+            public static String SPGetClientesAuxiliares = "EL_PUNTERO.GetClientesAuxiliares";
         }
 
         public static class TipoDocumento {
