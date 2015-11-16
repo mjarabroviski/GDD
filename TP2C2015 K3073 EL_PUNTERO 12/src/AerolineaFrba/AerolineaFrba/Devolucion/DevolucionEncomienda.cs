@@ -71,7 +71,8 @@ namespace AerolineaFrba.Devolucion
                 if (clientes.Count == 0 || clientes == null)
                 {
                     MessageBox.Show("No se encontraron clientes con esos datos, por favor reingreselos", "Atencion", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    Txt_Dni.Text = string.Empty;
+                    BotonesYtextosAestadoAnterior();
+
                 }
                 else if (clientes.Count > 1)
                 {
@@ -89,7 +90,7 @@ namespace AerolineaFrba.Devolucion
                     }
                     else
                     {
-                        Txt_Dni.Text = string.Empty;
+                        BotonesYtextosAestadoAnterior();
                     }
                 }
                 else
@@ -123,11 +124,7 @@ namespace AerolineaFrba.Devolucion
             if (cliente == null)
             {
                 MessageBox.Show("No se encontraron clientes con esos datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Dtp_FechaNacimiento.Visible = false;
-                lblNac.Visible = false;
-                Txt_Dni.Text = string.Empty;
-                Txt_Dni.Enabled = true;
-                Btn_Buscar2.Enabled = true;
+                BotonesYtextosAestadoAnterior();
             }
             else
             {
@@ -249,27 +246,35 @@ namespace AerolineaFrba.Devolucion
 
         private void Btn_Limpiar_Click(object sender, EventArgs e)
         {
+            BotonesYtextosAestadoAnterior();
+            LimpiarDataGridView();
+
+        }
+        private void BotonesYtextosAestadoAnterior()
+        {
             Txt_Dni.Text = string.Empty;
             if (Dtp_FechaNacimiento.Visible)
             {
                 Dtp_FechaNacimiento.Value = DateTime.Now;
                 Dtp_FechaNacimiento.Visible = false;
+                lblNac.Visible = false;
+                cboTipoDoc.Enabled = true;
+                Txt_Dni.Enabled = true;
                 Btn_Buscar2.Visible = false;
                 Btn_Buscar.Visible = true;
 
             }
             Btn_DevolverTodos.Enabled = false;
             Btn_Finalizar.Enabled = true;
-            LimpiarDataGridView();
-
         }
-
         private void LimpiarDataGridView()
         {
             DgvEncomiendas.DataSource = null;
             DgvEncomiendas.Columns.Clear();
             DgvPasaje.DataSource = null;
             DgvPasaje.Columns.Clear();
+
+            
         }
 
         private void Btn_Finalizar_Click(object sender, EventArgs e)

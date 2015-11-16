@@ -50,13 +50,12 @@
             this.Btn_Finalizar.BackColor = System.Drawing.Color.DodgerBlue;
             this.Btn_Finalizar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Btn_Finalizar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Btn_Finalizar.Enabled = false;
             this.Btn_Finalizar.ForeColor = System.Drawing.Color.White;
-            this.Btn_Finalizar.Location = new System.Drawing.Point(1104, 543);
+            this.Btn_Finalizar.Location = new System.Drawing.Point(1259, 524);
             this.Btn_Finalizar.Name = "Btn_Finalizar";
             this.Btn_Finalizar.Size = new System.Drawing.Size(91, 34);
             this.Btn_Finalizar.TabIndex = 85;
-            this.Btn_Finalizar.Text = "LISTO";
+            this.Btn_Finalizar.Text = "FINALIZAR";
             this.Btn_Finalizar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.Btn_Finalizar.Click += new System.EventHandler(this.Btn_Finalizar_Click);
             // 
@@ -67,7 +66,7 @@
             this.Btn_DevolverTodos.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_DevolverTodos.Enabled = false;
             this.Btn_DevolverTodos.ForeColor = System.Drawing.Color.White;
-            this.Btn_DevolverTodos.Location = new System.Drawing.Point(15, 543);
+            this.Btn_DevolverTodos.Location = new System.Drawing.Point(15, 524);
             this.Btn_DevolverTodos.Name = "Btn_DevolverTodos";
             this.Btn_DevolverTodos.Size = new System.Drawing.Size(91, 34);
             this.Btn_DevolverTodos.TabIndex = 84;
@@ -87,7 +86,7 @@
             this.DgvEncomiendas.Name = "DgvEncomiendas";
             this.DgvEncomiendas.RowHeadersVisible = false;
             this.DgvEncomiendas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DgvEncomiendas.Size = new System.Drawing.Size(594, 441);
+            this.DgvEncomiendas.Size = new System.Drawing.Size(660, 422);
             this.DgvEncomiendas.TabIndex = 80;
             // 
             // DgvPasaje
@@ -98,12 +97,12 @@
             this.DgvPasaje.AllowUserToResizeRows = false;
             this.DgvPasaje.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.DgvPasaje.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DgvPasaje.Location = new System.Drawing.Point(615, 99);
+            this.DgvPasaje.Location = new System.Drawing.Point(690, 100);
             this.DgvPasaje.MultiSelect = false;
             this.DgvPasaje.Name = "DgvPasaje";
             this.DgvPasaje.RowHeadersVisible = false;
             this.DgvPasaje.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DgvPasaje.Size = new System.Drawing.Size(580, 441);
+            this.DgvPasaje.Size = new System.Drawing.Size(660, 421);
             this.DgvPasaje.TabIndex = 91;
             // 
             // Btn_Buscar2
@@ -159,6 +158,8 @@
             // 
             // Dtp_FechaNacimiento
             // 
+            this.Dtp_FechaNacimiento.CustomFormat = "                   d / M / yyyy ";
+            this.Dtp_FechaNacimiento.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.Dtp_FechaNacimiento.Location = new System.Drawing.Point(137, 65);
             this.Dtp_FechaNacimiento.Name = "Dtp_FechaNacimiento";
             this.Dtp_FechaNacimiento.Size = new System.Drawing.Size(200, 20);
@@ -204,7 +205,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1205, 586);
+            this.ClientSize = new System.Drawing.Size(1362, 570);
             this.Controls.Add(this.Btn_Buscar);
             this.Controls.Add(this.Btn_Limpiar);
             this.Controls.Add(this.Btn_Buscar2);
