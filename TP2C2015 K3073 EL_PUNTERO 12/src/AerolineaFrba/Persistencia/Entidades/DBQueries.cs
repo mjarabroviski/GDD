@@ -148,6 +148,7 @@ namespace Persistencia.Entidades
         {
             public static String SPGetClientePorTipoYDocumento = "EL_PUNTERO.GetClientePorTipoYDocumento";
             public static String SPGetClientePorTipoYDocumentoYFechaNac = "EL_PUNTERO.GetClientePorTipoYDocumentoYFechaNac";
+            public static String SPObtenerNombreClientePorID = "SPObtenerNombreClientePorID";
         }
 
         public static class TipoDocumento {
@@ -158,6 +159,20 @@ namespace Persistencia.Entidades
         public static class RegistroMillas
         {
             public static String SPActualizarMillas = "EL_PUNTERO.AgregarRegistroMillas";
+        }
+
+        public static class Encomienda
+        { 
+            public static String SPObtenerEncomiendasFuturas = "EL_PUNTERO.ObtenerEncomiendasFuturas";
+            public static String SPObtenerRutaDeEncomienda = "EL_PUNTERO.ObtenerRutaDeEncomienda";
+            public static String SPObtenerFechaSalidaDeEncomienda = "EL_PUNTERO.ObtenerFechaSalidaDeEncomienda";
+        }
+
+        public static class Pasaje
+        {
+            public static String SPObtenerPasajesFuturos = "EL_PUNTERO.ObtenerPasajesFuturos";
+            public static String SPObtenerRutaDePasaje = "EL_PUNTERO.ObtenerRutaDePasaje";
+            public static String SPObtenerFechaSalidaDePasaje = "EL_PUNTERO.ObtenerFechaSalidaDePasaje";
         }
     }
 }

@@ -42,5 +42,20 @@ namespace Persistencia
                 
             return users[0];
         }
+
+        public static String ObtenerNombreClientePorID(int ID_CLIENTE)
+        {
+            var param = new List<SPParameter> { new SPParameter("ID_Cliente", ID_CLIENTE),
+                                                
+                                              };
+
+            var sp = new StoreProcedure(DBQueries.Cliente.SPObtenerNombreClientePorID, param);
+
+            List<Cliente> users = sp.ExecuteReader<Cliente>();
+
+            if (users.Count == 0 || users == null) return null;
+
+            return users[0].Apellido.ToUpper() + " " + users[0].Nombre.ToUpper();
+        }
     }
 }

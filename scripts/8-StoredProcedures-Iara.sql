@@ -247,4 +247,90 @@ BEGIN
 	WHERE ID_Viaje = @ID; 
 END
 GO
+
+------------------------------------------------------------------------------------------------------------------------
+CREATE PROCEDURE [EL_PUNTERO].[ObtenerEncomiendasFuturas]
+@ID_Cliente int
+AS 
+BEGIN
+	SELECT * 
+	FROM EL_PUNTERO.TL_ENCOMIENDA E 
+	INNER JOIN EL_PUNTERO.TL_COMPRA C ON C.ID_Compra = E.ID_Compra
+	WHERE C.ID_Cliente = @ID_Cliente 
+		  AND (SELECT V.Fecha_Salida 
+				FROM EL_PUNTERO.TL_VIAJE V
+				WHERE E.ID_Viaje = V.ID_Viaje) > GETDATE()
+END
+GO
+CREATE PROCEDURE [EL_PUNTERO].[ObtenerPasajesFuturos]
+@ID_Cliente int
+AS 
+BEGIN
+	SELECT * 
+	FROM EL_PUNTERO.TL_PASAJE p 
+	INNER JOIN EL_PUNTERO.TL_COMPRA C ON C.ID_Compra = P.ID_Compra
+	WHERE C.ID_Cliente = @ID_Cliente 
+		  AND (SELECT V.Fecha_Salida 
+				FROM EL_PUNTERO.TL_VIAJE V
+				WHERE P.ID_Viaje = V.ID_Viaje) > GETDATE()
+	ORDER BY P.Codigo_Pasaje
+END
+GO
+CREATE PROCEDURE [EL_PUNTERO].ObtenerRutaDeEncomienda
+@ID_Encomienda int
+AS
+BEGIN
+	SELECT * 
+	FROM [EL_PUNTERO].[TL_RUTA] R
+	INNER JOIN EL_PUNTERO.TL_VIAJE V ON V.ID_Ruta = R.ID_Ruta
+	INNER JOIN EL_PUNTERO.TL_ENCOMIENDA E ON V.ID_Viaje = E.ID_Viaje
+	WHERE  E.ID_Encomienda = @ID_Encomienda
+	ORDER BY E.Codigo_Encomienda
+END
+GO
+CREATE PROCEDURE [EL_PUNTERO].ObtenerFechaSalidaDeEncomienda
+@ID_Encomienda int
+AS
+BEGIN
+	SELECT * 
+	FROM EL_PUNTERO.TL_VIAJE V
+	INNER JOIN EL_PUNTERO.TL_ENCOMIENDA E ON E.ID_Viaje = V.ID_Viaje
+	WHERE  E.ID_Encomienda = @ID_Encomienda
+END
+GO
+CREATE PROCEDURE [EL_PUNTERO].ObtenerRutaDePasaje
+@ID_Pasaje int
+AS
+BEGIN
+	SELECT * 
+	FROM [EL_PUNTERO].[TL_RUTA] R
+	INNER JOIN EL_PUNTERO.TL_VIAJE V ON V.ID_Ruta = R.ID_Ruta
+	INNER JOIN EL_PUNTERO.TL_PASAJE P ON V.ID_Viaje = P.ID_Viaje
+	WHERE  P.ID_Pasaje = @ID_Pasaje
+END
+GO
+CREATE PROCEDURE [EL_PUNTERO].ObtenerFechaSalidaDePasaje
+@ID_Pasaje int
+AS
+BEGIN
+	SELECT * 
+	FROM EL_PUNTERO.TL_VIAJE V
+	INNER JOIN EL_PUNTERO.TL_PASAJE P ON V.ID_Viaje = P.ID_Viaje
+	WHERE  P.ID_Pasaje = @ID_Pasaje
+END
+GO
+
+CREATE PROCEDURE SPObtenerNombreClientePorID
+@ID_Cliente int
+AS 
+BEGIN
+	SELECT *
+	FROM EL_PUNTERO.TL_CLIENTE C
+	WHERE C.ID_Cliente = @ID_Cliente
+END
+GO
+
+DROP PROCEDURE [EL_PUNTERO].[ObtenerPasajesFuturos]
+DROP PROCEDURE [EL_PUNTERO].[ObtenerEncomiendasFuturas]
+
 COMMIT
