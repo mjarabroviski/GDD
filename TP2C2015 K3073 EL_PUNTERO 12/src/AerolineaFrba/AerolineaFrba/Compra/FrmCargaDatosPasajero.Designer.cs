@@ -49,10 +49,6 @@
             this.TxtNroCalle = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.TxtPiso = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.TxtDepto = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
             this.TxtTelefono = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
@@ -134,6 +130,7 @@
             this.TxtNroDoc.Name = "TxtNroDoc";
             this.TxtNroDoc.Size = new System.Drawing.Size(217, 20);
             this.TxtNroDoc.TabIndex = 32;
+            this.TxtNroDoc.Leave += new System.EventHandler(this.TxtNroDoc_Leave);
             // 
             // label7
             // 
@@ -271,41 +268,9 @@
             this.label13.TabIndex = 58;
             this.label13.Text = "Altura";
             // 
-            // TxtPiso
-            // 
-            this.TxtPiso.Location = new System.Drawing.Point(123, 92);
-            this.TxtPiso.Name = "TxtPiso";
-            this.TxtPiso.Size = new System.Drawing.Size(79, 20);
-            this.TxtPiso.TabIndex = 64;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(82, 95);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(27, 13);
-            this.label16.TabIndex = 62;
-            this.label16.Text = "Piso";
-            // 
-            // TxtDepto
-            // 
-            this.TxtDepto.Location = new System.Drawing.Point(258, 92);
-            this.TxtDepto.Name = "TxtDepto";
-            this.TxtDepto.Size = new System.Drawing.Size(79, 20);
-            this.TxtDepto.TabIndex = 66;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(216, 95);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(36, 13);
-            this.label15.TabIndex = 65;
-            this.label15.Text = "Depto";
-            // 
             // TxtTelefono
             // 
-            this.TxtTelefono.Location = new System.Drawing.Point(135, 318);
+            this.TxtTelefono.Location = new System.Drawing.Point(135, 288);
             this.TxtTelefono.Name = "TxtTelefono";
             this.TxtTelefono.Size = new System.Drawing.Size(214, 20);
             this.TxtTelefono.TabIndex = 69;
@@ -315,7 +280,7 @@
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label17.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.label17.Location = new System.Drawing.Point(112, 317);
+            this.label17.Location = new System.Drawing.Point(112, 287);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(15, 20);
             this.label17.TabIndex = 68;
@@ -325,7 +290,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(67, 321);
+            this.label18.Location = new System.Drawing.Point(67, 291);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(49, 13);
             this.label18.TabIndex = 67;
@@ -333,7 +298,7 @@
             // 
             // TxtMail
             // 
-            this.TxtMail.Location = new System.Drawing.Point(134, 393);
+            this.TxtMail.Location = new System.Drawing.Point(134, 363);
             this.TxtMail.Name = "TxtMail";
             this.TxtMail.Size = new System.Drawing.Size(215, 20);
             this.TxtMail.TabIndex = 72;
@@ -341,7 +306,7 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(94, 396);
+            this.label20.Location = new System.Drawing.Point(94, 366);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(26, 13);
             this.label20.TabIndex = 70;
@@ -352,7 +317,7 @@
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label19.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.label19.Location = new System.Drawing.Point(115, 356);
+            this.label19.Location = new System.Drawing.Point(115, 326);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(15, 20);
             this.label19.TabIndex = 74;
@@ -362,7 +327,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(27, 361);
+            this.label21.Location = new System.Drawing.Point(27, 331);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(93, 13);
             this.label21.TabIndex = 73;
@@ -370,10 +335,12 @@
             // 
             // DtpFechaNac
             // 
-            this.DtpFechaNac.Location = new System.Drawing.Point(135, 355);
+            this.DtpFechaNac.Location = new System.Drawing.Point(135, 325);
+            this.DtpFechaNac.MaxDate = new System.DateTime(2015, 11, 13, 0, 0, 0, 0);
             this.DtpFechaNac.Name = "DtpFechaNac";
             this.DtpFechaNac.Size = new System.Drawing.Size(214, 20);
             this.DtpFechaNac.TabIndex = 75;
+            this.DtpFechaNac.Value = new System.DateTime(2015, 11, 13, 0, 0, 0, 0);
             // 
             // groupBox1
             // 
@@ -383,13 +350,9 @@
             this.groupBox1.Controls.Add(this.label13);
             this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Controls.Add(this.TxtNroCalle);
-            this.groupBox1.Controls.Add(this.label16);
-            this.groupBox1.Controls.Add(this.TxtPiso);
-            this.groupBox1.Controls.Add(this.label15);
-            this.groupBox1.Controls.Add(this.TxtDepto);
             this.groupBox1.Location = new System.Drawing.Point(12, 180);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(352, 132);
+            this.groupBox1.Size = new System.Drawing.Size(352, 95);
             this.groupBox1.TabIndex = 76;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Dirección";
@@ -420,6 +383,8 @@
             // 
             // DgvButacas
             // 
+            this.DgvButacas.AllowUserToResizeColumns = false;
+            this.DgvButacas.AllowUserToResizeRows = false;
             this.DgvButacas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DgvButacas.Location = new System.Drawing.Point(392, 39);
             this.DgvButacas.MultiSelect = false;
@@ -494,10 +459,6 @@
         private System.Windows.Forms.TextBox TxtNroCalle;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox TxtPiso;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.TextBox TxtDepto;
-        private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox TxtTelefono;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;

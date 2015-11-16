@@ -14,6 +14,9 @@ namespace AerolineaFrba.Consulta_Millas
 {
     public partial class ConsultaMillas : Form
     {
+        private List<RegistroMillas> registrosMillas = new List<RegistroMillas>();
+        Cliente cliente;
+
         public ConsultaMillas()
         {
             InitializeComponent();
@@ -39,6 +42,13 @@ namespace AerolineaFrba.Consulta_Millas
         private void LblLimpiar_Click(object sender, EventArgs e)
         {
             LimpiarDataGridView();
+            LbLNac.Visible = false;
+            dtpNac.Visible = false;
+            btnAceptar.Visible = false;
+            cboTipoDoc.Enabled = true;
+            TxtDni.Enabled = true;
+            TxtDni.Text = string.Empty;
+            LblBuscar.Enabled = true;
         }
 
         private void LimpiarDataGridView()
@@ -47,7 +57,6 @@ namespace AerolineaFrba.Consulta_Millas
             dgvCompras.Columns.Clear();
             dgvCanjes.DataSource = null;
             dgvCanjes.Columns.Clear();
-            TxtDni.Text = string.Empty;
         }
 
         private void LblListo_Click(object sender, EventArgs e)
@@ -97,6 +106,7 @@ namespace AerolineaFrba.Consulta_Millas
                          btnAceptar.Visible = true;
                          TxtDni.Enabled = false;
                          LblBuscar.Enabled = false;
+                         cboTipoDoc.Enabled = false;
                      }
                      else
                      {
@@ -106,7 +116,9 @@ namespace AerolineaFrba.Consulta_Millas
                 else 
                 {
                     //Cargar las compras y los canjes del cliente
-                    Cliente cliente = clientes[0];
+                    cliente = clientes[0];
+                    ActualizarRegistroMillas();
+                    CalcularMillas();
                 }
             }
             catch (Exception ex)
@@ -120,7 +132,7 @@ namespace AerolineaFrba.Consulta_Millas
             int doc = Convert.ToInt32(TxtDni.Text);
             int tipo = Convert.ToInt32(cboTipoDoc.SelectedValue);
             DateTime fecha = dtpNac.Value.Date;
-            Cliente cliente = ClientePersistencia.ObtenerClientePorDNIYFechaNac(doc, tipo, fecha);
+            cliente = ClientePersistencia.ObtenerClientePorDNIYFechaNac(doc, tipo, fecha);
             if (cliente == null) {
                 MessageBox.Show("No se encontraron clientes con esos datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 dtpNac.Visible = false;
@@ -133,7 +145,46 @@ namespace AerolineaFrba.Consulta_Millas
             else
             {
                 //Cargar las compras y los canjes del cliente
+                ActualizarRegistroMillas();
+                CalcularMillas();
             }
         }
+
+        private void ActualizarRegistroMillas()
+        {
+            LimpiarDataGridView();
+            var diccionarioDeAeronaves = new Dictionary<int, RegistroMillas>();
+
+            #region Cargar el diccionario a mostrar en la grilla
+
+                registrosMillas = RegistroMillasPersistencia.ObtenerPorIDCliente(cliente.ID);
+                if (registrosMillas.Count == 0 || registrosMillas == null) MessageBox.Show("No cuenta con registros de compras", "Atención", MessageBoxButtons.OK,MessageBoxIcon.Information);
+                diccionarioDeAeronaves = registrosMillas.ToDictionary(a => a.ID, a => a);
+
+            //Muestra en la grilla el contenido de los registros que se encuentran cargados en el diccionario
+            var bind = diccionarioDeAeronaves.Values.Select(a => new
+            {
+                Fecha_Inicio = a.Fecha_Inicio.Date,
+                Codigo_Item = a.Codigo_Item,
+                Millas = a.Millas,
+                Fecha_Vencimiento = a.Fecha_Inicio.AddDays(366).Date
+            });
+
+            #endregion
+
+            dgvCompras.DataSource = bind.ToList();
+            dgvCompras.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+
+        private void CalcularMillas() {
+            //faltan las de canje
+            int sum = 0;
+            for (int i = 0; i < dgvCompras.Rows.Count; ++i)
+            {
+                sum += Convert.ToInt32(dgvCompras.Rows[i].Cells[2].Value);
+            }
+            TxtMillas.Text = sum.ToString();
+        }
     }
+
 }

@@ -43,6 +43,7 @@ namespace Persistencia
             return users[0];
         }
 
+
         public static String ObtenerNombreClientePorID(int ID_CLIENTE)
         {
             var param = new List<SPParameter> { new SPParameter("ID_Cliente", ID_CLIENTE),
@@ -56,6 +57,18 @@ namespace Persistencia
             if (users.Count == 0 || users == null) return null;
 
             return users[0].Apellido.ToUpper() + " " + users[0].Nombre.ToUpper();
+        }
+
+        public static object ObtenerAuxiliares()
+        {
+            //Traigo los clientes de la tabla auxiliar
+            var param = new List<SPParameter> { };
+
+            var sp = new StoreProcedure(DBQueries.Cliente.SPGetClientesAuxiliares, param);
+
+            List<ClienteAuxiliar> users = sp.ExecuteReader<ClienteAuxiliar>();
+
+            return users;
         }
     }
 }

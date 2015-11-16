@@ -21,6 +21,7 @@ namespace AerolineaFrba.Compra
         public decimal cantPasajesActual;
         public decimal cantEncomiendasActual;
         public List<Butaca> ListaButacas = new List<Butaca>();
+        public Butaca butacaSeleccionada;
 
         public FrmCargaDatosPasajero(Viaje viaje,decimal cantPasajes,decimal cantEncomiendas,FrmIngresoCantidades ingresoCantidades,int nroOrdenPasaje)
         {
@@ -36,11 +37,11 @@ namespace AerolineaFrba.Compra
                 LblNroPasajero.Text = "#" + ordenPasaje;
                 ordenPasaje++;
             }
-            else
-            {
-                this.Visible = false;
-                //Cargar el formulario de datos del pago
-            }
+            //else
+            //{
+            //    this.Visible = false;
+            //    //Cargar el formulario de datos del pago
+            //}
 
            
         }
@@ -51,12 +52,16 @@ namespace AerolineaFrba.Compra
             CmbTipoDoc.ValueMember = "ID";
             CmbTipoDoc.DisplayMember = "Descripcion";
 
+            TxtNroDoc.Select();
+            DtpFechaNac.MaxDate = DateTime.Now;
+
             if (ordenPasaje == cantPasajesActual+1)
             {
                 BtnSiguiente.Text = "FINALIZAR CARGA";
             }
 
             CargarDgvButacas();
+            DgvButacas.CurrentCell = DgvButacas.Rows[0].Cells[1];
         }
 
         private void CargarDgvButacas()
@@ -71,6 +76,7 @@ namespace AerolineaFrba.Compra
             //Muestra en la grilla el contenido de las butacas que se encuentran cargados en el diccionario
             var bind = diccionarioDeButacas.Values.Select(a => new
             {
+                ID = a.ID,
                 Numero = a.Numero,
                 Tipo = TipoButacaPersistencia.ObtenerTipoButaca(a).Descripcion,
                 Piso = a.Piso
@@ -79,7 +85,7 @@ namespace AerolineaFrba.Compra
             #endregion
 
             DgvButacas.DataSource = bind.ToList();
-            //AgregarBotonesDeColumnas();
+            DgvButacas.Columns[0].Visible = false;
 
             DgvButacas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
@@ -93,14 +99,51 @@ namespace AerolineaFrba.Compra
                 var mensajeExcepcion = string.Empty;
 
                 #region Validaciones
-                if (!(ValidadorDeTipos.IsNumeric(TxtNroDoc.Text)))
-                    mensajeExcepcion += Environment.NewLine + "El documento debe ser un número";
 
-                if (!(ValidadorDeTipos.IsNumeric(TxtNroCalle.Text)))
-                    mensajeExcepcion += Environment.NewLine + "La altura de la dirección debe ser un número";
+                if (!(ValidadorDeTipos.IsEmpty(TxtNroDoc.Text)))
+                {
+                    if (!(ValidadorDeTipos.IsNumeric(TxtNroDoc.Text)))
+                        mensajeExcepcion += Environment.NewLine + "El documento debe ser un número";
+                }
+                else
+                {
+                    mensajeExcepcion += Environment.NewLine + "Debe ingresar su documento";
+                }
 
-                if (!(ValidadorDeTipos.IsNumeric(TxtTelefono.Text)))
-                    mensajeExcepcion += Environment.NewLine + "El teléfono debe ser un número";
+                if (ValidadorDeTipos.IsEmpty(TxtNombres.Text))
+                {
+                    mensajeExcepcion += Environment.NewLine + "Debe ingresar su nombre";
+                }
+
+                if (ValidadorDeTipos.IsEmpty(TxtApellidos.Text))
+                {
+                    mensajeExcepcion += Environment.NewLine + "Debe ingresar su apellido";
+                }
+
+                if (ValidadorDeTipos.IsEmpty(TxtCalle.Text))
+                {
+                    mensajeExcepcion += Environment.NewLine + "Debe ingresar la calle de su domicilio";
+                }
+
+                if (!(ValidadorDeTipos.IsEmpty(TxtNroCalle.Text)))
+                {
+                    if (!(ValidadorDeTipos.IsNumeric(TxtNroCalle.Text)))
+                        mensajeExcepcion += Environment.NewLine + "La altura del domicilio debe ser un número";
+                }
+                else
+                {
+                    mensajeExcepcion += Environment.NewLine + "Debe ingresar la altura de su domicilio";
+                }
+
+                if (!(ValidadorDeTipos.IsEmpty(TxtTelefono.Text)))
+                {
+                    if (!(ValidadorDeTipos.IsNumeric(TxtTelefono.Text)))
+                        mensajeExcepcion += Environment.NewLine + "El teléfono debe ser un número";
+                }
+                else
+                {
+                    mensajeExcepcion += Environment.NewLine + "Debe ingresar su teléfono";
+                }
 
                 if ((!(ValidadorDeTipos.IsMailValido(TxtMail.Text))) && (!(ValidadorDeTipos.IsEmpty(TxtMail.Text))))
                     mensajeExcepcion += Environment.NewLine + "Formato inválido de mail";
@@ -109,21 +152,24 @@ namespace AerolineaFrba.Compra
                     throw new Exception(mensajeExcepcion);
 
                 #endregion
-                /*
+
+                butacaSeleccionada = ListaButacas.Find(b => (b.ID == (int)DgvButacas.CurrentRow.Cells[0].Value));
+
+                //MessageBox.Show(string.Format("{0}",butacaSeleccionada.Numero), "Atención");
+                
+                
                 CompraPersistencia.CargarTablaDatosPasajeros(CmbTipoDoc.Text,
-                                                             TxtNroDoc.Text,
+                                                             Int32.Parse(TxtNroDoc.Text),
                                                              TxtApellidos.Text,
                                                              TxtNombres.Text,
                                                              TxtCalle.Text,
                                                              TxtNroCalle.Text,
-                                                             TxtPiso.Text,
-                                                             TxtDepto.Text,
-                                                             TxtTelefono.Text,
-                                                             DtpFechaNac.Text,
+                                                             Int32.Parse(TxtTelefono.Text),
+                                                             DtpFechaNac.Value,
                                                              TxtMail.Text,
-                                                             DgvButacas.SelectedRows[0].);
-
-                */
+                                                             butacaSeleccionada.ID);
+                
+                
 
                 if (ordenPasaje <= cantPasajesActual)
                 {
@@ -134,7 +180,8 @@ namespace AerolineaFrba.Compra
                 else
                 {
                     this.Visible = false;
-                    //Cargar el formulario de datos del pago
+                    var formularioPago = new FrmCargaDatosPago(null,cantEncomiendasActual,viajeActual);
+                    formularioPago.ShowDialog();
                 }
             }
             catch (Exception ex)
@@ -152,6 +199,63 @@ namespace AerolineaFrba.Compra
                 CompraPersistencia.BorrarTablaAuxiliar();
                 formularioAnterior.Visible = true;
                 this.Visible = false;
+            }
+        }
+
+        private void TxtNroDoc_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!(ValidadorDeTipos.IsNumeric(TxtNroDoc.Text)) && !(ValidadorDeTipos.IsEmpty(TxtNroDoc.Text)))
+                    throw new Exception("El documento debe ser un número");
+
+                if (!(ValidadorDeTipos.IsEmpty(TxtNroDoc.Text)))
+                {
+                    Cliente cliente = CompraPersistencia.ObtenerClientePorDoc(CmbTipoDoc.Text, Int32.Parse(TxtNroDoc.Text));
+                    if (cliente != null)
+                    {
+
+                        for (int i = cliente.Direccion.Length-1; i > 0; i--)
+                        {
+                            if(!ValidadorDeTipos.IsNumeric(cliente.Direccion[i].ToString())){
+                                TxtNroCalle.Text = cliente.Direccion.Substring(i + 1, cliente.Direccion.Length - 1 - i);
+                                TxtCalle.Text = cliente.Direccion.Substring(0, i+1);
+                                i = 0;
+                            }
+
+                        }
+
+                        TxtApellidos.Text = cliente.Apellido;
+                        TxtNombres.Text = cliente.Nombre;
+                        TxtMail.Text = cliente.Mail;
+                        TxtTelefono.Text = cliente.Telefono;
+                        DtpFechaNac.Value = cliente.Fecha_Nacimiento;
+                    }
+                    else
+                    {
+                        TxtApellidos.Text = "";
+                        TxtNombres.Text = "";
+                        TxtCalle.Text = "";
+                        TxtNroCalle.Text = "";
+                        TxtMail.Text = "";
+                        TxtTelefono.Text = "";
+                        DtpFechaNac.Value = DateTime.Today;
+                    }
+                }
+                else
+                {
+                    TxtApellidos.Text = "";
+                    TxtNombres.Text = "";
+                    TxtCalle.Text = "";
+                    TxtNroCalle.Text = "";
+                    TxtMail.Text = "";
+                    TxtTelefono.Text = "";
+                    DtpFechaNac.Value = DateTime.Today;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Atención");
             }
         }
     }

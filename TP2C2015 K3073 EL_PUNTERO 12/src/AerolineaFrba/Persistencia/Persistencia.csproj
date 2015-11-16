@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="AeronavePersistencia.cs" />
     <Compile Include="ButacaPersistencia.cs" />
+    <Compile Include="CanjePersistencia.cs" />
     <Compile Include="CiudadPersistencia.cs" />
     <Compile Include="ClientePersistencia.cs" />
     <Compile Include="CompraPersistencia.cs" />
@@ -54,8 +55,10 @@
     <Compile Include="EncomiendaPersistencia.cs" />
     <Compile Include="Entidades\Aeronave.cs" />
     <Compile Include="Entidades\Butaca.cs" />
+    <Compile Include="Entidades\Canje.cs" />
     <Compile Include="Entidades\Ciudad.cs" />
     <Compile Include="Entidades\Cliente.cs" />
+    <Compile Include="Entidades\ClienteAuxiliar.cs" />
     <Compile Include="Entidades\DBManager.cs" />
     <Compile Include="Entidades\DBQueries.cs" />
     <Compile Include="Entidades\Devolucion.cs" />
@@ -64,6 +67,7 @@
     <Compile Include="Entidades\IMapable.cs" />
     <Compile Include="Entidades\ItemDevuelto.cs" />
     <Compile Include="Entidades\Pasaje.cs" />
+    <Compile Include="Entidades\Producto.cs" />
     <Compile Include="Entidades\RegistroMillas.cs" />
     <Compile Include="Entidades\Rol.cs" />
     <Compile Include="Entidades\Ruta.cs" />

@@ -12,6 +12,8 @@ namespace Persistencia.Entidades
         {
             public static String SPCrearTablaAuxiliarPasajeros = "EL_PUNTERO.CrearTablaAuxiliarPasajeros";
             public static String SPBorrarTablaAuxiliarPasajeros = "EL_PUNTERO.BorrarTablaAuxiliarPasajeros";
+            public static String SPCargarTablaAuxiliarPasajeros = "EL_PUNTERO.CargarTablaAuxiliarPasajeros";
+            public static String SPObtenerClientePorDoc = "EL_PUNTERO.ObtenerClientePorDoc";
         }
 
         public static class Rol
@@ -149,6 +151,8 @@ namespace Persistencia.Entidades
             public static String SPGetClientePorTipoYDocumento = "EL_PUNTERO.GetClientePorTipoYDocumento";
             public static String SPGetClientePorTipoYDocumentoYFechaNac = "EL_PUNTERO.GetClientePorTipoYDocumentoYFechaNac";
             public static String SPObtenerNombreClientePorID = "SPObtenerNombreClientePorID";
+            public static String SPGetClientesAuxiliares = "EL_PUNTERO.GetClientesAuxiliares";
+
         }
 
         public static class TipoDocumento {
@@ -159,6 +163,14 @@ namespace Persistencia.Entidades
         public static class RegistroMillas
         {
             public static String SPActualizarMillas = "EL_PUNTERO.AgregarRegistroMillas";
+            public static String SPGetAllRegistrosMillas = "EL_PUNTERO.GetAllRegistrosMillas";
+            public static String SPObtenerRegistrosPorIDCliente = "EL_PUNTERO.GetRegistrosPorIDCliente";
+        }
+
+        public static class Canje
+        {
+            //ya hecho
+            public static String SPObtenerCanjePorIDCliente = "EL_PUNTERO.GetCanjePorIDCliente";
         }
 
         public static class Encomienda

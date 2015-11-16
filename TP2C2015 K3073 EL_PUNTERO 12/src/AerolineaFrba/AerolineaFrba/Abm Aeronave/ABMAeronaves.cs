@@ -77,7 +77,7 @@ namespace AerolineaFrba.Abm_Aeronave
             {
                 //El datasource se carga con todos las aeronaves de la BD
                 LimpiarFiltros();
-                ListaAeronaves = AeronavePersistencia.ObtenerTodas(); //FALTA MODIFICAR LOS QUE VOLVIERON DE FUERA DE SERVICIO
+                ListaAeronaves = AeronavePersistencia.ObtenerTodas(); 
                 diccionarioDeAeronaves = ListaAeronaves.ToDictionary(a => a.ID, a => a);
             }
             else
