@@ -105,6 +105,7 @@ namespace AerolineaFrba.Devolucion
 
                     ActualizarEncomiendaDGV(encomiendas);
                     ActualizarPasajeDGV(pasajes);
+                    Btn_DevolverTodos.Enabled = true;
                 }
             }
             catch (Exception ex)
@@ -140,7 +141,7 @@ namespace AerolineaFrba.Devolucion
 
                 ActualizarEncomiendaDGV(encomiendas);
                 ActualizarPasajeDGV(pasajes);
-
+                Btn_DevolverTodos.Enabled = true;
             }
         }
 
