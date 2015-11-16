@@ -7,8 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Persistencia.Entidades;
 using Persistencia;
+using Persistencia.Entidades;
 
 namespace AerolineaFrba.Devolucion
 {
@@ -245,6 +245,37 @@ namespace AerolineaFrba.Devolucion
             //Agrego las columnas nuevas
             DgvPasaje.Columns.Add(columnaDevolucion);
         }
+
+        private void Btn_Limpiar_Click(object sender, EventArgs e)
+        {
+            Txt_Dni.Text = string.Empty;
+            if (Dtp_FechaNacimiento.Visible)
+            {
+                Dtp_FechaNacimiento.Value = DateTime.Now;
+                Dtp_FechaNacimiento.Visible = false;
+                Btn_Buscar2.Visible = false;
+                Btn_Buscar.Visible = true;
+
+            }
+            Btn_DevolverTodos.Enabled = false;
+            Btn_Finalizar.Enabled = true;
+            LimpiarDataGridView();
+
+        }
+
+        private void LimpiarDataGridView()
+        {
+            DgvEncomiendas.DataSource = null;
+            DgvEncomiendas.Columns.Clear();
+            DgvPasaje.DataSource = null;
+            DgvPasaje.Columns.Clear();
+        }
+
+        private void Btn_Finalizar_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
 
     }
 }

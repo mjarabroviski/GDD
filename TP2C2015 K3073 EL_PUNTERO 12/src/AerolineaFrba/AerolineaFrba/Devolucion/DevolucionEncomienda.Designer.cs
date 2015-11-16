@@ -30,7 +30,6 @@
         {
             this.Btn_Finalizar = new System.Windows.Forms.Label();
             this.Btn_DevolverTodos = new System.Windows.Forms.Label();
-            this.Btn_Cancelar = new System.Windows.Forms.Label();
             this.DgvEncomiendas = new System.Windows.Forms.DataGridView();
             this.DgvPasaje = new System.Windows.Forms.DataGridView();
             this.Btn_Buscar2 = new System.Windows.Forms.Label();
@@ -57,8 +56,9 @@
             this.Btn_Finalizar.Name = "Btn_Finalizar";
             this.Btn_Finalizar.Size = new System.Drawing.Size(91, 34);
             this.Btn_Finalizar.TabIndex = 85;
-            this.Btn_Finalizar.Text = "FINALIZAR";
+            this.Btn_Finalizar.Text = "LISTO";
             this.Btn_Finalizar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Btn_Finalizar.Click += new System.EventHandler(this.Btn_Finalizar_Click);
             // 
             // Btn_DevolverTodos
             // 
@@ -67,26 +67,12 @@
             this.Btn_DevolverTodos.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_DevolverTodos.Enabled = false;
             this.Btn_DevolverTodos.ForeColor = System.Drawing.Color.White;
-            this.Btn_DevolverTodos.Location = new System.Drawing.Point(1007, 543);
+            this.Btn_DevolverTodos.Location = new System.Drawing.Point(15, 543);
             this.Btn_DevolverTodos.Name = "Btn_DevolverTodos";
             this.Btn_DevolverTodos.Size = new System.Drawing.Size(91, 34);
             this.Btn_DevolverTodos.TabIndex = 84;
             this.Btn_DevolverTodos.Text = "DEVOLVER TODO";
             this.Btn_DevolverTodos.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // Btn_Cancelar
-            // 
-            this.Btn_Cancelar.BackColor = System.Drawing.Color.DodgerBlue;
-            this.Btn_Cancelar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Btn_Cancelar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Btn_Cancelar.ForeColor = System.Drawing.Color.White;
-            this.Btn_Cancelar.Location = new System.Drawing.Point(15, 543);
-            this.Btn_Cancelar.Name = "Btn_Cancelar";
-            this.Btn_Cancelar.Size = new System.Drawing.Size(91, 34);
-            this.Btn_Cancelar.TabIndex = 83;
-            this.Btn_Cancelar.Text = "CANCELAR";
-            this.Btn_Cancelar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.Btn_Cancelar.Click += new System.EventHandler(this.Btn_Cancelar_Click);
             // 
             // DgvEncomiendas
             // 
@@ -198,6 +184,7 @@
             this.Btn_Limpiar.TabIndex = 99;
             this.Btn_Limpiar.Text = "LIMPIAR";
             this.Btn_Limpiar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Btn_Limpiar.Click += new System.EventHandler(this.Btn_Limpiar_Click);
             // 
             // Btn_Buscar
             // 
@@ -230,7 +217,6 @@
             this.Controls.Add(this.DgvPasaje);
             this.Controls.Add(this.Btn_Finalizar);
             this.Controls.Add(this.Btn_DevolverTodos);
-            this.Controls.Add(this.Btn_Cancelar);
             this.Controls.Add(this.DgvEncomiendas);
             this.Name = "DevolucionEncomiendaPasaje";
             this.Text = "Devolución Encomienda/Pasaje";
@@ -246,7 +232,6 @@
 
         private System.Windows.Forms.Label Btn_Finalizar;
         private System.Windows.Forms.Label Btn_DevolverTodos;
-        private System.Windows.Forms.Label Btn_Cancelar;
         private System.Windows.Forms.DataGridView DgvEncomiendas;
         private System.Windows.Forms.DataGridView DgvPasaje;
         private System.Windows.Forms.Label Btn_Buscar2;
