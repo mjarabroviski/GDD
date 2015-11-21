@@ -30,7 +30,6 @@
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.DtpFechaLlegada = new System.Windows.Forms.DateTimePicker();
@@ -55,7 +54,6 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.DtpFechaLlegada);
@@ -89,18 +87,6 @@
             this.label3.TabIndex = 91;
             this.label3.Text = "*";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.label2.Location = new System.Drawing.Point(186, 65);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(15, 20);
-            this.label2.TabIndex = 90;
-            this.label2.Text = "*";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label1
             // 
@@ -165,7 +151,7 @@
             this.Btn_SeleccionarCiudadDestino.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Btn_SeleccionarCiudadDestino.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_SeleccionarCiudadDestino.ForeColor = System.Drawing.Color.White;
-            this.Btn_SeleccionarCiudadDestino.Location = new System.Drawing.Point(212, 105);
+            this.Btn_SeleccionarCiudadDestino.Location = new System.Drawing.Point(212, 62);
             this.Btn_SeleccionarCiudadDestino.Name = "Btn_SeleccionarCiudadDestino";
             this.Btn_SeleccionarCiudadDestino.Size = new System.Drawing.Size(29, 21);
             this.Btn_SeleccionarCiudadDestino.TabIndex = 75;
@@ -188,7 +174,7 @@
             // 
             this.CboTipoServicio.Enabled = false;
             this.CboTipoServicio.FormattingEnabled = true;
-            this.CboTipoServicio.Location = new System.Drawing.Point(15, 147);
+            this.CboTipoServicio.Location = new System.Drawing.Point(15, 63);
             this.CboTipoServicio.Name = "CboTipoServicio";
             this.CboTipoServicio.Size = new System.Drawing.Size(165, 21);
             this.CboTipoServicio.TabIndex = 69;
@@ -198,7 +184,7 @@
             // 
             this.CboCiudadDestino.Enabled = false;
             this.CboCiudadDestino.FormattingEnabled = true;
-            this.CboCiudadDestino.Location = new System.Drawing.Point(15, 106);
+            this.CboCiudadDestino.Location = new System.Drawing.Point(17, 147);
             this.CboCiudadDestino.Name = "CboCiudadDestino";
             this.CboCiudadDestino.Size = new System.Drawing.Size(165, 21);
             this.CboCiudadDestino.TabIndex = 68;
@@ -208,7 +194,7 @@
             // CboCiudadOrigen
             // 
             this.CboCiudadOrigen.FormattingEnabled = true;
-            this.CboCiudadOrigen.Location = new System.Drawing.Point(15, 65);
+            this.CboCiudadOrigen.Location = new System.Drawing.Point(15, 105);
             this.CboCiudadOrigen.Name = "CboCiudadOrigen";
             this.CboCiudadOrigen.Size = new System.Drawing.Size(165, 21);
             this.CboCiudadOrigen.TabIndex = 67;
@@ -340,7 +326,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label Btn_SeleccionarCiudadDestino;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
     }
 }

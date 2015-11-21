@@ -97,7 +97,7 @@ namespace Persistencia
                     new SPParameter("Codigo", ruta.Codigo_Ruta), 
                     new SPParameter("ID_Ciudad_Destino", ruta.ID_Ciudad_Destino),
                     new SPParameter("ID_Ciudad_Origen", ruta.ID_Ciudad_Origen),
-                    new SPParameter("ID_Servicio", ruta.ID_Servicio),
+                    //new SPParameter("ID_Servicio", ruta.ID_Servicio),
                     new SPParameter("Precio_Base_KG", ruta.Precio_Base_KG),
                     new SPParameter("Precio_Base_Pasaje", ruta.Precio_Base_Pasaje),
                     new SPParameter("Habilitado", ruta.Habilitado)
@@ -141,7 +141,7 @@ namespace Persistencia
                     new SPParameter("Codigo", ruta.Codigo_Ruta), 
                     new SPParameter("ID_Ciudad_Destino", ruta.ID_Ciudad_Destino),
                     new SPParameter("ID_Ciudad_Origen", ruta.ID_Ciudad_Origen),
-                    new SPParameter("ID_Servicio", ruta.ID_Servicio),
+                    //new SPParameter("ID_Servicio", ruta.ID_Servicio),
                     new SPParameter("Precio_Base_KG", ruta.Precio_Base_KG),
                     new SPParameter("Precio_Base_Pasaje", ruta.Precio_Base_Pasaje),
                     new SPParameter("Habilitado", ruta.Habilitado)
@@ -205,6 +205,23 @@ namespace Persistencia
             };
             var sp = new StoreProcedure(DBQueries.Ruta.SPObtenerRutaPorOrigenYDestino, param);
             return sp.ExecuteReader<Ruta>();
+        }
+
+        public static List<Servicio> ObtenerServiciosPorIDRuta(int ID_Ruta)
+        {
+            var param = new List<SPParameter>
+            { 
+                new SPParameter("ID_Ruta",ID_Ruta)
+            };
+
+            var sp = new StoreProcedure(DBQueries.Ruta.SPServiciosPorIDRuta, param);
+
+            List<Servicio> servicios = sp.ExecuteReader<Servicio>();
+
+            if (servicios == null || servicios.Count == 0)
+                return null;
+
+            return servicios;
         }
 
     }

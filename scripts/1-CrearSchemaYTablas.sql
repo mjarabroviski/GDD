@@ -188,12 +188,17 @@ CREATE TABLE [EL_PUNTERO].[TL_SERVICIO](
 CREATE TABLE [EL_PUNTERO].[TL_RUTA](
 	[ID_Ruta] int IDENTITY(1,1),
 	[Codigo_Ruta] int NOT NULL,
-	[ID_Servicio] int NOT NULL,
 	[ID_Ciudad_Origen] int NOT NULL,
 	[ID_Ciudad_Destino] int NOT NULL,
 	[Precio_Base_KG] numeric(18,2),
 	[Precio_Base_Pasaje] numeric(18,2),
 	[Habilitado] int DEFAULT 1
+);
+
+CREATE TABLE [EL_PUNTERO].[TL_SERVICIO_RUTA](
+	[ID_Servicio_Ruta] int IDENTITY (1,1),
+	[ID_Servicio] int NOT NULL,
+	[ID_Ruta] int NOT NULL
 );
 
 CREATE TABLE [EL_PUNTERO].[TL_CIUDAD](
@@ -245,6 +250,7 @@ CREATE TABLE [EL_PUNTERO].[TL_ENCOMIENDA](
 
 CREATE TABLE [EL_PUNTERO].[TL_COMPRA](
 	[ID_Compra] int IDENTITY(1,1),
+	[PNR] int,
 	[ID_Cliente] int NOT NULL,
 	[Monto] numeric(18,2) NOT NULL,
 	[Fecha_Compra] datetime NOT NULL,

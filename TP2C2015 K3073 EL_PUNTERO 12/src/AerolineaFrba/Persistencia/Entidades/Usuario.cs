@@ -10,7 +10,7 @@ namespace Persistencia.Entidades
     public class Usuario : IMapable
     {
         public int ID { get; set; }
-        private List<Rol> _Roles { get; set; }
+        public List<Rol> _Roles { get; set; }
         public string Username { get; set; }
         public string Contrasena { get; set; }
         public bool Habilitado { get; set; }

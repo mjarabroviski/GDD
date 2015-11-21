@@ -78,7 +78,6 @@ namespace AerolineaFrba.Abm_Ruta
             var bind = rutasDictionary.Values.Select(a => new
             {
                 CodigoRuta = a.Codigo_Ruta,
-                TipoServicio = RutaPersistencia.ObtenerServicioPorID(a.ID_Servicio),
                 CiudadOrigen = RutaPersistencia.ObtenerCiudadPorID(a.ID_Ciudad_Origen),
                 CiudadDestino = RutaPersistencia.ObtenerCiudadPorID(a.ID_Ciudad_Destino),
                 PrecioBaseKg = a.Precio_Base_KG,
@@ -244,7 +243,6 @@ namespace AerolineaFrba.Abm_Ruta
 
             //Obtengo la ruta correspondiente a la fila seleccionada
             var rutaSeleccionada = _rutas.Find(r => (r.Codigo_Ruta == (int)DgvRuta.Rows[e.RowIndex].Cells[0].Value) &&
-                                                   (RutaPersistencia.ObtenerServicioPorID(r.ID_Servicio) == (string)DgvRuta.Rows[e.RowIndex].Cells[1].Value) &&
                                                    (RutaPersistencia.ObtenerCiudadPorID(r.ID_Ciudad_Origen) == (string)DgvRuta.Rows[e.RowIndex].Cells[2].Value) &&
                                                    (RutaPersistencia.ObtenerCiudadPorID(r.ID_Ciudad_Destino) == (string)DgvRuta.Rows[e.RowIndex].Cells[3].Value) &&
                                                    (r.Precio_Base_KG == (double)DgvRuta.Rows[e.RowIndex].Cells[4].Value) &&

@@ -38,9 +38,7 @@ namespace AerolineaFrba.Abm_Ruta
             this.Text = (!modoModificacion) ? string.Format("{0} - {1}", "AerolineaFrba", "Nueva ruta") : string.Format("{0} - {1}", "AerolineaFrba", "Modificar ruta");
 
             #region Cargar comboBox
-            CmbTipoServicio.DataSource = ServicioPersistencia.ObtenerTodos();
-            CmbTipoServicio.ValueMember = "ID_Servicio";
-            CmbTipoServicio.DisplayMember = "Nombre";
+            CmbTipoServicio.Enabled = false;
 
             CmbCiudadOrigen.DataSource = CiudadPersistencia.ObtenerTodos();
             CmbCiudadOrigen.ValueMember = "ID";
@@ -58,7 +56,11 @@ namespace AerolineaFrba.Abm_Ruta
                 //Esta trabajando en modo modificación
                 TxtCodigo.Text = RutaActual.Codigo_Ruta.ToString();
                 ChkInhabilitado.Checked = !(RutaActual.Habilitado);
-                CmbTipoServicio.Text = RutaPersistencia.ObtenerServicioPorID(RutaActual.ID_Servicio);
+
+                CmbTipoServicio.DataSource = RutaPersistencia.ObtenerServiciosPorIDRuta(RutaActual.ID);
+                CmbTipoServicio.ValueMember = "ID_Servicio";
+                CmbTipoServicio.DisplayMember = "Nombre";
+
                 CmbCiudadOrigen.Text = RutaPersistencia.ObtenerCiudadPorID(RutaActual.ID_Ciudad_Origen);
                 CmbCiudadDestino.Text = RutaPersistencia.ObtenerCiudadPorID(RutaActual.ID_Ciudad_Destino);
                 TxtBaseKg.Text = RutaActual.Precio_Base_KG.ToString();
@@ -143,7 +145,7 @@ namespace AerolineaFrba.Abm_Ruta
                     ruta.Codigo_Ruta = (int)(filtro.Codigo);
                     ruta.ID_Ciudad_Origen = CiudadPersistencia.ObtenerIDPorNombreDeCiudad(filtro.CiudadOrigen);
                     ruta.ID_Ciudad_Destino = CiudadPersistencia.ObtenerIDPorNombreDeCiudad(filtro.CiudadDestino);
-                    ruta.ID_Servicio = ServicioPersistencia.ObtenerIDPorNombreDeServicio(filtro.TipoServicio);
+                    //ruta.ID_Servicio = ServicioPersistencia.ObtenerIDPorNombreDeServicio(filtro.TipoServicio);
                     ruta.Precio_Base_KG = (double)filtro.PrecioDesdeKg;   //ES INDISTINTO PONER DESDE O HASTA PORQUE EN ESTE CASO SON IGUALES
                     ruta.Precio_Base_Pasaje = (double)filtro.PrecioDesdePasaje;  //ES INDISTINTO PONER DESDE O HASTA PORQUE EN ESTE CASO SON IGUALES
                     ruta.Habilitado = !(ChkInhabilitado.Checked);
@@ -168,7 +170,7 @@ namespace AerolineaFrba.Abm_Ruta
                     RutaActual.Codigo_Ruta = Int32.Parse(TxtCodigo.Text);
                     RutaActual.ID_Ciudad_Origen = CiudadPersistencia.ObtenerIDPorNombreDeCiudad(CmbCiudadOrigen.Text);
                     RutaActual.ID_Ciudad_Destino = CiudadPersistencia.ObtenerIDPorNombreDeCiudad(CmbCiudadDestino.Text);
-                    RutaActual.ID_Servicio = ServicioPersistencia.ObtenerIDPorNombreDeServicio(CmbTipoServicio.Text);
+                    //RutaActual.ID_Servicio = ServicioPersistencia.ObtenerIDPorNombreDeServicio(CmbTipoServicio.Text);
                     RutaActual.Precio_Base_KG = double.Parse(TxtBaseKg.Text);   //ES INDISTINTO PONER DESDE O HASTA PORQUE EN ESTE CASO SON IGUALES
                     RutaActual.Precio_Base_Pasaje = double.Parse(TxtBasePasaje.Text);  //ES INDISTINTO PONER DESDE O HASTA PORQUE EN ESTE CASO SON IGUALES
                     RutaActual.Habilitado = !(ChkInhabilitado.Checked);

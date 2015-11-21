@@ -122,7 +122,7 @@ BEGIN
 	  AND ((Precio_Base_KG <= @Hasta_Kg) OR (@Hasta_Kg is NULL))
 	  AND ((@Desde_Pasaje <= Precio_Base_Pasaje) OR (@Desde_Pasaje is NULL)) 
 	  AND ((Precio_Base_Pasaje <= @Hasta_Pasaje) OR (@Hasta_Pasaje is NULL)) 
-	  AND (((SELECT Nombre FROM [EL_PUNTERO].TL_SERVICIO S WHERE S.ID_Servicio = R.ID_Servicio) = @Tipo_Servicio) OR (@Tipo_Servicio is NULL)) 
+	  AND ((@Tipo_Servicio IN (SELECT Nombre FROM [EL_PUNTERO].TL_SERVICIO S, EL_PUNTERO.TL_SERVICIO_RUTA SR WHERE S.ID_Servicio = SR.ID_Servicio AND SR.ID_Ruta = R.ID_Ruta)) OR (@Tipo_Servicio is NULL)) 
 	  AND (((SELECT Nombre_Ciudad FROM [EL_PUNTERO].TL_CIUDAD C WHERE C.ID_Ciudad = R.ID_Ciudad_Origen) = @Ciudad_Origen) OR (@Ciudad_Origen is NULL)) 
 	  AND (((SELECT Nombre_Ciudad FROM [EL_PUNTERO].TL_CIUDAD C WHERE C.ID_Ciudad = R.ID_Ciudad_Destino) = @Ciudad_Destino) OR (@Ciudad_Destino is NULL))
 END
@@ -381,17 +381,6 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE [EL_PUNTERO].[ServicioPorIDRuta]
-@ID_Ruta int
-AS
-BEGIN
-	SET NOCOUNT ON;
-	SELECT *
-	FROM [EL_PUNTERO].TL_SERVICIO
-	WHERE ID_Servicio = (SELECT ID_Servicio FROM TL_RUTA WHERE ID_Ruta=@ID_Ruta)
-END
-GO
-
 CREATE PROCEDURE [EL_PUNTERO].[ObtenerViajes]
 AS
 BEGIN
@@ -502,6 +491,18 @@ BEGIN
 	SET NOCOUNT ON;
 	SELECT *
 	FROM TL_CLIENTE_AUX
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[GetServiciosPorIDRuta]
+@ID_Ruta int
+AS
+BEGIN
+	SET NOCOUNT ON;
+	SELECT S.*
+	FROM [EL_PUNTERO].TL_SERVICIO S, EL_PUNTERO.TL_SERVICIO_RUTA SR
+	WHERE S.ID_Servicio = SR.ID_Servicio
+	AND @ID_Ruta = SR.ID_Ruta
 END
 GO
 

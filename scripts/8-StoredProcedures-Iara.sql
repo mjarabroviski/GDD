@@ -109,13 +109,10 @@ CREATE PROCEDURE [EL_PUNTERO].[ObtenerServiciosDeRuta]
 AS
 BEGIN
 	SET NOCOUNT ON;
-	SELECT S.ID_Servicio,S.Nombre,S.Porcentaje
-	FROM [EL_PUNTERO].[TL_SERVICIO] S,[EL_PUNTERO].[TL_AERONAVE] A, [EL_PUNTERO].[TL_RUTA] R
-	WHERE @ID_Ciudad_Origen = R.ID_Ciudad_Origen 
-			AND @ID_Ciudad_Destino =R.ID_Ciudad_Destino 
-			AND @Matricula = A.Matricula
-			AND A.ID_Servicio = R.ID_Servicio
-	ORDER BY Nombre
+	SELECT S.*
+	FROM [EL_PUNTERO].[TL_SERVICIO] S, [EL_PUNTERO].[TL_SERVICIO_RUTA] SR
+	WHERE S.ID_Servicio = SR.ID_Servicio
+	AND SR.ID_Ruta = (SELECT R.ID_Ruta FROM EL_PUNTERO.TL_RUTA R WHERE R.ID_Ciudad_Destino = @ID_Ciudad_Destino AND R.ID_Ciudad_Origen = @ID_Ciudad_Origen)
 END
 GO
 

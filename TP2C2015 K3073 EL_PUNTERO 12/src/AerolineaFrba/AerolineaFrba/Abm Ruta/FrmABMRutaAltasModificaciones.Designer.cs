@@ -238,7 +238,7 @@
             this.BtnCancelar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.BtnCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnCancelar.ForeColor = System.Drawing.Color.White;
-            this.BtnCancelar.Location = new System.Drawing.Point(169, 316);
+            this.BtnCancelar.Location = new System.Drawing.Point(19, 318);
             this.BtnCancelar.Name = "BtnCancelar";
             this.BtnCancelar.Size = new System.Drawing.Size(138, 32);
             this.BtnCancelar.TabIndex = 53;
@@ -252,11 +252,11 @@
             this.BtnGuardar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.BtnGuardar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnGuardar.ForeColor = System.Drawing.Color.White;
-            this.BtnGuardar.Location = new System.Drawing.Point(14, 316);
+            this.BtnGuardar.Location = new System.Drawing.Point(165, 318);
             this.BtnGuardar.Name = "BtnGuardar";
             this.BtnGuardar.Size = new System.Drawing.Size(140, 32);
             this.BtnGuardar.TabIndex = 52;
-            this.BtnGuardar.Text = "GUARDAR";
+            this.BtnGuardar.Text = "SIGUIENTE";
             this.BtnGuardar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.BtnGuardar.Click += new System.EventHandler(this.BtnGuardar_Click);
             // 

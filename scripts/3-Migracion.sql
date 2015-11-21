@@ -50,13 +50,25 @@ INSERT INTO EL_PUNTERO.TL_AERONAVE (Matricula,Fabricante,Modelo,ID_Servicio,Fech
  COMMIT
 
  BEGIN TRANSACTION
- INSERT INTO EL_PUNTERO.TL_RUTA(Codigo_Ruta,ID_Servicio,ID_Ciudad_Origen,ID_Ciudad_Destino)
+ INSERT INTO EL_PUNTERO.TL_RUTA(Codigo_Ruta,ID_Ciudad_Origen,ID_Ciudad_Destino)
  (SELECT DISTINCT [Ruta_Codigo],
-		 (SELECT ID_Servicio FROM EL_PUNTERO.TL_SERVICIO WHERE Nombre = gd_esquema.Maestra.Tipo_Servicio),
 		 (SELECT ID_Ciudad FROM EL_PUNTERO.TL_CIUDAD WHERE Nombre_Ciudad = SUBSTRING((gd_esquema.Maestra.Ruta_Ciudad_Origen),2,LEN(gd_esquema.Maestra.Ruta_Ciudad_Origen)-1)),
 		 (SELECT ID_Ciudad FROM EL_PUNTERO.TL_CIUDAD WHERE Nombre_Ciudad = SUBSTRING((gd_esquema.Maestra.Ruta_Ciudad_Destino),2,LEN(gd_esquema.Maestra.Ruta_Ciudad_Destino)-1))
  FROM gd_esquema.Maestra);
  COMMIT
+
+BEGIN TRANSACTION
+INSERT INTO EL_PUNTERO.TL_SERVICIO_RUTA(ID_Servicio,ID_Ruta)
+(SELECT DISTINCT (SELECT ID_Servicio FROM EL_PUNTERO.TL_SERVICIO WHERE Nombre = M.Tipo_Servicio),
+				  (SELECT ID_Ruta FROM EL_PUNTERO.TL_RUTA R WHERE 
+				  (R.ID_Ciudad_Origen = (SELECT ID_Ciudad 
+										FROM EL_PUNTERO.TL_CIUDAD C
+										WHERE C.Nombre_Ciudad = SUBSTRING((M.Ruta_Ciudad_Origen),2,LEN(M.Ruta_Ciudad_Origen)-1))) 
+				  AND R.ID_Ciudad_Destino = (SELECT ID_Ciudad 
+											FROM EL_PUNTERO.TL_CIUDAD C
+											WHERE C.Nombre_Ciudad = SUBSTRING((M.Ruta_Ciudad_Destino),2,LEN(M.Ruta_Ciudad_Destino)-1)))
+ FROM gd_esquema.Maestra M)
+COMMIT
 
 BEGIN TRANSACTION
 UPDATE EL_PUNTERO.TL_RUTA
@@ -107,6 +119,9 @@ COMMIT
 		 [Pasaje_Codigo],
 		 [Paquete_Codigo]
  FROM gd_esquema.Maestra);
+
+ UPDATE EL_PUNTERO.TL_COMPRA
+ SET PNR = ID_Compra 
 COMMIT
 
 BEGIN TRANSACTION
