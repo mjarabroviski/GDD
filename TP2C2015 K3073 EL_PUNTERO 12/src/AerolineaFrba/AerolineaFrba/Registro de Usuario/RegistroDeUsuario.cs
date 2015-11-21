@@ -68,8 +68,7 @@ namespace AerolineaFrba.Registro_de_Usuario
                 {
                     using (var transaction = DBManager.Instance().Connection.BeginTransaction(IsolationLevel.Serializable))
                     {
-                        user.Rol = rolAUsar;
-                        UsuarioPersistencia.InsertarUsuario(user,transaction);
+                        UsuarioPersistencia.InsertarUsuario(user,rolAUsar.ID,transaction);
                         transaction.Commit();
                         
                         var dialogAnswer2 = MessageBox.Show("Usuario registrado correctamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);

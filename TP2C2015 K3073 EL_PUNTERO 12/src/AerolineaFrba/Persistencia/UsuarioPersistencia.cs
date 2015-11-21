@@ -73,13 +73,13 @@ namespace Persistencia
             sp.ExecuteNonQuery(null);
         }
 
-        public static int InsertarUsuario(Usuario user, SqlTransaction transaction)
+        public static int InsertarUsuario(Usuario user, int ID_Rol, SqlTransaction transaction)
         {
             var param = new List<SPParameter>
                 {
                     new SPParameter("Username", user.Username), 
                     new SPParameter("Password", user.Contrasena),
-                    new SPParameter("ID_Rol", user.Rol.ID)
+                    new SPParameter("ID_Rol", ID_Rol)
                 };
 
             var sp = (transaction != null)

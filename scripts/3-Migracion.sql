@@ -93,23 +93,6 @@ COMMIT
 					SUBSTRING((M.Ruta_Ciudad_Destino),2,LEN(M.Ruta_Ciudad_Destino)-1) = (SELECT Nombre_Ciudad FROM EL_PUNTERO.TL_CIUDAD WHERE ID_Ciudad = ID_Ciudad_Destino))
  FROM gd_esquema.Maestra M);
  COMMIT
-
- BEGIN TRANSACTION
- INSERT INTO EL_PUNTERO.TL_USUARIO (ID_Rol,Username,Password,Cant_Intentos)
- VALUES (2,'admin1','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',3);
-
- INSERT INTO EL_PUNTERO.TL_USUARIO (ID_Rol,Username,Password,Cant_Intentos)
- VALUES (2,'admin2','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',3);
-
- INSERT INTO EL_PUNTERO.TL_USUARIO (ID_Rol,Username,Password,Cant_Intentos)
- VALUES (2,'admin3','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',3);
-
- INSERT INTO EL_PUNTERO.TL_USUARIO (ID_Rol,Username,Password,Cant_Intentos)
- VALUES (2,'admin4','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',3);
-
- INSERT INTO EL_PUNTERO.TL_USUARIO (ID_Rol,Username,Password,Cant_Intentos)
- VALUES (3,'admin','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',3);
- COMMIT
  
  BEGIN TRANSACTION
  INSERT INTO EL_PUNTERO.TL_COMPRA(ID_Cliente,Fecha_Compra,ID_Tarjeta,ID_Usuario,Monto,Codigo_Pasaje,Codigo_Paquete)

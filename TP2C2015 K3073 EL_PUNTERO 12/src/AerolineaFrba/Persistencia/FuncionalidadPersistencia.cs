@@ -85,5 +85,17 @@ namespace Persistencia
             return func;
         }
 
+        public static List<Funcionalidad> ObtenerFuncionalidadesPorUsuario(Usuario user)
+        {
+            var param = new List<SPParameter> { new SPParameter("ID_Usuario", user.ID) };
+            var sp = new StoreProcedure(DBQueries.Funcionalidad.SPGetFuncionalidadesPorUsuario, param);
+
+            List<Funcionalidad> func = sp.ExecuteReader<Funcionalidad>();
+
+            if (func == null || func.Count == 0)
+                return null;
+
+            return func;
+        }
     }
 }

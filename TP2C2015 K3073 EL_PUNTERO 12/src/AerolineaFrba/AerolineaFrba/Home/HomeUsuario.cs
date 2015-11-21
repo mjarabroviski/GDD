@@ -8,8 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Sesion;
-using Persistencia;
-using Persistencia.Entidades;
 using AerolineaFrba.LogIn;
 using AerolineaFrba.Abm_Aeronave;
 using AerolineaFrba.Abm_Ciudad;
@@ -23,6 +21,8 @@ using AerolineaFrba.Generacion_Viaje;
 using AerolineaFrba.Listado_Estadistico;
 using AerolineaFrba.Registro_de_Usuario;
 using AerolineaFrba.Registro_Llegada_Destino;
+using Persistencia;
+using Persistencia.Entidades;
 
 
 namespace AerolineaFrba.Home
@@ -50,8 +50,9 @@ namespace AerolineaFrba.Home
             var usuario = false;
 
             List<Funcionalidad> funcionalidades;
+            Usuario user = AdministradorSesion.UsuarioActual;
 
-            if (AdministradorSesion.UsuarioActual != null) funcionalidades = AdministradorSesion.UsuarioActual.Rol.Funcionalidades;
+            if (AdministradorSesion.UsuarioActual != null) funcionalidades = FuncionalidadPersistencia.ObtenerFuncionalidadesPorUsuario(user); 
             else funcionalidades = FuncionalidadPersistencia.ObtenerFuncionalidadesPorNombreRol("Cliente");
 
             //Obtengo todas las funcionalidades asignadas al rol del usuario logueado

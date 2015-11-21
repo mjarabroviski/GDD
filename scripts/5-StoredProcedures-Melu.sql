@@ -58,9 +58,10 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 	
-	SELECT *
-	FROM [EL_PUNTERO].[TL_Rol]
-	WHERE ID_Rol = (SELECT ID_Rol FROM TL_Usuario WHERE ID_Usuario = @ID_User);
+	SELECT R.*
+	FROM [EL_PUNTERO].[TL_Rol_Usuario] RU, [EL_PUNTERO].[TL_Rol] R
+	WHERE R.ID_Rol = RU.ID_Rol
+	AND RU.ID_Usuario = @ID_User
 END
 GO
 
@@ -110,9 +111,16 @@ CREATE PROCEDURE [EL_PUNTERO].[InsertarUsuario]
 AS
 BEGIN
 	SET NOCOUNT ON;
+
+	DECLARE @ID_Usuario int;
 	
-	INSERT INTO [EL_PUNTERO].[TL_Usuario](Id_Rol,Username,Password,Habilitado,Cant_Intentos)
-	VALUES(@ID_Rol,@Username,@Password,1,3)
+	INSERT INTO [EL_PUNTERO].[TL_Usuario](Username,Password,Habilitado,Cant_Intentos)
+	VALUES(@Username,@Password,1,3)
+
+	SELECT @ID_Usuario = ID_Usuario FROM EL_PUNTERO.TL_USUARIO WHERE Username = @Username
+
+	INSERT INTO [EL_PUNTERO].[TL_ROL_USUARIO](ID_Rol,ID_Usuario)
+	VALUES(@ID_Rol,@ID_Usuario)
 	
 END
 GO
@@ -941,6 +949,19 @@ BEGIN
 	SELECT *
 	FROM [EL_PUNTERO].[TL_CANJE]
 	WHERE ID_Cliente = @ID_Cliente
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[GetFuncionalidadesPorUsuario]
+@ID_Usuario int
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	SELECT F.*
+	FROM [EL_PUNTERO].[TL_Funcionalidad] F
+	INNER JOIN [EL_PUNTERO].TL_FUNCIONALIDAD_ROL FR ON F.ID_Funcionalidad = FR.ID_Funcionalidad 
+	WHERE FR.ID_Rol IN (SELECT RU.ID_Rol FROM EL_PUNTERO.TL_ROL_USUARIO RU WHERE RU.ID_Usuario = @ID_Usuario)
 END
 GO
 

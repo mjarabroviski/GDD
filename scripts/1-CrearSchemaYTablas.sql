@@ -65,11 +65,16 @@ INSERT INTO EL_PUNTERO.TL_TIPO_DOCUMENTO (Descripcion) VALUES ('LE');
 
 CREATE TABLE [EL_PUNTERO].[TL_USUARIO] (
 	[ID_Usuario] int IDENTITY (1,1),
-	[ID_Rol] int NOT NULL,
 	[Username] nvarchar(255) UNIQUE,
 	[Password] nvarchar(64) NOT NULL,
 	[Habilitado] bit DEFAULT 1,
 	[Cant_Intentos] int DEFAULT 3
+);
+
+CREATE TABLE [EL_PUNTERO].[TL_ROL_USUARIO](
+	[ID_Rol_Usuario] int IDENTITY (1,1),
+	[ID_Rol] int NOT NULL,
+	[ID_Usuario] int NOT NULL
 );
 
 CREATE TABLE [EL_PUNTERO].[TL_ROL](
@@ -78,9 +83,34 @@ CREATE TABLE [EL_PUNTERO].[TL_ROL](
 	[Habilitado] bit DEFAULT 1
 );
 
+--Inserto Roles
 INSERT INTO EL_PUNTERO.TL_ROL (Descripcion) VALUES ('Cliente');
 INSERT INTO EL_PUNTERO.TL_ROL (Descripcion) VALUES ('Administrador');
 INSERT INTO EL_PUNTERO.TL_ROL (Descripcion) VALUES ('Administrador General');
+
+--Inserto Usuarios
+INSERT INTO EL_PUNTERO.TL_USUARIO (Username,Password,Cant_Intentos)
+VALUES ('admin1','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',3);
+INSERT INTO EL_PUNTERO.TL_USUARIO (Username,Password,Cant_Intentos)
+VALUES ('admin2','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',3);
+INSERT INTO EL_PUNTERO.TL_USUARIO (Username,Password,Cant_Intentos)
+VALUES ('admin3','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',3);
+INSERT INTO EL_PUNTERO.TL_USUARIO (Username,Password,Cant_Intentos)
+VALUES ('admin4','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',3);
+INSERT INTO EL_PUNTERO.TL_USUARIO (Username,Password,Cant_Intentos)
+VALUES ('admin','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',3);
+
+--Inserto Roles por Usuario
+INSERT INTO EL_PUNTERO.TL_ROL_USUARIO (ID_Rol,ID_Usuario)
+VALUES(2,1)
+INSERT INTO EL_PUNTERO.TL_ROL_USUARIO (ID_Rol,ID_Usuario)
+VALUES(2,2)
+INSERT INTO EL_PUNTERO.TL_ROL_USUARIO (ID_Rol,ID_Usuario)
+VALUES(2,3)
+INSERT INTO EL_PUNTERO.TL_ROL_USUARIO (ID_Rol,ID_Usuario)
+VALUES(2,4)
+INSERT INTO EL_PUNTERO.TL_ROL_USUARIO (ID_Rol,ID_Usuario)
+VALUES(3,5)
 
 CREATE TABLE [EL_PUNTERO].[TL_FUNCIONALIDAD](
 	[ID_Funcionalidad] int IDENTITY (1,1),

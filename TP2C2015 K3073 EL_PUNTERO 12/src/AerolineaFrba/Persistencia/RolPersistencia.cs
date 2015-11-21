@@ -25,7 +25,7 @@ namespace Persistencia
             return sp.ExecuteReader<Rol>();
         }
 
-        public static Rol ObtenerRolPorUsuario(Usuario usuario) {
+        public static List<Rol> ObtenerRolesPorUsuario(Usuario usuario) {
             //Obtengo el rol del usuario
             var param = new List<SPParameter> { new SPParameter("ID_User", usuario.ID) };
             var sp = new StoreProcedure(DBQueries.Usuario.SPGetRolPorUsuario, param);
@@ -36,9 +36,12 @@ namespace Persistencia
             if (roles == null || roles.Count == 0)
                 return null;
 
-            //Se llena el rol con sus funcionalidades
-            Rol rolARetornar = roles[0].AgregarFuncionalidades();
-            return rolARetornar;
+            //Se llenan los roles con sus funcionalidades
+            for (int i = 1; i <= roles.Count; i++)
+            {
+                roles[i].AgregarFuncionalidades();
+            }
+            return roles;
         }
 
         public static Rol ObtenerRolPorNombre(String nombre)
