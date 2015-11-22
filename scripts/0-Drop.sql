@@ -126,6 +126,15 @@ DROP PROCEDURE [EL_PUNTERO].[CrearTablaAuxiliarPasajeros];
 DROP PROCEDURE [EL_PUNTERO].[GetClientesAuxiliares];
 DROP PROCEDURE [EL_PUNTERO].[ObtenerClientePorDoc];
 DROP PROCEDURE [EL_PUNTERO].[ObtenerInfoButacasDisponibles];
+DROP PROCEDURE [EL_PUNTERO].[ObtenerPasajesFuturos]
+DROP PROCEDURE [EL_PUNTERO].[ObtenerEncomiendasFuturas]
+DROP PROCEDURE [EL_PUNTERO].ObtenerRutaDeEncomienda
+DROP PROCEDURE [EL_PUNTERO].ObtenerFechaSalidaDeEncomienda
+DROP PROCEDURE [EL_PUNTERO].ObtenerRutaDePasaje
+DROP PROCEDURE [EL_PUNTERO].ObtenerFechaSalidaDePasaje
+DROP PROCEDURE [EL_PUNTERO].ObtenerNombreClientePorID
+DROP PROCEDURE [EL_PUNTERO].[ObtenerServicioAeronave]
+DROP PROCEDURE [EL_PUNTERO].ObtenerRutaEncomienda
 
 DROP TRIGGER [EL_PUNTERO].[Tr_DeshabilitarUsuariosConRolDeshabilitado];
 

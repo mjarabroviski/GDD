@@ -29,15 +29,14 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.Txt_Servicio = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.DtpFechaLlegada = new System.Windows.Forms.DateTimePicker();
             this.DtpFechaLlegadaEstimada = new System.Windows.Forms.DateTimePicker();
             this.DtpFechaSalida = new System.Windows.Forms.DateTimePicker();
-            this.Btn_SeleccionarCiudadDestino = new System.Windows.Forms.Label();
             this.CboAeronave = new System.Windows.Forms.ComboBox();
-            this.CboTipoServicio = new System.Windows.Forms.ComboBox();
             this.CboCiudadDestino = new System.Windows.Forms.ComboBox();
             this.CboCiudadOrigen = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -53,15 +52,14 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.Txt_Servicio);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.DtpFechaLlegada);
             this.groupBox1.Controls.Add(this.DtpFechaLlegadaEstimada);
             this.groupBox1.Controls.Add(this.DtpFechaSalida);
-            this.groupBox1.Controls.Add(this.Btn_SeleccionarCiudadDestino);
             this.groupBox1.Controls.Add(this.CboAeronave);
-            this.groupBox1.Controls.Add(this.CboTipoServicio);
             this.groupBox1.Controls.Add(this.CboCiudadDestino);
             this.groupBox1.Controls.Add(this.CboCiudadOrigen);
             this.groupBox1.Controls.Add(this.label9);
@@ -75,6 +73,15 @@
             this.groupBox1.TabIndex = 47;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "DATOS DEL VIAJE A GENERAR";
+            // 
+            // Txt_Servicio
+            // 
+            this.Txt_Servicio.Enabled = false;
+            this.Txt_Servicio.Location = new System.Drawing.Point(17, 63);
+            this.Txt_Servicio.Name = "Txt_Servicio";
+            this.Txt_Servicio.Size = new System.Drawing.Size(163, 20);
+            this.Txt_Servicio.TabIndex = 92;
+            this.Txt_Servicio.Text = "TIPO SERVICIO";
             // 
             // label3
             // 
@@ -145,20 +152,6 @@
             this.DtpFechaSalida.Value = new System.DateTime(2015, 10, 29, 0, 0, 0, 0);
             this.DtpFechaSalida.ValueChanged += new System.EventHandler(this.DtpFechaSalida_ValueChanged_1);
             // 
-            // Btn_SeleccionarCiudadDestino
-            // 
-            this.Btn_SeleccionarCiudadDestino.BackColor = System.Drawing.Color.DodgerBlue;
-            this.Btn_SeleccionarCiudadDestino.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Btn_SeleccionarCiudadDestino.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Btn_SeleccionarCiudadDestino.ForeColor = System.Drawing.Color.White;
-            this.Btn_SeleccionarCiudadDestino.Location = new System.Drawing.Point(212, 62);
-            this.Btn_SeleccionarCiudadDestino.Name = "Btn_SeleccionarCiudadDestino";
-            this.Btn_SeleccionarCiudadDestino.Size = new System.Drawing.Size(29, 21);
-            this.Btn_SeleccionarCiudadDestino.TabIndex = 75;
-            this.Btn_SeleccionarCiudadDestino.Text = "OK";
-            this.Btn_SeleccionarCiudadDestino.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.Btn_SeleccionarCiudadDestino.Click += new System.EventHandler(this.Btn_SeleccionarCiudadDestino_Click_1);
-            // 
             // CboAeronave
             // 
             this.CboAeronave.FormattingEnabled = true;
@@ -167,18 +160,7 @@
             this.CboAeronave.Size = new System.Drawing.Size(165, 21);
             this.CboAeronave.TabIndex = 70;
             this.CboAeronave.Text = "MATRICULA AERONAVE";
-            this.CboAeronave.SelectedIndexChanged += new System.EventHandler(this.CboAeronave_SelectedIndexChanged);
             this.CboAeronave.SelectionChangeCommitted += new System.EventHandler(this.CboAeronave_SelectionChangeCommitted);
-            // 
-            // CboTipoServicio
-            // 
-            this.CboTipoServicio.Enabled = false;
-            this.CboTipoServicio.FormattingEnabled = true;
-            this.CboTipoServicio.Location = new System.Drawing.Point(15, 63);
-            this.CboTipoServicio.Name = "CboTipoServicio";
-            this.CboTipoServicio.Size = new System.Drawing.Size(165, 21);
-            this.CboTipoServicio.TabIndex = 69;
-            this.CboTipoServicio.Text = "TIPO SERVICIO";
             // 
             // CboCiudadDestino
             // 
@@ -189,18 +171,17 @@
             this.CboCiudadDestino.Size = new System.Drawing.Size(165, 21);
             this.CboCiudadDestino.TabIndex = 68;
             this.CboCiudadDestino.Text = "CIUDAD DESTINO";
-            this.CboCiudadDestino.SelectionChangeCommitted += new System.EventHandler(this.CboCiudadDestino_SelectionChangeCommitted);
             // 
             // CboCiudadOrigen
             // 
+            this.CboCiudadOrigen.Enabled = false;
             this.CboCiudadOrigen.FormattingEnabled = true;
-            this.CboCiudadOrigen.Location = new System.Drawing.Point(15, 105);
+            this.CboCiudadOrigen.Location = new System.Drawing.Point(17, 106);
             this.CboCiudadOrigen.Name = "CboCiudadOrigen";
             this.CboCiudadOrigen.Size = new System.Drawing.Size(165, 21);
             this.CboCiudadOrigen.TabIndex = 67;
             this.CboCiudadOrigen.Text = "CIUDAD ORIGEN";
             this.CboCiudadOrigen.SelectionChangeCommitted += new System.EventHandler(this.CboCiudadOrigen_SelectionChangeCommitted);
-            this.CboCiudadOrigen.Click += new System.EventHandler(this.CboCiudadOrigen_Click);
             // 
             // label9
             // 
@@ -318,14 +299,13 @@
         private System.Windows.Forms.Label Btn_GenerarViaje;
         private System.Windows.Forms.ComboBox CboCiudadOrigen;
         private System.Windows.Forms.ComboBox CboCiudadDestino;
-        private System.Windows.Forms.ComboBox CboTipoServicio;
         private System.Windows.Forms.ComboBox CboAeronave;
         private System.Windows.Forms.DateTimePicker DtpFechaLlegada;
         private System.Windows.Forms.DateTimePicker DtpFechaLlegadaEstimada;
         private System.Windows.Forms.DateTimePicker DtpFechaSalida;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label Btn_SeleccionarCiudadDestino;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox Txt_Servicio;
     }
 }
