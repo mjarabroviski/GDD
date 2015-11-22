@@ -107,15 +107,15 @@ COMMIT
  COMMIT
  
  BEGIN TRANSACTION
- INSERT INTO EL_PUNTERO.TL_COMPRA(ID_Cliente,Fecha_Compra,ID_Tarjeta,ID_Usuario,Monto,Codigo_Pasaje,Codigo_Paquete)
+ INSERT INTO EL_PUNTERO.TL_COMPRA(ID_Cliente,Fecha_Compra,ID_Usuario,ID_Tarjeta,Cantidad_Cuotas,Codigo_Pasaje,Codigo_Paquete)
  (SELECT (SELECT ID_Cliente FROM EL_PUNTERO.TL_CLIENTE 
 			 WHERE Nro_Documento = Cli_Dni AND Apellido = Cli_Apellido AND Nombre = Cli_Nombre),
 		 (CASE WHEN Pasaje_FechaCompra = '1900-01-01 00:00:00.000' THEN Paquete_FechaCompra
 			 WHEN Paquete_FechaCompra = '1900-01-01 00:00:00.000'  THEN Pasaje_FechaCompra
 		  END),
-		  NULL,
 		  1,
-		 Paquete_Precio + Pasaje_Precio,
+		  NULL,
+		  NULL,
 		 [Pasaje_Codigo],
 		 [Paquete_Codigo]
  FROM gd_esquema.Maestra);

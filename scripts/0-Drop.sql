@@ -79,7 +79,6 @@ DROP PROCEDURE [EL_PUNTERO].[DarDeBajaPorFueraDeServicio];
 DROP PROCEDURE [EL_PUNTERO].[BajaPorFueraDeServicio];
 DROP PROCEDURE [EL_PUNTERO].[CancelarPasajesYEncomiendasPorBajaServicioAeronave];
 DROP PROCEDURE [EL_PUNTERO].[ReemplazoAeronavePorServicio];
-DROP FUNCTION [EL_PUNTERO].[ObtenerAeronaveDeReemplazoPorServicio];
 DROP PROCEDURE [EL_PUNTERO].[SeleccionReemplazoAeronavePorServicio];
 DROP PROCEDURE [EL_PUNTERO].[HabilitarAeronavesQueVolvieronDeBajaServicio];
 DROP PROCEDURE [EL_PUNTERO].[GetFuncionalidadPorNombre];
@@ -142,5 +141,6 @@ DROP FUNCTION [EL_PUNTERO].[CompraAPartirDeEncomienda];
 DROP FUNCTION [EL_PUNTERO].[CompraAPartirDePasaje];
 DROP FUNCTION [EL_PUNTERO].[ObtenerAeronaveDeReemplazo];
 DROP FUNCTION [EL_PUNTERO].[ObtenerIDBajaServicioMax];
+DROP FUNCTION [EL_PUNTERO].[ObtenerAeronaveDeReemplazoPorServicio];
 
 DROP SCHEMA [EL_PUNTERO];
