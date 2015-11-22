@@ -223,7 +223,7 @@ CREATE TABLE [EL_PUNTERO].[TL_TIPO_BUTACA](
 INSERT INTO EL_PUNTERO.TL_TIPO_BUTACA (Descripcion) VALUES ('Ventanilla');
 INSERT INTO EL_PUNTERO.TL_TIPO_BUTACA (Descripcion) VALUES ('Pasillo');
 
-/*tipo item: 1:pasaje 0:encomienda*/
+--tipo item: 1:pasaje 0:encomienda
 CREATE TABLE [EL_PUNTERO].[TL_ITEM_DEVUELTO](
 	[ID_Item_Devuelto] int IDENTITY(1,1),
 	[ID_Encomienda] int,
@@ -252,9 +252,9 @@ CREATE TABLE [EL_PUNTERO].[TL_COMPRA](
 	[ID_Compra] int IDENTITY(1,1),
 	[PNR] int,
 	[ID_Cliente] int NOT NULL,
-	[Monto] numeric(18,2) NOT NULL,
 	[Fecha_Compra] datetime NOT NULL,
 	[ID_Tarjeta] int,
+	[Cantidad_Cuotas] int,
 	[ID_Usuario] int NOT NULL,
 	[Codigo_Pasaje] int,
 	[Codigo_Paquete] int
@@ -293,12 +293,11 @@ CREATE TABLE [EL_PUNTERO].[TL_TARJETA](
 CREATE TABLE [EL_PUNTERO].[TL_TIPO_TARJETA](
 	[ID_Tipo_Tarjeta] int IDENTITY(1,1),
 	[Descripcion] nvarchar(30),
-	[Cantidad_Cuotas] int NOT NULL
 );
 
-INSERT INTO EL_PUNTERO.TL_TIPO_TARJETA (Descripcion,Cantidad_Cuotas) VALUES ('VISA',12);
-INSERT INTO EL_PUNTERO.TL_TIPO_TARJETA (Descripcion,Cantidad_Cuotas) VALUES ('MASTERCARD',6);
-INSERT INTO EL_PUNTERO.TL_TIPO_TARJETA (Descripcion,Cantidad_Cuotas) VALUES ('AMEX',3);
+INSERT INTO EL_PUNTERO.TL_TIPO_TARJETA (Descripcion) VALUES ('VISA');
+INSERT INTO EL_PUNTERO.TL_TIPO_TARJETA (Descripcion) VALUES ('MASTERCARD');
+INSERT INTO EL_PUNTERO.TL_TIPO_TARJETA (Descripcion) VALUES ('AMEX');
 
 
 COMMIT
