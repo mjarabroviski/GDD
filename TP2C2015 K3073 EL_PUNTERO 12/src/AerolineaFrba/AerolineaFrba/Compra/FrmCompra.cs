@@ -192,7 +192,7 @@ namespace AerolineaFrba.Compra
             if (viajeSeleccionado != null)
             {
                 //El usuario tocó el botón de seleccionar
-                if (e.ColumnIndex == 7)
+                if (e.ColumnIndex == 6)
                 {
                     var ingresoCantidades = new FrmIngresoCantidades(viajeSeleccionado,this);
                     ingresoCantidades.ShowDialog();

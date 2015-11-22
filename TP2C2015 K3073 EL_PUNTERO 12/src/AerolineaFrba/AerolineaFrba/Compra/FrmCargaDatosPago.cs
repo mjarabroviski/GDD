@@ -27,11 +27,11 @@ namespace AerolineaFrba.Compra
             if (AdministradorSesion.UsuarioActual == null)
                 BtnEfectivo.Visible = false;
 
+            DtpFechaNac.MaxDate = DateTime.Now;
+            DtpFechaNac.Value = DateTime.Now;
             CmbPasajeros.DataSource = ClientePersistencia.ObtenerAuxiliares();
             CmbPasajeros.ValueMember = "ID";
             CmbPasajeros.DisplayMember = "NombreYApellido";
-            CmbPasajeros.Text = "Otro";
-            TxtNroDoc.Enabled = true;
         }
 
         private void BtnCancelar_Click(object sender, EventArgs e)
@@ -45,7 +45,66 @@ namespace AerolineaFrba.Compra
 
         private void CmbPasajeros_SelectedValueChanged(object sender, EventArgs e)
         {
-            //TODO Cargar los datos del cliente y deshabilitar todos los text
+        }
+
+        private void BtnDatosNuevos_Click(object sender, EventArgs e)
+        {
+                CmbPasajeros.Enabled = false;
+                TxtApellidos.Enabled = true;
+                TxtCalle.Enabled = true;
+                TxtMail.Enabled = true;
+                TxtNombres.Enabled = true;
+                TxtNroCalle.Enabled = true;
+                TxtNroDoc.Enabled = true;
+                TxtTelefono.Enabled = true;
+                DtpFechaNac.Enabled = true;
+                CmbTipoDoc.Enabled = true;
+
+                TxtApellidos.Text = "";
+                TxtMail.Text = "";
+                TxtNombres.Text = "";
+                TxtNroDoc.Text = "";
+                TxtTelefono.Text = "";
+                CmbTipoDoc.Text = "";
+                TxtNroCalle.Text = "";
+                TxtCalle.Text = "";
+                DtpFechaNac.Value = DateTime.Today;
+
+                CmbPasajeros.DataSource = ClientePersistencia.ObtenerAuxiliares();
+                CmbPasajeros.ValueMember = "ID";
+                CmbPasajeros.DisplayMember = "NombreYApellido";
+        }
+
+        private void BtnDatosViejos_Click(object sender, EventArgs e)
+        {
+            CmbPasajeros.Enabled = true;
+            TxtApellidos.Enabled = false;
+            TxtCalle.Enabled = false;
+            TxtMail.Enabled = false;
+            TxtNombres.Enabled = false;
+            TxtNroCalle.Enabled = false;
+            TxtNroDoc.Enabled = false;
+            TxtTelefono.Enabled = false;
+            DtpFechaNac.Enabled = false;
+            CmbTipoDoc.Enabled = false;
+            ClienteAuxiliar clienteAux = ClientePersistencia.ObtenerClientePorNombreYApellido(CmbPasajeros.Text);
+            for (int i = clienteAux.Direccion.Length-1; i > 0; i--)
+            {
+                if(!ValidadorDeTipos.IsNumeric(clienteAux.Direccion[i].ToString())){
+                    TxtNroCalle.Text = clienteAux.Direccion.Substring(i + 1, clienteAux.Direccion.Length - 1 - i);
+                    TxtCalle.Text = clienteAux.Direccion.Substring(0, i+1);
+                    i = 0;
+                }
+
+            }
+            TxtApellidos.Text = clienteAux.Apellido;
+            TxtMail.Text = clienteAux.Mail;
+            TxtNombres.Text = clienteAux.Nombre;
+            TxtNroDoc.Text = clienteAux.Nro_Documento.ToString();
+            TxtTelefono.Text = clienteAux.Telefono;
+            CmbTipoDoc.Text = TipoDocumentoPersistencia.ObtenerPorID(clienteAux.ID_Tipo_Documento);
+            DtpFechaNac.Value = clienteAux.Fecha_Nacimiento;
+
         }
     }
 }

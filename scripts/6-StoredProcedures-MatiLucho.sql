@@ -139,49 +139,6 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE [EL_PUNTERO].[InsertarRuta]
-	@Codigo int,
-	@ID_Ciudad_Destino int,
-	@ID_Ciudad_Origen int,
-	@ID_Servicio int,
-	@Precio_Base_KG numeric(18,2),
-	@Precio_Base_Pasaje numeric(18,2),
-	@Habilitado bit
-AS
-BEGIN
-	SET NOCOUNT ON;
-
-	INSERT INTO [EL_PUNTERO].[TL_Ruta] (Codigo_Ruta,ID_Ciudad_Origen,ID_Ciudad_Destino,Precio_Base_KG,Precio_Base_Pasaje,ID_Servicio,Habilitado)
-	OUTPUT inserted.ID_Ruta
-	VALUES (@Codigo, @ID_Ciudad_Origen,@ID_Ciudad_Destino,@Precio_Base_KG,@Precio_Base_Pasaje,@ID_Servicio,@Habilitado)
-END
-GO
-
-CREATE PROCEDURE [EL_PUNTERO].[ModificarRuta]
-	@ID_Ruta int,
-	@Codigo int,
-	@ID_Ciudad_Destino int,
-	@ID_Ciudad_Origen int,
-	@ID_Servicio int,
-	@Precio_Base_KG numeric(18,2),
-	@Precio_Base_Pasaje numeric(18,2),
-	@Habilitado bit
-AS
-BEGIN
-	SET NOCOUNT ON;
-
-	UPDATE [EL_PUNTERO].[TL_RUTA]
-	SET Codigo_Ruta = @Codigo, 
-		ID_Ciudad_Destino = @ID_Ciudad_Destino,
-		ID_Ciudad_Origen = @ID_Ciudad_Origen,
-		ID_Servicio = @ID_Servicio,
-		Precio_Base_KG = @Precio_Base_KG,
-		Precio_Base_Pasaje = @Precio_Base_Pasaje,
-		Habilitado = @Habilitado
-	WHERE ID_Ruta = @ID_Ruta
-END
-GO
-
 CREATE PROCEDURE [EL_PUNTERO].[CancelarPasajesYEncomiendasConRutaInhabilitada]
 	@ID_Ruta int,
 	@Motivo varchar(255),
@@ -506,4 +463,82 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE [EL_PUNTERO].[InsertarRuta]
+	@Codigo int,
+	@ID_Ciudad_Destino int,
+	@ID_Ciudad_Origen int,
+	@Precio_Base_KG numeric(18,2),
+	@Precio_Base_Pasaje numeric(18,2),
+	@Habilitado bit
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	INSERT INTO [EL_PUNTERO].[TL_Ruta] (Codigo_Ruta,ID_Ciudad_Origen,ID_Ciudad_Destino,Precio_Base_KG,Precio_Base_Pasaje,Habilitado)
+	OUTPUT inserted.ID_Ruta
+	VALUES (@Codigo, @ID_Ciudad_Origen,@ID_Ciudad_Destino,@Precio_Base_KG,@Precio_Base_Pasaje,@Habilitado)
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[ModificarRuta]
+	@ID_Ruta int,
+	@Codigo int,
+	@ID_Ciudad_Destino int,
+	@ID_Ciudad_Origen int,
+	@Precio_Base_KG numeric(18,2),
+	@Precio_Base_Pasaje numeric(18,2),
+	@Habilitado bit
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	UPDATE [EL_PUNTERO].[TL_RUTA]
+	SET Codigo_Ruta = @Codigo, 
+		ID_Ciudad_Destino = @ID_Ciudad_Destino,
+		ID_Ciudad_Origen = @ID_Ciudad_Origen,
+		Precio_Base_KG = @Precio_Base_KG,
+		Precio_Base_Pasaje = @Precio_Base_Pasaje,
+		Habilitado = @Habilitado
+	WHERE ID_Ruta = @ID_Ruta
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[EliminarServiciosPorRuta]
+	@ID_Ruta int
+AS
+BEGIN
+	DELETE FROM [EL_PUNTERO].[TL_SERVICIO_RUTA]
+	WHERE @ID_Ruta=ID_Ruta
+END 
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[InsertarServiciosPorRuta]
+	@ID_Servicio int,
+	@ID_Ruta int
+AS
+BEGIN
+	INSERT INTO [EL_PUNTERO].[TL_SERVICIO_RUTA] (ID_Servicio,ID_Ruta)
+	VALUES (@ID_Servicio,@ID_Ruta)
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[GetClientePorNombreYApellido]
+@NombreYApellido nvarchar(255)
+AS
+BEGIN
+	SELECT *
+	FROM TL_CLIENTE_AUX
+	WHERE @NombreYApellido=NombreYApellido
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[ObtenerTipoDocumentoPorID]
+@ID_Tipo_Documento int
+AS
+BEGIN
+	SELECT * 
+	FROM TL_Tipo_Documento
+	WHERE @ID_Tipo_Documento = ID_Tipo_Documento
+END
+GO
 COMMIT

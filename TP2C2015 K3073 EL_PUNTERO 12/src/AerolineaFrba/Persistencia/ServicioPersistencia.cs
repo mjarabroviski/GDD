@@ -79,5 +79,34 @@ namespace Persistencia
 
             return servicios;
         }
+
+        public static int EliminarPorRuta(Ruta RutaActual, SqlTransaction transaccion)
+        {
+            var param = new List<SPParameter> { new SPParameter("ID_Ruta", RutaActual.ID) };
+            var sp = (transaccion != null)
+                ? new StoreProcedure(DBQueries.Ruta.SPEliminarServiciosPorRuta, param, transaccion)
+                            : new StoreProcedure(DBQueries.Ruta.SPEliminarServiciosPorRuta, param);
+
+            //Retorno la cantidad de servicios eliminados a partir de un ExecuteNonQuery
+            return sp.ExecuteNonQuery(transaccion);
+        }
+
+        public static int InsertarPorRuta(Ruta RutaActual, SqlTransaction transaccion)
+        {
+            var regsAfectados = 0;
+
+            foreach (var feature in RutaActual.Servicios)
+            {
+                var param = new List<SPParameter> { new SPParameter("ID_Servicio", feature.ID_Servicio), new SPParameter("ID_Ruta", RutaActual.ID) };
+                var sp = (transaccion != null)
+                            ? new StoreProcedure(DBQueries.Ruta.SPInsertarServiciosPorRuta, param, transaccion)
+                            : new StoreProcedure(DBQueries.Ruta.SPInsertarServiciosPorRuta, param);
+
+                regsAfectados += sp.ExecuteNonQuery(transaccion);
+            }
+
+            //Retorno la cantidad de servicios insertados a partir de un ExecuteNonQuery
+            return regsAfectados;
+        }
     }
 }

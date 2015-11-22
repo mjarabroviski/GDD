@@ -70,5 +70,20 @@ namespace Persistencia
 
             return users;
         }
+
+        public static ClienteAuxiliar ObtenerClientePorNombreYApellido(string p)
+        {
+            //Traigo el cliente cuyo nomyape coincida con los parametros
+            var param = new List<SPParameter> { new SPParameter("NombreYApellido", p),
+                                              };
+
+            var sp = new StoreProcedure(DBQueries.Cliente.SPGetClientePorNombreYApellido, param);
+
+            List<ClienteAuxiliar> users = sp.ExecuteReader<ClienteAuxiliar>();
+
+            if (users.Count == 0 || users == null) return null;
+
+            return users[0];
+        }
     }
 }

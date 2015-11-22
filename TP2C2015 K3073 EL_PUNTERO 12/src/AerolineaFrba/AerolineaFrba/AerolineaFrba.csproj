@@ -117,6 +117,12 @@
     <Compile Include="Abm Ruta\FrmABMRutaAltasModificaciones.Designer.cs">
       <DependentUpon>FrmABMRutaAltasModificaciones.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm Ruta\FrmABMRutaModificacionServicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Ruta\FrmABMRutaModificacionServicio.Designer.cs">
+      <DependentUpon>FrmABMRutaModificacionServicio.cs</DependentUpon>
+    </Compile>
     <Compile Include="Canje Millas\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -262,6 +268,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Ruta\FrmABMRutaAltasModificaciones.resx">
       <DependentUpon>FrmABMRutaAltasModificaciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Ruta\FrmABMRutaModificacionServicio.resx">
+      <DependentUpon>FrmABMRutaModificacionServicio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Compra\FrmCargaDatosPago.resx">
       <DependentUpon>FrmCargaDatosPago.cs</DependentUpon>
