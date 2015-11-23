@@ -223,20 +223,21 @@ CREATE TABLE [EL_PUNTERO].[TL_TIPO_BUTACA](
 INSERT INTO EL_PUNTERO.TL_TIPO_BUTACA (Descripcion) VALUES ('Ventanilla');
 INSERT INTO EL_PUNTERO.TL_TIPO_BUTACA (Descripcion) VALUES ('Pasillo');
 
---tipo item: 1:pasaje 0:encomienda
-CREATE TABLE [EL_PUNTERO].[TL_ITEM_DEVUELTO](
-	[ID_Item_Devuelto] int IDENTITY(1,1),
+CREATE TABLE [EL_PUNTERO].[TL_DEVOLUCION_ENCOMIENDA](
+	[ID_Devolucion_Encomienda] int IDENTITY(1,1),
 	[ID_Encomienda] int,
-	[ID_Pasaje] int,
-	[ID_Devolucion] int 
-);
-
-CREATE TABLE [EL_PUNTERO].[TL_DEVOLUCION](
-	[ID_Devolucion] int IDENTITY(1,1),
 	[Fecha_Devolucion] datetime,
 	[Motivo] nvarchar(100),
-	[ID_Compra] int NOT NULL,
 	[ID_Usuario] int,
+);
+
+CREATE TABLE [EL_PUNTERO].[TL_DEVOLUCION_PASAJE](
+	[ID_Devolucion_Pasaje] int IDENTITY(1,1),
+	[ID_Pasaje] int,
+	[Fecha_Devolucion] datetime,
+	[Motivo] nvarchar(100),
+	[ID_Usuario] int,
+	
 );
 
 CREATE TABLE [EL_PUNTERO].[TL_ENCOMIENDA](

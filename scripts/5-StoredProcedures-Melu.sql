@@ -581,7 +581,7 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE [EL_PUNTERO].[CancelarPasajesYEncomiendasPorBajaAeronave]
+/*CREATE PROCEDURE [EL_PUNTERO].[CancelarPasajesYEncomiendasPorBajaAeronave]
 	@ID_Aeronave int,
 	@Motivo varchar(255),
 	@ID_Usuario int
@@ -645,7 +645,7 @@ BEGIN
 	DROP TABLE [EL_PUNTERO].[TL_ITEM_DEVUELTO2];
 
 END
-GO
+GO*/
 
 CREATE PROCEDURE [EL_PUNTERO].[DarDeBajaPorFueraDeServicio]
 @ID_Aeronave int,
@@ -682,7 +682,7 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE [EL_PUNTERO].[CancelarPasajesYEncomiendasPorBajaServicioAeronave]
+/*CREATE PROCEDURE [EL_PUNTERO].[CancelarPasajesYEncomiendasPorBajaServicioAeronave]
 	@ID_Aeronave int,
 	@Motivo varchar(255),
 	@ID_Usuario int,
@@ -748,7 +748,7 @@ BEGIN
 	DROP TABLE [EL_PUNTERO].[TL_ITEM_DEVUELTO2];
 
 END
-GO
+GO*/
 
 CREATE FUNCTION [EL_PUNTERO].[ObtenerAeronaveDeReemplazoPorServicio](@ID_AeronaveBaja int, @Modelo nvarchar(30), @Servicio int, @Fabricante nvarchar(30), @Comienzo datetime, @Reinicio datetime)
 RETURNS int

@@ -147,64 +147,29 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 
-   /*Insertar los id_compra, fecha y motivo en la tabla de devolución*/
-	INSERT INTO [EL_PUNTERO].[TL_DEVOLUCION] (ID_Compra)
-	  (SELECT DISTINCT ID_Compra FROM [EL_PUNTERO].TL_PASAJE WHERE ID_Viaje IN (SELECT ID_Viaje FROM [EL_PUNTERO].TL_VIAJE WHERE (ID_Ruta=@ID_Ruta) AND (Fecha_Salida>=GETDATE())));
+	--Inserto los id_pasaje del viaje de la ruta que viene por parametro 
+	INSERT INTO [EL_PUNTERO].[TL_DEVOLUCION_PASAJE] (ID_Pasaje)
+	SELECT P.ID_Pasaje FROM TL_PASAJE P WHERE ID_Viaje IN  (SELECT ID_Viaje FROM TL_VIAJE WHERE ID_Ruta=@ID_Ruta)
+	AND P.ID_Pasaje NOT IN (SELECT D.ID_Pasaje FROM EL_PUNTERO.TL_DEVOLUCION_PASAJE D)
 
-	UPDATE [EL_PUNTERO].TL_DEVOLUCION
+	--Se llenan la fecha, el motivo y el usuario de los pasajes
+	UPDATE [EL_PUNTERO].TL_DEVOLUCION_PASAJE
 	SET Fecha_Devolucion=GETDATE(),
 		Motivo=@Motivo,
 		ID_Usuario=@ID_Usuario
 	WHERE Fecha_Devolucion is NULL;
 	
-	INSERT INTO [EL_PUNTERO].[TL_DEVOLUCION] (ID_Compra)
-	  (SELECT DISTINCT ID_Compra FROM [EL_PUNTERO].TL_ENCOMIENDA WHERE ID_Viaje IN (SELECT ID_Viaje FROM [EL_PUNTERO].TL_VIAJE WHERE (ID_Ruta=@ID_Ruta) AND (Fecha_Salida>=GETDATE())));
+	--Inserto los id_encomienda del viaje de la ruta que viene por parametro 
+	INSERT INTO [EL_PUNTERO].[TL_DEVOLUCION_ENCOMIENDA] (ID_Encomienda)
+	SELECT E.ID_Encomienda FROM TL_ENCOMIENDA E WHERE ID_Viaje IN  (SELECT ID_Viaje FROM TL_VIAJE WHERE ID_Ruta=@ID_Ruta)
+	AND E.ID_Encomienda NOT IN (SELECT D.ID_Encomienda FROM EL_PUNTERO.TL_DEVOLUCION_ENCOMIENDA D)
 
-	UPDATE [EL_PUNTERO].TL_DEVOLUCION
+	--Se llenan la fecha, el motivo y el usuario de las encomiendas
+	UPDATE [EL_PUNTERO].TL_DEVOLUCION_ENCOMIENDA
 	SET Fecha_Devolucion=GETDATE(),
 		Motivo=@Motivo,
 		ID_Usuario=@ID_Usuario
 	WHERE Fecha_Devolucion is NULL;
-
-	/*Insertar los id_pasaje, id_encomienda y id_devolucion en la tabla de item_devuelto*/ 
-	INSERT INTO [EL_PUNTERO].[TL_ITEM_DEVUELTO] (ID_Pasaje)
-	SELECT ID_Pasaje FROM TL_PASAJE WHERE ID_Viaje IN  (SELECT ID_Viaje FROM TL_VIAJE WHERE ID_Ruta=@ID_Ruta);
-	
-	CREATE TABLE [EL_PUNTERO].[TL_ITEM_DEVUELTO2](
-	[ID_Item_Devuelto] int IDENTITY(1,1),
-	[ID_Pasaje] int,
-	[ID_Devolucion] int
-	);
-
-	INSERT INTO [EL_PUNTERO].[TL_ITEM_DEVUELTO2] (ID_Pasaje)
-	(SELECT ID_Pasaje FROM  [EL_PUNTERO].[TL_ITEM_DEVUELTO]);
-
-	UPDATE [EL_PUNTERO].TL_ITEM_DEVUELTO SET ID_Devolucion = (SELECT ID_Devolucion FROM [EL_PUNTERO].TL_DEVOLUCION WHERE ID_Compra = [EL_PUNTERO].CompraAPartirDePasaje(I2.ID_Pasaje))
-	FROM [EL_PUNTERO].TL_ITEM_DEVUELTO I1 JOIN [EL_PUNTERO].TL_ITEM_DEVUELTO2 I2
-	ON I1.ID_Item_Devuelto = I2.ID_Item_Devuelto;
-
-	DROP TABLE [EL_PUNTERO].[TL_ITEM_DEVUELTO2];
-
-	
-	--Encomienda
-	INSERT INTO [EL_PUNTERO].[TL_ITEM_DEVUELTO] (ID_Encomienda)
-	SELECT ID_Encomienda FROM TL_ENCOMIENDA WHERE ID_Viaje IN  (SELECT ID_Viaje FROM TL_VIAJE WHERE (ID_Ruta=@ID_Ruta)  AND (Fecha_Salida>=GETDATE()));
-
-	CREATE TABLE [EL_PUNTERO].[TL_ITEM_DEVUELTO2](
-	[ID_Item_Devuelto] int IDENTITY(1,1),
-	[ID_Encomienda] int,
-	[ID_Devolucion] int
-	);
-
-	INSERT INTO [EL_PUNTERO].[TL_ITEM_DEVUELTO2] (ID_Encomienda)
-	(SELECT ID_Encomienda FROM  [EL_PUNTERO].[TL_ITEM_DEVUELTO]);
-
-	UPDATE [EL_PUNTERO].TL_ITEM_DEVUELTO SET ID_Devolucion = (SELECT ID_Devolucion FROM [EL_PUNTERO].TL_DEVOLUCION WHERE ID_Compra = [EL_PUNTERO].CompraAPartirDeEncomienda(I2.ID_Encomienda))
-	FROM [EL_PUNTERO].TL_ITEM_DEVUELTO I1 JOIN [EL_PUNTERO].TL_ITEM_DEVUELTO2 I2
-	ON I1.ID_Item_Devuelto = I2.ID_Item_Devuelto
-	WHERE ID_Pasaje IS NULL;
-
-	DROP TABLE [EL_PUNTERO].[TL_ITEM_DEVUELTO2];
 
 END
 GO
