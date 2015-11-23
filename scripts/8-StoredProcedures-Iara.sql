@@ -38,17 +38,6 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE [EL_PUNTERO].[GetCiudades]
-AS
-BEGIN
-	SET NOCOUNT ON;
-	
-	SELECT *
-	FROM [EL_PUNTERO].[TL_Ciudad]
-	ORDER BY Nombre_Ciudad;
-END
-GO
-
 CREATE PROCEDURE [EL_PUNTERO].[ObtenerCiudadPorId_Ciudad]
 @ID_Ciudad int
 AS
@@ -59,33 +48,6 @@ BEGIN
 	FROM [EL_PUNTERO].[TL_CIUDAD]
 	WHERE @ID_Ciudad = ID_Ciudad;
 END
-GO
-
-CREATE FUNCTION [EL_PUNTERO].[ObtenerIDBajaServicioMax](@ID_AeronaveBaja int)
-RETURNS int
-AS
-BEGIN
-DECLARE @id int
-
-	SELECT @id = MAX(ID_Baja_Servicio) FROM [EL_PUNTERO].[TL_BAJA_SERVICIO_AERONAVE]
-	WHERE ID_Aeronave = @ID_AeronaveBaja
-
-	RETURN @id
-END
-GO
-
-CREATE PROCEDURE [EL_PUNTERO].[HabilitarAeronavesQueVolvieronDeBajaServicio]
-AS
-BEGIN
-
-	UPDATE [EL_PUNTERO].[TL_AERONAVE] 
-	SET Baja_Por_Fuera_De_Servicio = 0
-	WHERE Baja_Por_Fuera_De_Servicio = 1
-	AND ID_AERONAVE IN (
-					SELECT ID_Aeronave FROM [EL_PUNTERO].[TL_BAJA_SERVICIO_AERONAVE] 
-					WHERE ID_Baja_Servicio = [EL_PUNTERO].[ObtenerIDBajaServicioMax](ID_AERONAVE)
-					AND Fecha_Reinicio_Servicio <= GETDATE())
-	END
 GO
 
 
@@ -127,30 +89,6 @@ BEGIN
 	FROM  [EL_PUNTERO].[TL_RUTA] R
 	WHERE @ID_Ciudad_Origen = R.ID_Ciudad_Origen 
 		   AND @ID_Ciudad_Destino =R.ID_Ciudad_Destino;
-END
-GO
-
-CREATE PROCEDURE [EL_PUNTERO].[GetAeronavePorMatricula]
-@Matricula nvarchar(7)
-AS
-BEGIN
-	SET NOCOUNT ON;
-	
-	SELECT *
-	FROM [EL_PUNTERO].[TL_AERONAVE]
-	WHERE Matricula = @Matricula
-END
-GO
-
-
-CREATE PROCEDURE [EL_PUNTERO].[ObtenerIDPorNombreDeCiudad]
-@Nombre_Ciudad nvarchar(255)
-AS
-BEGIN
-	SET NOCOUNT ON;
-	SELECT *
-	FROM [EL_PUNTERO].[TL_CIUDAD]  
-	WHERE Nombre_Ciudad = @Nombre_Ciudad;
 END
 GO
 
@@ -196,28 +134,6 @@ BEGIN
 	FROM [EL_PUNTERO].[TL_AERONAVE] A
 	INNER JOIN [EL_PUNTERO].[TL_VIAJE] V ON A.ID_Aeronave = V.ID_Aeronave
 	WHERE V.Fecha_Salida = @Fecha_Salida AND V.ID_Ruta = @ID_Ruta
-END
-GO
-
-CREATE PROCEDURE [EL_PUNTERO].[GetAeronaves]
-AS
-BEGIN
-	SET NOCOUNT ON;
-	SELECT *
-	FROM [EL_PUNTERO].[TL_Aeronave] A
-	ORDER BY A.Matricula
-END
-GO
-
-CREATE PROCEDURE [EL_PUNTERO].[GetServicioPorID]
-@ID_Servicio int
-AS
-BEGIN
-	SET NOCOUNT ON;
-	
-	SELECT *
-	FROM [EL_PUNTERO].[TL_SERVICIO]
-	WHERE @ID_Servicio = ID_Servicio
 END
 GO
 
