@@ -88,6 +88,7 @@
             this.DgvEncomiendas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DgvEncomiendas.Size = new System.Drawing.Size(660, 422);
             this.DgvEncomiendas.TabIndex = 80;
+            this.DgvEncomiendas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvEncomiendas_CellContentClick);
             // 
             // DgvPasaje
             // 

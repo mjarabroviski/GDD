@@ -9,12 +9,16 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Persistencia;
 using Persistencia.Entidades;
+using Sesion;
 
 namespace AerolineaFrba.Devolucion
 {
     public partial class DevolucionEncomiendaPasaje : Form
     {
         private Cliente cliente;
+        private List<Encomienda> encomiendas= new List<Encomienda>();
+        private List<Pasaje> pasajes= new List<Pasaje>();
+
         public DevolucionEncomiendaPasaje()
         {
             InitializeComponent();
@@ -96,8 +100,8 @@ namespace AerolineaFrba.Devolucion
                 else
                 {
                     cliente = clientes[0];
-                    List<Encomienda> encomiendas = EncomiendaPersistencia.ObtenerEncomiendasFuturas(cliente.ID);
-                    List<Pasaje> pasajes = PasajePersistencia.ObtenerPasajesFuturos(cliente.ID);
+                    encomiendas = EncomiendaPersistencia.ObtenerEncomiendasFuturas(cliente.ID);
+                    pasajes = PasajePersistencia.ObtenerPasajesFuturos(cliente.ID);
 
                     if ((encomiendas == null || encomiendas.Count == 0) & (pasajes == null || pasajes.Count == 0))
                     {
@@ -128,8 +132,8 @@ namespace AerolineaFrba.Devolucion
             }
             else
             {
-                List<Encomienda> encomiendas = EncomiendaPersistencia.ObtenerEncomiendasFuturas(cliente.ID);
-                List<Pasaje> pasajes = PasajePersistencia.ObtenerPasajesFuturos(cliente.ID);
+                encomiendas = EncomiendaPersistencia.ObtenerEncomiendasFuturas(cliente.ID);
+                pasajes = PasajePersistencia.ObtenerPasajesFuturos(cliente.ID);
 
                 if ((encomiendas == null || encomiendas.Count == 0) & (pasajes == null || pasajes.Count == 0))
                 {
@@ -280,6 +284,68 @@ namespace AerolineaFrba.Devolucion
         private void Btn_Finalizar_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+
+        private void DgvEncomiendas_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //Solo funciona cuando el usuario hace click en los botones de la columnas
+            if (e.RowIndex == -1 || e.ColumnIndex >= 0 && e.ColumnIndex < 6)
+                return;
+
+            var encomiendaSeleccionada = encomiendas.Find(encomienda => encomienda.Codigo_Encomienda == (int)DgvEncomiendas.Rows[e.RowIndex].Cells[0].Value);
+
+            if (e.ColumnIndex == 6)
+            {
+                MotivoDevolucion Frmmotivo = new MotivoDevolucion();
+                Frmmotivo.ShowDialog();
+                using (var transaccion = DBManager.Instance().Connection.BeginTransaction(IsolationLevel.Serializable))
+                {
+                    try
+                    {
+                        DevolucionPersistencia.InsertarDevolucionEncomienda(encomiendaSeleccionada.ID, AdministradorSesion.UsuarioActual, Frmmotivo.Motivo,transaccion);
+
+                    }
+                    catch (Exception)
+                    {
+                        transaccion.Rollback();
+                        throw new Exception("Se produjo un error al insertar devolución. ");
+                    }
+
+                    transaccion.Commit();
+
+                }
+            }
+        }
+
+        private void DgvPasaje_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //Solo funciona cuando el usuario hace click en los botones de la columnas
+            if (e.RowIndex == -1 || e.ColumnIndex >= 0 && e.ColumnIndex < 7)
+                return;
+
+            var pasajeSeleccionado = pasajes.Find(pasaje => pasaje.Codigo_Pasaje == (int)DgvPasaje.Rows[e.RowIndex].Cells[0].Value);
+
+            if (e.ColumnIndex == 7)
+            {
+                MotivoDevolucion Frmmotivo = new MotivoDevolucion();
+                Frmmotivo.ShowDialog();
+                using (var transaccion = DBManager.Instance().Connection.BeginTransaction(IsolationLevel.Serializable))
+                {
+                    try
+                    {
+                        DevolucionPersistencia.InsertarDevolucionPasaje(pasajeSeleccionado.ID, AdministradorSesion.UsuarioActual, Frmmotivo.Motivo, transaccion);
+
+                    }
+                    catch (Exception)
+                    {
+                        transaccion.Rollback();
+                        throw new Exception("Se produjo un error al insertar devolución. ");
+                    }
+                    transaccion.Commit();
+
+                }
+            }
         }
 
 
