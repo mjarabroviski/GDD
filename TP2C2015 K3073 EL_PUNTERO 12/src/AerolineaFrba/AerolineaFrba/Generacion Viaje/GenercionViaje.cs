@@ -60,7 +60,7 @@ namespace AerolineaFrba.Generacion_Viaje
         {
             CargarCbos();
             ComenzarConCboVacios();
-            CboCiudadDestino.Enabled = false;
+            CboCiudadOrigen.Enabled = false;
             CboCiudadDestino.Enabled = false;
             ActualizarFechas();
         }
@@ -80,7 +80,7 @@ namespace AerolineaFrba.Generacion_Viaje
 
         private void Btn_Cancelar_Click(object sender, EventArgs e)
         {
-            var dialogAnswer = MessageBox.Show("Esta seguro que quiere cancelar la operacion?", "Atencion", MessageBoxButtons.YesNo);
+            var dialogAnswer = MessageBox.Show("Esta seguro que quiere volver al Home?", "Atencion", MessageBoxButtons.YesNo);
             if (DialogResult.Yes == dialogAnswer)
             {
                 Close();
@@ -203,30 +203,47 @@ namespace AerolineaFrba.Generacion_Viaje
                 CboCiudadDestino.DataSource = ciudadesConMismoOrigen;
                 CboCiudadDestino.ValueMember = "ID";
                 CboCiudadDestino.DisplayMember = "Nombre";
+
+                DtpFechaSalida.Enabled = true;
+                DtpFechaLlegadaEstimada.Enabled = true;
             
         }
 
         private void CboAeronave_SelectionChangeCommitted(object sender, EventArgs e)
         {
             if( CboAeronave.Text != "MATRICULA AERONAVE"){
-
+                //SERVICIO
                 var transaccion = DBManager.Instance().Connection.BeginTransaction(IsolationLevel.Serializable);
                 int ID_Aeronave = AeronavePersistencia.ObtenerPorMatricula(CboAeronave.Text, transaccion).ID;
                 transaccion.Commit();
                 Servicio servicio = ServicioPersistencia.ObtenerServicioAeronave(ID_Aeronave);
                 Txt_Servicio.Text = servicio.Nombre;
 
+                //CIUDAD ORIGEN
                 CboCiudadOrigen.Enabled = true;
                 CboCiudadOrigen.DataSource = CiudadPersistencia.ObtenerCiudadesOrigenParaUnServicio(servicio.ID_Servicio);
                 CboCiudadOrigen.ValueMember = "ID";
                 CboCiudadOrigen.DisplayMember = "Nombre";
+                
+                //CIUDAD DESTINO
+                CboCiudadDestino.Enabled = true;
+                int ID_Origen = Convert.ToInt32(CboCiudadOrigen.SelectedValue);
+                List<Ciudad> ciudadesConMismoOrigen = RutaPersistencia.ObtenerTodasLasCiudadesConOrigen(ID_Origen);
+
+                CboCiudadDestino.DataSource = ciudadesConMismoOrigen;
+                CboCiudadDestino.ValueMember = "ID";
+                CboCiudadDestino.DisplayMember = "Nombre";
+
+                //FECHAS
+                DtpFechaSalida.Enabled = true;
+                DtpFechaLlegadaEstimada.Enabled = true;
+            
             }
-            if (CboCiudadOrigen.Text != "CIUDAD ORIGEN" && CboCiudadDestino.Text != "CIUDAD DESTINO")
-            {
-                CboCiudadDestino.Text = "CIUDAD DESTINO";
-                CboCiudadDestino.Enabled = false;
-            }
+
         }
+
+        
+        
     }
 
 }

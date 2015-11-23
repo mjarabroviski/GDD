@@ -244,7 +244,8 @@ BEGIN
 	SET NOCOUNT ON;
 	EXECUTE [EL_PUNTERO].[HabilitarAeronavesQueVolvieronDeBajaServicio];
 	SELECT *
-	FROM [EL_PUNTERO].[TL_Aeronave]
+	FROM [EL_PUNTERO].[TL_Aeronave] A
+	ORDER BY A.Matricula
 END
 GO
 

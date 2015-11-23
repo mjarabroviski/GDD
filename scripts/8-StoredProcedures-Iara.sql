@@ -317,7 +317,7 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE ObtenerNombreClientePorID
+CREATE PROCEDURE [EL_PUNTERO].ObtenerNombreClientePorID
 @ID_Cliente int
 AS 
 BEGIN
@@ -327,7 +327,7 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE ObtenerServicioAeronave
+CREATE PROCEDURE [EL_PUNTERO].ObtenerServicioAeronave
 @ID_Aeronave int
 AS 
 BEGIN
@@ -337,15 +337,16 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE ObtenerCiudadesOrigenParaUnServicio
+CREATE PROCEDURE [EL_PUNTERO].ObtenerCiudadesOrigenParaUnServicio
 @ID_Servicio int
 AS 
 BEGIN
-	SELECT C.*
+	SELECT DISTINCT C.*
 	FROM EL_PUNTERO.TL_SERVICIO_RUTA SR, EL_PUNTERO.TL_CIUDAD C, EL_PUNTERO.TL_RUTA R
 	WHERE SR.ID_Servicio = @ID_Servicio 
 	      AND SR.ID_Ruta = R.ID_Ruta
 		  AND R.ID_Ciudad_Origen = C.ID_Ciudad
+	ORDER BY C.Nombre_Ciudad
 END
 GO
 
