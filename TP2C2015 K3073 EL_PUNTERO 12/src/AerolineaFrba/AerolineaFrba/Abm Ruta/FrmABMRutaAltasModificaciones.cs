@@ -122,6 +122,8 @@ namespace AerolineaFrba.Abm_Ruta
 
                     #endregion
 
+                    #region Validaciones
+
                     if (filtro.CiudadOrigen == filtro.CiudadDestino)
                         mensajeExcepcion += "No puede crear una ruta con la misma ciudad de origen y destino";
 
@@ -139,6 +141,8 @@ namespace AerolineaFrba.Abm_Ruta
 
                     //TODO Por qué no me muestra el mensaje de error que le dije??
 
+                    #endregion
+
                     #region Inserto una nueva ruta
 
                     var ruta = new Ruta();
@@ -150,16 +154,15 @@ namespace AerolineaFrba.Abm_Ruta
                     ruta.Precio_Base_Pasaje = (double)filtro.PrecioDesdePasaje;  //ES INDISTINTO PONER DESDE O HASTA PORQUE EN ESTE CASO SON IGUALES
                     ruta.Habilitado = !(ChkInhabilitado.Checked);
 
-                    var dialogAnswer = MessageBox.Show("Esta seguro que quiere insertar la nueva ruta?", "Atencion", MessageBoxButtons.YesNo);
-                    if (dialogAnswer == DialogResult.Yes)
-                    {
-                        //Impacto en la base
-                        RutaPersistencia.InsertarRuta(ruta);
-                        AccionCompleta = true;
-                        Close();
-                    }
+                    //Impacto en la base
+                    RutaPersistencia.InsertarRuta(ruta);
+                    AccionCompleta = true;
+                    FrmABMRutaModificacionServicio frmModificarServicio = new FrmABMRutaModificacionServicio(ruta,false);
+                    frmModificarServicio.ShowDialog();
+                    Close();
                     
                     #endregion
+
 
                 }
                 else
@@ -175,15 +178,12 @@ namespace AerolineaFrba.Abm_Ruta
                     RutaActual.Precio_Base_Pasaje = double.Parse(TxtBasePasaje.Text);  //ES INDISTINTO PONER DESDE O HASTA PORQUE EN ESTE CASO SON IGUALES
                     RutaActual.Habilitado = !(ChkInhabilitado.Checked);
 
-                    var dialogAnswer = MessageBox.Show(string.Format("Esta seguro que quiere modificar la ruta {0} de {1} a {2}?", rutaAModificar.Codigo_Ruta, RutaPersistencia.ObtenerCiudadPorID(rutaAModificar.ID_Ciudad_Origen), RutaPersistencia.ObtenerCiudadPorID(rutaAModificar.ID_Ciudad_Destino)), "Atención", MessageBoxButtons.YesNo);
-                    if (dialogAnswer == DialogResult.Yes)
-                    {
-                        //Impacto en la base
-                        RutaPersistencia.ModificarRuta(RutaActual);
-                        AccionCompleta = true;
-                        Close();
-                    }
-
+                    //Impacto en la base
+                    RutaPersistencia.ModificarRuta(RutaActual);
+                    AccionCompleta = true;
+                    FrmABMRutaModificacionServicio frmModificarServicio = new FrmABMRutaModificacionServicio(RutaActual,true);
+                    frmModificarServicio.ShowDialog();
+                    Close();
 
                     #endregion
                 }

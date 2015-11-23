@@ -224,5 +224,32 @@ namespace Persistencia
             return servicios;
         }
 
+
+        public static void InsertarRutaYServicios(Ruta RutaActual)
+        {
+            using (var transaccion = DBManager.Instance().Connection.BeginTransaction(IsolationLevel.Serializable))
+            {
+                try
+                {
+                   if (ServicioPersistencia.EliminarPorRuta(RutaActual, transaccion) >= 0)
+                        if (ServicioPersistencia.InsertarPorRuta(RutaActual, transaccion) > 0)
+                        {
+                            //La unica forma que se realice la transaction: borro todos los servicios viejos e inserto los nuevos
+                            transaccion.Commit();
+                        }
+                        else
+                            //Tuvo que haber insertado por lo menos uno, sino es un error
+                            transaccion.Rollback();
+                   else
+                        //Tuvo que haber insertado por lo menos uno, sino es un error
+                        transaccion.Rollback();
+                }
+                catch (Exception)
+                {
+                    transaccion.Rollback();
+                    throw new Exception("Se produjo un error durante la modificacion de la ruta");
+                }
+            }
+        }
     }
 }

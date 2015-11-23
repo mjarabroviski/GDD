@@ -129,6 +129,23 @@ DROP PROCEDURE [EL_PUNTERO].[GetProductos];
 DROP PROCEDURE [EL_PUNTERO].[GetProductosParaUnCliente];
 DROP PROCEDURE [EL_PUNTERO].[GetClientePorID];
 DROP PROCEDURE [EL_PUNTERO].[GenerarCanje];
+DROP PROCEDURE [EL_PUNTERO].[GetServiciosPorIDRuta];
+DROP PROCEDURE [EL_PUNTERO].[EliminarServiciosPorRuta];
+DROP PROCEDURE [EL_PUNTERO].[InsertarServiciosPorRuta];
+DROP PROCEDURE [EL_PUNTERO].[GetClientePorNombreYApellido];
+DROP PROCEDURE [EL_PUNTERO].[ObtenerTipoDocumentoPorID];
+
+
+DROP PROCEDURE [EL_PUNTERO].[ObtenerPasajesFuturos]
+DROP PROCEDURE [EL_PUNTERO].[ObtenerEncomiendasFuturas]
+DROP PROCEDURE [EL_PUNTERO].ObtenerRutaDeEncomienda
+DROP PROCEDURE [EL_PUNTERO].ObtenerFechaSalidaDeEncomienda
+DROP PROCEDURE [EL_PUNTERO].ObtenerRutaDePasaje
+DROP PROCEDURE [EL_PUNTERO].ObtenerFechaSalidaDePasaje
+DROP PROCEDURE [EL_PUNTERO].ObtenerNombreClientePorID
+DROP PROCEDURE [EL_PUNTERO].[ObtenerServicioAeronave]
+DROP PROCEDURE [EL_PUNTERO].ObtenerRutaEncomienda
+
 
 DROP TRIGGER [EL_PUNTERO].[Tr_DeshabilitarUsuariosConRolDeshabilitado];
 

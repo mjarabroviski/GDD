@@ -79,7 +79,7 @@ namespace AerolineaFrba.Abm_Rol
         {
             try
             {
-                #region Validations
+                #region Validaciones
 
                 var exceptionMessage = string.Empty;
 

@@ -243,18 +243,18 @@ namespace AerolineaFrba.Abm_Ruta
 
             //Obtengo la ruta correspondiente a la fila seleccionada
             var rutaSeleccionada = _rutas.Find(r => (r.Codigo_Ruta == (int)DgvRuta.Rows[e.RowIndex].Cells[0].Value) &&
-                                                   (RutaPersistencia.ObtenerCiudadPorID(r.ID_Ciudad_Origen) == (string)DgvRuta.Rows[e.RowIndex].Cells[2].Value) &&
-                                                   (RutaPersistencia.ObtenerCiudadPorID(r.ID_Ciudad_Destino) == (string)DgvRuta.Rows[e.RowIndex].Cells[3].Value) &&
-                                                   (r.Precio_Base_KG == (double)DgvRuta.Rows[e.RowIndex].Cells[4].Value) &&
-                                                   (r.Precio_Base_Pasaje == (double)DgvRuta.Rows[e.RowIndex].Cells[5].Value) &&
-                                                   (r.Habilitado == (bool)DgvRuta.Rows[e.RowIndex].Cells[6].Value)
+                                                   (RutaPersistencia.ObtenerCiudadPorID(r.ID_Ciudad_Origen) == (string)DgvRuta.Rows[e.RowIndex].Cells[1].Value) &&
+                                                   (RutaPersistencia.ObtenerCiudadPorID(r.ID_Ciudad_Destino) == (string)DgvRuta.Rows[e.RowIndex].Cells[2].Value) &&
+                                                   (r.Precio_Base_KG == (double)DgvRuta.Rows[e.RowIndex].Cells[3].Value) &&
+                                                   (r.Precio_Base_Pasaje == (double)DgvRuta.Rows[e.RowIndex].Cells[4].Value) &&
+                                                   (r.Habilitado == (bool)DgvRuta.Rows[e.RowIndex].Cells[5].Value)
                                                    );
 
             if (rutaSeleccionada != null)
             {
                 
                 //El usuario tocó el botón de modificar
-                if (e.ColumnIndex == 7)
+                if (e.ColumnIndex == 6)
                 {
                     var altasModificacionesVisibilidad = new FrmABMRutaAltasModificaciones(rutaSeleccionada);
                     altasModificacionesVisibilidad.ShowDialog();
@@ -263,7 +263,7 @@ namespace AerolineaFrba.Abm_Ruta
                     if (altasModificacionesVisibilidad.AccionCompleta)
                         ActualizarPantalla(null);
                 }
-                else if (e.ColumnIndex == 8)
+                else if (e.ColumnIndex == 7)
                 {
                     
                     //El usuario tocó el botón de inhabilitar
