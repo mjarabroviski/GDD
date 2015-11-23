@@ -37,6 +37,8 @@ namespace Persistencia.Entidades
             public static String SPObtenerServiciosDeRuta = "EL_PUNTERO.ObtenerServiciosDeRuta";
             public static String SPObtenerServicioPorNombre = "EL_PUNTERO.ObtenerIDPorNombreDeServicio";
             public static String SPObtenerServiciosPorRuta = "EL_PUNTERO.GetServiciosPorIDRuta";
+            public static String SPObtenerServiciosPorRuta = "EL_PUNTERO.ObtenerServiciosPorRuta";
+            public static String SPObtenerServicioAeronave = "EL_PUNTERO.ObtenerServicioAeronave";
         }
 
         public static class Funcionalidad
@@ -87,6 +89,7 @@ namespace Persistencia.Entidades
             public static String SPActualizarCiudad = "EL_PUNTERO.ActualizarCiudad";
             public static String SPObtenerIDPorNombreDeCiudad = "EL_PUNTERO.ObtenerIDPorNombreDeCiudad";
             public static String SPObtenerCiudadPorId_Ciudad = "EL_PUNTERO.ObtenerCiudadPorId_Ciudad";
+            public static String SPObtenerCiudadesOrigenParaUnServicio = "EL_PUNTERO.ObtenerCiudadesOrigenParaUnServicio";
         }
 
         public static class Aeronave
@@ -154,7 +157,7 @@ namespace Persistencia.Entidades
         {
             public static String SPGetClientePorTipoYDocumento = "EL_PUNTERO.GetClientePorTipoYDocumento";
             public static String SPGetClientePorTipoYDocumentoYFechaNac = "EL_PUNTERO.GetClientePorTipoYDocumentoYFechaNac";
-            public static String SPObtenerNombreClientePorID = "SPObtenerNombreClientePorID";
+            public static String SPObtenerNombreClientePorID = "ObtenerNombreClientePorID";
             public static String SPGetClientesAuxiliares = "EL_PUNTERO.GetClientesAuxiliares";
             public static String SPGetClientePorNombreYApellido = "EL_PUNTERO.GetClientePorNombreYApellido";
 

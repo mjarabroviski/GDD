@@ -317,7 +317,7 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE SPObtenerNombreClientePorID
+CREATE PROCEDURE ObtenerNombreClientePorID
 @ID_Cliente int
 AS 
 BEGIN
@@ -327,7 +327,26 @@ BEGIN
 END
 GO
 
-DROP PROCEDURE [EL_PUNTERO].[ObtenerPasajesFuturos]
-DROP PROCEDURE [EL_PUNTERO].[ObtenerEncomiendasFuturas]
+CREATE PROCEDURE ObtenerServicioAeronave
+@ID_Aeronave int
+AS 
+BEGIN
+	SELECT S.*
+	FROM EL_PUNTERO.TL_SERVICIO S, EL_PUNTERO.TL_AERONAVE A
+	WHERE A.ID_Servicio= S.ID_Servicio AND A.ID_Aeronave= @ID_Aeronave
+END
+GO
+
+CREATE PROCEDURE ObtenerCiudadesOrigenParaUnServicio
+@ID_Servicio int
+AS 
+BEGIN
+	SELECT C.*
+	FROM EL_PUNTERO.TL_SERVICIO_RUTA SR, EL_PUNTERO.TL_CIUDAD C, EL_PUNTERO.TL_RUTA R
+	WHERE SR.ID_Servicio = @ID_Servicio 
+	      AND SR.ID_Ruta = R.ID_Ruta
+		  AND R.ID_Ciudad_Origen = C.ID_Ciudad
+END
+GO
 
 COMMIT

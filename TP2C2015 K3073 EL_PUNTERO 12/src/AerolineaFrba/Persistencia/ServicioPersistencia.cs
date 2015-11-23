@@ -80,6 +80,7 @@ namespace Persistencia
             return servicios;
         }
 
+
         public static int EliminarPorRuta(Ruta RutaActual, SqlTransaction transaccion)
         {
             var param = new List<SPParameter> { new SPParameter("ID_Ruta", RutaActual.ID) };
@@ -108,5 +109,18 @@ namespace Persistencia
             //Retorno la cantidad de servicios insertados a partir de un ExecuteNonQuery
             return regsAfectados;
         }
+
+        public static Servicio ObtenerServicioAeronave(int ID_Aeronave)
+        {
+            var param = new List<SPParameter> { new SPParameter("ID_Aeronave", ID_Aeronave) };
+            var sp = new StoreProcedure(DBQueries.Servicio.SPObtenerServicioAeronave, param);
+            List<Servicio> servicios = sp.ExecuteReader<Servicio>();
+
+            if (servicios == null || servicios.Count == 0)
+                return null;
+
+            return servicios[0];
+        }
+
     }
 }

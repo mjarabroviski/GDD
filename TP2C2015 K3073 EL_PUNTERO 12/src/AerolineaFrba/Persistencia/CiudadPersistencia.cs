@@ -110,5 +110,14 @@ namespace Persistencia
 
             return ciudades[0];
         }
+        public static List<Ciudad> ObtenerCiudadesOrigenParaUnServicio(int ID_Servicio)
+        {
+            //Obtengo la lista de ciudades que cumplen ciertos filtros 
+            var param = new List<SPParameter> { new SPParameter("ID_Servicio", ID_Servicio) };
+            var sp = new StoreProcedure(DBQueries.Ciudad.SPObtenerCiudadesOrigenParaUnServicio, param);
+
+            return sp.ExecuteReader<Ciudad>();
+        }
+        
     }
 }

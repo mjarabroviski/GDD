@@ -31,7 +31,7 @@ namespace AerolineaFrba.Generacion_Viaje
 
         private void ComenzarConCboVacios()
         {
-            CboTipoServicio.Text = "TIPO SERVICIO";
+            Txt_Servicio.Text = "TIPO SERVICIO";
             CboAeronave.Text = "MATRICULA AERONAVE";
             CboCiudadOrigen.Text = "CIUDAD ORIGEN";
             CboCiudadDestino.Text = "CIUDAD DESTINO";
@@ -39,10 +39,6 @@ namespace AerolineaFrba.Generacion_Viaje
 
         private void CargarCbos()
         {
-             CboCiudadOrigen.DataSource = CiudadPersistencia.ObtenerTodos();
-             CboCiudadOrigen.ValueMember = "ID";
-             CboCiudadOrigen.DisplayMember = "Nombre";
-
              CboAeronave.DataSource = AeronavePersistencia.ObtenerAeronavesHabilitadas();
              CboAeronave.ValueMember = "ID";
              CboAeronave.DisplayMember = "Matricula";
@@ -54,17 +50,6 @@ namespace AerolineaFrba.Generacion_Viaje
             DtpFechaLlegada.Value = DtpFechaLlegadaEstimada.Value;
         }
 
-        private void CboCiudadOrigen_Click(object sender, EventArgs e)
-        {
-           /* if (CboCiudadOrigen.Text != "CIUDAD ORIGEN")
-            {
-                CboCiudadDestino.Text = "CIUDAD DESTINO";
-                CboCiudadDestino.Enabled = false;
-                CboTipoServicio.Text = "TIPO SERVICIO";
-                CboTipoServicio.Enabled = false;
-            }*/
-
-        }
 
         private void Btn_Limpiar_Click(object sender, EventArgs e)
         {
@@ -76,7 +61,7 @@ namespace AerolineaFrba.Generacion_Viaje
             CargarCbos();
             ComenzarConCboVacios();
             CboCiudadDestino.Enabled = false;
-            CboTipoServicio.Enabled = false;
+            CboCiudadDestino.Enabled = false;
             ActualizarFechas();
         }
 
@@ -183,39 +168,8 @@ namespace AerolineaFrba.Generacion_Viaje
             return ViajePersistencia.ValidarHorarioDeAeronave(fechaSalida, fechaLlegadaEstimada,ID_Aeronave);
         }
 
-        private void ObtenerServiciosDisponibles()
-        {
-            int id_origen = CiudadPersistencia.ObtenerIDPorNombreDeCiudad(CboCiudadOrigen.Text);
-            int id_destino = CiudadPersistencia.ObtenerIDPorNombreDeCiudad(CboCiudadDestino.Text);
-            List<Servicio> serviciosDisponibles = ServicioPersistencia.ObtenerServiciosDeRuta(id_origen, id_destino, CboAeronave.Text);
-            if (serviciosDisponibles.Count != 0)
-            {
-                CboTipoServicio.DataSource = serviciosDisponibles;
-                CboTipoServicio.ValueMember = "ID_Servicio";
-                CboTipoServicio.DisplayMember = "Nombre";
-                if (CboAeronave.Text != "MATRICULA AERONAVE") CboTipoServicio.Enabled = true;
-            }
-            else if (CboAeronave.Text == "MATRICULA AERONAVE")
-            {
-                MessageBox.Show("Ingrese la Matrícula.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else
-            {
-                MessageBox.Show("Los datos ingresados no tienen servicios disponibles pruebe otra combincación.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-         }
 
-
-        private void CboAeronave_SelectedIndexChanged(object sender, EventArgs e)
-        {
-           /* if (CboCiudadOrigen.Text != "CIUDAD ORIGEN" && CboCiudadDestino.Text != "CIUDAD DESTINO" && CboAeronave.Text != "MATRICULA AERONAVE")
-            {
-                ObtenerServiciosDisponibles();
-            }*/
-        }
-
-
-          private void DtpFechaSalida_ValueChanged_1(object sender, EventArgs e)
+        private void DtpFechaSalida_ValueChanged_1(object sender, EventArgs e)
           {
                   DtpFechaLlegadaEstimada.Value = DtpFechaSalida.Value.AddHours(1);
                   DtpFechaLlegada.Value = DtpFechaLlegadaEstimada.Value;
@@ -227,16 +181,10 @@ namespace AerolineaFrba.Generacion_Viaje
               DtpFechaLlegada.Value = DtpFechaLlegadaEstimada.Value;
           }
 
-          private void label8_Click(object sender, EventArgs e)
-          {
-              CboCiudadOrigen.Enabled = true;
-          }
-
         private void Btn_SeleccionarCiudadDestino_Click_1(object sender, EventArgs e)
         {
             if (CboCiudadOrigen.Text != "CIUDAD ORIGEN" && CboCiudadDestino.Text != "CIUDAD DESTINO" && CboAeronave.Text != "MATRICULA AERONAVE")
             {
-                ObtenerServiciosDisponibles();
                 DtpFechaSalida.Enabled = true;
                 DtpFechaLlegadaEstimada.Enabled = true;
             }
@@ -248,12 +196,6 @@ namespace AerolineaFrba.Generacion_Viaje
 
         private void CboCiudadOrigen_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            if (CboCiudadOrigen.Text != "CIUDAD ORIGEN" && CboCiudadDestino.Text != "CIUDAD DESTINO" && CboAeronave.Text != "MATRICULA AERONAVE")
-            {
-                ObtenerServiciosDisponibles();
-            }
-            else
-            {
                 CboCiudadDestino.Enabled = true;
                 int ID_Origen = Convert.ToInt32(CboCiudadOrigen.SelectedValue);
                 List<Ciudad> ciudadesConMismoOrigen = RutaPersistencia.ObtenerTodasLasCiudadesConOrigen(ID_Origen);
@@ -261,25 +203,30 @@ namespace AerolineaFrba.Generacion_Viaje
                 CboCiudadDestino.DataSource = ciudadesConMismoOrigen;
                 CboCiudadDestino.ValueMember = "ID";
                 CboCiudadDestino.DisplayMember = "Nombre";
-            }
+            
         }
 
         private void CboAeronave_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            if (CboCiudadOrigen.Text != "CIUDAD ORIGEN" && CboCiudadDestino.Text != "CIUDAD DESTINO" && CboAeronave.Text != "MATRICULA AERONAVE")
+            if( CboAeronave.Text != "MATRICULA AERONAVE"){
+
+                var transaccion = DBManager.Instance().Connection.BeginTransaction(IsolationLevel.Serializable);
+                int ID_Aeronave = AeronavePersistencia.ObtenerPorMatricula(CboAeronave.Text, transaccion).ID;
+                transaccion.Commit();
+                Servicio servicio = ServicioPersistencia.ObtenerServicioAeronave(ID_Aeronave);
+                Txt_Servicio.Text = servicio.Nombre;
+
+                CboCiudadOrigen.Enabled = true;
+                CboCiudadOrigen.DataSource = CiudadPersistencia.ObtenerCiudadesOrigenParaUnServicio(servicio.ID_Servicio);
+                CboCiudadOrigen.ValueMember = "ID";
+                CboCiudadOrigen.DisplayMember = "Nombre";
+            }
+            if (CboCiudadOrigen.Text != "CIUDAD ORIGEN" && CboCiudadDestino.Text != "CIUDAD DESTINO")
             {
-                ObtenerServiciosDisponibles();
+                CboCiudadDestino.Text = "CIUDAD DESTINO";
+                CboCiudadDestino.Enabled = false;
             }
         }
-
-        private void CboCiudadDestino_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            if (CboCiudadOrigen.Text != "CIUDAD ORIGEN" && CboCiudadDestino.Text != "CIUDAD DESTINO" && CboAeronave.Text != "MATRICULA AERONAVE")
-            {
-                ObtenerServiciosDisponibles();
-            }
-        }
-
     }
 
 }
