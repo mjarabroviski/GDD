@@ -203,6 +203,7 @@ namespace Persistencia.Entidades
         {
             public static String SPGetProductos = "EL_PUNTERO.GetProductos";
             public static String SPObtenerProductosParaUnCliente = "EL_PUNTERO.GetProductosParaUnCliente";
+            public static String SPGetMinimoDeProducto = "EL_PUNTERO.GetProductoMinimo";
         }
 
     }

@@ -147,6 +147,7 @@ DROP PROCEDURE [EL_PUNTERO].ObtenerRutaEncomienda;
 DROP PROCEDURE [EL_PUNTERO].ObtenerCiudadesOrigenParaUnServicio;
 DROP PROCEDURE [EL_PUNTERO].ObtenerServicioAeronave;
 DROP PROCEDURE [EL_PUNTERO].[GetUsuarioPorUsernameYRol];
+DROP PROCEDURE [EL_PUNTERO].[GetProductoMinimo];
 
 DROP TRIGGER [EL_PUNTERO].[Tr_DeshabilitarUsuariosConRolDeshabilitado];
 

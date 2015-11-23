@@ -32,5 +32,13 @@ namespace Persistencia
             return productos;
         }
 
+        public static int ObtenerProductoMinimo()
+        {
+            var sp = new StoreProcedure(DBQueries.Producto.SPGetMinimoDeProducto);
+            int cant = Convert.ToInt32(sp.ExecuteScalar(null));
+
+            return cant;
+        }
+
     }
 }
