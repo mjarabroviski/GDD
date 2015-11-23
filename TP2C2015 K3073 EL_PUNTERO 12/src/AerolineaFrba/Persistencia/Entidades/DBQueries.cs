@@ -36,7 +36,7 @@ namespace Persistencia.Entidades
             public static String SPGetServicioPorID = "EL_PUNTERO.GetServicioPorID";
             public static String SPObtenerServiciosDeRuta = "EL_PUNTERO.ObtenerServiciosDeRuta";
             public static String SPObtenerServicioPorNombre = "EL_PUNTERO.ObtenerIDPorNombreDeServicio";
-            public static String SPObtenerServiciosPorRuta = "EL_PUNTERO.GetServiciosPorIDRuta";
+            public static String SPObtenerServiciosPorIDRuta = "EL_PUNTERO.GetServiciosPorIDRuta";
             public static String SPObtenerServiciosPorRuta = "EL_PUNTERO.ObtenerServiciosPorRuta";
             public static String SPObtenerServicioAeronave = "EL_PUNTERO.ObtenerServicioAeronave";
         }

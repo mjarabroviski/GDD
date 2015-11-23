@@ -71,7 +71,7 @@ namespace Persistencia
         public static List<Servicio> ObtenerServiciosPorRuta(Ruta ruta)
         {
             var param = new List<SPParameter> {new SPParameter("ID_Ruta", ruta.ID)};
-            var sp = new StoreProcedure(DBQueries.Servicio.SPObtenerServiciosPorRuta, param);
+            var sp = new StoreProcedure(DBQueries.Servicio.SPObtenerServiciosPorIDRuta, param);
             List<Servicio> servicios = sp.ExecuteReader<Servicio>();
 
             if (servicios == null || servicios.Count == 0)

@@ -171,6 +171,7 @@
             this.canjeDeMillasToolStripMenuItem.Size = new System.Drawing.Size(289, 22);
             this.canjeDeMillasToolStripMenuItem.Text = "Canje de Millas";
             this.canjeDeMillasToolStripMenuItem.Visible = false;
+            this.canjeDeMillasToolStripMenuItem.Click += new System.EventHandler(this.canjeDeMillasToolStripMenuItem_Click);
             // 
             // consultaDeMillasDePasajeroFrecuenteToolStripMenuItem
             // 

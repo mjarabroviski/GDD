@@ -218,5 +218,12 @@ namespace AerolineaFrba.Home
             var consulta = new ConsultaMillas();
             consulta.ShowDialog();
         }
+
+        private void canjeDeMillasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var canje = new Canje_Millas.Canje();
+            canje.ShowDialog();
+            
+        }
     }
 }
