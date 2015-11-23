@@ -304,7 +304,6 @@ namespace AerolineaFrba.Devolucion
                     try
                     {
                         DevolucionPersistencia.InsertarDevolucionEncomienda(encomiendaSeleccionada.ID, AdministradorSesion.UsuarioActual, Frmmotivo.Motivo,transaccion);
-
                     }
                     catch (Exception)
                     {
@@ -313,8 +312,8 @@ namespace AerolineaFrba.Devolucion
                     }
 
                     transaccion.Commit();
-
                 }
+                //quitar encomienda del datagrid 
             }
         }
 
