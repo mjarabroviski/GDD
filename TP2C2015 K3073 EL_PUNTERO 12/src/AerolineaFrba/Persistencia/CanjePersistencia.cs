@@ -21,5 +21,19 @@ namespace Persistencia
 
             return sp.ExecuteReader<Canje>();
         }
+
+        public static int GenerarCanje(Producto producto, int cantidad, Cliente cliente)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("ID_Producto", producto.ID),
+                    new SPParameter("Cantidad", cantidad),
+                    new SPParameter("ID_Cliente", cliente.ID)
+                };
+
+            var sp = new StoreProcedure(DBQueries.Canje.SPGenerarCanje, param);
+
+            return sp.ExecuteNonQuery(null);
+        }
     }
 }

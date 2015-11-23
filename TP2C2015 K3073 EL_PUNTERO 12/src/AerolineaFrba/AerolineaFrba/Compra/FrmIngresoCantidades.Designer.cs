@@ -125,7 +125,6 @@
             this.Controls.Add(this.label1);
             this.Name = "FrmIngresoCantidades";
             this.Text = "Ingreso Cantidades";
-            this.Load += new System.EventHandler(this.FrmIngresoCantidades_Load);
             ((System.ComponentModel.ISupportInitialize)(this.NumPasajes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumEncomiendas)).EndInit();
             this.ResumeLayout(false);

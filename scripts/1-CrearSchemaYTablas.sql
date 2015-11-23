@@ -90,13 +90,13 @@ INSERT INTO EL_PUNTERO.TL_ROL (Descripcion) VALUES ('Administrador General');
 
 --Inserto Usuarios
 INSERT INTO EL_PUNTERO.TL_USUARIO (Username,Password,Cant_Intentos)
-VALUES ('admin1','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',3);
+VALUES ('admin1','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',2);
 INSERT INTO EL_PUNTERO.TL_USUARIO (Username,Password,Cant_Intentos)
-VALUES ('admin2','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',3);
+VALUES ('admin2','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',2);
 INSERT INTO EL_PUNTERO.TL_USUARIO (Username,Password,Cant_Intentos)
-VALUES ('admin3','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',3);
+VALUES ('admin3','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',2);
 INSERT INTO EL_PUNTERO.TL_USUARIO (Username,Password,Cant_Intentos)
-VALUES ('admin4','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',3);
+VALUES ('admin4','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',2);
 INSERT INTO EL_PUNTERO.TL_USUARIO (Username,Password,Cant_Intentos)
 VALUES ('admin','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',3);
 
@@ -282,6 +282,14 @@ CREATE TABLE [EL_PUNTERO].[TL_PRODUCTO](
 	[Stock] int NOT NULL,
 	[Puntos] int NOT NULL
 );
+
+INSERT INTO EL_PUNTERO.TL_PRODUCTO (Descripcion,Stock,Puntos)
+VALUES
+('Bicicleta', 10, 50),
+('Celular', 8, 75),
+('LCD Philips', 10, 100),
+('Notebook Toshiba', 6, 150),
+('Valija', 20, 50);
 
 CREATE TABLE [EL_PUNTERO].[TL_TARJETA](
 	[ID_Tarjeta] int IDENTITY(1,1),

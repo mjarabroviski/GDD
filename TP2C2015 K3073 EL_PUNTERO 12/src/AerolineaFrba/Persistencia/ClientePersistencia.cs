@@ -21,9 +21,9 @@ namespace Persistencia
 
             var sp = new StoreProcedure(DBQueries.Cliente.SPGetClientePorTipoYDocumento, param);
 
-            List<Cliente> users = sp.ExecuteReader<Cliente>();
+            List<Cliente> clientes = sp.ExecuteReader<Cliente>();
 
-            return users;
+            return clientes;
         }
 
         public static Cliente ObtenerClientePorDNIYFechaNac(int doc, int tipo_Doc, DateTime fecha)
@@ -36,11 +36,11 @@ namespace Persistencia
 
             var sp = new StoreProcedure(DBQueries.Cliente.SPGetClientePorTipoYDocumentoYFechaNac, param);
 
-            List<Cliente> users = sp.ExecuteReader<Cliente>();
+            List<Cliente> clientes = sp.ExecuteReader<Cliente>();
 
-            if (users.Count == 0 || users == null) return null;
-                
-            return users[0];
+            if (clientes.Count == 0 || clientes == null) return null;
+
+            return clientes[0];
         }
 
 
@@ -52,11 +52,11 @@ namespace Persistencia
 
             var sp = new StoreProcedure(DBQueries.Cliente.SPObtenerNombreClientePorID, param);
 
-            List<Cliente> users = sp.ExecuteReader<Cliente>();
+            List<Cliente> clientes = sp.ExecuteReader<Cliente>();
 
-            if (users.Count == 0 || users == null) return null;
+            if (clientes.Count == 0 || clientes == null) return null;
 
-            return users[0].Apellido.ToUpper() + " " + users[0].Nombre.ToUpper();
+            return clientes[0].Apellido.ToUpper() + " " + clientes[0].Nombre.ToUpper();
         }
 
         public static object ObtenerAuxiliares()
@@ -66,9 +66,23 @@ namespace Persistencia
 
             var sp = new StoreProcedure(DBQueries.Cliente.SPGetClientesAuxiliares, param);
 
-            List<ClienteAuxiliar> users = sp.ExecuteReader<ClienteAuxiliar>();
+            List<ClienteAuxiliar> clientes = sp.ExecuteReader<ClienteAuxiliar>();
 
-            return users;
+            return clientes;
+        }
+
+        public static Cliente ObtenerClientePorID(int ID)
+        {
+            //Traigo el cliente cuyo ID coincida con el parametro
+            var param = new List<SPParameter> { new SPParameter("ID_Cliente", ID)};
+
+            var sp = new StoreProcedure(DBQueries.Cliente.SPGetClientePorID, param);
+
+            List<Cliente> clientes = sp.ExecuteReader<Cliente>();
+
+            if (clientes.Count == 0 || clientes == null) return null;
+
+            return clientes[0];
         }
     }
 }

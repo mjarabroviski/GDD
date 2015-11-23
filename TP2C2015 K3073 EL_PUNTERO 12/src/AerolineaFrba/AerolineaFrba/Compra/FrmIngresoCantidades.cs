@@ -27,11 +27,6 @@ namespace AerolineaFrba.Compra
             formularioAnterior.Visible = false;
         }
 
-        private void FrmIngresoCantidades_Load(object sender, EventArgs e)
-        {
-           
-        }
-
         private void BtnCancelar_Click(object sender, EventArgs e)
         {
             formularioAnterior.Visible = true;

@@ -125,6 +125,10 @@ DROP PROCEDURE [EL_PUNTERO].[CrearTablaAuxiliarPasajeros];
 DROP PROCEDURE [EL_PUNTERO].[GetClientesAuxiliares];
 DROP PROCEDURE [EL_PUNTERO].[ObtenerClientePorDoc];
 DROP PROCEDURE [EL_PUNTERO].[ObtenerInfoButacasDisponibles];
+DROP PROCEDURE [EL_PUNTERO].[GetProductos];
+DROP PROCEDURE [EL_PUNTERO].[GetProductosParaUnCliente];
+DROP PROCEDURE [EL_PUNTERO].[GetClientePorID];
+DROP PROCEDURE [EL_PUNTERO].[GenerarCanje];
 
 DROP TRIGGER [EL_PUNTERO].[Tr_DeshabilitarUsuariosConRolDeshabilitado];
 

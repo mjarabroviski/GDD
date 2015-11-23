@@ -15,6 +15,7 @@ namespace AerolineaFrba.Consulta_Millas
     public partial class ConsultaMillas : Form
     {
         private List<RegistroMillas> registrosMillas = new List<RegistroMillas>();
+        private List<Canje> canjes = new List<Canje>();
         Cliente cliente;
 
         public ConsultaMillas()
@@ -49,6 +50,7 @@ namespace AerolineaFrba.Consulta_Millas
             TxtDni.Enabled = true;
             TxtDni.Text = string.Empty;
             LblBuscar.Enabled = true;
+            TxtMillas.Text = string.Empty;
         }
 
         private void LimpiarDataGridView()
@@ -118,6 +120,7 @@ namespace AerolineaFrba.Consulta_Millas
                     //Cargar las compras y los canjes del cliente
                     cliente = clientes[0];
                     ActualizarRegistroMillas();
+                    ActualizarCanjes();
                     CalcularMillas();
                 }
             }
@@ -146,6 +149,7 @@ namespace AerolineaFrba.Consulta_Millas
             {
                 //Cargar las compras y los canjes del cliente
                 ActualizarRegistroMillas();
+                ActualizarCanjes();
                 CalcularMillas();
             }
         }
@@ -158,7 +162,18 @@ namespace AerolineaFrba.Consulta_Millas
             #region Cargar el diccionario a mostrar en la grilla
 
                 registrosMillas = RegistroMillasPersistencia.ObtenerPorIDCliente(cliente.ID);
-                if (registrosMillas.Count == 0 || registrosMillas == null) MessageBox.Show("No cuenta con registros de compras", "Atención", MessageBoxButtons.OK,MessageBoxIcon.Information);
+                if (registrosMillas.Count == 0 || registrosMillas == null)
+                {
+                    MessageBox.Show("No cuenta con registros de compras", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LimpiarDataGridView();
+                    dtpNac.Visible = false;
+                    LbLNac.Visible = false;
+                    btnAceptar.Visible = false;
+                    TxtDni.Text = string.Empty;
+                    TxtDni.Enabled = true;
+                    LblBuscar.Enabled = true;
+                    
+                }
                 diccionarioDeAeronaves = registrosMillas.ToDictionary(a => a.ID, a => a);
 
             //Muestra en la grilla el contenido de los registros que se encuentran cargados en el diccionario
@@ -175,6 +190,8 @@ namespace AerolineaFrba.Consulta_Millas
             dgvCompras.DataSource = bind.ToList();
             dgvCompras.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
+
+        private void ActualizarCanjes() { }
 
         private void CalcularMillas() {
             //faltan las de canje

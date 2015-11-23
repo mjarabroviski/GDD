@@ -80,6 +80,7 @@
     <Compile Include="Entidades\Viaje.cs" />
     <Compile Include="FuncionalidadPersistencia.cs" />
     <Compile Include="PasajePersistencia.cs" />
+    <Compile Include="ProductoPersistencia.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegistroMillasPersistencia.cs" />

@@ -895,6 +895,10 @@ CREATE PROCEDURE [EL_PUNTERO].[AgregarRegistroMillas]
 @ID_Viaje int
 AS
 BEGIN
+	--Elimino los registros vencidos
+	DELETE FROM EL_PUNTERO.TL_REGISTRO_MILLAS 
+	WHERE DATEDIFF(DAY, Fecha_Inicio, GETDATE()) = 366
+
 	--Agrego Pasajes
 	INSERT INTO EL_PUNTERO.TL_REGISTRO_MILLAS (ID_Cliente,Codigo_Item,Fecha_Inicio,Millas)
 	(SELECT DISTINCT ID_Cliente,Codigo_Pasaje, GETDATE(), (Precio/10) FROM EL_PUNTERO.TL_PASAJE WHERE ID_Viaje = @ID_Viaje
@@ -907,7 +911,11 @@ BEGIN
 
 	--Sumo las millas del cliente
 	UPDATE C
-	SET C.Millas += (SELECT SUM(R.Millas) FROM EL_PUNTERO.TL_REGISTRO_MILLAS R  WHERE R.ID_Cliente = C.ID_Cliente) 
+	SET C.Millas += (SELECT SUM(R.Millas) 
+					 FROM EL_PUNTERO.TL_REGISTRO_MILLAS R  
+					 WHERE R.ID_Cliente = C.ID_Cliente 
+					 AND ((R.Codigo_Item IN (SELECT P.Codigo_Pasaje FROM EL_PUNTERO.TL_PASAJE P WHERE P.ID_Viaje = @ID_Viaje)) 
+					 OR (R.Codigo_Item IN (SELECT E.Codigo_Encomienda FROM EL_PUNTERO.TL_ENCOMIENDA E WHERE E.ID_Viaje = @ID_Viaje)))) 
 	FROM EL_PUNTERO.TL_CLIENTE C
 
 	--Pongo en cero los demas campos de millas
@@ -962,6 +970,68 @@ BEGIN
 	FROM [EL_PUNTERO].[TL_Funcionalidad] F
 	INNER JOIN [EL_PUNTERO].TL_FUNCIONALIDAD_ROL FR ON F.ID_Funcionalidad = FR.ID_Funcionalidad 
 	WHERE FR.ID_Rol IN (SELECT RU.ID_Rol FROM EL_PUNTERO.TL_ROL_USUARIO RU WHERE RU.ID_Usuario = @ID_Usuario)
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[GetProductos]
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	SELECT *
+	FROM [EL_PUNTERO].[TL_PRODUCTO]
+	WHERE Stock > 0
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[GetProductosParaUnCliente]
+@ID_Cliente int
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	SELECT *
+	FROM [EL_PUNTERO].[TL_PRODUCTO] P
+	WHERE P.Puntos <= (SELECT C.Millas FROM EL_PUNTERO.TL_CLIENTE C WHERE C.ID_Cliente = @ID_Cliente)
+	AND P.Stock > 0
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[GetClientePorID]
+@ID_Cliente int
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	SELECT *
+	FROM [EL_PUNTERO].[TL_Cliente] C
+	WHERE C.ID_Cliente = @ID_Cliente
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[GenerarCanje]
+@ID_Producto int,
+@Cantidad int,
+@ID_Cliente int
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	--Inserto el canje
+	INSERT INTO EL_PUNTERO.TL_CANJE (ID_Producto,Cantidad,Fecha_Canje,ID_Cliente)
+	VALUES (@ID_Producto, @Cantidad, GETDATE(), @ID_Cliente)
+
+	--Modifico las millas del cliente
+	UPDATE C
+	SET C.Millas -= (SELECT P.Puntos FROM EL_PUNTERO.TL_PRODUCTO P WHERE P.ID_Producto = @ID_Producto)*@Cantidad
+	FROM EL_PUNTERO.TL_CLIENTE C
+	WHERE C.ID_Cliente = @ID_Cliente
+
+	--Modifico el Stock del producto
+	UPDATE P
+	SET Stock -= @Cantidad
+	FROM EL_PUNTERO.TL_PRODUCTO P
+	WHERE P.ID_Producto = @ID_Producto
 END
 GO
 
