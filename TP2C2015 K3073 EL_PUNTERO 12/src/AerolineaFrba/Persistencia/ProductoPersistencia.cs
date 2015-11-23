@@ -40,5 +40,17 @@ namespace Persistencia
             return cant;
         }
 
+        public static Producto ObtenerProductoPorID(int idProd)
+        {
+            var param = new List<SPParameter> {new SPParameter("ID_Producto", idProd)};
+            var sp = new StoreProcedure(DBQueries.Producto.SPObtenerProductoPorID, param);
+            List<Producto> productos = sp.ExecuteReader<Producto>();
+
+            if (productos == null || productos.Count == 0)
+                return null;
+
+            return productos[0];
+        }
+
     }
 }

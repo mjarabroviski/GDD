@@ -64,9 +64,7 @@ DROP PROCEDURE [EL_PUNTERO].[ModificarAeronave];
 DROP PROCEDURE [EL_PUNTERO].[GetTipoButacaPorButaca];
 DROP PROCEDURE [EL_PUNTERO].[GetButacasDeAeronave];
 DROP PROCEDURE [EL_PUNTERO].[GetCantButacasPorAeronave];
-DROP PROCEDURE [EL_PUNTERO].[InsertarIDDevolucion];
 DROP PROCEDURE [EL_PUNTERO].[SeleccionReemplazoAeronave];
-DROP PROCEDURE [EL_PUNTERO].[TraerLosPasajesDevueltos];
 DROP PROCEDURE [EL_PUNTERO].[GetTiposButacas];
 DROP PROCEDURE [EL_PUNTERO].[GetTipoPorDescripcion];
 DROP PROCEDURE [EL_PUNTERO].[ModificarButaca];
@@ -148,6 +146,7 @@ DROP PROCEDURE [EL_PUNTERO].ObtenerCiudadesOrigenParaUnServicio;
 DROP PROCEDURE [EL_PUNTERO].ObtenerServicioAeronave;
 DROP PROCEDURE [EL_PUNTERO].[GetUsuarioPorUsernameYRol];
 DROP PROCEDURE [EL_PUNTERO].[GetProductoMinimo];
+DROP PROCEDURE [EL_PUNTERO].[GetProductoPorID];
 
 DROP TRIGGER [EL_PUNTERO].[Tr_DeshabilitarUsuariosConRolDeshabilitado];
 

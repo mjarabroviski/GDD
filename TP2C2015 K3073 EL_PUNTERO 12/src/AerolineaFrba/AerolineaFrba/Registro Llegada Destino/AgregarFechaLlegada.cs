@@ -69,5 +69,10 @@ namespace AerolineaFrba.Registro_Llegada_Destino
         
         }
 
+        private void AgregarFechaLlegada_Load(object sender, EventArgs e)
+        {
+            DtpFechaLlegada.Value = viaje.Fecha_Llegada_Estimada;
+        }
+
     }
 }
