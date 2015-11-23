@@ -164,6 +164,7 @@
             this.devolucionDePasajeYoEncomiendaToolStripMenuItem.Size = new System.Drawing.Size(289, 22);
             this.devolucionDePasajeYoEncomiendaToolStripMenuItem.Text = "Devolucion de Pasaje y/o Encomienda";
             this.devolucionDePasajeYoEncomiendaToolStripMenuItem.Visible = false;
+            this.devolucionDePasajeYoEncomiendaToolStripMenuItem.Click += new System.EventHandler(this.devolucionDePasajeYoEncomiendaToolStripMenuItem_Click);
             // 
             // canjeDeMillasToolStripMenuItem
             // 

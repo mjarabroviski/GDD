@@ -1035,4 +1035,17 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE [EL_PUNTERO].[GetUsuarioPorUsernameYRol]
+@User nvarchar(255),
+@ID_Rol int
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	SELECT U.*
+	FROM [EL_PUNTERO].[TL_Usuario] U, EL_PUNTERO.TL_ROL_USUARIO RU
+	WHERE Username = @User AND RU.ID_Rol = @ID_Rol AND RU.ID_Usuario = U.ID_Usuario
+END
+GO
+
 COMMIT

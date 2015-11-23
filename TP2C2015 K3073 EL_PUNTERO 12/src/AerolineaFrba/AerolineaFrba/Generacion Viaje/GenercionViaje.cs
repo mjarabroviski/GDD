@@ -211,10 +211,10 @@ namespace AerolineaFrba.Generacion_Viaje
 
         private void CboAeronave_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            if( CboAeronave.Text != "MATRICULA AERONAVE"){
                 //SERVICIO
+                Aeronave aero = (Aeronave)CboAeronave.SelectedItem;
                 var transaccion = DBManager.Instance().Connection.BeginTransaction(IsolationLevel.Serializable);
-                int ID_Aeronave = AeronavePersistencia.ObtenerPorMatricula(CboAeronave.Text, transaccion).ID;
+                int ID_Aeronave = aero.ID;
                 transaccion.Commit();
                 Servicio servicio = ServicioPersistencia.ObtenerServicioAeronave(ID_Aeronave);
                 Txt_Servicio.Text = servicio.Nombre;
@@ -237,8 +237,6 @@ namespace AerolineaFrba.Generacion_Viaje
                 //FECHAS
                 DtpFechaSalida.Enabled = true;
                 DtpFechaLlegadaEstimada.Enabled = true;
-            
-            }
 
         }
 

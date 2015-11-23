@@ -77,6 +77,7 @@ namespace Persistencia.Entidades
             public static String SPLimpiarIntentos = "EL_PUNTERO.LimpiarIntentos";
             public static String SPInsertarUsuario = "EL_PUNTERO.InsertarUsuario";
             public static String SPActualizarContrasena = "EL_PUNTERO.ActualizarContrasena";
+            public static String SPGetUsuarioPorUsernameYRol = "EL_PUNTERO.GetUsuarioPorUsernameYRol";
         }
 
         public static class Ciudad

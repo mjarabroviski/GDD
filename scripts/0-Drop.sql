@@ -135,18 +135,18 @@ DROP PROCEDURE [EL_PUNTERO].[InsertarServiciosPorRuta];
 DROP PROCEDURE [EL_PUNTERO].[GetClientePorNombreYApellido];
 DROP PROCEDURE [EL_PUNTERO].[ObtenerTipoDocumentoPorID];
 
-
-DROP PROCEDURE [EL_PUNTERO].[ObtenerPasajesFuturos]
-DROP PROCEDURE [EL_PUNTERO].[ObtenerEncomiendasFuturas]
-DROP PROCEDURE [EL_PUNTERO].ObtenerRutaDeEncomienda
-DROP PROCEDURE [EL_PUNTERO].ObtenerFechaSalidaDeEncomienda
-DROP PROCEDURE [EL_PUNTERO].ObtenerRutaDePasaje
-DROP PROCEDURE [EL_PUNTERO].ObtenerFechaSalidaDePasaje
-DROP PROCEDURE [EL_PUNTERO].ObtenerNombreClientePorID
-DROP PROCEDURE [EL_PUNTERO].[ObtenerServicioAeronave]
-DROP PROCEDURE [EL_PUNTERO].ObtenerRutaEncomienda
-DROP PROCEDURE [EL_PUNTERO].ObtenerCiudadesOrigenParaUnServicio
-DROP PROCEDURE [EL_PUNTERO].ObtenerServicioAeronave
+DROP PROCEDURE [EL_PUNTERO].[ObtenerPasajesFuturos];
+DROP PROCEDURE [EL_PUNTERO].[ObtenerEncomiendasFuturas];
+DROP PROCEDURE [EL_PUNTERO].ObtenerRutaDeEncomienda;
+DROP PROCEDURE [EL_PUNTERO].ObtenerFechaSalidaDeEncomienda;
+DROP PROCEDURE [EL_PUNTERO].ObtenerRutaDePasaje;
+DROP PROCEDURE [EL_PUNTERO].ObtenerFechaSalidaDePasaje;
+DROP PROCEDURE [EL_PUNTERO].ObtenerNombreClientePorID;
+DROP PROCEDURE [EL_PUNTERO].[ObtenerServicioAeronave];
+DROP PROCEDURE [EL_PUNTERO].ObtenerRutaEncomienda;
+DROP PROCEDURE [EL_PUNTERO].ObtenerCiudadesOrigenParaUnServicio;
+DROP PROCEDURE [EL_PUNTERO].ObtenerServicioAeronave;
+DROP PROCEDURE [EL_PUNTERO].[GetUsuarioPorUsernameYRol];
 
 DROP TRIGGER [EL_PUNTERO].[Tr_DeshabilitarUsuariosConRolDeshabilitado];
 

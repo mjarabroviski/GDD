@@ -21,8 +21,25 @@ namespace Persistencia
         public static Usuario ObtenerPorUserName(string userName)
         {
             //Traigo el usuario cuyo nombre de usuario coincida con el del parametro
-            var param = new List<SPParameter> { new SPParameter("User", userName) };
+            var param = new List<SPParameter> { new SPParameter("User", userName)};
+
             var sp = new StoreProcedure(DBQueries.Usuario.SPGetUsuarioPorUsername, param);
+
+            List<Usuario> users = sp.ExecuteReader<Usuario>();
+
+            if (users == null || users.Count == 0)
+                return null;
+
+            return users[0];
+        }
+
+        public static Usuario ObtenerPorUserNameYRol(string userName, int idRol)
+        {
+            //Traigo el usuario cuyo nombre de usuario coincida con el del parametro
+            var param = new List<SPParameter> { new SPParameter("User", userName),
+                                                new SPParameter("ID_Rol", idRol)};
+
+            var sp = new StoreProcedure(DBQueries.Usuario.SPGetUsuarioPorUsernameYRol, param);
 
             List<Usuario> users = sp.ExecuteReader<Usuario>();
 

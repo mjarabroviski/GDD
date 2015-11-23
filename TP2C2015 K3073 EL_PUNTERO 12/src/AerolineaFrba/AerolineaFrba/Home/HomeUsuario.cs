@@ -225,5 +225,11 @@ namespace AerolineaFrba.Home
             canje.ShowDialog();
             
         }
+
+        private void devolucionDePasajeYoEncomiendaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var devolucion = new Devolucion.DevolucionEncomiendaPasaje();
+            devolucion.ShowDialog();
+        }
     }
 }
