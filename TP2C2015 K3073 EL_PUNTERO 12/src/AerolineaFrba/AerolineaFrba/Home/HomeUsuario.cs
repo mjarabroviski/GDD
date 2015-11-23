@@ -231,5 +231,11 @@ namespace AerolineaFrba.Home
             var devolucion = new Devolucion.DevolucionEncomiendaPasaje();
             devolucion.ShowDialog();
         }
+
+        private void listadoEstadisticoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var listado = new Listado_Estadistico.Listado_Estadistico();
+            listado.ShowDialog();
+        }
     }
 }
