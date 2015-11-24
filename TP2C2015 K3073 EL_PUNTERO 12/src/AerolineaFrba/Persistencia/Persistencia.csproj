@@ -62,6 +62,7 @@
     <Compile Include="Entidades\DBManager.cs" />
     <Compile Include="Entidades\DBQueries.cs" />
     <Compile Include="Entidades\Encomienda.cs" />
+    <Compile Include="Entidades\Estadistica.cs" />
     <Compile Include="Entidades\Funcionalidad.cs" />
     <Compile Include="Entidades\IMapable.cs" />
     <Compile Include="Entidades\ItemDevuelto.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="Entidades\TipoDocumento.cs" />
     <Compile Include="Entidades\Usuario.cs" />
     <Compile Include="Entidades\Viaje.cs" />
+    <Compile Include="EstadisticaPersistencia.cs" />
     <Compile Include="FuncionalidadPersistencia.cs" />
     <Compile Include="PasajePersistencia.cs" />
     <Compile Include="ProductoPersistencia.cs" />

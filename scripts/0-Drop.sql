@@ -150,8 +150,12 @@ DROP PROCEDURE [EL_PUNTERO].ObtenerServicioAeronave;
 DROP PROCEDURE [EL_PUNTERO].[GetUsuarioPorUsernameYRol];
 DROP PROCEDURE [EL_PUNTERO].InsertarDevolucionPasaje
 DROP PROCEDURE [EL_PUNTERO].InsertarDevolucionEncomienda
-DROP PROCEDURE [EL_PUNTERO].InsertarDevolucionPasaje
+DROP PROCEDURE [EL_PUNTERO].DevolverTodosLosPasajes
 DROP PROCEDURE [EL_PUNTERO].DevolverTodasLasEncomiendas
+DROP PROCEDURE [EL_PUNTERO].[GetProductoMinimo];
+DROP PROCEDURE [EL_PUNTERO].[GetProductoPorID];
+DROP PROCEDURE [EL_PUNTERO].InsertarDevolucionPasaje;
+DROP PROCEDURE [EL_PUNTERO].InsertarDevolucionEncomienda;
 
 DROP TRIGGER [EL_PUNTERO].[Tr_DeshabilitarUsuariosConRolDeshabilitado];
 

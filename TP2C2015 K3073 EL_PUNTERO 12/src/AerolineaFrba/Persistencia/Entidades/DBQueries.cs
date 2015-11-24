@@ -59,8 +59,6 @@ namespace Persistencia.Entidades
             public static String SPInsertarRuta = "EL_PUNTERO.InsertarRuta";
             public static String SPModificarRuta = "EL_PUNTERO.ModificarRuta";
             public static String SPCancelarPasajesYEncomiendasConRutaInhabilitada = "EL_PUNTERO.CancelarPasajesYEncomiendasConRutaInhabilitada";
-            public static String SPTraerLosPasajesDevueltos = "EL_PUNTERO.TraerLosPasajesDevueltos";
-            public static String SPInsertarIDDevolucion = "EL_PUNTERO.InsertarIDDevolucion";
             public static String SPObtenerTodasLasCiudadesConOrigen = "EL_PUNTERO.ObtenerTodasLasCiudadesConOrigen";
             public static String SPObtenerRutaPorOrigenYDestino = "EL_PUNTERO.ObtenerRutaPorOrigenYDestino";
             public static String SPServiciosPorIDRuta = "EL_PUNTERO.GetServiciosPorIDRuta";
@@ -185,7 +183,6 @@ namespace Persistencia.Entidades
 
         public static class Canje
         {
-            //ya hecho
             public static String SPObtenerCanjePorIDCliente = "EL_PUNTERO.GetCanjePorIDCliente";
             public static String SPGenerarCanje = "EL_PUNTERO.GenerarCanje";
         }
@@ -208,6 +205,18 @@ namespace Persistencia.Entidades
         {
             public static String SPGetProductos = "EL_PUNTERO.GetProductos";
             public static String SPObtenerProductosParaUnCliente = "EL_PUNTERO.GetProductosParaUnCliente";
+            public static String SPGetMinimoDeProducto = "EL_PUNTERO.GetProductoMinimo";
+            public static String SPObtenerProductoPorID = "EL_PUNTERO.GetProductoPorID";
+        }
+
+        public static class Estadistica
+        {
+            //FALTAN HACER TODAS!!
+            public static String SPGetDestinosConMasPasajesComprados = "EL_PUNTERO.GetDestinosConMasPasajesComprados";
+            public static String SPGetDestinosConMasAeronavesVacias = "EL_PUNTERO.GetDestinosConMasAeronavesVacias";
+            public static String SPGetClientesConMasPuntosAcumulados = "EL_PUNTERO.GetClientesConMasPuntosAcumulados";
+            public static String SPGetDestinosConMasPasajesCancelados = "EL_PUNTERO.GetDestinosConMasPasajesCancelados";
+            public static String SPGetAeronavesConMayorCantDeDiasFueraDeServicio = "EL_PUNTERO.GetAeronavesConMayorCantDeDiasFueraDeServicio";
         }
 
     }
