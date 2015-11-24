@@ -10,7 +10,7 @@ namespace Persistencia.Entidades
 {
     public class Estadistica : IMapable
     {
-        public string Usuario { get; set; }
+        public string Parametro { get; set; }
         public double Valor { get; set; }
 
         //Implement of IMapable
@@ -18,7 +18,7 @@ namespace Persistencia.Entidades
         {
             return new Estadistica
             {
-                Usuario = ((String)reader["Usuario"]).Trim(),
+                Parametro = ((String)reader["Parametro"]).Trim(),
                 Valor = double.Parse(reader["Valor"].ToString())
             };
         }

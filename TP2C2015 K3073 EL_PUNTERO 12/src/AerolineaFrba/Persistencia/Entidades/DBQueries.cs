@@ -207,5 +207,15 @@ namespace Persistencia.Entidades
             public static String SPObtenerProductoPorID = "EL_PUNTERO.GetProductoPorID";
         }
 
+        public static class Estadistica
+        {
+            //FALTAN HACER TODAS!!
+            public static String SPGetDestinosConMasPasajesComprados = "EL_PUNTERO.GetDestinosConMasPasajesComprados";
+            public static String SPGetDestinosConMasAeronavesVacias = "EL_PUNTERO.GetDestinosConMasAeronavesVacias";
+            public static String SPGetClientesConMasPuntosAcumulados = "EL_PUNTERO.GetClientesConMasPuntosAcumulados";
+            public static String SPGetDestinosConMasPasajesCancelados = "EL_PUNTERO.GetDestinosConMasPasajesCancelados";
+            public static String SPGetAeronavesConMayorCantDeDiasFueraDeServicio = "EL_PUNTERO.GetAeronavesConMayorCantDeDiasFueraDeServicio";
+        }
+
     }
 }
