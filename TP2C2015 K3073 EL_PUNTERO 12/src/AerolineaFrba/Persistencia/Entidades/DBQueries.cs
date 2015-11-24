@@ -154,6 +154,8 @@ namespace Persistencia.Entidades
             public static String SPCancelarPasajesYEncomiendasPorBajaServicioAeronave = "EL_PUNTERO.CancelarPasajesYEncomiendasPorBajaServicioAeronave";
             public static String SPInsertarDevolucionEncomienda = "EL_PUNTERO.InsertarDevolucionEncomienda";
             public static String SPInsertarDevolucionPasaje = "EL_PUNTERO.InsertarDevolucionPasaje";
+            public static String SPDevolverTodasLasEncomiendas = "EL_PUNTERO.DevolverTodasLasEncomiendas";
+            public static String SPDevolverTodosLosPasajes = "EL_PUNTERO.DevolverTodosLosPasajes";
             
         }
 

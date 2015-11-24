@@ -72,6 +72,7 @@
             this.Btn_DevolverTodos.TabIndex = 84;
             this.Btn_DevolverTodos.Text = "DEVOLVER TODO";
             this.Btn_DevolverTodos.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Btn_DevolverTodos.Click += new System.EventHandler(this.Btn_DevolverTodos_Click);
             // 
             // DgvEncomiendas
             // 
@@ -180,7 +181,7 @@
             this.Btn_Limpiar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Btn_Limpiar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_Limpiar.ForeColor = System.Drawing.Color.White;
-            this.Btn_Limpiar.Location = new System.Drawing.Point(376, 10);
+            this.Btn_Limpiar.Location = new System.Drawing.Point(376, 38);
             this.Btn_Limpiar.Name = "Btn_Limpiar";
             this.Btn_Limpiar.Size = new System.Drawing.Size(83, 21);
             this.Btn_Limpiar.TabIndex = 99;
@@ -194,7 +195,7 @@
             this.Btn_Buscar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Btn_Buscar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_Buscar.ForeColor = System.Drawing.Color.White;
-            this.Btn_Buscar.Location = new System.Drawing.Point(376, 39);
+            this.Btn_Buscar.Location = new System.Drawing.Point(376, 11);
             this.Btn_Buscar.Name = "Btn_Buscar";
             this.Btn_Buscar.Size = new System.Drawing.Size(83, 20);
             this.Btn_Buscar.TabIndex = 100;
