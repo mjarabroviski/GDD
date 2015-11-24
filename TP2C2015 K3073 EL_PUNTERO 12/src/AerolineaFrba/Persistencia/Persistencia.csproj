@@ -61,7 +61,6 @@
     <Compile Include="Entidades\ClienteAuxiliar.cs" />
     <Compile Include="Entidades\DBManager.cs" />
     <Compile Include="Entidades\DBQueries.cs" />
-    <Compile Include="Entidades\Devolucion.cs" />
     <Compile Include="Entidades\Encomienda.cs" />
     <Compile Include="Entidades\Estadistica.cs" />
     <Compile Include="Entidades\Funcionalidad.cs" />

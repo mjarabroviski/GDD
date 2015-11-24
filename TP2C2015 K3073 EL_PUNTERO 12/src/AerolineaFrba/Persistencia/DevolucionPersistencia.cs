@@ -80,5 +80,38 @@ namespace Persistencia
 
             return sp.ExecuteNonQuery(transaccion);
         }
+
+        public static void InsertarDevolucionEncomienda(int ID_Encomienda,Usuario usuario,String motivo, SqlTransaction transaccion)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("ID_Encomienda",ID_Encomienda),
+                    new SPParameter("Motivo",motivo),
+                    new SPParameter("ID_Usuario",usuario.ID),
+                };
+
+            var sp = (transaccion != null)
+                        ? new StoreProcedure(DBQueries.Devolucion.SPInsertarDevolucionEncomienda, param, transaccion)
+                        : new StoreProcedure(DBQueries.Devolucion.SPInsertarDevolucionEncomienda, param);
+            sp.ExecuteNonQuery(transaccion);
+        }
+
+        public static void InsertarDevolucionPasaje(int ID_Encomienda, Usuario usuario, string motivo, SqlTransaction transaccion)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("ID_Encomienda",ID_Encomienda),
+                    new SPParameter("Motivo",motivo),
+                    new SPParameter("ID_Usuario",usuario.ID),
+                };
+
+            var sp = (transaccion != null)
+                        ? new StoreProcedure(DBQueries.Devolucion.SPInsertarDevolucionPasaje, param, transaccion)
+                        : new StoreProcedure(DBQueries.Devolucion.SPInsertarDevolucionPasaje, param);
+           sp.ExecuteNonQuery(transaccion);
+        }
+        
+
+
     }
 }

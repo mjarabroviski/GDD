@@ -177,6 +177,12 @@
     <Compile Include="Devolucion\DevolucionEncomienda.Designer.cs">
       <DependentUpon>DevolucionEncomienda.cs</DependentUpon>
     </Compile>
+    <Compile Include="Devolucion\MotivoDevolucion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Devolucion\MotivoDevolucion.Designer.cs">
+      <DependentUpon>MotivoDevolucion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -310,6 +316,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Devolucion\DevolucionEncomienda.resx">
       <DependentUpon>DevolucionEncomienda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Devolucion\MotivoDevolucion.resx">
+      <DependentUpon>MotivoDevolucion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Generacion Viaje\GenercionViaje.resx">
       <DependentUpon>GenercionViaje.cs</DependentUpon>

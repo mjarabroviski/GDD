@@ -266,4 +266,32 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE [EL_PUNTERO].InsertarDevolucionEncomienda
+@ID_Encomienda int,
+@Motivo varchar(100),
+@ID_Usuario int
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	--Inserto los id_encomienda del viaje de la ruta que viene por parametro 
+	INSERT INTO [EL_PUNTERO].[TL_DEVOLUCION_ENCOMIENDA] (ID_Encomienda,Fecha_Devolucion,Motivo,ID_Usuario)
+	VALUES (@ID_Encomienda,GETDATE(),@Motivo,@ID_Usuario)
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].InsertarDevolucionPasaje
+@ID_Pasaje int,
+@Motivo varchar(100),
+@ID_Usuario int
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	--Inserto los id_encomienda del viaje de la ruta que viene por parametro 
+	INSERT INTO [EL_PUNTERO].[TL_DEVOLUCION_PASAJE] (ID_Pasaje,Fecha_Devolucion,Motivo,ID_Usuario)
+	VALUES (@ID_Pasaje,GETDATE(),@Motivo,@ID_Usuario)
+END
+GO
+
 COMMIT
