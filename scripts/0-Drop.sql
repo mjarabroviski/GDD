@@ -156,6 +156,11 @@ DROP PROCEDURE [EL_PUNTERO].[GetProductoMinimo];
 DROP PROCEDURE [EL_PUNTERO].[GetProductoPorID];
 DROP PROCEDURE [EL_PUNTERO].InsertarDevolucionPasaje;
 DROP PROCEDURE [EL_PUNTERO].InsertarDevolucionEncomienda;
+DROP PROCEDURE [EL_PUNTERO].[GetDestinosConMasPasajesComprados];
+DROP PROCEDURE [EL_PUNTERO].[GetDestinosConMasAeronavesVacias];
+DROP PROCEDURE [EL_PUNTERO].[GetClientesConMasPuntosAcumulados];
+DROP PROCEDURE [EL_PUNTERO].[GetDestinosConMasPasajesCancelados];
+DROP PROCEDURE [EL_PUNTERO].[GetAeronavesConMayorCantDeDiasFueraDeServicio];
 
 DROP TRIGGER [EL_PUNTERO].[Tr_DeshabilitarUsuariosConRolDeshabilitado];
 
@@ -164,5 +169,7 @@ DROP FUNCTION [EL_PUNTERO].[CompraAPartirDePasaje];
 DROP FUNCTION [EL_PUNTERO].[ObtenerAeronaveDeReemplazo];
 DROP FUNCTION [EL_PUNTERO].[ObtenerIDBajaServicioMax];
 DROP FUNCTION [EL_PUNTERO].[ObtenerAeronaveDeReemplazoPorServicio];
+DROP FUNCTION [EL_PUNTERO].[ObtenerMillasCanje];
+DROP FUNCTION [EL_PUNTERO].[CantFueraDeServicio];
 
 DROP SCHEMA [EL_PUNTERO];

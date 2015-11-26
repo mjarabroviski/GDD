@@ -51,8 +51,9 @@ namespace AerolineaFrba.Listado_Estadistico
             #region Cargar Recursos
 
             //Cargo el combo de años
+            //Se muestran estadisticas de aca a 3 anios
             var dataSourceAño = new List<object>();
-            for (var i = 1990; i <= Convert.ToInt32(Configuracion.ConfiguracionDeVariables.FechaSistema.Year); i++)
+            for (var i = 1990; i <= Convert.ToInt32(Configuracion.ConfiguracionDeVariables.FechaSistema.AddYears(3).Year); i++)
                 dataSourceAño.Add(new { Name = i.ToString(), Value = i });
             cboAnio.DataSource = dataSourceAño;
             cboAnio.ValueMember = "Value";
@@ -135,8 +136,8 @@ namespace AerolineaFrba.Listado_Estadistico
                     case "02": diaHasta = "28"; break;
                 }
 
-                var fechaDesde = DateTime.Parse("01/" + mesDesde + "/" + cboAnio.SelectedValue.ToString());
-                var fechaHasta = DateTime.Parse(diaHasta + "/" + mesHasta + "/" + cboAnio.SelectedValue.ToString());
+                var fechaDesde = DateTime.Parse(cboAnio.SelectedValue.ToString() + "/" + mesDesde + "/01");
+                var fechaHasta = DateTime.Parse(cboAnio.SelectedValue.ToString() + "/" + mesHasta + "/" + diaHasta);
 
                 //Creo los filtros con los que se ejecuta la consulta.
                 var filtros = new EstadisticaFiltros
@@ -207,7 +208,7 @@ namespace AerolineaFrba.Listado_Estadistico
                         var bind1 = estadisticasDictionary.Values.Select(a => new
                         {
                             Destino = a.Parametro,
-                            Cantidad = a.Valor
+                            Cantidad_Pasajes_Comprados = a.Valor
                         });
                         DgvListado.DataSource = bind1.ToList();
                         break;
@@ -216,7 +217,7 @@ namespace AerolineaFrba.Listado_Estadistico
                         var bind2 = estadisticasDictionary.Values.Select(a => new
                         {
                             Destino = a.Parametro,
-                            Cantidad = a.Valor
+                            Cantidad_Butacas_Libres = a.Valor
                         });
                         DgvListado.DataSource = bind2.ToList();
                         break;
@@ -232,7 +233,7 @@ namespace AerolineaFrba.Listado_Estadistico
                         var bind4 = estadisticasDictionary.Values.Select(a => new
                         {
                             Destino = a.Parametro,
-                            Cantidad = a.Valor
+                            Cantidad_Pasajes_Cancelados = a.Valor
                         });
                         DgvListado.DataSource = bind4.ToList();
                         break;
@@ -240,7 +241,7 @@ namespace AerolineaFrba.Listado_Estadistico
                         var bind5 = estadisticasDictionary.Values.Select(a => new
                         {
                             Aeronave = a.Parametro,
-                            Cantidad = a.Valor
+                            Cantidad_Dias = a.Valor
                         });
                         DgvListado.DataSource = bind5.ToList();
                         break;
