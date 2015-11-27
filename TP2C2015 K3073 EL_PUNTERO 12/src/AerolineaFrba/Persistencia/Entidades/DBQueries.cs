@@ -211,7 +211,6 @@ namespace Persistencia.Entidades
 
         public static class Estadistica
         {
-            //FALTAN HACER TODAS!!
             public static String SPGetDestinosConMasPasajesComprados = "EL_PUNTERO.GetDestinosConMasPasajesComprados";
             public static String SPGetDestinosConMasAeronavesVacias = "EL_PUNTERO.GetDestinosConMasAeronavesVacias";
             public static String SPGetClientesConMasPuntosAcumulados = "EL_PUNTERO.GetClientesConMasPuntosAcumulados";
