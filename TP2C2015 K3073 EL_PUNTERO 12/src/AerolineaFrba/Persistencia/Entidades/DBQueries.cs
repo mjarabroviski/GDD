@@ -14,6 +14,11 @@ namespace Persistencia.Entidades
             public static String SPBorrarTablaAuxiliarPasajeros = "EL_PUNTERO.BorrarTablaAuxiliarPasajeros";
             public static String SPCargarTablaAuxiliarPasajeros = "EL_PUNTERO.CargarTablaAuxiliarPasajeros";
             public static String SPObtenerClientePorDoc = "EL_PUNTERO.ObtenerClientePorDoc";
+            public static String SPGuardarPasajeros = "EL_PUNTERO.GuardarPasajeros";
+            public static String SPGuardarAlQuePaga = "EL_PUNTERO.GuardarAlQuePaga";
+            public static String SPGuardarTarjetaYCompra = "EL_PUNTERO.GuardarTarjetaYCompra";
+            public static String SPGuardarCompraEnEfectivo = "EL_PUNTERO.GuardarCompraEnEfectivo";
+            public static String SPObtenerPNR = "EL_PUNTERO.ObtenerPNR";
         }
 
         public static class Rol
@@ -66,6 +71,7 @@ namespace Persistencia.Entidades
             public static String SPServiciosPorIDRuta = "EL_PUNTERO.GetServiciosPorIDRuta";
             public static String SPEliminarServiciosPorRuta = "EL_PUNTERO.EliminarServiciosPorRuta";
             public static String SPInsertarServiciosPorRuta = "EL_PUNTERO.InsertarServiciosPorRuta";
+            public static String SPGetRutaPorID = "EL_PUNTERO.GetRutaPorID";
         }
 
         public static class Usuario { 
@@ -168,6 +174,11 @@ namespace Persistencia.Entidades
 
             public static String SPGetAllTipoDocumento = "EL_PUNTERO.GetAllTipoDocumento";
             public static string SPObtenerTipoDocumentoPorID = "EL_PUNTERO.ObtenerTipoDocumentoPorID";
+        }
+
+        public static class TipoTarjeta
+        {
+            public static String SPGetAllTipoTarjeta = "EL_PUNTERO.GetAllTipoTarjeta";
         }
 
         public static class RegistroMillas

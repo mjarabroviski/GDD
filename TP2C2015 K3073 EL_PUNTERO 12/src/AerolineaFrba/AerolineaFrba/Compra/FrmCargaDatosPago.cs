@@ -15,11 +15,42 @@ namespace AerolineaFrba.Compra
 {
     public partial class FrmCargaDatosPago : Form
     {
-        public FrmCargaDatosPago(FrmIngresoCantidades frmIngresoCants,decimal cantEncomiendas,Viaje viaje)
+        public decimal cantEnc;
+        public decimal cantPas;
+        public Viaje viajeActual;
+        public double precioPasajes;
+        public double precioEncomienda;
+
+        public FrmCargaDatosPago(FrmIngresoCantidades frmIngresoCants,decimal cantPasajes,decimal cantEncomiendas,Viaje viaje)
         {
             InitializeComponent();
             if (frmIngresoCants != null)
                 frmIngresoCants.Visible = false;
+            cantEnc = cantEncomiendas;
+            viajeActual = viaje;
+            cantPas = cantPasajes;
+            if (cantPas == 0)
+            {
+                CmbPasajeros.Visible = false;
+                BtnDatosViejos.Visible = false;
+                BtnDatosNuevos.Visible = false;
+                TxtApellidos.Enabled = true;
+                TxtCalle.Enabled = true;
+                TxtMail.Enabled = true;
+                TxtNombres.Enabled = true;
+                TxtNroCalle.Enabled = true;
+                TxtNroDoc.Enabled = true;
+                TxtTelefono.Enabled = true;
+                DtpFechaNac.Enabled = true;
+                CmbTipoDoc.Enabled = true;
+                label14.Visible = false;
+            }
+            else
+            {
+                CmbPasajeros.DataSource = ClientePersistencia.ObtenerAuxiliares();
+                CmbPasajeros.ValueMember = "ID";
+                CmbPasajeros.DisplayMember = "NombreYApellido";
+            }
         }
 
         private void FrmCargaDatosPago_Load(object sender, EventArgs e)
@@ -28,19 +59,33 @@ namespace AerolineaFrba.Compra
                 BtnEfectivo.Visible = false;
 
             DtpFechaNac.MaxDate = DateTime.Now;
-            DtpFechaNac.Value = DateTime.Now;
-            CmbPasajeros.DataSource = ClientePersistencia.ObtenerAuxiliares();
-            CmbPasajeros.ValueMember = "ID";
-            CmbPasajeros.DisplayMember = "NombreYApellido";
+            DtpFechaNac.Value = DateTime.Today;
+
+            CmbTipoDoc.DataSource = TipoDocumentoPersistencia.ObtenerTodos();
+            CmbTipoDoc.ValueMember = "ID";
+            CmbTipoDoc.DisplayMember = "Descripcion";
+
+            Servicio servi = ServicioPersistencia.ObtenerServicioAeronave(viajeActual.ID_Aeronave);
+            var porcentajeServicio = (servi.Porcentaje/100)+1;
+            Ruta ruta = RutaPersistencia.ObtenerRutaPorID(viajeActual.ID_Ruta);
+            precioEncomienda = (double)cantEnc * ruta.Precio_Base_KG;
+            precioPasajes = (double)cantPas * ruta.Precio_Base_Pasaje * porcentajeServicio;
+
+            label16.Text = "$" + Math.Round((precioEncomienda + precioPasajes),2).ToString();
         }
 
         private void BtnCancelar_Click(object sender, EventArgs e)
         {
-            CompraPersistencia.BorrarTablaAuxiliar();
-            this.Visible = false;
-            FrmCompra frmCompra = new FrmCompra();
-            frmCompra.ShowDialog();
-            this.Close();
+            var dialogAnswer = MessageBox.Show(string.Format("Esta seguro que desea cancelar la compra?"), "Atención", MessageBoxButtons.YesNo);
+            if (dialogAnswer == DialogResult.Yes)
+            {
+                if(cantPas!=0)
+                    CompraPersistencia.BorrarTablaAuxiliar();
+                this.Visible = false;
+                FrmCompra frmCompra = new FrmCompra();
+                frmCompra.ShowDialog();
+                this.Close();
+            }
         }
 
         private void CmbPasajeros_SelectedValueChanged(object sender, EventArgs e)
@@ -105,6 +150,150 @@ namespace AerolineaFrba.Compra
             CmbTipoDoc.Text = TipoDocumentoPersistencia.ObtenerPorID(clienteAux.ID_Tipo_Documento);
             DtpFechaNac.Value = clienteAux.Fecha_Nacimiento;
 
+        }
+
+        private void BtnTarjeta_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                Validaciones();
+
+                #region Armado del cliente auxiliar
+
+                ClienteAuxiliar cli = new ClienteAuxiliar();
+                cli.Apellido=TxtApellidos.Text;
+                cli.Direccion = TxtCalle.Text + TxtNroCalle.Text;
+                cli.Fecha_Nacimiento = DtpFechaNac.Value;
+                cli.ID_Tipo_Documento = CmbTipoDoc.SelectedIndex+1;
+                cli.Mail = TxtMail.Text;
+                cli.Nombre = TxtNombres.Text;
+                cli.NombreYApellido = cli.Apellido + ", " + cli.Nombre;
+                cli.Nro_Documento = Int32.Parse(TxtNroDoc.Text);
+                cli.Telefono = TxtTelefono.Text;
+
+                #endregion
+
+                FrmPagoConTarjeta frmPagoTarjeta = new FrmPagoConTarjeta(cli,viajeActual,cantEnc,precioEncomienda,cantPas,precioPasajes,label16.Text);
+                frmPagoTarjeta.ShowDialog();
+                this.Visible = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Atención");
+            }
+        }
+
+        private void Validaciones()
+        {
+            var mensajeExcepcion = string.Empty;
+
+            if (!(ValidadorDeTipos.IsEmpty(TxtNroDoc.Text)))
+            {
+                if (!(ValidadorDeTipos.IsNumeric(TxtNroDoc.Text)))
+                    mensajeExcepcion += Environment.NewLine + "El documento debe ser un número";
+            }
+            else
+            {
+                mensajeExcepcion += Environment.NewLine + "Debe ingresar su documento";
+            }
+
+            if (ValidadorDeTipos.IsEmpty(TxtNombres.Text))
+            {
+                mensajeExcepcion += Environment.NewLine + "Debe ingresar su nombre";
+            }
+
+            if (ValidadorDeTipos.IsEmpty(TxtApellidos.Text))
+            {
+                mensajeExcepcion += Environment.NewLine + "Debe ingresar su apellido";
+            }
+
+            if (ValidadorDeTipos.IsEmpty(TxtCalle.Text))
+            {
+                mensajeExcepcion += Environment.NewLine + "Debe ingresar la calle de su domicilio";
+            }
+
+            if (!(ValidadorDeTipos.IsEmpty(TxtNroCalle.Text)))
+            {
+                if (!(ValidadorDeTipos.IsNumeric(TxtNroCalle.Text)))
+                    mensajeExcepcion += Environment.NewLine + "La altura del domicilio debe ser un número";
+            }
+            else
+            {
+                mensajeExcepcion += Environment.NewLine + "Debe ingresar la altura de su domicilio";
+            }
+
+            if (!(ValidadorDeTipos.IsEmpty(TxtTelefono.Text)))
+            {
+                if (!(ValidadorDeTipos.IsNumeric(TxtTelefono.Text)))
+                    mensajeExcepcion += Environment.NewLine + "El teléfono debe ser un número";
+            }
+            else
+            {
+                mensajeExcepcion += Environment.NewLine + "Debe ingresar su teléfono";
+            }
+
+            if ((!(ValidadorDeTipos.IsMailValido(TxtMail.Text))) && (!(ValidadorDeTipos.IsEmpty(TxtMail.Text))))
+                mensajeExcepcion += Environment.NewLine + "Formato inválido de mail";
+
+            if (!ValidadorDeTipos.IsEmpty(mensajeExcepcion))
+                throw new Exception(mensajeExcepcion);
+
+        }
+
+        private void label16_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnEfectivo_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Validaciones();
+
+                var dialogAnswer = MessageBox.Show(string.Format("Desea confirmar la compra?"), "Atención", MessageBoxButtons.YesNo);
+                if (dialogAnswer == DialogResult.Yes)
+                {
+                    #region Armado del cliente auxiliar
+
+                    ClienteAuxiliar cli = new ClienteAuxiliar();
+                    cli.Apellido = TxtApellidos.Text;
+                    cli.Direccion = TxtCalle.Text + TxtNroCalle.Text;
+                    cli.Fecha_Nacimiento = DtpFechaNac.Value;
+                    cli.ID_Tipo_Documento = CmbTipoDoc.SelectedIndex + 1;
+                    cli.Mail = TxtMail.Text;
+                    cli.Nombre = TxtNombres.Text;
+                    cli.NombreYApellido = cli.Apellido + ", " + cli.Nombre;
+                    cli.Nro_Documento = Int32.Parse(TxtNroDoc.Text);
+                    cli.Telefono = TxtTelefono.Text;
+
+                    #endregion
+
+                    if (cantPas != 0)
+                    {
+                        for (int i = 1; i <= ClientePersistencia.ObtenerAuxiliares().Count; i++)
+                        {
+                            CompraPersistencia.GuardarPasajeros(i, viajeActual.ID, precioPasajes);
+                        }
+                    }
+
+                    CompraPersistencia.GuardarAlQuePaga(cli);
+                    CompraPersistencia.GuardarCompraEnEfectivo(cli,
+                                                                viajeActual.ID,
+                                                                cantEnc,
+                                                                precioEncomienda,
+                                                                AdministradorSesion.UsuarioActual);
+
+                    FrmInformeDatosCompra frmInfDatosCompra = new FrmInformeDatosCompra(label16.Text);
+                    frmInfDatosCompra.ShowDialog();
+                    this.Visible = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Atención");
+            }
         }
     }
 }

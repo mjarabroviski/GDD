@@ -154,9 +154,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(743, 448);
+            this.ControlBox = false;
             this.Controls.Add(this.BtnCancelar);
             this.Controls.Add(this.DgvViaje);
             this.Controls.Add(this.groupBox1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FrmCompra";
             this.Text = "FrmCompra";
             this.Load += new System.EventHandler(this.FrmCompra_Load);

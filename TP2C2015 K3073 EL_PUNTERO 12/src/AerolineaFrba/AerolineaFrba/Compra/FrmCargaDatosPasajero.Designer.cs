@@ -398,6 +398,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(734, 467);
+            this.ControlBox = false;
             this.Controls.Add(this.DgvButacas);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.BtnCancelar);
@@ -425,6 +426,8 @@
             this.Controls.Add(this.BtnSiguiente);
             this.Controls.Add(this.LblNroPasajero);
             this.Controls.Add(this.label1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FrmCargaDatosPasajero";
             this.Text = "FrmCargaDatosPasajero";
             this.Load += new System.EventHandler(this.FrmCargaDatosPasajero_Load);

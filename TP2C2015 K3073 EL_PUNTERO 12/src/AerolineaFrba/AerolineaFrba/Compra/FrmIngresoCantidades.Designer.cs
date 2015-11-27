@@ -61,11 +61,11 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(21, 133);
+            this.label3.Location = new System.Drawing.Point(21, 128);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(71, 13);
+            this.label3.Size = new System.Drawing.Size(58, 13);
             this.label3.TabIndex = 2;
-            this.label3.Text = "Encomiendas";
+            this.label3.Text = "Kilogramos";
             // 
             // NumPasajes
             // 
@@ -116,6 +116,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 233);
+            this.ControlBox = false;
             this.Controls.Add(this.BtnCancelar);
             this.Controls.Add(this.BtnAceptar);
             this.Controls.Add(this.NumEncomiendas);
@@ -123,6 +124,8 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FrmIngresoCantidades";
             this.Text = "Ingreso Cantidades";
             ((System.ComponentModel.ISupportInitialize)(this.NumPasajes)).EndInit();

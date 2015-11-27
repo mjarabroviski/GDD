@@ -24,7 +24,7 @@ CREATE TABLE [EL_PUNTERO].[TL_BAJA_SERVICIO_AERONAVE](
 CREATE TABLE [EL_PUNTERO].[TL_PASAJE](
 	[ID_Pasaje] int IDENTITY (1,1),
 	[Codigo_Pasaje] int NOT NULL,
-	[ID_Compra] int NOT NULL,
+	[ID_Compra] int,
 	[Precio] numeric(6,2) NOT NULL,
 	[ID_Viaje] int NOT NULL,
 	[ID_Butaca] int NOT NULL,
@@ -46,8 +46,8 @@ CREATE TABLE [EL_PUNTERO].[TL_CLIENTE](
 	[Apellido] nvarchar(255) NOT NULL,
 	[ID_Tipo_Documento] int NOT NULL,
 	[Nro_Documento] int NOT NULL,
-	[Mail] nvarchar(255) NOT NULL,
-	[Telefono] nvarchar(255),
+	[Mail] nvarchar(255),
+	[Telefono] nvarchar(255) NOT NULL,
 	[Direccion] nvarchar(255) NOT NULL,
 	[Fecha_Nacimiento] datetime NOT NULL,
 	[Millas] int DEFAULT 0
@@ -255,7 +255,7 @@ CREATE TABLE [EL_PUNTERO].[TL_COMPRA](
 	[Fecha_Compra] datetime NOT NULL,
 	[ID_Tarjeta] int,
 	[Cantidad_Cuotas] int,
-	[ID_Usuario] int NOT NULL,
+	[ID_Usuario] int,
 	[Codigo_Pasaje] int,
 	[Codigo_Paquete] int
 );

@@ -251,5 +251,20 @@ namespace Persistencia
                 }
             }
         }
+
+        public static Ruta ObtenerRutaPorID(int p)
+        {
+            //Obtengo la ruta
+            var param = new List<SPParameter> { new SPParameter("ID_Ruta", p) };
+            var sp = new StoreProcedure(DBQueries.Ruta.SPGetRutaPorID, param);
+
+            //Retorno una lista de Servicios a partir de un ExecuteReader
+            List<Ruta> rutas = sp.ExecuteReader<Ruta>();
+
+            if (rutas == null || rutas.Count == 0)
+                return null;
+
+            return rutas[0];
+        }
     }
 }

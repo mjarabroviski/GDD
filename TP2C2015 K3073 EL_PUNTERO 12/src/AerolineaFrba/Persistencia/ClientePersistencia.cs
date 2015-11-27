@@ -59,7 +59,7 @@ namespace Persistencia
             return clientes[0].Apellido.ToUpper() + " " + clientes[0].Nombre.ToUpper();
         }
 
-        public static object ObtenerAuxiliares()
+        public static List<ClienteAuxiliar> ObtenerAuxiliares()
         {
             //Traigo los clientes de la tabla auxiliar
             var param = new List<SPParameter> { };

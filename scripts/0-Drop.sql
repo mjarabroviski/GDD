@@ -148,6 +148,14 @@ DROP PROCEDURE [EL_PUNTERO].ObtenerRutaEncomienda
 DROP PROCEDURE [EL_PUNTERO].ObtenerCiudadesOrigenParaUnServicio
 DROP PROCEDURE [EL_PUNTERO].ObtenerServicioAeronave
 
+DROP PROCEDURE [EL_PUNTERO].[GetAllTipoTarjeta]
+DROP PROCEDURE [EL_PUNTERO].[GetRutaPorID]
+DROP PROCEDURE [EL_PUNTERO].[GuardarPasajeros]
+DROP PROCEDURE [EL_PUNTERO].[GuardarAlQuePaga]
+DROP PROCEDURE [EL_PUNTERO].[GuardarTarjetaYCompra]
+DROP PROCEDURE [EL_PUNTERO].[GuardarCompraEnEfectivo]
+DROP PROCEDURE [EL_PUNTERO].[ObtenerPNR]
+
 DROP TRIGGER [EL_PUNTERO].[Tr_DeshabilitarUsuariosConRolDeshabilitado];
 
 DROP FUNCTION [EL_PUNTERO].[CompraAPartirDeEncomienda];

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCargaDatosPago));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -63,7 +64,12 @@
             this.BtnEfectivo = new System.Windows.Forms.Label();
             this.BtnDatosNuevos = new System.Windows.Forms.Label();
             this.BtnDatosViejos = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.groupBox1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -382,12 +388,13 @@
             this.BtnTarjeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.BtnTarjeta.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnTarjeta.ForeColor = System.Drawing.Color.White;
-            this.BtnTarjeta.Location = new System.Drawing.Point(276, 464);
+            this.BtnTarjeta.Location = new System.Drawing.Point(575, 464);
             this.BtnTarjeta.Name = "BtnTarjeta";
             this.BtnTarjeta.Size = new System.Drawing.Size(88, 43);
             this.BtnTarjeta.TabIndex = 102;
             this.BtnTarjeta.Text = "PAGAR CON TARJETA DE CRÉDITO";
             this.BtnTarjeta.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.BtnTarjeta.Click += new System.EventHandler(this.BtnTarjeta_Click);
             // 
             // BtnEfectivo
             // 
@@ -395,12 +402,13 @@
             this.BtnEfectivo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.BtnEfectivo.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnEfectivo.ForeColor = System.Drawing.Color.White;
-            this.BtnEfectivo.Location = new System.Drawing.Point(147, 464);
+            this.BtnEfectivo.Location = new System.Drawing.Point(392, 464);
             this.BtnEfectivo.Name = "BtnEfectivo";
             this.BtnEfectivo.Size = new System.Drawing.Size(88, 43);
             this.BtnEfectivo.TabIndex = 103;
             this.BtnEfectivo.Text = "PAGAR EN EFECTIVO";
             this.BtnEfectivo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.BtnEfectivo.Click += new System.EventHandler(this.BtnEfectivo_Click);
             // 
             // BtnDatosNuevos
             // 
@@ -430,11 +438,54 @@
             this.BtnDatosViejos.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.BtnDatosViejos.Click += new System.EventHandler(this.BtnDatosViejos_Click);
             // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(35, 33);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(208, 25);
+            this.label15.TabIndex = 106;
+            this.label15.Text = "TOTAL A ABONAR";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(71, 75);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(125, 31);
+            this.label16.TabIndex = 107;
+            this.label16.Text = "PRECIO";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label16.Click += new System.EventHandler(this.label16_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.panel1.Controls.Add(this.label16);
+            this.panel1.Controls.Add(this.label15);
+            this.panel1.Location = new System.Drawing.Point(392, 309);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(271, 140);
+            this.panel1.TabIndex = 108;
+            // 
+            // panel2
+            // 
+            this.panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel2.BackgroundImage")));
+            this.panel2.Location = new System.Drawing.Point(392, 38);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(270, 233);
+            this.panel2.TabIndex = 109;
+            // 
             // FrmCargaDatosPago
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(383, 525);
+            this.ClientSize = new System.Drawing.Size(688, 525);
+            this.ControlBox = false;
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.BtnDatosViejos);
             this.Controls.Add(this.BtnDatosNuevos);
             this.Controls.Add(this.BtnEfectivo);
@@ -464,11 +515,15 @@
             this.Controls.Add(this.CmbTipoDoc);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FrmCargaDatosPago";
             this.Text = "FrmCargaDatosPago";
             this.Load += new System.EventHandler(this.FrmCargaDatosPago_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -511,5 +566,9 @@
         private System.Windows.Forms.Label BtnEfectivo;
         private System.Windows.Forms.Label BtnDatosNuevos;
         private System.Windows.Forms.Label BtnDatosViejos;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
     }
 }

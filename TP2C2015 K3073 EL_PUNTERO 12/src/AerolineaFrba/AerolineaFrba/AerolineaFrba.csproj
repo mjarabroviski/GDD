@@ -159,11 +159,23 @@
     <Compile Include="Compra\FrmCompra.Designer.cs">
       <DependentUpon>FrmCompra.cs</DependentUpon>
     </Compile>
+    <Compile Include="Compra\FrmInformeDatosCompra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Compra\FrmInformeDatosCompra.Designer.cs">
+      <DependentUpon>FrmInformeDatosCompra.cs</DependentUpon>
+    </Compile>
     <Compile Include="Compra\FrmIngresoCantidades.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Compra\FrmIngresoCantidades.Designer.cs">
       <DependentUpon>FrmIngresoCantidades.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Compra\FrmPagoConTarjeta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Compra\FrmPagoConTarjeta.Designer.cs">
+      <DependentUpon>FrmPagoConTarjeta.cs</DependentUpon>
     </Compile>
     <Compile Include="Consulta Millas\ConsultaMillas.cs">
       <SubType>Form</SubType>
@@ -302,8 +314,14 @@
     <EmbeddedResource Include="Compra\FrmCompra.resx">
       <DependentUpon>FrmCompra.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Compra\FrmInformeDatosCompra.resx">
+      <DependentUpon>FrmInformeDatosCompra.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Compra\FrmIngresoCantidades.resx">
       <DependentUpon>FrmIngresoCantidades.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Compra\FrmPagoConTarjeta.resx">
+      <DependentUpon>FrmPagoConTarjeta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Consulta Millas\ConsultaMillas.resx">
       <DependentUpon>ConsultaMillas.cs</DependentUpon>

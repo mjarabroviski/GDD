@@ -1,3 +1,4 @@
+
 BEGIN TRANSACTION
 
 SET ANSI_NULLS ON
@@ -225,27 +226,6 @@ BEGIN
 END
 GO
 
-
-CREATE PROCEDURE [EL_PUNTERO].[TraerLosPasajesDevueltos]
-AS
-BEGIN
-	SET NOCOUNT ON;
-	SELECT *
-	FROM [EL_PUNTERO].TL_ITEM_DEVUELTO
-	WHERE ID_Pasaje IS NOT NULL;
-END
-GO
-
-CREATE PROCEDURE [EL_PUNTERO].[InsertarIDDevolucion]
-@ID_Item_Devuelto int
-AS
-BEGIN
-	SET NOCOUNT ON;
-	UPDATE [EL_PUNTERO].TL_ITEM_DEVUELTO SET ID_Devolucion = [EL_PUNTERO].DevolucionAPartirDePasaje(ID_Pasaje)
-	WHERE ID_Item_Devuelto = @ID_Item_Devuelto
-END
-GO
-
 CREATE PROCEDURE [EL_PUNTERO].[FiltrarViajes]
 @Fecha_Salida dateTime,
 @Ciudad_Origen varchar(255),
@@ -286,7 +266,6 @@ BEGIN
 END
 GO
 
---Acordarse de descomentar
 CREATE PROCEDURE [EL_PUNTERO].[ObtenerButacasDisponibles]
 @ID_Viaje int
 AS
@@ -300,7 +279,7 @@ BEGIN
 			[ButacasDisponibles] int
 		);
 
-		SET @ButacasTotales = (SELECT COUNT(*) FROM [EL_PUNTERO].TL_BUTACA B WHERE B.ID_Aeronave=(SELECT V.ID_Aeronave FROM [EL_PUNTERO].TL_VIAJE V WHERE V.ID_Viaje=@ID_Viaje)) /*AND B.Habilitado=1*/
+		SET @ButacasTotales = (SELECT COUNT(*) FROM [EL_PUNTERO].TL_BUTACA B WHERE B.ID_Aeronave=(SELECT V.ID_Aeronave FROM [EL_PUNTERO].TL_VIAJE V WHERE V.ID_Viaje=@ID_Viaje) AND B.Habilitado=1)
 
 		SET @ButacasOcupadas = (SELECT COUNT(*) FROM [EL_PUNTERO].TL_PASAJE P WHERE P.ID_Viaje=@ID_Viaje)	
 		
@@ -389,7 +368,7 @@ BEGIN
 			[ID_Butaca] int
 		);
 
-		INSERT INTO [EL_PUNTERO].TL_BUTACAAUX(ID_Butaca) ((SELECT B.ID_Butaca FROM [EL_PUNTERO].TL_BUTACA B WHERE B.ID_Aeronave = (SELECT V.ID_Aeronave FROM [EL_PUNTERO].TL_VIAJE V WHERE V.ID_Viaje=@ID_Viaje))) /*AND B.Habilitado=1*/
+		INSERT INTO [EL_PUNTERO].TL_BUTACAAUX(ID_Butaca) ((SELECT B.ID_Butaca FROM [EL_PUNTERO].TL_BUTACA B WHERE B.ID_Aeronave = (SELECT V.ID_Aeronave FROM [EL_PUNTERO].TL_VIAJE V WHERE V.ID_Viaje=@ID_Viaje) AND B.Habilitado=1))
 
 		SELECT * FROM [EL_PUNTERO].TL_BUTACA WHERE ID_Butaca IN 
 		(SELECT ID_Butaca
@@ -409,7 +388,7 @@ CREATE PROCEDURE [EL_PUNTERO].[CargarTablaAuxiliarPasajeros]
 @Nombres nvarchar(255),
 @Calle nvarchar(255),
 @Nro_Calle nvarchar(255),
-@Telefono int,
+@Telefono nvarchar(255),
 @Fecha_Nacimiento dateTime,
 @Mail nvarchar(255),
 @ID_Butaca int
@@ -541,4 +520,212 @@ BEGIN
 	WHERE @ID_Tipo_Documento = ID_Tipo_Documento
 END
 GO
+
+CREATE PROCEDURE [EL_PUNTERO].[GetAllTipoTarjeta]
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	SELECT *
+	FROM [EL_PUNTERO].[TL_TIPO_TARJETA] 
+END
+GO
+
+
+CREATE PROCEDURE [EL_PUNTERO].[GetRutaPorID]
+@ID_Ruta int
+AS
+BEGIN
+	SET NOCOUNT ON;
+	SELECT * FROM [EL_PUNTERO].[TL_RUTA] WHERE ID_Ruta=@ID_Ruta 
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[GuardarPasajeros]
+	@ID_Deseado int,
+	@ID_Viaje int,
+	@Precio_Pasajes numeric(18,2)
+AS
+BEGIN
+	DECLARE @Cant int
+	DECLARE @Nombre nvarchar(255)
+	DECLARE @Apellido nvarchar(255)
+	DECLARE @ID_Tipo_Documento int
+	DECLARE @Nro_Documento int
+	DECLARE @Direccion nvarchar(255)
+	DECLARE @Telefono nvarchar(255)
+	DECLARE @Fecha_Nacimiento datetime
+	DECLARE @ID_Cliente int
+	DECLARE @Mail nvarchar(255)
+	DECLARE @MaxPasaje int
+	DECLARE @ID_Butaca int
+	
+	SET @Cant = (SELECT COUNT(*) FROM [EL_PUNTERO].[TL_CLIENTE] WHERE 
+							Nro_Documento = (SELECT CA.Nro_Documento FROM [EL_PUNTERO].[TL_CLIENTE_AUX] CA WHERE CA.ID=@ID_Deseado) AND
+							Apellido = (SELECT CA.Apellido FROM [EL_PUNTERO].[TL_CLIENTE_AUX] CA WHERE CA.ID=@ID_Deseado) AND
+							Nombre = (SELECT CA.Nombre FROM [EL_PUNTERO].[TL_CLIENTE_AUX] CA WHERE CA.ID=@ID_Deseado))
+	
+	SET @Nombre = (SELECT Nombre FROM [EL_PUNTERO].[TL_CLIENTE_AUX] WHERE ID=@ID_Deseado)
+	SET @Apellido = (SELECT Apellido FROM [EL_PUNTERO].[TL_CLIENTE_AUX] WHERE ID=@ID_Deseado)
+	SET @ID_Tipo_Documento = (SELECT ID_Tipo_Documento FROM [EL_PUNTERO].[TL_CLIENTE_AUX] WHERE ID=@ID_Deseado)
+	SET @Nro_Documento = (SELECT Nro_Documento FROM [EL_PUNTERO].[TL_CLIENTE_AUX] WHERE ID=@ID_Deseado)
+	SET @Direccion = (SELECT Direccion FROM [EL_PUNTERO].[TL_CLIENTE_AUX] WHERE ID=@ID_Deseado)
+	SET @Telefono = (SELECT Telefono FROM [EL_PUNTERO].[TL_CLIENTE_AUX] WHERE ID=@ID_Deseado)
+	SET @Fecha_Nacimiento = (SELECT Fecha_Nacimiento FROM [EL_PUNTERO].[TL_CLIENTE_AUX] WHERE ID=@ID_Deseado)
+	SET @Mail = (SELECT Mail FROM [EL_PUNTERO].[TL_CLIENTE_AUX] WHERE ID=@ID_Deseado)
+
+	SET @ID_Cliente = (SELECT ID_Cliente FROM [EL_PUNTERO].[TL_CLIENTE] WHERE 
+			Nro_Documento = (SELECT CA.Nro_Documento FROM [EL_PUNTERO].[TL_CLIENTE_AUX] CA WHERE CA.ID=@ID_Deseado) AND
+			Apellido = (SELECT CA.Apellido FROM [EL_PUNTERO].[TL_CLIENTE_AUX] CA WHERE CA.ID=@ID_Deseado) AND
+			Nombre = (SELECT CA.Nombre FROM [EL_PUNTERO].[TL_CLIENTE_AUX] CA WHERE CA.ID=@ID_Deseado))
+	
+	IF(@Cant=1)
+	BEGIN
+		--Actualizo al pasajero si existe en la tabla principal
+		UPDATE [EL_PUNTERO].[TL_CLIENTE] SET Direccion=@Direccion,Telefono=@Telefono,Fecha_Nacimiento=@Fecha_Nacimiento,Mail=@Mail
+		WHERE ID_Cliente = @ID_Cliente
+	END
+
+	IF(@Cant=0) 
+	BEGIN
+		--Inserto al pasajero si no existe en la tabla principal
+		INSERT INTO [EL_PUNTERO].[TL_CLIENTE] (Nombre,Apellido,ID_Tipo_Documento,Nro_Documento,Direccion,Telefono,Fecha_Nacimiento,Mail)
+			VALUES (@Nombre,@Apellido,@ID_Tipo_Documento,@Nro_Documento,@Direccion,@Telefono,@Fecha_Nacimiento,@Mail)		
+
+		SET @ID_Cliente = (SELECT ID_Cliente FROM [EL_PUNTERO].[TL_CLIENTE] WHERE 
+			Nro_Documento = (SELECT CA.Nro_Documento FROM [EL_PUNTERO].[TL_CLIENTE_AUX] CA WHERE CA.ID=@ID_Deseado) AND
+			Apellido = (SELECT CA.Apellido FROM [EL_PUNTERO].[TL_CLIENTE_AUX] CA WHERE CA.ID=@ID_Deseado) AND
+			Nombre = (SELECT CA.Nombre FROM [EL_PUNTERO].[TL_CLIENTE_AUX] CA WHERE CA.ID=@ID_Deseado))
+	END
+	
+	--Creo el nuevo pasaje con el ID_Compra en NULL
+	SET @MaxPasaje = (SELECT MAX(Codigo_Pasaje) FROM [EL_PUNTERO].[TL_PASAJE])
+	SET @ID_Butaca = (SELECT ID_Butaca FROM [EL_PUNTERO].[TL_CLIENTE_AUX] WHERE ID=@ID_Deseado)
+	
+	INSERT INTO [EL_PUNTERO].[TL_PASAJE] (Codigo_Pasaje,ID_Viaje,ID_Butaca,ID_Cliente,Precio)
+		VALUES (@MaxPasaje+1,@ID_Viaje,@ID_Butaca,@ID_Cliente,@Precio_Pasajes)
+	
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[GuardarAlQuePaga]
+@Apellido nvarchar(255),
+@Direccion nvarchar(255),
+@Fecha_Nacimiento datetime,
+@ID_Tipo_Documento int,
+@Mail nvarchar(255),
+@Nombre nvarchar(255),
+@Nro_Documento int,
+@Telefono nvarchar(255)
+
+AS
+BEGIN
+	DECLARE @Cant int
+	SET @Cant = (SELECT COUNT(*) FROM [EL_PUNTERO].[TL_CLIENTE] WHERE Nombre=@Nombre AND Apellido=@Apellido AND Nro_Documento=@Nro_Documento)
+
+	IF (@Cant=0)
+	BEGIN
+		INSERT INTO [EL_PUNTERO].[TL_CLIENTE] (Nombre,Apellido,ID_Tipo_Documento,Nro_Documento,Direccion,Telefono,Fecha_Nacimiento,Mail)
+			VALUES (@Nombre,@Apellido,@ID_Tipo_Documento,@Nro_Documento,@Direccion,@Telefono,@Fecha_Nacimiento,@Mail)	
+	END
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[GuardarTarjetaYCompra]
+@Apellido nvarchar(255),
+@Nombre nvarchar(255),
+@Nro_Documento int,
+@ID_Tipo_Tarjeta int,
+@Nro_Tarjeta int,
+@Cant_Cuotas int,
+@ID_Viaje int,
+@KG int,
+@Precio_Encomienda numeric(18,2),
+@ID_Usuario int
+AS
+BEGIN
+	DECLARE @ID_Cliente int
+	DECLARE @Cant int
+	DECLARE @ID_Tarjeta int
+	DECLARE @MaxEncomienda int
+	DECLARE @ID_Compra int
+	SET @ID_Cliente = (SELECT ID_Cliente FROM [EL_PUNTERO].[TL_CLIENTE] WHERE Nombre=@Nombre AND Apellido=@Apellido AND Nro_Documento=@Nro_Documento)
+	SET @Cant = (SELECT COUNT(*) FROM [EL_PUNTERO].[TL_TARJETA] WHERE Nro_Tarjeta=@Nro_Tarjeta AND @ID_Cliente=ID_Cliente AND @ID_Tipo_Tarjeta=ID_Tipo_Tarjeta)
+
+	IF(@Cant=0)
+	BEGIN
+		INSERT INTO [EL_PUNTERO].[TL_TARJETA] (Nro_Tarjeta,ID_Cliente,ID_Tipo_Tarjeta)
+			VALUES (@Nro_Tarjeta,@ID_Cliente,@ID_Tipo_Tarjeta)
+	END
+
+	SET @ID_Tarjeta = (SELECT ID_Tarjeta FROM [EL_PUNTERO].[TL_TARJETA] WHERE Nro_Tarjeta=@Nro_Tarjeta AND @ID_Cliente=ID_Cliente AND @ID_Tipo_Tarjeta=ID_Tipo_Tarjeta)
+
+	INSERT INTO [EL_PUNTERO].[TL_COMPRA] (ID_Cliente,Fecha_Compra,ID_Tarjeta,ID_Usuario,Cantidad_Cuotas)
+		VALUES(@ID_Cliente,GETDATE(),@ID_Tarjeta,@ID_Usuario,@Cant_Cuotas)
+
+	UPDATE EL_PUNTERO.TL_COMPRA
+		SET PNR = ID_Compra 
+
+	SET @MaxEncomienda = (SELECT MAX(Codigo_Encomienda) FROM [EL_PUNTERO].[TL_ENCOMIENDA])
+	SET @ID_Compra = (SELECT MAX(ID_Compra) FROM [EL_PUNTERO].[TL_COMPRA])
+
+	IF(@KG>0)
+	BEGIN
+		INSERT INTO [EL_PUNTERO].[TL_ENCOMIENDA] (Codigo_Encomienda,ID_Compra,ID_Viaje,KG,Precio)
+			VALUES(@MaxEncomienda+1,@ID_Compra,@ID_Viaje,@KG,@Precio_Encomienda)
+	END
+
+	UPDATE EL_PUNTERO.TL_PASAJE SET ID_Compra=@ID_Compra
+	WHERE ID_Compra is NULL
+
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[GuardarCompraEnEfectivo]
+@Apellido nvarchar(255),
+@Nombre nvarchar(255),
+@Nro_Documento int,
+@ID_Viaje int,
+@KG int,
+@Precio_Encomienda numeric(18,2),
+@ID_Usuario int
+AS
+BEGIN
+	DECLARE @ID_Cliente int
+	DECLARE @MaxEncomienda int
+	DECLARE @ID_Compra int
+
+	SET @ID_Cliente = (SELECT ID_Cliente FROM [EL_PUNTERO].[TL_CLIENTE] WHERE Nombre=@Nombre AND Apellido=@Apellido AND Nro_Documento=@Nro_Documento)
+
+	INSERT INTO [EL_PUNTERO].[TL_COMPRA] (ID_Cliente,Fecha_Compra,ID_Usuario)
+		VALUES(@ID_Cliente,GETDATE(),@ID_Usuario)
+
+	UPDATE EL_PUNTERO.TL_COMPRA
+		SET PNR = ID_Compra 
+
+	SET @MaxEncomienda = (SELECT MAX(Codigo_Encomienda) FROM [EL_PUNTERO].[TL_ENCOMIENDA])
+	SET @ID_Compra = (SELECT MAX(ID_Compra) FROM [EL_PUNTERO].[TL_COMPRA])
+
+	IF(@KG>0)
+	BEGIN
+		INSERT INTO [EL_PUNTERO].[TL_ENCOMIENDA] (Codigo_Encomienda,ID_Compra,ID_Viaje,KG,Precio)
+			VALUES(@MaxEncomienda+1,@ID_Compra,@ID_Viaje,@KG,@Precio_Encomienda)
+	END
+
+	UPDATE EL_PUNTERO.TL_PASAJE SET ID_Compra=@ID_Compra
+	WHERE ID_Compra is NULL
+
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[ObtenerPNR]
+AS
+BEGIN
+	SET NOCOUNT ON;
+	SELECT TOP 1 ID_Compra
+	FROM [EL_PUNTERO].[TL_COMPRA] 
+	ORDER BY PNR DESC
+END
+GO
+
 COMMIT

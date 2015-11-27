@@ -59,6 +59,7 @@
     <Compile Include="Entidades\Ciudad.cs" />
     <Compile Include="Entidades\Cliente.cs" />
     <Compile Include="Entidades\ClienteAuxiliar.cs" />
+    <Compile Include="Entidades\Compra.cs" />
     <Compile Include="Entidades\DBManager.cs" />
     <Compile Include="Entidades\DBQueries.cs" />
     <Compile Include="Entidades\Devolucion.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="Entidades\StoreProcedure.cs" />
     <Compile Include="Entidades\TipoButaca.cs" />
     <Compile Include="Entidades\TipoDocumento.cs" />
+    <Compile Include="Entidades\TipoTarjeta.cs" />
     <Compile Include="Entidades\Usuario.cs" />
     <Compile Include="Entidades\Viaje.cs" />
     <Compile Include="FuncionalidadPersistencia.cs" />
@@ -89,6 +91,7 @@
     <Compile Include="ServicioPersistencia.cs" />
     <Compile Include="TipoButacaPersistencia.cs" />
     <Compile Include="TipoDocumentoPersistencia.cs" />
+    <Compile Include="TipoTarjetaPersistencia.cs" />
     <Compile Include="UsuarioPersistencia.cs" />
     <Compile Include="ViajePersistencia.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">

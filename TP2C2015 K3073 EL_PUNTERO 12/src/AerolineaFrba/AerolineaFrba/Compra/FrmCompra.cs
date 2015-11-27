@@ -141,7 +141,7 @@ namespace AerolineaFrba.Compra
                 int j = 0;
                 for (int i = 0; i < DgvViaje.RowCount; i++)
                 {
-                    if (((int)DgvViaje.Rows[i].Cells[5].Value == 0) && ((int)DgvViaje.Rows[i].Cells[6].Value == 0))
+                    if (((int)DgvViaje.Rows[i].Cells[4].Value == 0) && ((int)DgvViaje.Rows[i].Cells[5].Value == 0))
                     {
                         DgvViaje.CurrentCell = null;
                         DgvViaje.Rows[i].Visible = false;

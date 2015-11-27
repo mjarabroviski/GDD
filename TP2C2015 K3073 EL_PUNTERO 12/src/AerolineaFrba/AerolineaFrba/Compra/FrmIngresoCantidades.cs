@@ -54,7 +54,7 @@ namespace AerolineaFrba.Compra
                 {
                     //Solo hay encomiendas
                     ordenPasaje = 0;
-                    var formularioPago = new FrmCargaDatosPago(this,NumEncomiendas.Value,viajeActual);
+                    var formularioPago = new FrmCargaDatosPago(this,NumPasajes.Value,NumEncomiendas.Value,viajeActual);
                     formularioPago.ShowDialog();
                 }
 

@@ -164,7 +164,7 @@ namespace AerolineaFrba.Compra
                                                              TxtNombres.Text,
                                                              TxtCalle.Text,
                                                              TxtNroCalle.Text,
-                                                             Int32.Parse(TxtTelefono.Text),
+                                                             TxtTelefono.Text,
                                                              DtpFechaNac.Value,
                                                              TxtMail.Text,
                                                              butacaSeleccionada.ID);
@@ -180,7 +180,7 @@ namespace AerolineaFrba.Compra
                 else
                 {
                     this.Visible = false;
-                    var formularioPago = new FrmCargaDatosPago(null,cantEncomiendasActual,viajeActual);
+                    var formularioPago = new FrmCargaDatosPago(null,cantPasajesActual,cantEncomiendasActual,viajeActual);
                     formularioPago.ShowDialog();
                 }
             }
