@@ -171,6 +171,7 @@ namespace Persistencia.Entidades
             public static String SPGetClientesAuxiliares = "EL_PUNTERO.GetClientesAuxiliares";
             public static String SPGetClientePorID = "EL_PUNTERO.GetClientePorID";
             public static String SPGetClientePorNombreYApellido = "EL_PUNTERO.GetClientePorNombreYApellido";
+            public static String SPGetClienteEnViaje = "EL_PUNTERO.GetClienteEnViaje";
 
         }
 

@@ -169,6 +169,7 @@ DROP PROCEDURE [EL_PUNTERO].[GuardarAlQuePaga]
 DROP PROCEDURE [EL_PUNTERO].[GuardarTarjetaYCompra]
 DROP PROCEDURE [EL_PUNTERO].[GuardarCompraEnEfectivo]
 DROP PROCEDURE [EL_PUNTERO].[ObtenerPNR]
+DROP PROCEDURE [EL_PUNTERO].[GetClienteEnViaje]
 
 DROP TRIGGER [EL_PUNTERO].[Tr_DeshabilitarUsuariosConRolDeshabilitado];
 
@@ -179,5 +180,6 @@ DROP FUNCTION [EL_PUNTERO].[ObtenerIDBajaServicioMax];
 DROP FUNCTION [EL_PUNTERO].[ObtenerAeronaveDeReemplazoPorServicio];
 DROP FUNCTION [EL_PUNTERO].[ObtenerMillasCanje];
 DROP FUNCTION [EL_PUNTERO].[CantFueraDeServicio];
+DROP FUNCTION [EL_PUNTERO].[SeIntersectanFechas];
 
 DROP SCHEMA [EL_PUNTERO];

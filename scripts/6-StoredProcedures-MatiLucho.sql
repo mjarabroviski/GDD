@@ -701,4 +701,47 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE [EL_PUNTERO].[GetClienteEnViaje]
+@Documento int,
+@Tipo_Doc int,
+@ID_Viaje int,
+@Apellido nvarchar(255)
+AS
+BEGIN
+	SET NOCOUNT ON;
+	DECLARE @FechaDesde datetime
+	DECLARE @FechaHasta datetime
+	DECLARE @ID_Cliente int
+	SET @FechaDesde = (SELECT Fecha_Salida FROM [EL_PUNTERO].TL_VIAJE WHERE ID_Viaje=@ID_Viaje)
+	SET @FechaHasta = (SELECT Fecha_Llegada_Estimada FROM [EL_PUNTERO].TL_VIAJE WHERE ID_Viaje=@ID_Viaje)
+
+	SET @ID_Cliente = (SELECT ID_Cliente FROM [EL_PUNTERO].TL_CLIENTE WHERE ID_Tipo_Documento=@Tipo_Doc AND Nro_Documento=@Documento AND Apellido=@Apellido)
+	
+	SELECT * FROM [EL_PUNTERO].TL_PASAJE WHERE ID_Cliente=@ID_Cliente AND [EL_PUNTERO].[SeIntersectanFechas](ID_Pasaje,@FechaDesde,@FechaHasta)=1
+	
+END
+GO
+
+CREATE FUNCTION [EL_PUNTERO].[SeIntersectanFechas](@ID_Pasaje int,@FechaDesde datetime,@FechaHasta datetime)
+RETURNS int
+AS
+BEGIN
+	DECLARE @PasajeDesde datetime
+	DECLARE @PasajeHasta datetime
+	DECLARE @resul int
+
+	SET @PasajeDesde = (SELECT V.Fecha_Salida FROM [EL_PUNTERO].TL_PASAJE P,[EL_PUNTERO].TL_VIAJE V WHERE V.ID_Viaje=P.ID_Viaje AND P.ID_Pasaje=@ID_Pasaje)
+
+	SET @PasajeHasta = (SELECT V.Fecha_Llegada_Estimada FROM [EL_PUNTERO].TL_PASAJE P,[EL_PUNTERO].TL_VIAJE V WHERE V.ID_Viaje=P.ID_Viaje AND P.ID_Pasaje=@ID_Pasaje)
+
+	SET @resul = 0
+	IF ((@PasajeDesde>=@FechaDesde) AND (@PasajeDesde<=@FechaHasta)) OR ((@PasajeHasta>=@FechaDesde) AND (@PasajeHasta<=@FechaHasta))
+	BEGIN
+		SET @resul = 1
+	END
+	RETURN @resul
+END
+GO
+
+
 COMMIT

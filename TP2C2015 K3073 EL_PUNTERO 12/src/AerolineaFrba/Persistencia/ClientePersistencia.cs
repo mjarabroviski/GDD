@@ -99,5 +99,22 @@ namespace Persistencia
 
             return users[0];
         }
+
+        public static int ElClienteYaEstaDeViaje(int tipoDoc, int nroDoc, int viajeID,string ape)
+        {
+            var param = new List<SPParameter> { new SPParameter("Documento", nroDoc),
+                                                new SPParameter("Tipo_Doc", tipoDoc),
+                                                new SPParameter("ID_Viaje",viajeID),
+                                                new SPParameter("Apellido",ape)
+                                              };
+
+            var sp = new StoreProcedure(DBQueries.Cliente.SPGetClienteEnViaje, param);
+
+            List<Pasaje> pasajes = sp.ExecuteReader<Pasaje>();
+
+            if (pasajes.Count == 0 || pasajes == null) return 0;
+
+            return pasajes.Count;
+        }
     }
 }
