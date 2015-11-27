@@ -160,7 +160,7 @@ namespace AerolineaFrba.Compra
                                                                       precioEnc,
                                                                       AdministradorSesion.UsuarioActual);
 
-                    FrmInformeDatosCompra frmInfDatosCompra = new FrmInformeDatosCompra(precioTot);
+                    FrmInformeDatosCompra frmInfDatosCompra = new FrmInformeDatosCompra(precioTot,cantPasajes);
                     frmInfDatosCompra.ShowDialog();
                     this.Visible = false;
                 }

@@ -265,6 +265,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(326, 373);
+            this.ControlBox = false;
             this.Controls.Add(this.BtnCancelar);
             this.Controls.Add(this.BtnGuardar);
             this.Controls.Add(this.label12);
@@ -286,6 +287,7 @@
             this.Controls.Add(this.CmbTipoServicio);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.TxtCodigo);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "FrmABMRutaAltasModificaciones";
             this.Text = "FrmABMRutaAltasModificaciones";
             this.Load += new System.EventHandler(this.FrmABMRutaAltasModificaciones_Load);

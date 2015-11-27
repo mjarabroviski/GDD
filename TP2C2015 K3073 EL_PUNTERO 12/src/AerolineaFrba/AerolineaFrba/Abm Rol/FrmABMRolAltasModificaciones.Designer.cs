@@ -140,6 +140,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(323, 436);
+            this.ControlBox = false;
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.ChkInhabilitado);
@@ -149,6 +150,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.TxtRol);
             this.Controls.Add(this.label3);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "FrmABMRolAltasModificaciones";
             this.Text = "FrmABMRolAltasModificaciones";
             this.Load += new System.EventHandler(this.FrmABMRolAltasModificaciones_Load);

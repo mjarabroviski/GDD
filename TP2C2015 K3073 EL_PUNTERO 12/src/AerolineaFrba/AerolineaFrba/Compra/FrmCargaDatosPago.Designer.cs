@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCargaDatosPago));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -67,9 +66,10 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.pbFoto = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbFoto)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -442,7 +442,7 @@
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(35, 33);
+            this.label15.Location = new System.Drawing.Point(56, 13);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(208, 25);
             this.label15.TabIndex = 106;
@@ -452,7 +452,7 @@
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(71, 75);
+            this.label16.Location = new System.Drawing.Point(92, 55);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(125, 31);
             this.label16.TabIndex = 107;
@@ -465,18 +465,18 @@
             this.panel1.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.panel1.Controls.Add(this.label16);
             this.panel1.Controls.Add(this.label15);
-            this.panel1.Location = new System.Drawing.Point(392, 309);
+            this.panel1.Location = new System.Drawing.Point(378, 340);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(271, 140);
+            this.panel1.Size = new System.Drawing.Size(298, 109);
             this.panel1.TabIndex = 108;
             // 
-            // panel2
+            // pbFoto
             // 
-            this.panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel2.BackgroundImage")));
-            this.panel2.Location = new System.Drawing.Point(392, 38);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(270, 233);
-            this.panel2.TabIndex = 109;
+            this.pbFoto.Location = new System.Drawing.Point(378, 107);
+            this.pbFoto.Name = "pbFoto";
+            this.pbFoto.Size = new System.Drawing.Size(300, 200);
+            this.pbFoto.TabIndex = 109;
+            this.pbFoto.TabStop = false;
             // 
             // FrmCargaDatosPago
             // 
@@ -484,7 +484,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(688, 525);
             this.ControlBox = false;
-            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.pbFoto);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.BtnDatosViejos);
             this.Controls.Add(this.BtnDatosNuevos);
@@ -515,6 +515,7 @@
             this.Controls.Add(this.CmbTipoDoc);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmCargaDatosPago";
@@ -524,6 +525,7 @@
             this.groupBox1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbFoto)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -569,6 +571,6 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.PictureBox pbFoto;
     }
 }

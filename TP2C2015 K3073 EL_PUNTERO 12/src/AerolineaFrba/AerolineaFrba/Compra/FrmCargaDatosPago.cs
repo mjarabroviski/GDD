@@ -55,6 +55,10 @@ namespace AerolineaFrba.Compra
 
         private void FrmCargaDatosPago_Load(object sender, EventArgs e)
         {
+            Image image = Image.FromFile("../../Avion.jpg");
+            pbFoto.Image = image;
+            pbFoto.SizeMode = PictureBoxSizeMode.CenterImage;
+            
             if (AdministradorSesion.UsuarioActual == null)
                 BtnEfectivo.Visible = false;
 
@@ -285,7 +289,7 @@ namespace AerolineaFrba.Compra
                                                                 precioEncomienda,
                                                                 AdministradorSesion.UsuarioActual);
 
-                    FrmInformeDatosCompra frmInfDatosCompra = new FrmInformeDatosCompra(label16.Text);
+                    FrmInformeDatosCompra frmInfDatosCompra = new FrmInformeDatosCompra(label16.Text,cantPas);
                     frmInfDatosCompra.ShowDialog();
                     this.Visible = false;
                 }

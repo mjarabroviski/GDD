@@ -168,12 +168,14 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(706, 496);
+            this.ControlBox = false;
             this.Controls.Add(this.label1);
             this.Controls.Add(this.LstFuncionalidades);
             this.Controls.Add(this.DgvRol);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.BtnListo);
             this.Controls.Add(this.BtnNuevo);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "FrmABMRol";
             this.Text = "FrmABMRol";
             this.Load += new System.EventHandler(this.FrmABMRol_Load);

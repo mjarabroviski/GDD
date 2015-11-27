@@ -426,6 +426,7 @@
             this.Controls.Add(this.BtnSiguiente);
             this.Controls.Add(this.LblNroPasajero);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmCargaDatosPasajero";
