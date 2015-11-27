@@ -119,11 +119,11 @@ namespace AerolineaFrba.Canje_Millas
                 else
                 {
                     cliente = clientes[0];
-                    if (cliente.Millas == 0)
+                    if (cliente.Millas == 0 || cliente.Millas < ProductoPersistencia.ObtenerProductoMinimo())
                     {
-                        MessageBox.Show("El cliente seleccionado no cuenta con millas de pasajero frecuente", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("El cliente seleccionado no cuenta con millas suficientes para realizar un canje", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         TxtDni.Text = string.Empty;
-                    }
+                    } 
                     else
                     {
                         //Cargar las millas del cliente
@@ -157,9 +157,9 @@ namespace AerolineaFrba.Canje_Millas
             }
             else
             {
-                if (cliente.Millas == 0)
+                if (cliente.Millas == 0 || cliente.Millas < ProductoPersistencia.ObtenerProductoMinimo())
                 {
-                    MessageBox.Show("El cliente seleccionado no cuenta con millas de pasajero frecuente", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("El cliente seleccionado no cuenta con millas suficientes para realizar un canje", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     TxtDni.Text = string.Empty;
                 }
                 else
@@ -249,7 +249,18 @@ namespace AerolineaFrba.Canje_Millas
                          {
                              cliente = ClientePersistencia.ObtenerClientePorID(cliente.ID);
                              TxtMillas.Text = cliente.Millas.ToString();
-                             ActualizarProductos();
+                             if (cliente.Millas == 0 || cliente.Millas < ProductoPersistencia.ObtenerProductoMinimo())
+                             {
+                                 MessageBox.Show("No cuenta con millas suficientes para realizar un canje", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                 LimpiarDataGridView();
+                                 dtpNac.Visible = false;
+                                 LbLNac.Visible = false;
+                                 btnAceptar.Visible = false;
+                                 TxtDni.Text = string.Empty;
+                                 TxtDni.Enabled = true;
+                                 LblBuscar.Enabled = true;
+                             }
+                             else ActualizarProductos();
                          }
                          else
                          {

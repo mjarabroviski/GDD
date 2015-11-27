@@ -48,7 +48,9 @@
             this.registroDeUsuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cambioDeContraseñaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pbFoto = new System.Windows.Forms.PictureBox();
             this.menuHome.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbFoto)).BeginInit();
             this.SuspendLayout();
             // 
             // nToolStripMenuItem
@@ -164,6 +166,7 @@
             this.devolucionDePasajeYoEncomiendaToolStripMenuItem.Size = new System.Drawing.Size(289, 22);
             this.devolucionDePasajeYoEncomiendaToolStripMenuItem.Text = "Devolucion de Pasaje y/o Encomienda";
             this.devolucionDePasajeYoEncomiendaToolStripMenuItem.Visible = false;
+            this.devolucionDePasajeYoEncomiendaToolStripMenuItem.Click += new System.EventHandler(this.devolucionDePasajeYoEncomiendaToolStripMenuItem_Click);
             // 
             // canjeDeMillasToolStripMenuItem
             // 
@@ -186,6 +189,7 @@
             this.listadoEstadisticoToolStripMenuItem.Name = "listadoEstadisticoToolStripMenuItem";
             this.listadoEstadisticoToolStripMenuItem.Size = new System.Drawing.Size(116, 20);
             this.listadoEstadisticoToolStripMenuItem.Text = "Listado Estadistico";
+            this.listadoEstadisticoToolStripMenuItem.Click += new System.EventHandler(this.listadoEstadisticoToolStripMenuItem_Click);
             // 
             // usuarioToolStripMenuItem
             // 
@@ -219,17 +223,27 @@
             this.logOutToolStripMenuItem.Text = "Log Out";
             this.logOutToolStripMenuItem.Click += new System.EventHandler(this.logOutToolStripMenuItem_Click);
             // 
+            // pbFoto
+            // 
+            this.pbFoto.Location = new System.Drawing.Point(0, 27);
+            this.pbFoto.Name = "pbFoto";
+            this.pbFoto.Size = new System.Drawing.Size(580, 331);
+            this.pbFoto.TabIndex = 1;
+            this.pbFoto.TabStop = false;
+            // 
             // HomeUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(580, 355);
+            this.Controls.Add(this.pbFoto);
             this.Controls.Add(this.menuHome);
             this.Name = "HomeUsuario";
-            this.Text = "Home";
+            this.Text = "Home AerolineaFRBA";
             this.Load += new System.EventHandler(this.Home_Load);
             this.menuHome.ResumeLayout(false);
             this.menuHome.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbFoto)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -257,5 +271,6 @@
         private System.Windows.Forms.ToolStripMenuItem registroDeUsuarioToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cambioDeContraseñaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem logOutToolStripMenuItem;
+        private System.Windows.Forms.PictureBox pbFoto;
     }
 }

@@ -17,9 +17,12 @@ namespace AerolineaFrba.LogIn
 {
     public partial class InicioAdministrador : Form
     {
-        public InicioAdministrador()
+        public Rol rolALoguear;
+
+        public InicioAdministrador(Rol rol)
         {
             InitializeComponent();
+            rolALoguear = rol;
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
@@ -57,7 +60,7 @@ namespace AerolineaFrba.LogIn
             }
 
                //Valido que los datos del usuario ingresados sean correctos
-                var user = UsuarioPersistencia.Login(usuario);
+                var user = UsuarioPersistencia.ObtenerPorUserNameYRol(usuario,rolALoguear.ID);
 
                 if (user == null)
                 {
@@ -104,6 +107,8 @@ namespace AerolineaFrba.LogIn
         private void InicioAdministrador_Load(object sender, EventArgs e)
         {
             btnNuevo.Enabled = false;
+            txtAdministrador.Enabled = false;
+            txtAdministrador.Text = rolALoguear.Descripcion;
         }
 
         private void btnNuevo_Click(object sender, EventArgs e)

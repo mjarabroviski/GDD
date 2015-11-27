@@ -119,9 +119,27 @@ namespace AerolineaFrba.Consulta_Millas
                 {
                     //Cargar las compras y los canjes del cliente
                     cliente = clientes[0];
-                    ActualizarRegistroMillas();
-                    ActualizarCanjes();
-                    CalcularMillas();
+
+                    registrosMillas = RegistroMillasPersistencia.ObtenerPorIDCliente(cliente.ID);
+                    canjes = CanjePersistencia.ObtenerPorIDCliente(cliente.ID);
+                    if ((registrosMillas.Count == 0 || registrosMillas == null) && (canjes.Count == 0 || canjes == null))
+                    {
+                        MessageBox.Show("No cuenta con registros de compras ni canjes realizados", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LimpiarDataGridView();
+                        dtpNac.Visible = false;
+                        LbLNac.Visible = false;
+                        btnAceptar.Visible = false;
+                        TxtDni.Text = string.Empty;
+                        TxtDni.Enabled = true;
+                        LblBuscar.Enabled = true;
+
+                    }
+                    else
+                    {
+                        ActualizarRegistroMillas();
+                        ActualizarCanjes();
+                        CalcularMillas();
+                    }
                 }
             }
             catch (Exception ex)
@@ -148,23 +166,11 @@ namespace AerolineaFrba.Consulta_Millas
             else
             {
                 //Cargar las compras y los canjes del cliente
-                ActualizarRegistroMillas();
-                ActualizarCanjes();
-                CalcularMillas();
-            }
-        }
-
-        private void ActualizarRegistroMillas()
-        {
-            LimpiarDataGridView();
-            var diccionarioDeAeronaves = new Dictionary<int, RegistroMillas>();
-
-            #region Cargar el diccionario a mostrar en la grilla
-
                 registrosMillas = RegistroMillasPersistencia.ObtenerPorIDCliente(cliente.ID);
-                if (registrosMillas.Count == 0 || registrosMillas == null)
+                canjes = CanjePersistencia.ObtenerPorIDCliente(cliente.ID);
+                if ((registrosMillas.Count == 0 || registrosMillas == null) && (canjes.Count == 0 || canjes == null))
                 {
-                    MessageBox.Show("No cuenta con registros de compras", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("No cuenta con registros de compras ni canjes realizados", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LimpiarDataGridView();
                     dtpNac.Visible = false;
                     LbLNac.Visible = false;
@@ -172,12 +178,31 @@ namespace AerolineaFrba.Consulta_Millas
                     TxtDni.Text = string.Empty;
                     TxtDni.Enabled = true;
                     LblBuscar.Enabled = true;
-                    
+
                 }
-                diccionarioDeAeronaves = registrosMillas.ToDictionary(a => a.ID, a => a);
+                else
+                {
+                    ActualizarRegistroMillas();
+                    ActualizarCanjes();
+                    CalcularMillas();
+                }
+            }
+        }
+
+        private void ActualizarRegistroMillas()
+        {
+            dgvCompras.DataSource = null;
+            dgvCompras.Columns.Clear();
+
+            var diccionarioDeCompras = new Dictionary<int, RegistroMillas>();
+
+            #region Cargar el diccionario a mostrar en la grilla
+
+            registrosMillas = RegistroMillasPersistencia.ObtenerPorIDCliente(cliente.ID);
+            diccionarioDeCompras = registrosMillas.ToDictionary(a => a.ID, a => a);
 
             //Muestra en la grilla el contenido de los registros que se encuentran cargados en el diccionario
-            var bind = diccionarioDeAeronaves.Values.Select(a => new
+            var bind = diccionarioDeCompras.Values.Select(a => new
             {
                 Fecha_Inicio = a.Fecha_Inicio.Date,
                 Codigo_Item = a.Codigo_Item,
@@ -191,7 +216,31 @@ namespace AerolineaFrba.Consulta_Millas
             dgvCompras.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
-        private void ActualizarCanjes() { }
+        private void ActualizarCanjes() {
+            dgvCanjes.DataSource = null;
+            dgvCanjes.Columns.Clear();
+
+            var diccionarioDeCanjes = new Dictionary<int, Canje>();
+
+            #region Cargar el diccionario a mostrar en la grilla
+
+            canjes = CanjePersistencia.ObtenerPorIDCliente(cliente.ID);
+            diccionarioDeCanjes = canjes.ToDictionary(a => a.ID, a => a);
+
+            //Muestra en la grilla el contenido de los registros que se encuentran cargados en el diccionario
+            var bind = diccionarioDeCanjes.Values.Select(a => new
+            {
+                Fecha_Canje = a.Fecha_Canje.Date,
+                Producto = (ProductoPersistencia.ObtenerProductoPorID(a.ID_Producto).Descripcion),
+                Cantidad = a.Cantidad,
+                Millas = a.Cantidad * (ProductoPersistencia.ObtenerProductoPorID(a.ID_Producto).Puntos)
+            });
+
+            #endregion
+
+            dgvCanjes.DataSource = bind.ToList();
+            dgvCanjes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
 
         private void CalcularMillas() {
             //faltan las de canje
@@ -199,6 +248,10 @@ namespace AerolineaFrba.Consulta_Millas
             for (int i = 0; i < dgvCompras.Rows.Count; ++i)
             {
                 sum += Convert.ToInt32(dgvCompras.Rows[i].Cells[2].Value);
+            }
+            for (int i = 0; i < dgvCanjes.Rows.Count; ++i)
+            {
+                sum -= Convert.ToInt32(dgvCanjes.Rows[i].Cells[3].Value);
             }
             TxtMillas.Text = sum.ToString();
         }

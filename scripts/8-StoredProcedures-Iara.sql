@@ -173,8 +173,13 @@ BEGIN
 		  AND (SELECT V.Fecha_Salida 
 				FROM EL_PUNTERO.TL_VIAJE V
 				WHERE E.ID_Viaje = V.ID_Viaje) > GETDATE()
+		   AND E.ID_Encomienda NOT IN (SELECT DE.ID_Encomienda
+										FROM EL_PUNTERO.TL_DEVOLUCION_ENCOMIENDA DE
+										WHERE DE.ID_Encomienda = E.ID_Encomienda)
+	ORDER BY E.Codigo_Encomienda
 END
 GO
+
 CREATE PROCEDURE [EL_PUNTERO].[ObtenerPasajesFuturos]
 @ID_Cliente int
 AS 
@@ -186,9 +191,13 @@ BEGIN
 		  AND (SELECT V.Fecha_Salida 
 				FROM EL_PUNTERO.TL_VIAJE V
 				WHERE P.ID_Viaje = V.ID_Viaje) > GETDATE()
+	AND P.ID_Pasaje NOT IN (SELECT DP.ID_Pasaje
+								FROM EL_PUNTERO.TL_DEVOLUCION_PASAJE DP
+								WHERE DP.ID_Pasaje = P.ID_Pasaje)
 	ORDER BY P.Codigo_Pasaje
 END
 GO
+
 CREATE PROCEDURE [EL_PUNTERO].ObtenerRutaDeEncomienda
 @ID_Encomienda int
 AS
@@ -263,6 +272,95 @@ BEGIN
 	      AND SR.ID_Ruta = R.ID_Ruta
 		  AND R.ID_Ciudad_Origen = C.ID_Ciudad
 	ORDER BY C.Nombre_Ciudad
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].InsertarDevolucionEncomienda
+@ID_Encomienda int,
+@Motivo varchar(100),
+@ID_Usuario int
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	--Inserto los id_encomienda del viaje de la ruta que viene por parametro 
+	INSERT INTO [EL_PUNTERO].[TL_DEVOLUCION_ENCOMIENDA] (ID_Encomienda,Fecha_Devolucion,Motivo,ID_Usuario)
+	VALUES (@ID_Encomienda,GETDATE(),@Motivo,@ID_Usuario)
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].InsertarDevolucionPasaje
+@ID_Pasaje int,
+@Motivo varchar(100),
+@ID_Usuario int
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	--Inserto los id_encomienda del viaje de la ruta que viene por parametro 
+	INSERT INTO [EL_PUNTERO].[TL_DEVOLUCION_PASAJE] (ID_Pasaje,Fecha_Devolucion,Motivo,ID_Usuario)
+	VALUES (@ID_Pasaje,GETDATE(),@Motivo,@ID_Usuario)
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].DevolverTodosLosPasajes
+@ID_Cliente int,
+@Motivo varchar(100),
+@ID_Usuario int
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	--Inserto los id_encomienda del viaje de la ruta que viene por parametro 
+	INSERT INTO [EL_PUNTERO].[TL_DEVOLUCION_PASAJE] (ID_Pasaje)
+	SELECT P.ID_Pasaje
+	FROM EL_PUNTERO.TL_PASAJE P
+	INNER JOIN EL_PUNTERO.TL_COMPRA C ON C.ID_Compra = P.ID_Compra
+	WHERE C.ID_Cliente = @ID_Cliente 
+		  AND (SELECT V.Fecha_Salida 
+				FROM EL_PUNTERO.TL_VIAJE V
+				WHERE P.ID_Viaje = V.ID_Viaje) > GETDATE()
+	AND P.ID_Pasaje NOT IN (SELECT DP.ID_Pasaje
+								FROM EL_PUNTERO.TL_DEVOLUCION_PASAJE DP
+								WHERE DP.ID_Pasaje = P.ID_Pasaje)
+
+	--Se llenan la fecha, el motivo y el usuario de los pasajes
+	UPDATE [EL_PUNTERO].TL_DEVOLUCION_PASAJE
+	SET Fecha_Devolucion=GETDATE(),
+		Motivo=@Motivo,
+		ID_Usuario=@ID_Usuario
+	WHERE Fecha_Devolucion is NULL;
+
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].DevolverTodasLasEncomiendas
+@ID_Cliente int,
+@Motivo varchar(100),
+@ID_Usuario int
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	--Inserto los id_encomienda del viaje de la ruta que viene por parametro 
+	INSERT INTO [EL_PUNTERO].[TL_DEVOLUCION_ENCOMIENDA] (ID_Encomienda)
+	(SELECT E.ID_Encomienda
+	FROM EL_PUNTERO.TL_ENCOMIENDA E 
+	INNER JOIN EL_PUNTERO.TL_COMPRA C ON C.ID_Compra = E.ID_Compra
+	WHERE C.ID_Cliente = @ID_Cliente 
+	AND (SELECT V.Fecha_Salida 
+		 FROM EL_PUNTERO.TL_VIAJE V
+		 WHERE E.ID_Viaje = V.ID_Viaje) > GETDATE()
+	AND E.ID_Encomienda NOT IN (SELECT DE.ID_Encomienda
+								FROM EL_PUNTERO.TL_DEVOLUCION_ENCOMIENDA DE
+								WHERE DE.ID_Encomienda = E.ID_Encomienda))
+
+	--Se llenan la fecha, el motivo y el usuario de las encomiendas
+	UPDATE [EL_PUNTERO].TL_DEVOLUCION_ENCOMIENDA
+	SET Fecha_Devolucion= GETDATE(),
+		Motivo=@Motivo,
+		ID_Usuario=@ID_Usuario
+	WHERE Fecha_Devolucion is NULL;
 END
 GO
 

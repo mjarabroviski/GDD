@@ -34,7 +34,7 @@ namespace AerolineaFrba.LogIn
                    this.Hide();
 
                     //Muestro pantalla para iniciar sesion
-                    InicioAdministrador inic = new InicioAdministrador();
+                    InicioAdministrador inic = new InicioAdministrador(RolSeleccionado);
                     inic.ShowDialog();
                 }
             }

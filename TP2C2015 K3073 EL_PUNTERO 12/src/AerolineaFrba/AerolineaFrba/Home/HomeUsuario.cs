@@ -39,6 +39,9 @@ namespace AerolineaFrba.Home
             SetMenuPorUsuario();
             if (AdministradorSesion.UsuarioActual != null) cambioDeContraseñaToolStripMenuItem.Visible = true;
 
+            Image image = Image.FromFile("../../Aeropuerto-Marco-Polo1.jpg");
+            pbFoto.Image = image;
+            pbFoto.SizeMode = PictureBoxSizeMode.CenterImage;
         }
 
         private void SetMenuPorUsuario()
@@ -224,6 +227,18 @@ namespace AerolineaFrba.Home
             var canje = new Canje_Millas.Canje();
             canje.ShowDialog();
             
+        }
+
+        private void devolucionDePasajeYoEncomiendaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var devolucion = new Devolucion.DevolucionEncomiendaPasaje();
+            devolucion.ShowDialog();
+        }
+
+        private void listadoEstadisticoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var listado = new Listado_Estadistico.Listado_Estadistico();
+            listado.ShowDialog();
         }
     }
 }

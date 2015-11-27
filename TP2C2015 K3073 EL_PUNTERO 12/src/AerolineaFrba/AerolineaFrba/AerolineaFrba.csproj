@@ -189,6 +189,12 @@
     <Compile Include="Devolucion\DevolucionEncomienda.Designer.cs">
       <DependentUpon>DevolucionEncomienda.cs</DependentUpon>
     </Compile>
+    <Compile Include="Devolucion\MotivoDevolucion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Devolucion\MotivoDevolucion.Designer.cs">
+      <DependentUpon>MotivoDevolucion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -207,11 +213,11 @@
     <Compile Include="Home\HomeUsuario.Designer.cs">
       <DependentUpon>HomeUsuario.cs</DependentUpon>
     </Compile>
-    <Compile Include="Listado Estadistico\Form1.cs">
+    <Compile Include="Listado Estadistico\Listado_Estadistico.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Listado Estadistico\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Listado Estadistico\Listado_Estadistico.Designer.cs">
+      <DependentUpon>Listado_Estadistico.cs</DependentUpon>
     </Compile>
     <Compile Include="LogIn\ResetearContrasena.cs">
       <SubType>Form</SubType>
@@ -329,11 +335,17 @@
     <EmbeddedResource Include="Devolucion\DevolucionEncomienda.resx">
       <DependentUpon>DevolucionEncomienda.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Devolucion\MotivoDevolucion.resx">
+      <DependentUpon>MotivoDevolucion.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Generacion Viaje\GenercionViaje.resx">
       <DependentUpon>GenercionViaje.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Home\HomeUsuario.resx">
       <DependentUpon>HomeUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listado Estadistico\Listado_Estadistico.resx">
+      <DependentUpon>Listado_Estadistico.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LogIn\ResetearContrasena.resx">
       <DependentUpon>ResetearContrasena.cs</DependentUpon>

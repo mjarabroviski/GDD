@@ -19,6 +19,7 @@ namespace AerolineaFrba
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            //Application.Run(new Listado_Estadistico.Listado_Estadistico());
             //Application.Run(new Canje_Millas.Canje());
             //Application.Run(new Registro_Llegada_Destino.RegistroLlegadaDestino());
             //Application.Run(new Consulta_Millas.ConsultaMillas());

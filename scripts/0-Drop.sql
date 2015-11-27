@@ -1,7 +1,8 @@
 DROP TABLE [EL_PUNTERO].[TL_REGISTRO_MILLAS];
 DROP TABLE [EL_PUNTERO].[TL_ENCOMIENDA];
 DROP TABLE [EL_PUNTERO].[TL_ITEM_DEVUELTO];
-DROP TABLE [EL_PUNTERO].[TL_DEVOLUCION];
+DROP TABLE [EL_PUNTERO].[TL_DEVOLUCION_ENCOMIENDA];
+DROP TABLE [EL_PUNTERO].[TL_DEVOLUCION_PASAJE];
 DROP TABLE [EL_PUNTERO].[TL_PASAJE];
 DROP TABLE [EL_PUNTERO].[TL_VIAJE];
 DROP TABLE [EL_PUNTERO].[TL_COMPRA];
@@ -135,18 +136,31 @@ DROP PROCEDURE [EL_PUNTERO].[InsertarServiciosPorRuta];
 DROP PROCEDURE [EL_PUNTERO].[GetClientePorNombreYApellido];
 DROP PROCEDURE [EL_PUNTERO].[ObtenerTipoDocumentoPorID];
 
-
-DROP PROCEDURE [EL_PUNTERO].[ObtenerPasajesFuturos]
-DROP PROCEDURE [EL_PUNTERO].[ObtenerEncomiendasFuturas]
-DROP PROCEDURE [EL_PUNTERO].ObtenerRutaDeEncomienda
-DROP PROCEDURE [EL_PUNTERO].ObtenerFechaSalidaDeEncomienda
-DROP PROCEDURE [EL_PUNTERO].ObtenerRutaDePasaje
-DROP PROCEDURE [EL_PUNTERO].ObtenerFechaSalidaDePasaje
-DROP PROCEDURE [EL_PUNTERO].ObtenerNombreClientePorID
-DROP PROCEDURE [EL_PUNTERO].[ObtenerServicioAeronave]
-DROP PROCEDURE [EL_PUNTERO].ObtenerRutaEncomienda
-DROP PROCEDURE [EL_PUNTERO].ObtenerCiudadesOrigenParaUnServicio
-DROP PROCEDURE [EL_PUNTERO].ObtenerServicioAeronave
+DROP PROCEDURE [EL_PUNTERO].[ObtenerPasajesFuturos];
+DROP PROCEDURE [EL_PUNTERO].[ObtenerEncomiendasFuturas];
+DROP PROCEDURE [EL_PUNTERO].ObtenerRutaDeEncomienda;
+DROP PROCEDURE [EL_PUNTERO].ObtenerFechaSalidaDeEncomienda;
+DROP PROCEDURE [EL_PUNTERO].ObtenerRutaDePasaje;
+DROP PROCEDURE [EL_PUNTERO].ObtenerFechaSalidaDePasaje;
+DROP PROCEDURE [EL_PUNTERO].ObtenerNombreClientePorID;
+DROP PROCEDURE [EL_PUNTERO].[ObtenerServicioAeronave];
+DROP PROCEDURE [EL_PUNTERO].ObtenerRutaEncomienda;
+DROP PROCEDURE [EL_PUNTERO].ObtenerCiudadesOrigenParaUnServicio;
+DROP PROCEDURE [EL_PUNTERO].ObtenerServicioAeronave;
+DROP PROCEDURE [EL_PUNTERO].[GetUsuarioPorUsernameYRol];
+DROP PROCEDURE [EL_PUNTERO].InsertarDevolucionPasaje
+DROP PROCEDURE [EL_PUNTERO].InsertarDevolucionEncomienda
+DROP PROCEDURE [EL_PUNTERO].DevolverTodosLosPasajes
+DROP PROCEDURE [EL_PUNTERO].DevolverTodasLasEncomiendas
+DROP PROCEDURE [EL_PUNTERO].[GetProductoMinimo];
+DROP PROCEDURE [EL_PUNTERO].[GetProductoPorID];
+DROP PROCEDURE [EL_PUNTERO].InsertarDevolucionPasaje;
+DROP PROCEDURE [EL_PUNTERO].InsertarDevolucionEncomienda;
+DROP PROCEDURE [EL_PUNTERO].[GetDestinosConMasPasajesComprados];
+DROP PROCEDURE [EL_PUNTERO].[GetDestinosConMasAeronavesVacias];
+DROP PROCEDURE [EL_PUNTERO].[GetClientesConMasPuntosAcumulados];
+DROP PROCEDURE [EL_PUNTERO].[GetDestinosConMasPasajesCancelados];
+DROP PROCEDURE [EL_PUNTERO].[GetAeronavesConMayorCantDeDiasFueraDeServicio];
 
 DROP PROCEDURE [EL_PUNTERO].[GetAllTipoTarjeta]
 DROP PROCEDURE [EL_PUNTERO].[GetRutaPorID]
@@ -163,5 +177,7 @@ DROP FUNCTION [EL_PUNTERO].[CompraAPartirDePasaje];
 DROP FUNCTION [EL_PUNTERO].[ObtenerAeronaveDeReemplazo];
 DROP FUNCTION [EL_PUNTERO].[ObtenerIDBajaServicioMax];
 DROP FUNCTION [EL_PUNTERO].[ObtenerAeronaveDeReemplazoPorServicio];
+DROP FUNCTION [EL_PUNTERO].[ObtenerMillasCanje];
+DROP FUNCTION [EL_PUNTERO].[CantFueraDeServicio];
 
 DROP SCHEMA [EL_PUNTERO];

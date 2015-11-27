@@ -103,6 +103,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "AgregarFechaLlegada";
             this.Text = "AgregarFechaLlegada";
+            this.Load += new System.EventHandler(this.AgregarFechaLlegada_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
