@@ -37,13 +37,6 @@ namespace AerolineaFrba.Compra
                 LblNroPasajero.Text = "#" + ordenPasaje;
                 ordenPasaje++;
             }
-            //else
-            //{
-            //    this.Visible = false;
-            //    //Cargar el formulario de datos del pago
-            //}
-
-           
         }
 
         private void FrmCargaDatosPasajero_Load(object sender, EventArgs e)
@@ -156,10 +149,7 @@ namespace AerolineaFrba.Compra
 
                 #endregion
 
-                butacaSeleccionada = ListaButacas.Find(b => (b.ID == (int)DgvButacas.CurrentRow.Cells[0].Value));
-
-                //MessageBox.Show(string.Format("{0}",butacaSeleccionada.Numero), "Atención");
-                
+                butacaSeleccionada = ListaButacas.Find(b => (b.ID == (int)DgvButacas.CurrentRow.Cells[0].Value)); 
                 
                 CompraPersistencia.CargarTablaDatosPasajeros(CmbTipoDoc.Text,
                                                              Int32.Parse(TxtNroDoc.Text),

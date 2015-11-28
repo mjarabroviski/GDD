@@ -281,8 +281,7 @@ namespace AerolineaFrba.Abm_Ruta
                         rutaSeleccionada.Habilitado = false;
                         RutaPersistencia.ModificarRuta(rutaSeleccionada);
                         RutaPersistencia.CancelarPasajesYEncomiendasConRutaInhabilitada(rutaSeleccionada,"Cancelacion de ruta",AdministradorSesion.UsuarioActual);
-                        //OJO!!! EL CANCELARPASAJES... SOLO VA A FUNCIONAR SI HAGO EL LOGIN ANTES
-                        
+        
                         //Vuelvo a cargar la lista de rutas
                         ActualizarPantalla(null);
                     }

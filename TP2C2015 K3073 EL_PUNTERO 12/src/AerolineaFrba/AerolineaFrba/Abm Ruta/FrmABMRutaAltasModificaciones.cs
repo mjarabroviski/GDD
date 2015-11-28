@@ -149,7 +149,6 @@ namespace AerolineaFrba.Abm_Ruta
                     ruta.Codigo_Ruta = (int)(filtro.Codigo);
                     ruta.ID_Ciudad_Origen = CiudadPersistencia.ObtenerIDPorNombreDeCiudad(filtro.CiudadOrigen);
                     ruta.ID_Ciudad_Destino = CiudadPersistencia.ObtenerIDPorNombreDeCiudad(filtro.CiudadDestino);
-                    //ruta.ID_Servicio = ServicioPersistencia.ObtenerIDPorNombreDeServicio(filtro.TipoServicio);
                     ruta.Precio_Base_KG = (double)filtro.PrecioDesdeKg;   //ES INDISTINTO PONER DESDE O HASTA PORQUE EN ESTE CASO SON IGUALES
                     ruta.Precio_Base_Pasaje = (double)filtro.PrecioDesdePasaje;  //ES INDISTINTO PONER DESDE O HASTA PORQUE EN ESTE CASO SON IGUALES
                     ruta.Habilitado = !(ChkInhabilitado.Checked);
@@ -173,7 +172,6 @@ namespace AerolineaFrba.Abm_Ruta
                     RutaActual.Codigo_Ruta = Int32.Parse(TxtCodigo.Text);
                     RutaActual.ID_Ciudad_Origen = CiudadPersistencia.ObtenerIDPorNombreDeCiudad(CmbCiudadOrigen.Text);
                     RutaActual.ID_Ciudad_Destino = CiudadPersistencia.ObtenerIDPorNombreDeCiudad(CmbCiudadDestino.Text);
-                    //RutaActual.ID_Servicio = ServicioPersistencia.ObtenerIDPorNombreDeServicio(CmbTipoServicio.Text);
                     RutaActual.Precio_Base_KG = double.Parse(TxtBaseKg.Text);   //ES INDISTINTO PONER DESDE O HASTA PORQUE EN ESTE CASO SON IGUALES
                     RutaActual.Precio_Base_Pasaje = double.Parse(TxtBasePasaje.Text);  //ES INDISTINTO PONER DESDE O HASTA PORQUE EN ESTE CASO SON IGUALES
                     RutaActual.Habilitado = !(ChkInhabilitado.Checked);
