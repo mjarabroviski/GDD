@@ -24,6 +24,9 @@ namespace AerolineaFrba.Generacion_Viaje
 
         private void GenercionViaje_Load(object sender, EventArgs e)
         {
+            DtpFechaSalida.MinDate = DateTime.Today;
+            DtpFechaLlegadaEstimada.MinDate = DtpFechaSalida.Value.AddHours(1);
+
             CargarCbos();
             ActualizarFechas();
             ComenzarConCboVacios();
@@ -67,12 +70,8 @@ namespace AerolineaFrba.Generacion_Viaje
 
         private void ActualizarFechas()
         {
-            DtpFechaSalida.MinDate = DateTime.Now;
-            DtpFechaLlegadaEstimada.MinDate = DtpFechaSalida.Value.AddHours(1);
 
             DtpFechaSalida.Value = DateTime.Now;
-            DtpFechaLlegadaEstimada.Value = DtpFechaSalida.Value.AddHours(1);
-            DtpFechaLlegada.Value = DtpFechaLlegadaEstimada.Value;
             DtpFechaLlegadaEstimada.Enabled = false;
             DtpFechaSalida.Enabled = false;
            
@@ -126,7 +125,7 @@ namespace AerolineaFrba.Generacion_Viaje
 
                 #endregion
 
-                if (ValidarHorarioDeAeronave(DtpFechaSalida.Value, DtpFechaLlegadaEstimada.Value))
+                if (ValidarHorarioDeAeronave(DtpFechaSalida.Value, DtpFechaLlegadaEstimada.Value) == 0)
                 {
 
                     int ID_Origen = CiudadPersistencia.ObtenerIDPorNombreDeCiudad(CboCiudadOrigen.Text);
@@ -160,7 +159,7 @@ namespace AerolineaFrba.Generacion_Viaje
             
         }
 
-        private bool ValidarHorarioDeAeronave(DateTime fechaSalida, DateTime fechaLlegadaEstimada)
+        private int ValidarHorarioDeAeronave(DateTime fechaSalida, DateTime fechaLlegadaEstimada)
         {
             var transaccion = DBManager.Instance().Connection.BeginTransaction(IsolationLevel.Serializable);
             int ID_Aeronave = AeronavePersistencia.ObtenerPorMatricula(CboAeronave.Text, transaccion).ID;

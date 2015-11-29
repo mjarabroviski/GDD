@@ -19,7 +19,7 @@ namespace Persistencia
             return sp.ExecuteReader<Ciudad>();
         }
 
-        public static int Eliminar(Ciudad ciudad, SqlTransaction transaccion)
+        public static int Eliminar(Ciudad ciudad)
         {
          
                     var param = new List<SPParameter>
@@ -27,11 +27,9 @@ namespace Persistencia
                             new SPParameter("ID_Ciudad", ciudad.ID),
                         };
 
-                    var sp = (transaccion != null)
-                                ? new StoreProcedure(DBQueries.Ciudad.SPEliminarCiudad, param, transaccion)
-                                : new StoreProcedure(DBQueries.Ciudad.SPEliminarCiudad, param);
+                    var sp = new StoreProcedure(DBQueries.Ciudad.SPEliminarCiudad, param);
 
-            return sp.ExecuteNonQuery(transaccion);
+            return sp.ExecuteNonQuery(null);
         }
 
         public static int ObtenerIDPorNombreDeCiudad(string ciudad)
@@ -110,6 +108,7 @@ namespace Persistencia
 
             return ciudades[0];
         }
+
         public static List<Ciudad> ObtenerCiudadesOrigenParaUnServicio(int ID_Servicio)
         {
             //Obtengo la lista de ciudades que cumplen ciertos filtros 
@@ -118,6 +117,19 @@ namespace Persistencia
 
             return sp.ExecuteReader<Ciudad>();
         }
-        
+
+        public static int CiudadTieneViajes(int idCiudad)
+        {
+            //Obtengo la ciudad
+            var param = new List<SPParameter> { new SPParameter("ID_Ciudad", idCiudad) };
+            var sp = new StoreProcedure(DBQueries.Ciudad.SPCiudadTieneViajes, param);
+
+            //Retorno una lista de Ciudades a partir de un ExecuteReader
+            List<Ruta> ciudades = sp.ExecuteReader<Ruta>();
+            if (ciudades == null || ciudades.Count == 0)
+                return 0;
+
+            return ciudades.Count;
+        }       
     }
 }

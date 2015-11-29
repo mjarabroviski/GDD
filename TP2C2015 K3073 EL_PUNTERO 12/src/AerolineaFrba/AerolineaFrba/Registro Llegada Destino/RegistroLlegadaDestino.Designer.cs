@@ -251,9 +251,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(404, 330);
+            this.ControlBox = false;
             this.Controls.Add(this.RegistroLlegadaADestino);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "RegistroLlegadaDestino";
-            this.Text = "RegistroLlegadaDestino";
+            this.Text = "Registro Llegada a Destino";
             this.Load += new System.EventHandler(this.RegistroLlegadaDestino_Load);
             this.RegistroLlegadaADestino.ResumeLayout(false);
             this.RegistroLlegadaADestino.PerformLayout();

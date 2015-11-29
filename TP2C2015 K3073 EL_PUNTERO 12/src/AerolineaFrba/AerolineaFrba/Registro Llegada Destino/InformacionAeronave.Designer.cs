@@ -194,14 +194,14 @@
             this.Txt_KG.Size = new System.Drawing.Size(164, 20);
             this.Txt_KG.TabIndex = 19;
             // 
-            // BtnValidar
+            // BtnAgregarFecha
             // 
             this.BtnAgregarFecha.BackColor = System.Drawing.Color.DodgerBlue;
             this.BtnAgregarFecha.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.BtnAgregarFecha.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnAgregarFecha.ForeColor = System.Drawing.Color.White;
             this.BtnAgregarFecha.Location = new System.Drawing.Point(188, 297);
-            this.BtnAgregarFecha.Name = "BtnValidar";
+            this.BtnAgregarFecha.Name = "BtnAgregarFecha";
             this.BtnAgregarFecha.Size = new System.Drawing.Size(106, 39);
             this.BtnAgregarFecha.TabIndex = 92;
             this.BtnAgregarFecha.Text = "AGREGAR FECHA LLEGADA";
@@ -236,6 +236,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(365, 345);
+            this.ControlBox = false;
             this.Controls.Add(this.Btn_Volver);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.BtnAgregarFecha);
@@ -256,8 +257,9 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "InformacionAeronave";
-            this.Text = "InformacionAeronave";
+            this.Text = "Informacion de Aeronave";
             this.Load += new System.EventHandler(this.InformacionAeronave_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

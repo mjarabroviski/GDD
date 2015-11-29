@@ -47,6 +47,7 @@ namespace AerolineaFrba.LogIn
                     HomeUsuario home = new HomeUsuario();
                     home.ShowDialog();
                     Close();
+                    
                 }
                 
             }else

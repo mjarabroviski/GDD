@@ -73,6 +73,7 @@
             // 
             // cboCantidad
             // 
+            this.cboCantidad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboCantidad.FormattingEnabled = true;
             this.cboCantidad.Location = new System.Drawing.Point(166, 30);
             this.cboCantidad.Name = "cboCantidad";
@@ -84,10 +85,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(267, 120);
+            this.ControlBox = false;
             this.Controls.Add(this.cboCantidad);
             this.Controls.Add(this.BtnCancelar);
             this.Controls.Add(this.BtnCanje);
             this.Controls.Add(this.label4);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "CantidadProducto";
             this.Text = "Cantidad de Producto";
             this.Load += new System.EventHandler(this.CantidadProducto_Load);

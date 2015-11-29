@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Persistencia.Entidades;
 using Persistencia;
 using Filtros;
+using Sesion;
 
 namespace AerolineaFrba.Abm_Ciudad
 {
@@ -124,35 +125,29 @@ namespace AerolineaFrba.Abm_Ciudad
                 else if (e.ColumnIndex == 2)
                 {
                     //El usuario tocó el botón de eliminar
-                    using (var transaccion = DBManager.Instance().Connection.BeginTransaction(IsolationLevel.Serializable))
-                    {
                         try
                         {
                             var dialogAnswer = MessageBox.Show(string.Format("Esta seguro que quiere eliminar la ciudad {0}?", ciudadSeleccionada.Nombre), "Atención", MessageBoxButtons.YesNo);
                             if (dialogAnswer == DialogResult.Yes)
                             {
-                                cant = CiudadPersistencia.Eliminar(ciudadSeleccionada, transaccion);
-                                if ( cant == -1)
+                                cant = CiudadPersistencia.CiudadTieneViajes(ciudadSeleccionada.ID);
+                                if ( cant > 0)
                                 {
-                                    transaccion.Commit();
-                                    MessageBox.Show("No se puede eliminar la ciudad ya que tiene viajes asignados", "Error");
-                                    return;
+                                    MessageBox.Show("No se puede eliminar la ciudad ya que tiene viajes asignados", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                                 }
                                 else
                                 {
-                                    transaccion.Commit();
                                     MessageBox.Show("La ciudad fue eliminada correctamente", "Atencion");
+                                    CiudadPersistencia.Eliminar(ciudadSeleccionada);
                                     ActualizarPantalla(null);
                                 }
                             }
-
                         }
+
                         catch (Exception)
                         {
-                            transaccion.Rollback();
                             throw new Exception("Se produjo un error durante la eliminacion de la ciudad");
                         }
-                    }
                 }
             }
         }

@@ -107,6 +107,27 @@ BEGIN
 END
 GO
 
+CREATE FUNCTION [EL_PUNTERO].[ValidarFechasViaje](@ID_Viaje int,@FechaDesde datetime,@FechaHasta datetime)
+RETURNS int
+AS
+BEGIN
+	DECLARE @ViajeDesde datetime
+	DECLARE @ViajeHasta datetime
+	DECLARE @resul int
+
+	SET @ViajeDesde = (SELECT V.Fecha_Salida FROM [EL_PUNTERO].TL_VIAJE V WHERE V.ID_Viaje=@ID_Viaje)
+
+	SET @ViajeHasta = (SELECT V.Fecha_Llegada_Estimada FROM [EL_PUNTERO].TL_VIAJE V WHERE V.ID_Viaje=@ID_Viaje)
+
+	SET @resul = 0
+	IF ((@ViajeDesde>=@FechaDesde) AND (@ViajeDesde<=@FechaHasta)) OR ((@ViajeHasta>=@FechaDesde) AND (@ViajeHasta<=@FechaHasta))
+	BEGIN
+		SET @resul = 1
+	END
+	RETURN @resul
+END
+GO
+
 CREATE PROCEDURE [EL_PUNTERO].[ValidarHorarioDeAeronave]
 @Fecha_Salida datetime,
 @Fecha_Llegada_Estimada datetime,
@@ -117,9 +138,9 @@ BEGIN
 
 	SELECT *
 	FROM [EL_PUNTERO].[TL_VIAJE] V
-	WHERE V.Fecha_Salida= @Fecha_Salida 
-			AND V.Fecha_Llegada_Estimada = @Fecha_Llegada_Estimada
-			AND V.ID_Aeronave = @ID_Aeronave
+	WHERE V.ID_Aeronave = @ID_Aeronave
+	AND EL_PUNTERO.ValidarFechasViaje(V.ID_Viaje,@Fecha_Salida,@Fecha_Llegada_Estimada) = 1
+
 END
 GO
 

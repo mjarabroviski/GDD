@@ -94,8 +94,6 @@ namespace AerolineaFrba.Abm_Aeronave
                 Modelo = a.Modelo,
                 Tipo_Servicio = ServicioPersistencia.ObtenerServicioPorID(a.ID_Servicio).Nombre,
                 Baja_Fuera_Servicio = a.Baja_Fuera_De_Servicio,
-                Baja_Vida_Util = a.Baja_Vida_Util,
-                Fecha_Baja_Definitiva = a.Fecha_Baja_Fuera_Servicio,
                 Fecha_Alta = a.Fecha_Alta,
                 KG_Totales = a.KG_Totales
             });
@@ -105,7 +103,7 @@ namespace AerolineaFrba.Abm_Aeronave
             DgvAeronaves.DataSource = bind.ToList();
             AgregarBotonesDeColumnas();
 
-            DgvAeronaves.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            DgvAeronaves.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         private void AgregarBotonesDeColumnas()
@@ -213,7 +211,7 @@ namespace AerolineaFrba.Abm_Aeronave
         {
             int cant = 0;
             //Solo funciona cuando el usuario hace click en los botones de la columnas
-            if (e.RowIndex == -1 || e.ColumnIndex >= 0 && e.ColumnIndex < 9)
+            if (e.RowIndex == -1 || e.ColumnIndex >= 0 && e.ColumnIndex < 7)
                 return;
 
             var aeronaveSeleccionada = ListaAeronaves.Find(aeronave => aeronave.Matricula == (string)DgvAeronaves.Rows[e.RowIndex].Cells[0].Value);
@@ -221,7 +219,7 @@ namespace AerolineaFrba.Abm_Aeronave
             if (aeronaveSeleccionada != null)
             {
                 //El usuario tocó el botón de modificar
-                if (e.ColumnIndex == 9)
+                if (e.ColumnIndex == 7)
                 {
                     var insertarActualizarAeronave = new ABMInsertarActualizarAeronave(aeronaveSeleccionada,true);
                     insertarActualizarAeronave.ShowDialog();
@@ -231,7 +229,7 @@ namespace AerolineaFrba.Abm_Aeronave
                         ActualizarPantalla(null);
                 }
                 //El usuario tocó el botón de dar de baja por vida util
-                else if (e.ColumnIndex == 11)
+                else if (e.ColumnIndex == 9)
                 {
                     if (aeronaveSeleccionada.Baja_Vida_Util)
                     {
@@ -262,7 +260,7 @@ namespace AerolineaFrba.Abm_Aeronave
                     }
                 }
                 //El usuario toco el boton de dar baja por fuera de servicio
-                else if (e.ColumnIndex == 10)
+                else if (e.ColumnIndex == 8)
                 {
                     if (aeronaveSeleccionada.Baja_Fuera_De_Servicio)
                     {

@@ -31,12 +31,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.NumPasajes = new System.Windows.Forms.NumericUpDown();
-            this.NumEncomiendas = new System.Windows.Forms.NumericUpDown();
             this.BtnAceptar = new System.Windows.Forms.Label();
             this.BtnCancelar = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.NumPasajes)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumEncomiendas)).BeginInit();
+            this.cboPasajes = new System.Windows.Forms.ComboBox();
+            this.cboKGS = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -67,22 +65,6 @@
             this.label3.TabIndex = 2;
             this.label3.Text = "Kilogramos";
             // 
-            // NumPasajes
-            // 
-            this.NumPasajes.BackColor = System.Drawing.Color.White;
-            this.NumPasajes.Location = new System.Drawing.Point(109, 67);
-            this.NumPasajes.Name = "NumPasajes";
-            this.NumPasajes.Size = new System.Drawing.Size(120, 20);
-            this.NumPasajes.TabIndex = 5;
-            // 
-            // NumEncomiendas
-            // 
-            this.NumEncomiendas.BackColor = System.Drawing.Color.White;
-            this.NumEncomiendas.Location = new System.Drawing.Point(109, 126);
-            this.NumEncomiendas.Name = "NumEncomiendas";
-            this.NumEncomiendas.Size = new System.Drawing.Size(120, 20);
-            this.NumEncomiendas.TabIndex = 6;
-            // 
             // BtnAceptar
             // 
             this.BtnAceptar.BackColor = System.Drawing.Color.DodgerBlue;
@@ -111,16 +93,35 @@
             this.BtnCancelar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.BtnCancelar.Click += new System.EventHandler(this.BtnCancelar_Click);
             // 
+            // cboPasajes
+            // 
+            this.cboPasajes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboPasajes.FormattingEnabled = true;
+            this.cboPasajes.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.cboPasajes.Location = new System.Drawing.Point(184, 66);
+            this.cboPasajes.Name = "cboPasajes";
+            this.cboPasajes.Size = new System.Drawing.Size(77, 21);
+            this.cboPasajes.TabIndex = 57;
+            // 
+            // cboKGS
+            // 
+            this.cboKGS.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboKGS.FormattingEnabled = true;
+            this.cboKGS.Location = new System.Drawing.Point(184, 125);
+            this.cboKGS.Name = "cboKGS";
+            this.cboKGS.Size = new System.Drawing.Size(77, 21);
+            this.cboKGS.TabIndex = 58;
+            // 
             // FrmIngresoCantidades
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 233);
             this.ControlBox = false;
+            this.Controls.Add(this.cboKGS);
+            this.Controls.Add(this.cboPasajes);
             this.Controls.Add(this.BtnCancelar);
             this.Controls.Add(this.BtnAceptar);
-            this.Controls.Add(this.NumEncomiendas);
-            this.Controls.Add(this.NumPasajes);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -129,8 +130,7 @@
             this.MinimizeBox = false;
             this.Name = "FrmIngresoCantidades";
             this.Text = "Ingreso Cantidades";
-            ((System.ComponentModel.ISupportInitialize)(this.NumPasajes)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumEncomiendas)).EndInit();
+            this.Load += new System.EventHandler(this.FrmIngresoCantidades_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -141,9 +141,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.NumericUpDown NumPasajes;
-        private System.Windows.Forms.NumericUpDown NumEncomiendas;
         private System.Windows.Forms.Label BtnAceptar;
         private System.Windows.Forms.Label BtnCancelar;
+        private System.Windows.Forms.ComboBox cboPasajes;
+        private System.Windows.Forms.ComboBox cboKGS;
     }
 }

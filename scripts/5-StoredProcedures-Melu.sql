@@ -174,20 +174,23 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE [EL_PUNTERO].[CiudadTieneViajes]
+@ID_Ciudad int
+AS
+BEGIN
+	(SELECT * FROM [EL_PUNTERO].[TL_Ruta] WHERE ID_Ciudad_Origen = @ID_Ciudad AND ID_Ruta IN (SELECT ID_Ruta FROM [EL_PUNTERO].[TL_Viaje] WHERE Fecha_Salida >= GETDATE()))
+	UNION ALL
+	(SELECT * FROM [EL_PUNTERO].[TL_Ruta] WHERE ID_Ciudad_Destino = @ID_Ciudad AND ID_Ruta IN (SELECT ID_Ruta FROM [EL_PUNTERO].[TL_Viaje] WHERE Fecha_Salida >= GETDATE()))
+END
+GO
+
 CREATE PROCEDURE [EL_PUNTERO].[EliminarCiudad]
 @ID_Ciudad int
 AS
 BEGIN
-	IF(NOT(
-	(@ID_Ciudad IN (SELECT ID_Ciudad_Origen FROM [EL_PUNTERO].[TL_Ruta] WHERE ID_Ruta IN (SELECT ID_Ruta FROM [EL_PUNTERO].[TL_Viaje] WHERE Fecha_Salida >= GETDATE())))
-	OR
-	(@ID_Ciudad IN (SELECT ID_Ciudad_Destino FROM [EL_PUNTERO].[TL_Ruta] WHERE ID_Ruta IN (SELECT ID_Ruta FROM [EL_PUNTERO].[TL_Viaje] WHERE Fecha_Salida >= GETDATE())))
-	))
-	BEGIN
 	DELETE 
 	FROM [EL_PUNTERO].[TL_Ciudad]
 	WHERE ID_Ciudad = @ID_Ciudad
-	END 
 END
 GO
 
@@ -253,6 +256,7 @@ BEGIN
 	EXECUTE [EL_PUNTERO].[HabilitarAeronavesQueVolvieronDeBajaServicio];
 	SELECT *
 	FROM [EL_PUNTERO].[TL_Aeronave]
+	WHERE Baja_Por_Vida_Util = 0
 END
 GO
 
@@ -1134,17 +1138,34 @@ DECLARE @bajaHasta datetime
 END
 GO
 
+
+CREATE FUNCTION [EL_PUNTERO].[SeIntersectanFechasFueraDeServicio](@BajaDesde datetime,@BajaHasta datetime,@FechaDesde datetime,@FechaHasta datetime)
+RETURNS int
+AS
+BEGIN
+	DECLARE @resul int
+
+	SET @resul = 0
+	IF ((@BajaDesde>=@FechaDesde) AND (@BajaDesde<=@FechaHasta)) OR ((@BajaHasta>=@FechaDesde) AND (@BajaHasta<=@FechaHasta))
+	BEGIN
+		SET @resul = 1
+	END
+	RETURN @resul
+END
+GO
+
 CREATE PROCEDURE [EL_PUNTERO].[GetAeronavesConMayorCantDeDiasFueraDeServicio]
 @Fecha_Desde datetime,
 @Fecha_Hasta datetime
 AS
 BEGIN
-	SELECT TOP 5 A.Matricula AS Parametro,MAX( [EL_PUNTERO].[CantFueraDeServicio](B.ID_Baja_Servicio,@Fecha_Desde,@Fecha_Hasta)) AS Valor
+	SELECT TOP 5 A.Matricula AS Parametro,MAX([EL_PUNTERO].[CantFueraDeServicio](B.ID_Baja_Servicio,@Fecha_Desde,@Fecha_Hasta)) AS Valor
 	FROM EL_PUNTERO.TL_AERONAVE A
 	INNER JOIN EL_PUNTERO.TL_BAJA_SERVICIO_AERONAVE B ON B.ID_Aeronave=A.ID_Aeronave
-	
+	WHERE [EL_PUNTERO].[SeIntersectanFechasFueraDeServicio](B.Fecha_Fuera_De_Servicio,B.Fecha_Reinicio_Servicio,@Fecha_Desde,@Fecha_Hasta)=1
 	GROUP BY A.Matricula
 	ORDER BY 2 DESC
 END
 GO
+
 COMMIT

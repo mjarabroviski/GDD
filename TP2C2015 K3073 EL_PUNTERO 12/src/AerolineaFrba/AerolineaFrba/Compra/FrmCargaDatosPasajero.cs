@@ -251,5 +251,67 @@ namespace AerolineaFrba.Compra
                 MessageBox.Show(ex.Message, "Atención");
             }
         }
+
+        private void TxtNroDoc_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //Cuando presiona la tecla 'Enter', realizo el llenado automático
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+            {
+                try
+                {
+                    if (!(ValidadorDeTipos.IsNumeric(TxtNroDoc.Text)) && !(ValidadorDeTipos.IsEmpty(TxtNroDoc.Text)))
+                        throw new Exception("El documento debe ser un número");
+
+                    if (!(ValidadorDeTipos.IsEmpty(TxtNroDoc.Text)))
+                    {
+                        Cliente cliente = CompraPersistencia.ObtenerClientePorDoc(CmbTipoDoc.Text, Int32.Parse(TxtNroDoc.Text));
+                        if (cliente != null)
+                        {
+
+                            for (int i = cliente.Direccion.Length - 1; i > 0; i--)
+                            {
+                                if (!ValidadorDeTipos.IsNumeric(cliente.Direccion[i].ToString()))
+                                {
+                                    TxtNroCalle.Text = cliente.Direccion.Substring(i + 1, cliente.Direccion.Length - 1 - i);
+                                    TxtCalle.Text = cliente.Direccion.Substring(0, i + 1);
+                                    i = 0;
+                                }
+
+                            }
+
+                            TxtApellidos.Text = cliente.Apellido;
+                            TxtNombres.Text = cliente.Nombre;
+                            TxtMail.Text = cliente.Mail;
+                            TxtTelefono.Text = cliente.Telefono;
+                            DtpFechaNac.Value = cliente.Fecha_Nacimiento;
+                        }
+                        else
+                        {
+                            TxtApellidos.Text = "";
+                            TxtNombres.Text = "";
+                            TxtCalle.Text = "";
+                            TxtNroCalle.Text = "";
+                            TxtMail.Text = "";
+                            TxtTelefono.Text = "";
+                            DtpFechaNac.Value = DateTime.Today;
+                        }
+                    }
+                    else
+                    {
+                        TxtApellidos.Text = "";
+                        TxtNombres.Text = "";
+                        TxtCalle.Text = "";
+                        TxtNroCalle.Text = "";
+                        TxtMail.Text = "";
+                        TxtTelefono.Text = "";
+                        DtpFechaNac.Value = DateTime.Today;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Atención");
+                }
+            }
+        }
     }
 }

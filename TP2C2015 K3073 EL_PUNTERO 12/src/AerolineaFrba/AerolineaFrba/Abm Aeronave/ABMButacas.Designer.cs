@@ -147,11 +147,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(392, 396);
+            this.ControlBox = false;
             this.Controls.Add(this.BtnLimpiar);
             this.Controls.Add(this.BtnAgregarButacas);
             this.Controls.Add(this.BtnCancelar);
             this.Controls.Add(this.GroupFiltros);
             this.Controls.Add(this.DgvButacas);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ABMButacas";
             this.Text = "Modificacion de Butacas";
             this.Load += new System.EventHandler(this.ABMButacas_Load);

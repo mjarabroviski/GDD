@@ -226,14 +226,16 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(521, 501);
+            this.ControlBox = false;
             this.Controls.Add(this.BtnVerProductos);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.LblLimpiar);
             this.Controls.Add(this.LblListo);
             this.Controls.Add(this.dgvProductos);
             this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Canje";
-            this.Text = "Canje";
+            this.Text = "Realizacion de Canje";
             this.Load += new System.EventHandler(this.Canje_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

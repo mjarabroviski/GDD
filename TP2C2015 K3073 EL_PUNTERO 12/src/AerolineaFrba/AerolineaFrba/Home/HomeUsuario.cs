@@ -240,5 +240,10 @@ namespace AerolineaFrba.Home
             var listado = new Listado_Estadistico.Listado_Estadistico();
             listado.ShowDialog();
         }
+
+        private void salirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

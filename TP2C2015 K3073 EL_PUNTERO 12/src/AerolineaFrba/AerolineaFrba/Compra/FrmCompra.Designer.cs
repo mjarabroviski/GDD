@@ -162,7 +162,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmCompra";
-            this.Text = "FrmCompra";
+            this.Text = "Compra de Pasajes/Encomiendas";
             this.Load += new System.EventHandler(this.FrmCompra_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

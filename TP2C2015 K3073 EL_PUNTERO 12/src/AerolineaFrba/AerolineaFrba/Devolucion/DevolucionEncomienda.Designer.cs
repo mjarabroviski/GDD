@@ -51,7 +51,7 @@
             this.Btn_Finalizar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Btn_Finalizar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_Finalizar.ForeColor = System.Drawing.Color.White;
-            this.Btn_Finalizar.Location = new System.Drawing.Point(1259, 524);
+            this.Btn_Finalizar.Location = new System.Drawing.Point(1210, 524);
             this.Btn_Finalizar.Name = "Btn_Finalizar";
             this.Btn_Finalizar.Size = new System.Drawing.Size(91, 34);
             this.Btn_Finalizar.TabIndex = 85;
@@ -104,7 +104,7 @@
             this.DgvPasaje.Name = "DgvPasaje";
             this.DgvPasaje.RowHeadersVisible = false;
             this.DgvPasaje.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DgvPasaje.Size = new System.Drawing.Size(660, 421);
+            this.DgvPasaje.Size = new System.Drawing.Size(611, 421);
             this.DgvPasaje.TabIndex = 91;
             // 
             // Btn_Buscar2
@@ -207,7 +207,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1362, 570);
+            this.ClientSize = new System.Drawing.Size(1322, 570);
+            this.ControlBox = false;
             this.Controls.Add(this.Btn_Buscar);
             this.Controls.Add(this.Btn_Limpiar);
             this.Controls.Add(this.Btn_Buscar2);
@@ -221,6 +222,7 @@
             this.Controls.Add(this.Btn_Finalizar);
             this.Controls.Add(this.Btn_DevolverTodos);
             this.Controls.Add(this.DgvEncomiendas);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "DevolucionEncomiendaPasaje";
             this.Text = "Devolución Encomienda/Pasaje";
             this.Load += new System.EventHandler(this.DevolucionEncomienda_Load);

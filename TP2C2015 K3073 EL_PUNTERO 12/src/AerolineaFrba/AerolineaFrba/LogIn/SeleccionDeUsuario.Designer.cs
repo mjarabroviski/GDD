@@ -74,6 +74,9 @@
             this.Controls.Add(this.CboRoles);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnEntrar);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "SeleccionDeUsuario";
             this.Text = "Seleccion de Usuario";
             this.Load += new System.EventHandler(this.SeleccionDeUsuario_Load);

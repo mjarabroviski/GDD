@@ -259,6 +259,7 @@ namespace AerolineaFrba.Canje_Millas
                                  TxtDni.Text = string.Empty;
                                  TxtDni.Enabled = true;
                                  LblBuscar.Enabled = true;
+                                 TxtMillas.Text = string.Empty;
                              }
                              else ActualizarProductos();
                          }

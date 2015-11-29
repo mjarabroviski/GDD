@@ -154,7 +154,7 @@ namespace AerolineaFrba.Compra
                     CompraPersistencia.GuardarTarjetaYConfirmarCompra(cliente, 
                                                                       CmbTipoTarjeta.SelectedIndex+1, 
                                                                       Int32.Parse(TxtNroTarjeta.Text), 
-                                                                      Int32.Parse(CmbCantCuotas.SelectedText),
+                                                                      Int32.Parse(CmbCantCuotas.Text),
                                                                       viajeActual.ID,
                                                                       cantKgs,
                                                                       precioEnc,

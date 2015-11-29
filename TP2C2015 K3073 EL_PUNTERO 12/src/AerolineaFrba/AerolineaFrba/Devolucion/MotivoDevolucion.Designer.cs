@@ -39,7 +39,7 @@
             this.Txt_Motivo.Location = new System.Drawing.Point(12, 51);
             this.Txt_Motivo.Multiline = true;
             this.Txt_Motivo.Name = "Txt_Motivo";
-            this.Txt_Motivo.Size = new System.Drawing.Size(348, 168);
+            this.Txt_Motivo.Size = new System.Drawing.Size(348, 84);
             this.Txt_Motivo.TabIndex = 0;
             // 
             // Lbl_ingresar
@@ -54,7 +54,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 222);
+            this.label1.Location = new System.Drawing.Point(12, 150);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(129, 13);
             this.label1.TabIndex = 2;
@@ -66,9 +66,9 @@
             this.Btn_OK.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Btn_OK.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_OK.ForeColor = System.Drawing.Color.White;
-            this.Btn_OK.Location = new System.Drawing.Point(317, 222);
+            this.Btn_OK.Location = new System.Drawing.Point(306, 150);
             this.Btn_OK.Name = "Btn_OK";
-            this.Btn_OK.Size = new System.Drawing.Size(43, 21);
+            this.Btn_OK.Size = new System.Drawing.Size(54, 33);
             this.Btn_OK.TabIndex = 100;
             this.Btn_OK.Text = "OK";
             this.Btn_OK.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -78,13 +78,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(372, 261);
+            this.ClientSize = new System.Drawing.Size(372, 193);
+            this.ControlBox = false;
             this.Controls.Add(this.Btn_OK);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Lbl_ingresar);
             this.Controls.Add(this.Txt_Motivo);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "MotivoDevolucion";
-            this.Text = "MotivoDevolucion";
+            this.Text = "Motivo de la Devolucion";
             this.Load += new System.EventHandler(this.MotivoDevolucion_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

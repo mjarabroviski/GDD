@@ -161,10 +161,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(704, 511);
+            this.ControlBox = false;
             this.Controls.Add(this.GroupFiltros);
             this.Controls.Add(this.DgvCiudad);
             this.Controls.Add(this.LblListo);
             this.Controls.Add(this.LblNuevo);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximumSize = new System.Drawing.Size(720, 550);
             this.MinimumSize = new System.Drawing.Size(720, 550);
             this.Name = "ABMCiudades";

@@ -20,8 +20,8 @@ namespace AerolineaFrba.Compra
             InitializeComponent();
             label16.Text = precioTotal;
             cantPasajeros = cantPas;
-            var PNR  = CompraPersistencia.ObtenerPNR();
-            label3.Text = PNR.ToString();
+            int PNR  = CompraPersistencia.ObtenerPNR();
+            txtPNR.Text = PNR.ToString();
         }
 
         private void FrmInformeDatosCompra_Load(object sender, EventArgs e)

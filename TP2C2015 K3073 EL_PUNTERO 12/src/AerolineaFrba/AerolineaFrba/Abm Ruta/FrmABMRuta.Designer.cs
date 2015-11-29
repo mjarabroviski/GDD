@@ -289,7 +289,7 @@
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "FrmABMRuta";
-            this.Text = "FrmABMRuta";
+            this.Text = "Administracion de Rutas";
             this.Load += new System.EventHandler(this.FrmABMRuta_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

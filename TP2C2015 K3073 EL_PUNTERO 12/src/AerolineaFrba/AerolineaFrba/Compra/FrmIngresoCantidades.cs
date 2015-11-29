@@ -16,14 +16,18 @@ namespace AerolineaFrba.Compra
     {
         public FrmCompra formularioAnterior;
         public Viaje viajeActual;
+        public int maxPasajes;
+        public int maxKGS;
+        public int cantPasajes = 0;
+        public int cantKGS = 0;
 
         public FrmIngresoCantidades(Viaje viaje,FrmCompra frmCompra)
         {
             formularioAnterior = frmCompra;
             viajeActual = viaje;
             InitializeComponent();
-            NumEncomiendas.Maximum = ViajePersistencia.ObtenerKGSDisponibles(viaje.ID);
-            NumPasajes.Maximum = ViajePersistencia.ObtenerButacasDisponibles(viaje.ID);
+            maxKGS = ViajePersistencia.ObtenerKGSDisponibles(viaje.ID);
+            maxPasajes = ViajePersistencia.ObtenerButacasDisponibles(viaje.ID);
             formularioAnterior.Visible = false;
         }
 
@@ -37,24 +41,32 @@ namespace AerolineaFrba.Compra
         {
             try
             {
-                if (NumPasajes.Value > 0)
+                if((ValidadorDeTipos.IsEmpty(cboPasajes.Text)) && ((ValidadorDeTipos.IsEmpty(cboKGS.Text))))
+                     throw new Exception("Debe ingresar cantidades mayores a 0");
+                if (!(ValidadorDeTipos.IsEmpty(cboPasajes.Text)))
+                    cantPasajes = Convert.ToInt32(cboPasajes.Text);
+
+                if (!(ValidadorDeTipos.IsEmpty(cboKGS.Text)))
+                    cantKGS = Convert.ToInt32(cboKGS.Text);
+                    
+
+                if (cantPasajes > 0)
                 {
                     CompraPersistencia.CrearTablaDatosPasajeros();
                 }
 
                 int ordenPasaje;
-                if (NumPasajes.Value == 0 && NumEncomiendas.Value == 0) throw new Exception("Debe ingresar cantidades mayores a 0");
-                if (NumPasajes.Value != 0)
+                if (cantPasajes != 0)
                 {
                     ordenPasaje = 1;
-                    var cargaPasajeros = new FrmCargaDatosPasajero(viajeActual, NumPasajes.Value, NumEncomiendas.Value, this, ordenPasaje);
+                    var cargaPasajeros = new FrmCargaDatosPasajero(viajeActual, cantPasajes,cantKGS, this, ordenPasaje);
                     cargaPasajeros.ShowDialog();
                 }
                 else
                 {
                     //Solo hay encomiendas
                     ordenPasaje = 0;
-                    var formularioPago = new FrmCargaDatosPago(this,NumPasajes.Value,NumEncomiendas.Value,viajeActual);
+                    var formularioPago = new FrmCargaDatosPago(this,cantPasajes, cantKGS, viajeActual);
                     formularioPago.ShowDialog();
                 }
 
@@ -62,6 +74,19 @@ namespace AerolineaFrba.Compra
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Atención");
+            }
+        }
+
+        private void FrmIngresoCantidades_Load(object sender, EventArgs e)
+        {
+            for (int i = 1; i <= maxPasajes; i++)
+            {
+                cboPasajes.Items.Add(i);
+            }
+
+            for (int i = 1; i <= maxKGS; i++)
+            {
+                cboKGS.Items.Add(i);
             }
         }
     }

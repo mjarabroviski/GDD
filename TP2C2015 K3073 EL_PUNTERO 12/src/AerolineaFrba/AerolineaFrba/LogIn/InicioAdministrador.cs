@@ -92,13 +92,13 @@ namespace AerolineaFrba.LogIn
                     UsuarioPersistencia.LimpiarIntentos(user);
                     var dialogAnswer2 = MessageBox.Show("Usuario logueado correctamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     if (dialogAnswer2 == DialogResult.OK)
-                    {
-                        
+                    {  
                         AdministradorSesion.UsuarioActual = user;
                         Hide();
                         HomeUsuario home = new HomeUsuario();
                         home.ShowDialog();
                         Close();
+                        
                     }
 
                 return 0;
@@ -106,37 +106,8 @@ namespace AerolineaFrba.LogIn
 
         private void InicioAdministrador_Load(object sender, EventArgs e)
         {
-            btnNuevo.Enabled = false;
             txtAdministrador.Enabled = false;
             txtAdministrador.Text = rolALoguear.Descripcion;
-        }
-
-        private void btnNuevo_Click(object sender, EventArgs e)
-        {
-            //Validacion que exista el usuario antes de cambiar contrasenia
-            Usuario user = UsuarioPersistencia.ObtenerPorUserName(TxtUsuario.Text);
-            if (user == null)
-            {
-                MessageBox.Show("El usuario ingresado no existe en el sistema, por favor registrese", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                LimpiarCampos();
-            }
-            else
-            {
-                ResetearContrasena reset = new ResetearContrasena(user);
-                reset.ShowDialog();
-            }
-        }
-
-        private void TxtUsuario_TextChanged(object sender, EventArgs e)
-        {
-            if (!String.IsNullOrEmpty(TxtUsuario.Text)) {
-                btnNuevo.Enabled = true;
-            }
-        }
-
-        private void TxtContrasena_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void TxtContrasena_KeyPress(object sender, KeyPressEventArgs e)

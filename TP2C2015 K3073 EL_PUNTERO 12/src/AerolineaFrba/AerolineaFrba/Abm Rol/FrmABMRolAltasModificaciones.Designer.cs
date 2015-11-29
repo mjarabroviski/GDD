@@ -152,7 +152,7 @@
             this.Controls.Add(this.label3);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "FrmABMRolAltasModificaciones";
-            this.Text = "FrmABMRolAltasModificaciones";
+            this.Text = "Insertar o Modificar Roles";
             this.Load += new System.EventHandler(this.FrmABMRolAltasModificaciones_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

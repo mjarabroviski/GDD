@@ -243,12 +243,14 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1005, 594);
+            this.ControlBox = false;
             this.Controls.Add(this.LblListo);
             this.Controls.Add(this.GroupFiltros);
             this.Controls.Add(this.LblNuevo);
             this.Controls.Add(this.DgvAeronaves);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ABMAeronaves";
-            this.Text = "Administracion Aeronaves";
+            this.Text = "Administracion de Aeronaves";
             this.Load += new System.EventHandler(this.ABMAeronaves_Load);
             this.GroupFiltros.ResumeLayout(false);
             this.GroupFiltros.PerformLayout();

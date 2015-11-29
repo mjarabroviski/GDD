@@ -90,13 +90,13 @@ INSERT INTO EL_PUNTERO.TL_ROL (Descripcion) VALUES ('Administrador General');
 
 --Inserto Usuarios
 INSERT INTO EL_PUNTERO.TL_USUARIO (Username,Password,Cant_Intentos)
-VALUES ('admin1','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',2);
+VALUES ('admin1','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',3);
 INSERT INTO EL_PUNTERO.TL_USUARIO (Username,Password,Cant_Intentos)
-VALUES ('admin2','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',2);
+VALUES ('admin2','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',3);
 INSERT INTO EL_PUNTERO.TL_USUARIO (Username,Password,Cant_Intentos)
-VALUES ('admin3','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',2);
+VALUES ('admin3','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',3);
 INSERT INTO EL_PUNTERO.TL_USUARIO (Username,Password,Cant_Intentos)
-VALUES ('admin4','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',2);
+VALUES ('admin4','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',3);
 INSERT INTO EL_PUNTERO.TL_USUARIO (Username,Password,Cant_Intentos)
 VALUES ('admin','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',3);
 

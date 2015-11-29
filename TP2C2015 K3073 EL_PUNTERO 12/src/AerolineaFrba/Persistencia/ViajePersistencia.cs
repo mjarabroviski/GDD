@@ -99,7 +99,7 @@ namespace Persistencia
             return (int)sp.ExecuteScalar(null);
         }
         
-        public static bool ValidarHorarioDeAeronave(DateTime fechaSalida, DateTime fechaLlegadaEstimada, int ID_Aeronave)
+        public static int ValidarHorarioDeAeronave(DateTime fechaSalida, DateTime fechaLlegadaEstimada, int ID_Aeronave)
         {
 
             var param = new List<SPParameter>
@@ -112,7 +112,7 @@ namespace Persistencia
             var sp = new StoreProcedure(DBQueries.Viaje.SPValidarHorarioDeAeronave, param);
 
             List<Viaje> viajes = sp.ExecuteReader<Viaje>();
-            return viajes.Count == 0;
+            return viajes.Count;
         }
 
 

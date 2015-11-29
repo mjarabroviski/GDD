@@ -92,10 +92,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(463, 168);
+            this.ControlBox = false;
             this.Controls.Add(this.LblVolver);
             this.Controls.Add(this.LblReemplazar);
             this.Controls.Add(this.LblCancelar);
             this.Controls.Add(this.label2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ABMCancelarOReemplazar";
             this.Text = "Informacion";
             this.ResumeLayout(false);

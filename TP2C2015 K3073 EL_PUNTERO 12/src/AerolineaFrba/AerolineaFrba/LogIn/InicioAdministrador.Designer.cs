@@ -30,7 +30,6 @@
         {
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnNuevo = new System.Windows.Forms.Label();
             this.TxtContrasena = new System.Windows.Forms.TextBox();
             this.TxtUsuario = new System.Windows.Forms.TextBox();
             this.btnEntrar = new System.Windows.Forms.Label();
@@ -57,20 +56,6 @@
             this.label2.TabIndex = 10;
             this.label2.Text = "CONTRASEÑA";
             // 
-            // btnNuevo
-            // 
-            this.btnNuevo.BackColor = System.Drawing.Color.DodgerBlue;
-            this.btnNuevo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.btnNuevo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnNuevo.ForeColor = System.Drawing.Color.White;
-            this.btnNuevo.Location = new System.Drawing.Point(148, 167);
-            this.btnNuevo.Name = "btnNuevo";
-            this.btnNuevo.Size = new System.Drawing.Size(91, 32);
-            this.btnNuevo.TabIndex = 9;
-            this.btnNuevo.Text = "CAMBIAR CONTRASEÑA";
-            this.btnNuevo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
-            // 
             // TxtContrasena
             // 
             this.TxtContrasena.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -79,7 +64,6 @@
             this.TxtContrasena.PasswordChar = '*';
             this.TxtContrasena.Size = new System.Drawing.Size(308, 20);
             this.TxtContrasena.TabIndex = 8;
-            this.TxtContrasena.TextChanged += new System.EventHandler(this.TxtContrasena_TextChanged);
             this.TxtContrasena.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtContrasena_KeyPress);
             // 
             // TxtUsuario
@@ -89,7 +73,6 @@
             this.TxtUsuario.Name = "TxtUsuario";
             this.TxtUsuario.Size = new System.Drawing.Size(308, 20);
             this.TxtUsuario.TabIndex = 7;
-            this.TxtUsuario.TextChanged += new System.EventHandler(this.TxtUsuario_TextChanged);
             // 
             // btnEntrar
             // 
@@ -97,9 +80,9 @@
             this.btnEntrar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.btnEntrar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEntrar.ForeColor = System.Drawing.Color.White;
-            this.btnEntrar.Location = new System.Drawing.Point(41, 167);
+            this.btnEntrar.Location = new System.Drawing.Point(41, 172);
             this.btnEntrar.Name = "btnEntrar";
-            this.btnEntrar.Size = new System.Drawing.Size(90, 32);
+            this.btnEntrar.Size = new System.Drawing.Size(143, 32);
             this.btnEntrar.TabIndex = 6;
             this.btnEntrar.Text = "ACEPTAR";
             this.btnEntrar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -111,9 +94,9 @@
             this.btnVolver.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.btnVolver.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnVolver.ForeColor = System.Drawing.Color.White;
-            this.btnVolver.Location = new System.Drawing.Point(258, 167);
+            this.btnVolver.Location = new System.Drawing.Point(206, 172);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(91, 32);
+            this.btnVolver.Size = new System.Drawing.Size(143, 32);
             this.btnVolver.TabIndex = 12;
             this.btnVolver.Text = "CANCELAR";
             this.btnVolver.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -141,15 +124,16 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(404, 229);
+            this.ControlBox = false;
             this.Controls.Add(this.lblRol);
             this.Controls.Add(this.txtAdministrador);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.btnNuevo);
             this.Controls.Add(this.TxtContrasena);
             this.Controls.Add(this.TxtUsuario);
             this.Controls.Add(this.btnEntrar);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "InicioAdministrador";
             this.Text = "Inicio Administrador";
             this.Load += new System.EventHandler(this.InicioAdministrador_Load);
@@ -162,7 +146,6 @@
 
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label btnNuevo;
         private System.Windows.Forms.TextBox TxtContrasena;
         private System.Windows.Forms.TextBox TxtUsuario;
         private System.Windows.Forms.Label btnEntrar;

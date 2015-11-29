@@ -88,6 +88,7 @@ namespace Persistencia.Entidades
         {
             public static String SPGetCiudades = "EL_PUNTERO.GetCiudades";
             public static String SPEliminarCiudad = "EL_PUNTERO.EliminarCiudad";
+            public static String SPCiudadTieneViajes = "EL_PUNTERO.CiudadTieneViajes";
             public static String SPObtenerCiudadesPorParametros = "EL_PUNTERO.GetCiudadesPorParametros";
             public static String SPObtenerCiudadesPorParametrosComo = "EL_PUNTERO.GetCiudadesPorParametrosComo";
             public static String SPInsertarCiudad = "EL_PUNTERO.InsertarCiudad";

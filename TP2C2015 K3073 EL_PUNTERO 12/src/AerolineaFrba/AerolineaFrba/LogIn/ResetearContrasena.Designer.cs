@@ -131,6 +131,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(408, 206);
+            this.ControlBox = false;
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnVolver);
@@ -139,6 +140,7 @@
             this.Controls.Add(this.TxtContrasenaRepetida);
             this.Controls.Add(this.TxtContrasena);
             this.Controls.Add(this.LblAceptar);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ResetearContrasena";
             this.Text = "Resetear Contraseña";
             this.ResumeLayout(false);

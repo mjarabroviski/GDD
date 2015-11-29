@@ -139,8 +139,6 @@ namespace AerolineaFrba.Abm_Ruta
                     if (!ValidadorDeTipos.IsEmpty(mensajeExcepcion))
                         throw new Exception(mensajeExcepcion);
 
-                    //TODO Por qué no me muestra el mensaje de error que le dije??
-
                     #endregion
 
                     #region Inserto una nueva ruta

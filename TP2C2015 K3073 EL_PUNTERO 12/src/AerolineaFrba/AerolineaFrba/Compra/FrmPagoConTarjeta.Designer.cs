@@ -270,6 +270,7 @@
             // 
             // CmbCantCuotas
             // 
+            this.CmbCantCuotas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CmbCantCuotas.FormattingEnabled = true;
             this.CmbCantCuotas.Items.AddRange(new object[] {
             "1",
@@ -314,7 +315,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmPagoConTarjeta";
-            this.Text = "FrmPagoConTarjeta";
+            this.Text = "Pago Con Tarjeta de Credito";
             this.Load += new System.EventHandler(this.FrmPagoConTarjeta_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

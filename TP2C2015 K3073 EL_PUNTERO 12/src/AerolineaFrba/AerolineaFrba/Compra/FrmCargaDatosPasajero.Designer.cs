@@ -130,6 +130,7 @@
             this.TxtNroDoc.Name = "TxtNroDoc";
             this.TxtNroDoc.Size = new System.Drawing.Size(217, 20);
             this.TxtNroDoc.TabIndex = 32;
+            this.TxtNroDoc.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtNroDoc_KeyPress);
             this.TxtNroDoc.Leave += new System.EventHandler(this.TxtNroDoc_Leave);
             // 
             // label7
@@ -430,7 +431,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmCargaDatosPasajero";
-            this.Text = "FrmCargaDatosPasajero";
+            this.Text = "Carga de Datos de Pasajero";
             this.Load += new System.EventHandler(this.FrmCargaDatosPasajero_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

@@ -99,8 +99,8 @@ namespace AerolineaFrba.Registro_de_Usuario
 
         private void RegistroDeUsuario_Load(object sender, EventArgs e)
         {
-            txtAdministrador.Enabled = false;
-            txtAdministrador.Text = "ADMINISTRADOR";
+            txtRol.Enabled = false;
+            txtRol.Text = "ADMINISTRADOR";
         }
     }
 }

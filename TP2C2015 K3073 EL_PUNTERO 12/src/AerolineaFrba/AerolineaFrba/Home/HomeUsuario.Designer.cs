@@ -48,6 +48,7 @@
             this.registroDeUsuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cambioDeContraseñaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pbFoto = new System.Windows.Forms.PictureBox();
             this.menuHome.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbFoto)).BeginInit();
@@ -66,10 +67,11 @@
             this.atencionAlClienteToolStripMenuItem,
             this.listadoEstadisticoToolStripMenuItem,
             this.usuarioToolStripMenuItem,
-            this.logOutToolStripMenuItem});
+            this.logOutToolStripMenuItem,
+            this.salirToolStripMenuItem});
             this.menuHome.Location = new System.Drawing.Point(0, 0);
             this.menuHome.Name = "menuHome";
-            this.menuHome.Size = new System.Drawing.Size(580, 24);
+            this.menuHome.Size = new System.Drawing.Size(581, 24);
             this.menuHome.TabIndex = 0;
             this.menuHome.Text = "menuStrip1";
             // 
@@ -223,6 +225,13 @@
             this.logOutToolStripMenuItem.Text = "Log Out";
             this.logOutToolStripMenuItem.Click += new System.EventHandler(this.logOutToolStripMenuItem_Click);
             // 
+            // salirToolStripMenuItem
+            // 
+            this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
+            this.salirToolStripMenuItem.Text = "Salir";
+            this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
+            // 
             // pbFoto
             // 
             this.pbFoto.Location = new System.Drawing.Point(0, 27);
@@ -235,9 +244,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(580, 355);
+            this.ClientSize = new System.Drawing.Size(581, 355);
+            this.ControlBox = false;
             this.Controls.Add(this.pbFoto);
             this.Controls.Add(this.menuHome);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "HomeUsuario";
             this.Text = "Home AerolineaFRBA";
             this.Load += new System.EventHandler(this.Home_Load);
@@ -272,5 +285,6 @@
         private System.Windows.Forms.ToolStripMenuItem cambioDeContraseñaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem logOutToolStripMenuItem;
         private System.Windows.Forms.PictureBox pbFoto;
+        private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
     }
 }
