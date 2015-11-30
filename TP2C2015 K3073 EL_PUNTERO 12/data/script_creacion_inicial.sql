@@ -2773,7 +2773,12 @@ BEGIN
 	SELECT *
 	FROM [EL_PUNTERO].[TL_AERONAVE] A
 	INNER JOIN [EL_PUNTERO].[TL_VIAJE] V ON A.ID_Aeronave = V.ID_Aeronave
-	WHERE V.Fecha_Salida = @Fecha_Salida AND V.ID_Ruta = @ID_Ruta
+	WHERE DATEPART(year,V.Fecha_Salida) = DATEPART(year, @Fecha_Salida) 
+    and DATEPART(month, V.Fecha_Salida) = DATEPART(month, @Fecha_Salida) 
+    and DATEPART(day,V.Fecha_Salida)= DATEPART(day, @Fecha_Salida) 
+	and DATEPART(hour,V.Fecha_Salida)= DATEPART(hour, @Fecha_Salida) 
+	and DATEPART(minute,V.Fecha_Salida)= DATEPART(minute, @Fecha_Salida) 
+	and DATEPART(second ,V.Fecha_Salida)= DATEPART(second, @Fecha_Salida) AND V.ID_Ruta = @ID_Ruta
 END
 GO
 
@@ -2786,7 +2791,14 @@ AS
 BEGIN
 	SELECT *
 	FROM [EL_PUNTERO].[TL_VIAJE] V
-	WHERE V.Fecha_Salida = @Fecha_Salida AND V.ID_Ruta = @ID_Ruta AND V.ID_Aeronave = @ID_Aeronave
+	WHERE DATEPART(year,V.Fecha_Salida) = DATEPART(year, @Fecha_Salida) 
+    and DATEPART(month, V.Fecha_Salida) = DATEPART(month, @Fecha_Salida) 
+    and DATEPART(day,V.Fecha_Salida)= DATEPART(day, @Fecha_Salida) 
+	and DATEPART(hour,V.Fecha_Salida)= DATEPART(hour, @Fecha_Salida) 
+	and DATEPART(minute,V.Fecha_Salida)= DATEPART(minute, @Fecha_Salida) 
+	and DATEPART(second ,V.Fecha_Salida)= DATEPART(second, @Fecha_Salida) 
+	and V.ID_Ruta = @ID_Ruta 
+	AND V.ID_Aeronave = @ID_Aeronave
 END
 GO
 
