@@ -48,14 +48,6 @@ namespace AerolineaFrba.Registro_Llegada_Destino
         private void InformacionAeronave_Load(object sender, EventArgs e)
         {
             #region completo los textbox
-            if (aeronave.Baja_Vida_Util == true)Txt_BajaVidaUtil.Text = "SI";
-            else Txt_BajaVidaUtil.Text = "NO";
-            if (aeronave.Baja_Fuera_De_Servicio== true)Txt_BajaFuera.Text = "SI";
-            else Txt_BajaFuera.Text = "NO";
-            if (aeronave.Fecha_Baja_Fuera_Servicio.ToString().Equals("1/1/0001 12:00:00 a. m."))
-            {
-                Txt_FechaBajaDef.Text = "NO TIENE";
-            }
             Txt_Fabricante.Text = aeronave.Fabricante;
             Txt_FechaAlta.Text = aeronave.Fecha_Alta.ToString();          
             Txt_KG.Text = aeronave.KG_Totales.ToString();
