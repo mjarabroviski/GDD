@@ -35,9 +35,6 @@ namespace AerolineaFrba.Generacion_Viaje
         private void ComenzarConCboVacios()
         {
             Txt_Servicio.Text = "TIPO SERVICIO";
-            CboAeronave.Text = "MATRICULA AERONAVE";
-            CboCiudadOrigen.Text = "CIUDAD ORIGEN";
-            CboCiudadDestino.Text = "CIUDAD DESTINO";
         }
 
         private void CargarCbos()
@@ -91,6 +88,7 @@ namespace AerolineaFrba.Generacion_Viaje
             try
             {
                 #region validacionesDeHoras
+
                 if ( DtpFechaLlegada.Value.Month != DtpFechaSalida.Value.Month
                     || DtpFechaLlegada.Value.Year != DtpFechaSalida.Value.Year)
                 {

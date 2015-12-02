@@ -136,8 +136,8 @@ namespace AerolineaFrba.Listado_Estadistico
                     case "02": diaHasta = "28"; break;
                 }
 
-                var fechaDesde = DateTime.Parse(cboAnio.SelectedValue.ToString() + "/" + mesDesde + "/01");
-                var fechaHasta = DateTime.Parse(cboAnio.SelectedValue.ToString() + "/" + mesHasta + "/" + diaHasta);
+                string fechaDesde = cboAnio.SelectedValue.ToString() + "/" + mesDesde + "/01" + " " + "12:00:00";
+                string fechaHasta = cboAnio.SelectedValue.ToString() + "/" + mesHasta + "/" + diaHasta + " " + "12:00:00";
 
                 //Creo los filtros con los que se ejecuta la consulta.
                 var filtros = new EstadisticaFiltros
@@ -146,7 +146,7 @@ namespace AerolineaFrba.Listado_Estadistico
                     FechaHasta = fechaHasta,
                 };
 
-                var listado = new List<Estadistica>();
+                List<Estadistica> listado = new List<Estadistica>();
                 switch ((int)cboListado.SelectedValue)
                 {
                     case 1:

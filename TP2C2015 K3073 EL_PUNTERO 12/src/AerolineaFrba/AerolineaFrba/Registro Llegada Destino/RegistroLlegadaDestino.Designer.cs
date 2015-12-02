@@ -34,9 +34,10 @@
             this.CboCiudadOrigen = new System.Windows.Forms.ComboBox();
             this.label21 = new System.Windows.Forms.Label();
             this.RegistroLlegadaADestino = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.Btn_Registrar = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.DtpFechaLlegada = new System.Windows.Forms.DateTimePicker();
             this.Btn_Limpiar = new System.Windows.Forms.Label();
             this.Btn_Cancelar = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -60,31 +61,31 @@
             // 
             // CboAeronave
             // 
+            this.CboAeronave.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CboAeronave.FormattingEnabled = true;
-            this.CboAeronave.Location = new System.Drawing.Point(22, 43);
+            this.CboAeronave.Location = new System.Drawing.Point(129, 42);
             this.CboAeronave.Name = "CboAeronave";
-            this.CboAeronave.Size = new System.Drawing.Size(165, 21);
+            this.CboAeronave.Size = new System.Drawing.Size(150, 21);
             this.CboAeronave.TabIndex = 70;
-            this.CboAeronave.Text = "MATRICULA AERONAVE";
             this.CboAeronave.SelectedIndexChanged += new System.EventHandler(this.CboAeronave_SelectedIndexChanged);
             // 
             // CboCiudadDestino
             // 
+            this.CboCiudadDestino.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CboCiudadDestino.FormattingEnabled = true;
-            this.CboCiudadDestino.Location = new System.Drawing.Point(22, 125);
+            this.CboCiudadDestino.Location = new System.Drawing.Point(129, 124);
             this.CboCiudadDestino.Name = "CboCiudadDestino";
-            this.CboCiudadDestino.Size = new System.Drawing.Size(165, 21);
+            this.CboCiudadDestino.Size = new System.Drawing.Size(150, 21);
             this.CboCiudadDestino.TabIndex = 68;
-            this.CboCiudadDestino.Text = "CIUDAD DESTINO";
             // 
             // CboCiudadOrigen
             // 
+            this.CboCiudadOrigen.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CboCiudadOrigen.FormattingEnabled = true;
-            this.CboCiudadOrigen.Location = new System.Drawing.Point(22, 84);
+            this.CboCiudadOrigen.Location = new System.Drawing.Point(129, 83);
             this.CboCiudadOrigen.Name = "CboCiudadOrigen";
-            this.CboCiudadOrigen.Size = new System.Drawing.Size(165, 21);
+            this.CboCiudadOrigen.Size = new System.Drawing.Size(150, 21);
             this.CboCiudadOrigen.TabIndex = 67;
-            this.CboCiudadOrigen.Text = "CIUDAD ORIGEN";
             // 
             // label21
             // 
@@ -97,9 +98,10 @@
             // 
             // RegistroLlegadaADestino
             // 
+            this.RegistroLlegadaADestino.Controls.Add(this.label7);
+            this.RegistroLlegadaADestino.Controls.Add(this.label6);
+            this.RegistroLlegadaADestino.Controls.Add(this.label5);
             this.RegistroLlegadaADestino.Controls.Add(this.Btn_Registrar);
-            this.RegistroLlegadaADestino.Controls.Add(this.label1);
-            this.RegistroLlegadaADestino.Controls.Add(this.DtpFechaLlegada);
             this.RegistroLlegadaADestino.Controls.Add(this.Btn_Limpiar);
             this.RegistroLlegadaADestino.Controls.Add(this.Btn_Cancelar);
             this.RegistroLlegadaADestino.Controls.Add(this.label4);
@@ -115,10 +117,37 @@
             this.RegistroLlegadaADestino.Controls.Add(this.label14);
             this.RegistroLlegadaADestino.Location = new System.Drawing.Point(11, 12);
             this.RegistroLlegadaADestino.Name = "RegistroLlegadaADestino";
-            this.RegistroLlegadaADestino.Size = new System.Drawing.Size(380, 306);
+            this.RegistroLlegadaADestino.Size = new System.Drawing.Size(326, 274);
             this.RegistroLlegadaADestino.TabIndex = 48;
             this.RegistroLlegadaADestino.TabStop = false;
             this.RegistroLlegadaADestino.Text = "REGISTRO LLEGADA A DESTINO";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(19, 129);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(99, 13);
+            this.label7.TabIndex = 102;
+            this.label7.Text = "CIUDAD DESTINO";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(19, 86);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(93, 13);
+            this.label6.TabIndex = 101;
+            this.label6.Text = "CIUDAD ORIGEN";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(19, 45);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(69, 13);
+            this.label5.TabIndex = 100;
+            this.label5.Text = "MATRICULA";
             // 
             // Btn_Registrar
             // 
@@ -126,33 +155,13 @@
             this.Btn_Registrar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Btn_Registrar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_Registrar.ForeColor = System.Drawing.Color.White;
-            this.Btn_Registrar.Location = new System.Drawing.Point(292, 193);
+            this.Btn_Registrar.Location = new System.Drawing.Point(209, 214);
             this.Btn_Registrar.Name = "Btn_Registrar";
-            this.Btn_Registrar.Size = new System.Drawing.Size(82, 20);
+            this.Btn_Registrar.Size = new System.Drawing.Size(86, 31);
             this.Btn_Registrar.TabIndex = 99;
             this.Btn_Registrar.Text = "REGISTRAR";
             this.Btn_Registrar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.Btn_Registrar.Click += new System.EventHandler(this.Btn_Registrar_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 200);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(94, 13);
-            this.label1.TabIndex = 98;
-            this.label1.Text = "FECHA LLEGADA";
-            // 
-            // DtpFechaLlegada
-            // 
-            this.DtpFechaLlegada.CustomFormat = "d/MM/yyyy   HH:mm:ss";
-            this.DtpFechaLlegada.Enabled = false;
-            this.DtpFechaLlegada.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.DtpFechaLlegada.Location = new System.Drawing.Point(129, 193);
-            this.DtpFechaLlegada.Name = "DtpFechaLlegada";
-            this.DtpFechaLlegada.Size = new System.Drawing.Size(150, 20);
-            this.DtpFechaLlegada.TabIndex = 97;
-            this.DtpFechaLlegada.Value = new System.DateTime(2015, 10, 29, 0, 0, 0, 0);
             // 
             // Btn_Limpiar
             // 
@@ -160,9 +169,9 @@
             this.Btn_Limpiar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Btn_Limpiar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_Limpiar.ForeColor = System.Drawing.Color.White;
-            this.Btn_Limpiar.Location = new System.Drawing.Point(94, 256);
+            this.Btn_Limpiar.Location = new System.Drawing.Point(116, 214);
             this.Btn_Limpiar.Name = "Btn_Limpiar";
-            this.Btn_Limpiar.Size = new System.Drawing.Size(76, 23);
+            this.Btn_Limpiar.Size = new System.Drawing.Size(86, 32);
             this.Btn_Limpiar.TabIndex = 96;
             this.Btn_Limpiar.Text = "LIMPIAR";
             this.Btn_Limpiar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -174,9 +183,9 @@
             this.Btn_Cancelar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Btn_Cancelar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_Cancelar.ForeColor = System.Drawing.Color.White;
-            this.Btn_Cancelar.Location = new System.Drawing.Point(186, 256);
+            this.Btn_Cancelar.Location = new System.Drawing.Point(22, 214);
             this.Btn_Cancelar.Name = "Btn_Cancelar";
-            this.Btn_Cancelar.Size = new System.Drawing.Size(76, 23);
+            this.Btn_Cancelar.Size = new System.Drawing.Size(86, 31);
             this.Btn_Cancelar.TabIndex = 95;
             this.Btn_Cancelar.Text = "LISTO";
             this.Btn_Cancelar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -187,7 +196,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.label4.Location = new System.Drawing.Point(193, 123);
+            this.label4.Location = new System.Drawing.Point(113, 125);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(15, 20);
             this.label4.TabIndex = 86;
@@ -199,7 +208,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.label3.Location = new System.Drawing.Point(193, 85);
+            this.label3.Location = new System.Drawing.Point(107, 83);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(15, 20);
             this.label3.TabIndex = 85;
@@ -211,7 +220,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.label2.Location = new System.Drawing.Point(192, 43);
+            this.label2.Location = new System.Drawing.Point(87, 43);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(15, 20);
             this.label2.TabIndex = 84;
@@ -250,7 +259,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(404, 330);
+            this.ClientSize = new System.Drawing.Size(350, 298);
             this.ControlBox = false;
             this.Controls.Add(this.RegistroLlegadaADestino);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -279,9 +288,10 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label Btn_Cancelar;
         private System.Windows.Forms.Label Btn_Limpiar;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DateTimePicker DtpFechaLlegada;
         private System.Windows.Forms.Label Btn_Registrar;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
 
     }
 }

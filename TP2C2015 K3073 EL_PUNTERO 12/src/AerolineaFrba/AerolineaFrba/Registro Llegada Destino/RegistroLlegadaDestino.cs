@@ -23,13 +23,6 @@ namespace AerolineaFrba.Registro_Llegada_Destino
             InitializeComponent();
         }
 
-        private void ComenzarConCboVacios()
-        {
-            CboAeronave.Text = "MATRICULA AERONAVE";
-            CboCiudadOrigen.Text = "CIUDAD ORIGEN";
-            CboCiudadDestino.Text = "CIUDAD DESTINO";
-        }
-
         private void CargarCbos()
         {
             CboCiudadOrigen.DataSource = CiudadPersistencia.ObtenerTodos();
@@ -48,10 +41,7 @@ namespace AerolineaFrba.Registro_Llegada_Destino
         private void RegistroLlegadaDestino_Load(object sender, EventArgs e)
         {
             CargarCbos();
-            ComenzarConCboVacios();
             DtpFechaSalida.Value = DateTime.Now;
-            DtpFechaLlegada.Value = DateTime.Now;
-
         }
 
 
@@ -62,6 +52,8 @@ namespace AerolineaFrba.Registro_Llegada_Destino
 
         public void volverAEstadoInicial(){
             limpiarCampos();
+            CargarCbos();
+            
             Btn_Cancelar.Enabled = true;
             Btn_Registrar.Enabled = true;
             DtpFechaSalida.Enabled = true;
@@ -74,33 +66,18 @@ namespace AerolineaFrba.Registro_Llegada_Destino
         private void Btn_Limpiar_Click(object sender, EventArgs e)
         {
             limpiarCampos();
+            CargarCbos();
         }
 
         private void limpiarCampos()
         {
-            CboAeronave.Text = "MATRICULA AERONAVE";
-            CboCiudadOrigen.Text = "CIUDAD ORIGEN";
-            CboCiudadDestino.Text = "CIUDAD DESTINO";
             DtpFechaSalida.Value = DateTime.Now;
-            DtpFechaLlegada.Value = DateTime.Now;
         }
 
         private void Btn_Registrar_Click(object sender, EventArgs e)
         {
             try
             {
-                #region ValidacionesEnGral
-                var exceptionMessage = string.Empty;
-                if (CboAeronave.Text == "MATRICULA AERONAVE")
-                    exceptionMessage += "La matricula no puede ser vacía.\n";
-                if (CboCiudadOrigen.Text == "CIUDAD ORIGEN")
-                    exceptionMessage += "La ciudad origen no puede ser vacía.\n";
-                if (CboCiudadDestino.Text == "CIUDAD DESTINO")
-                    exceptionMessage += "La ciudad destino no puede ser vacía.\n";
-                if (!string.IsNullOrEmpty(exceptionMessage))
-                    throw new Exception(exceptionMessage);
-
-                #endregion
 
                 #region declaraciones
                 var transaccion = DBManager.Instance().Connection.BeginTransaction(IsolationLevel.Serializable);
@@ -113,8 +90,7 @@ namespace AerolineaFrba.Registro_Llegada_Destino
 
                 if (rutas == null || rutas.Count == 0)
                 {
-                    ComenzarConCboVacios();
-                    DtpFechaSalida.Value = DateTime.Now;
+                    volverAEstadoInicial();
                     throw new Exception("Los campos ingresados no coninciden con un viaje realizado.");
                 }
                 else
@@ -129,8 +105,8 @@ namespace AerolineaFrba.Registro_Llegada_Destino
                 var viajes = ViajePersistencia.ObtenerViaje(ID_Aeronave, ID_Ruta, DtpFechaSalida.Value);
                 if (viajes == null || viajes.Count == 0)
                 {
-                    ComenzarConCboVacios();
-                    DtpFechaSalida.Value = DateTime.Now;
+                    limpiarCampos();
+                    CargarCbos();
                     throw new Exception("Los campos ingresados no coninciden con un viaje realizado.");
                 }
 
@@ -151,7 +127,6 @@ namespace AerolineaFrba.Registro_Llegada_Destino
 
         public void actualizarLlegada(DateTime fechallegada)
         {
-            DtpFechaLlegada.Value = fechallegada;
             Btn_Registrar.Enabled = false;
             DtpFechaSalida.Enabled = false;
             CboAeronave.Enabled = false;

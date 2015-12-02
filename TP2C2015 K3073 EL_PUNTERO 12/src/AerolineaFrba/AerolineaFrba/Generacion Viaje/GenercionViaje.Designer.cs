@@ -132,7 +132,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.label3.Location = new System.Drawing.Point(309, 24);
+            this.label3.Location = new System.Drawing.Point(80, 29);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(15, 20);
             this.label3.TabIndex = 91;
@@ -144,7 +144,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.label1.Location = new System.Drawing.Point(309, 107);
+            this.label1.Location = new System.Drawing.Point(59, 101);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(15, 20);
             this.label1.TabIndex = 89;
@@ -156,7 +156,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.label7.Location = new System.Drawing.Point(309, 148);
+            this.label7.Location = new System.Drawing.Point(64, 150);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(15, 20);
             this.label7.TabIndex = 87;
@@ -198,33 +198,33 @@
             // 
             // CboAeronave
             // 
+            this.CboAeronave.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CboAeronave.FormattingEnabled = true;
             this.CboAeronave.Location = new System.Drawing.Point(121, 24);
             this.CboAeronave.Name = "CboAeronave";
             this.CboAeronave.Size = new System.Drawing.Size(179, 21);
             this.CboAeronave.TabIndex = 70;
-            this.CboAeronave.Text = "MATRICULA AERONAVE";
             this.CboAeronave.SelectionChangeCommitted += new System.EventHandler(this.CboAeronave_SelectionChangeCommitted);
             // 
             // CboCiudadDestino
             // 
+            this.CboCiudadDestino.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CboCiudadDestino.Enabled = false;
             this.CboCiudadDestino.FormattingEnabled = true;
             this.CboCiudadDestino.Location = new System.Drawing.Point(121, 147);
             this.CboCiudadDestino.Name = "CboCiudadDestino";
             this.CboCiudadDestino.Size = new System.Drawing.Size(179, 21);
             this.CboCiudadDestino.TabIndex = 68;
-            this.CboCiudadDestino.Text = "CIUDAD DESTINO";
             // 
             // CboCiudadOrigen
             // 
+            this.CboCiudadOrigen.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CboCiudadOrigen.Enabled = false;
             this.CboCiudadOrigen.FormattingEnabled = true;
             this.CboCiudadOrigen.Location = new System.Drawing.Point(121, 106);
             this.CboCiudadOrigen.Name = "CboCiudadOrigen";
             this.CboCiudadOrigen.Size = new System.Drawing.Size(179, 21);
             this.CboCiudadOrigen.TabIndex = 67;
-            this.CboCiudadOrigen.Text = "CIUDAD ORIGEN";
             this.CboCiudadOrigen.SelectionChangeCommitted += new System.EventHandler(this.CboCiudadOrigen_SelectionChangeCommitted);
             // 
             // label9

@@ -52,16 +52,22 @@ namespace AerolineaFrba.Abm_Aeronave
                 var exceptionMessage = string.Empty;
 
                 if (string.IsNullOrEmpty(TxtPasillo.Text))
-                    exceptionMessage += "La cantidad de pasillo no puede ser vacia, si no desea tener este tipo de butacas ingrese cero.\n";
+                    exceptionMessage += "La cantidad de pasillo no puede ser vacia.\n";
 
                 else if (!ValidadorDeTipos.IsNumeric(TxtPasillo.Text))
                     exceptionMessage += "El valor de pasillo no es valido, debe ser un numero entero.\n";
 
+                else if (Convert.ToInt32(TxtPasillo.Text) <=0)
+                    exceptionMessage += "El valor de pasillo debe ser mayor a cero.\n";
+
                 if (string.IsNullOrEmpty(TxtVentanilla.Text))
-                    exceptionMessage += "La cantidad de ventanilla no puede ser vacia, si no desea tener este tipo de butacas ingrese cero.\n";
+                    exceptionMessage += "La cantidad de ventanilla no puede ser vacia.\n";
 
                 else if (!ValidadorDeTipos.IsNumeric(TxtVentanilla.Text))
                     exceptionMessage += "El valor de ventanilla no es valido, debe ser un numero entero.\n";
+
+                else if (Convert.ToInt32(TxtVentanilla.Text) <= 0)
+                    exceptionMessage += "El valor de ventanilla debe ser mayor a cero.\n";
 
                 if (aeronaveReemplazo != null)
                 {
@@ -116,7 +122,6 @@ namespace AerolineaFrba.Abm_Aeronave
                             }
                             #endregion
 
-                            MessageBox.Show("Butacas agregadas satisfactoriamente", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             accionTerminada = true;
                             Close();
                         }

@@ -80,7 +80,7 @@ namespace AerolineaFrba.Consulta_Millas
                 if (ValidadorDeTipos.IsEmpty(cboTipoDoc.Text))
                     mensajeDeExcepcion = "Debe ingresar su tipo de Documento";
 
-                if(TxtDni.Text.Length > 8 || TxtDni.Text.Length < 7 || !ValidadorDeTipos.IsNumeric(TxtDni.Text))
+                if(!ValidadorDeTipos.IsNumeric(TxtDni.Text))
                     mensajeDeExcepcion = "El numero de documento es invalido";
 
                 if (!ValidadorDeTipos.IsEmpty(mensajeDeExcepcion))

@@ -118,6 +118,7 @@
             // 
             // cboListado
             // 
+            this.cboListado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboListado.FormattingEnabled = true;
             this.cboListado.Location = new System.Drawing.Point(121, 84);
             this.cboListado.Name = "cboListado";
@@ -126,6 +127,7 @@
             // 
             // cboSemestre
             // 
+            this.cboSemestre.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboSemestre.FormattingEnabled = true;
             this.cboSemestre.Location = new System.Drawing.Point(121, 57);
             this.cboSemestre.Name = "cboSemestre";
@@ -134,6 +136,7 @@
             // 
             // cboAnio
             // 
+            this.cboAnio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboAnio.FormattingEnabled = true;
             this.cboAnio.Location = new System.Drawing.Point(121, 30);
             this.cboAnio.Name = "cboAnio";

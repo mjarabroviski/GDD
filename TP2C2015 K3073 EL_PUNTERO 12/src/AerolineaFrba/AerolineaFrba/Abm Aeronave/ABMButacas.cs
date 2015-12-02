@@ -60,6 +60,8 @@ namespace AerolineaFrba.Abm_Aeronave
             //Vaciar grilla y limpiar 
             Limpiar();
             ActualizarPantalla(null);
+            CboTipo.Enabled = false;
+            BtnGrabar.Enabled = false;
         }
 
         public void Limpiar()
@@ -204,7 +206,8 @@ namespace AerolineaFrba.Abm_Aeronave
             if (alta.accionTerminada)
             {
                 accionTerminada = true;
-                //Close();
+                Limpiar();
+                ActualizarPantalla(null);
             }
 
         }

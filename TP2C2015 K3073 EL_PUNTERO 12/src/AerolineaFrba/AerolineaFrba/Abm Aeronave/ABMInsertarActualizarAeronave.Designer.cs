@@ -140,6 +140,7 @@
             // 
             // CboServicio
             // 
+            this.CboServicio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CboServicio.FormattingEnabled = true;
             this.CboServicio.Location = new System.Drawing.Point(19, 160);
             this.CboServicio.Name = "CboServicio";

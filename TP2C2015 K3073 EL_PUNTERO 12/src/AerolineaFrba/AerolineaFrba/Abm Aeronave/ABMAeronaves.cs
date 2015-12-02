@@ -221,12 +221,20 @@ namespace AerolineaFrba.Abm_Aeronave
                 //El usuario tocó el botón de modificar
                 if (e.ColumnIndex == 7)
                 {
-                    var insertarActualizarAeronave = new ABMInsertarActualizarAeronave(aeronaveSeleccionada,true);
-                    insertarActualizarAeronave.ShowDialog();
+                    //El usuario va a modificar una aeronave, verifico que no tenga viajes asignados
+                    var viajes = ViajePersistencia.ObtenerViajesPorAeronave(aeronaveSeleccionada, null);
+                    if (viajes != null)
+                        MessageBox.Show("La aeronave no puede ser modificada porque tiene viajes asignados", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    else
+                    {
+                        var insertarActualizarAeronave = new ABMInsertarActualizarAeronave(aeronaveSeleccionada, true);
+                        insertarActualizarAeronave.ShowDialog();
 
-                    //Paso NULL para volver a obtener todos los registros de la base
-                    if (insertarActualizarAeronave.accionTerminada)
-                        ActualizarPantalla(null);
+                        //Paso NULL para volver a obtener todos los registros de la base
+                        if (insertarActualizarAeronave.accionTerminada)
+                            ActualizarPantalla(null);
+                    }
+                    
                 }
                 //El usuario tocó el botón de dar de baja por vida util
                 else if (e.ColumnIndex == 9)

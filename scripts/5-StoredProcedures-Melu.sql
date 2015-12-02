@@ -1012,27 +1012,40 @@ BEGIN
 END
 GO
 
+
 CREATE PROCEDURE [EL_PUNTERO].[GetDestinosConMasPasajesComprados]
-@Fecha_Desde datetime,
-@Fecha_Hasta datetime
+@Fecha_Desde nvarchar(255),
+@Fecha_Hasta nvarchar(255)
 AS
 BEGIN
+	DECLARE @Fecha_D_Posta datetime
+	DECLARE @Fecha_H_Posta datetime
+
+	SELECT @Fecha_D_Posta = CONVERT(datetime, @Fecha_Desde)
+	SELECT @Fecha_H_Posta = CONVERT(datetime, @Fecha_Hasta)
+
 	SELECT TOP 5 C.Nombre_Ciudad AS Parametro,COUNT(P.ID_Pasaje) AS Valor
 	FROM EL_PUNTERO.TL_CIUDAD C
 	INNER JOIN EL_PUNTERO.TL_RUTA R ON R.ID_Ciudad_Destino = C.ID_Ciudad
 	INNER JOIN EL_PUNTERO.TL_VIAJE V ON V.ID_Ruta = R.ID_Ruta
 	INNER JOIN EL_PUNTERO.TL_PASAJE P ON P.ID_Viaje = V.ID_Viaje
-	WHERE V.Fecha_Salida BETWEEN @Fecha_Desde AND @Fecha_Hasta
+	WHERE V.Fecha_Salida BETWEEN @Fecha_D_Posta AND  @Fecha_H_Posta
 	GROUP BY C.Nombre_Ciudad
 	ORDER BY 2 DESC
 END
 GO
 
 CREATE PROCEDURE [EL_PUNTERO].[GetDestinosConMasAeronavesVacias]
-@Fecha_Desde datetime,
-@Fecha_Hasta datetime
+@Fecha_Desde nvarchar(255),
+@Fecha_Hasta nvarchar(255)
 AS
 BEGIN
+	DECLARE @Fecha_D_Posta datetime
+	DECLARE @Fecha_H_Posta datetime
+
+	SELECT @Fecha_D_Posta = CONVERT(datetime, @Fecha_Desde)
+	SELECT @Fecha_H_Posta = CONVERT(datetime, @Fecha_Hasta)
+
 	SELECT TOP 5 C.Nombre_Ciudad AS Parametro,
 	COUNT(*) AS Valor
 	FROM EL_PUNTERO.TL_CIUDAD C
@@ -1040,7 +1053,7 @@ BEGIN
 	INNER JOIN EL_PUNTERO.TL_VIAJE V ON V.ID_Ruta = R.ID_Ruta
 	INNER JOIN EL_PUNTERO.TL_AERONAVE A ON A.ID_Aeronave = V.ID_Aeronave
 	INNER JOIN EL_PUNTERO.TL_BUTACA B ON B.ID_Aeronave = A.ID_Aeronave
-	WHERE V.Fecha_Salida BETWEEN @Fecha_Desde AND @Fecha_Hasta
+	WHERE V.Fecha_Salida BETWEEN @Fecha_D_Posta AND @Fecha_H_Posta
 	AND B.ID_Butaca NOT IN (SELECT P1.ID_Butaca 
 						    FROM EL_PUNTERO.TL_PASAJE P1
 						    WHERE P1.ID_Viaje = V.ID_Viaje)
@@ -1070,32 +1083,44 @@ END
 GO
 
 CREATE PROCEDURE [EL_PUNTERO].[GetClientesConMasPuntosAcumulados]
-@Fecha_Desde datetime,
-@Fecha_Hasta datetime
+@Fecha_Desde nvarchar(255),
+@Fecha_Hasta nvarchar(255)
 AS
 BEGIN
+	DECLARE @Fecha_D_Posta datetime
+	DECLARE @Fecha_H_Posta datetime
+
+	SELECT @Fecha_D_Posta = CONVERT(datetime, @Fecha_Desde)
+	SELECT @Fecha_H_Posta = CONVERT(datetime, @Fecha_Hasta)
+
 	SELECT TOP 5 UPPER(C.Apellido) + ' ' + UPPER(C.Nombre) AS Parametro,
-	SUM(R.Millas) - [EL_PUNTERO].[ObtenerMillasCanje](C.ID_Cliente,@Fecha_Hasta) AS Valor
+	SUM(R.Millas) - [EL_PUNTERO].[ObtenerMillasCanje](C.ID_Cliente,@Fecha_H_Posta) AS Valor
 	FROM EL_PUNTERO.TL_CLIENTE C
 	INNER JOIN EL_PUNTERO.TL_REGISTRO_MILLAS R ON R.ID_Cliente = C.ID_Cliente
-	WHERE R.Fecha_Inicio < @Fecha_Hasta
-	AND DATEDIFF(DAY, Fecha_Inicio, @Fecha_Hasta) <= 366
+	WHERE R.Fecha_Inicio < @Fecha_H_Posta
+	AND DATEDIFF(DAY, Fecha_Inicio, @Fecha_H_Posta) <= 366
 	GROUP BY C.Apellido,C.Nombre, C.ID_Cliente
 	ORDER BY 2 DESC 
 END
 GO
 
 CREATE PROCEDURE [EL_PUNTERO].[GetDestinosConMasPasajesCancelados]
-@Fecha_Desde datetime,
-@Fecha_Hasta datetime
+@Fecha_Desde nvarchar(255),
+@Fecha_Hasta nvarchar(255)
 AS
 BEGIN
+	DECLARE @Fecha_D_Posta datetime
+	DECLARE @Fecha_H_Posta datetime
+
+	SELECT @Fecha_D_Posta = CONVERT(datetime, @Fecha_Desde)
+	SELECT @Fecha_H_Posta = CONVERT(datetime, @Fecha_Hasta)
+
 	SELECT TOP 5 C.Nombre_Ciudad AS Parametro,COUNT(P.ID_Pasaje) AS Valor
 	FROM EL_PUNTERO.TL_CIUDAD C
 	INNER JOIN EL_PUNTERO.TL_RUTA R ON R.ID_Ciudad_Destino = C.ID_Ciudad
 	INNER JOIN EL_PUNTERO.TL_VIAJE V ON V.ID_Ruta = R.ID_Ruta
 	INNER JOIN EL_PUNTERO.TL_PASAJE P ON P.ID_Viaje = V.ID_Viaje
-	WHERE V.Fecha_Salida BETWEEN @Fecha_Desde AND @Fecha_Hasta
+	WHERE V.Fecha_Salida BETWEEN @Fecha_D_Posta AND @Fecha_H_Posta
 	AND P.ID_Pasaje IN (SELECT DP.ID_Pasaje FROM EL_PUNTERO.TL_DEVOLUCION_PASAJE DP)
 	GROUP BY C.Nombre_Ciudad
 	ORDER BY 2 DESC
@@ -1155,14 +1180,20 @@ END
 GO
 
 CREATE PROCEDURE [EL_PUNTERO].[GetAeronavesConMayorCantDeDiasFueraDeServicio]
-@Fecha_Desde datetime,
-@Fecha_Hasta datetime
+@Fecha_Desde nvarchar(255),
+@Fecha_Hasta nvarchar(255)
 AS
 BEGIN
-	SELECT TOP 5 A.Matricula AS Parametro,MAX([EL_PUNTERO].[CantFueraDeServicio](B.ID_Baja_Servicio,@Fecha_Desde,@Fecha_Hasta)) AS Valor
+	DECLARE @Fecha_D_Posta datetime
+	DECLARE @Fecha_H_Posta datetime
+
+	SELECT @Fecha_D_Posta = CONVERT(datetime, @Fecha_Desde)
+	SELECT @Fecha_H_Posta = CONVERT(datetime, @Fecha_Hasta)
+
+	SELECT TOP 5 A.Matricula AS Parametro,MAX([EL_PUNTERO].[CantFueraDeServicio](B.ID_Baja_Servicio,@Fecha_D_Posta,@Fecha_H_Posta )) AS Valor
 	FROM EL_PUNTERO.TL_AERONAVE A
 	INNER JOIN EL_PUNTERO.TL_BAJA_SERVICIO_AERONAVE B ON B.ID_Aeronave=A.ID_Aeronave
-	WHERE [EL_PUNTERO].[SeIntersectanFechasFueraDeServicio](B.Fecha_Fuera_De_Servicio,B.Fecha_Reinicio_Servicio,@Fecha_Desde,@Fecha_Hasta)=1
+	WHERE [EL_PUNTERO].[SeIntersectanFechasFueraDeServicio](B.Fecha_Fuera_De_Servicio,B.Fecha_Reinicio_Servicio,@Fecha_D_Posta,@Fecha_H_Posta )=1
 	GROUP BY A.Matricula
 	ORDER BY 2 DESC
 END

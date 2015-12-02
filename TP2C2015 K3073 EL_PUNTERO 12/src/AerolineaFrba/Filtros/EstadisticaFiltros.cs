@@ -8,8 +8,8 @@ namespace Filtros
 {
     public class EstadisticaFiltros
     {
-        public DateTime FechaDesde { get; set; }
+        public string FechaDesde { get; set; }
 
-        public DateTime FechaHasta { get; set; }
+        public string FechaHasta { get; set; }
     }
 }

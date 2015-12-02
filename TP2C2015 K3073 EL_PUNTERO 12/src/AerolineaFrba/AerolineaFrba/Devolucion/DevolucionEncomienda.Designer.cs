@@ -41,6 +41,8 @@
             this.Txt_Dni = new System.Windows.Forms.TextBox();
             this.Btn_Limpiar = new System.Windows.Forms.Label();
             this.Btn_Buscar = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DgvEncomiendas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DgvPasaje)).BeginInit();
             this.SuspendLayout();
@@ -51,7 +53,7 @@
             this.Btn_Finalizar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Btn_Finalizar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_Finalizar.ForeColor = System.Drawing.Color.White;
-            this.Btn_Finalizar.Location = new System.Drawing.Point(1210, 524);
+            this.Btn_Finalizar.Location = new System.Drawing.Point(1210, 545);
             this.Btn_Finalizar.Name = "Btn_Finalizar";
             this.Btn_Finalizar.Size = new System.Drawing.Size(91, 34);
             this.Btn_Finalizar.TabIndex = 85;
@@ -66,7 +68,7 @@
             this.Btn_DevolverTodos.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_DevolverTodos.Enabled = false;
             this.Btn_DevolverTodos.ForeColor = System.Drawing.Color.White;
-            this.Btn_DevolverTodos.Location = new System.Drawing.Point(15, 524);
+            this.Btn_DevolverTodos.Location = new System.Drawing.Point(15, 545);
             this.Btn_DevolverTodos.Name = "Btn_DevolverTodos";
             this.Btn_DevolverTodos.Size = new System.Drawing.Size(91, 34);
             this.Btn_DevolverTodos.TabIndex = 84;
@@ -82,7 +84,7 @@
             this.DgvEncomiendas.AllowUserToResizeRows = false;
             this.DgvEncomiendas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.DgvEncomiendas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DgvEncomiendas.Location = new System.Drawing.Point(15, 99);
+            this.DgvEncomiendas.Location = new System.Drawing.Point(15, 120);
             this.DgvEncomiendas.MultiSelect = false;
             this.DgvEncomiendas.Name = "DgvEncomiendas";
             this.DgvEncomiendas.RowHeadersVisible = false;
@@ -99,7 +101,7 @@
             this.DgvPasaje.AllowUserToResizeRows = false;
             this.DgvPasaje.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.DgvPasaje.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DgvPasaje.Location = new System.Drawing.Point(690, 100);
+            this.DgvPasaje.Location = new System.Drawing.Point(690, 121);
             this.DgvPasaje.MultiSelect = false;
             this.DgvPasaje.Name = "DgvPasaje";
             this.DgvPasaje.RowHeadersVisible = false;
@@ -124,6 +126,7 @@
             // 
             // cboTipoDoc
             // 
+            this.cboTipoDoc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboTipoDoc.FormattingEnabled = true;
             this.cboTipoDoc.Location = new System.Drawing.Point(137, 10);
             this.cboTipoDoc.Name = "cboTipoDoc";
@@ -203,12 +206,32 @@
             this.Btn_Buscar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.Btn_Buscar.Click += new System.EventHandler(this.Btn_Buscar_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(16, 98);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(157, 13);
+            this.label2.TabIndex = 101;
+            this.label2.Text = "ENCOMIENDAS COMPRADAS";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(689, 100);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(125, 13);
+            this.label4.TabIndex = 102;
+            this.label4.Text = "PASAJES COMPRADAS";
+            // 
             // DevolucionEncomiendaPasaje
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1322, 570);
+            this.ClientSize = new System.Drawing.Size(1322, 588);
             this.ControlBox = false;
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.Btn_Buscar);
             this.Controls.Add(this.Btn_Limpiar);
             this.Controls.Add(this.Btn_Buscar2);
@@ -248,6 +271,8 @@
         private System.Windows.Forms.TextBox Txt_Dni;
         private System.Windows.Forms.Label Btn_Limpiar;
         private System.Windows.Forms.Label Btn_Buscar;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label4;
 
     }
 }
