@@ -65,15 +65,15 @@ namespace AerolineaFrba.Abm_Ciudad
                     throw new Exception(excepcion);
 
                 #endregion
+                var filters = new CiudadFiltros { Nombre = TxtNombreCiudad.Text };
+                //Valido que no exista una ciudad con la descripcion informada
+                if (CiudadPersistencia.ObtenerTodasPorParametro(filters).Count > 0)
+                {
+                    throw new Exception("Ya existe una ciudad con la descripcion informada.");
+                }
 
                 if (modoInsertar)
                 {
-                    var filters = new CiudadFiltros { Nombre = TxtNombreCiudad.Text };
-                    //Valido que no exista una ciudad con la descripcion informada
-                    if (CiudadPersistencia.ObtenerTodasPorParametro(filters).Count > 0)
-                    {
-                        throw new Exception("Ya existe una ciudad con la descripcion informada.");
-                    }
                     #region Inserto la nueva ciudad
 
                     var ciudadNueva = new Ciudad();

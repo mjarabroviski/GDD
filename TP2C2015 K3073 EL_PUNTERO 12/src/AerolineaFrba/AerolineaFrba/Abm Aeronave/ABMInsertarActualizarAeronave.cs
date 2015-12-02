@@ -67,6 +67,19 @@ namespace AerolineaFrba.Abm_Aeronave
                 #endregion
             }
 
+            if (aeronaveAReemplazar != null)
+            {
+                TxtFabricante.Text = aeronaveAReemplazar.Fabricante;
+                TxtModelo.Text = aeronaveAReemplazar.Modelo;
+                CboServicio.Text = ServicioPersistencia.ObtenerServicioPorNombre(CboServicio.Text, null).Nombre;
+                TxtKG.Text = aeronaveAReemplazar.KG_Totales.ToString();
+
+                TxtModelo.Enabled = false;
+                TxtFabricante.Enabled = false;
+                DtpFechaAlta.Enabled = false;
+                CboServicio.Enabled = false;
+            }
+
         }
 
         private void LblSiguiente_Click(object sender, EventArgs e)
@@ -99,6 +112,18 @@ namespace AerolineaFrba.Abm_Aeronave
 
                     else if (!ValidadorDeTipos.IsNumeric(TxtKG.Text))
                         exceptionMessage += "De ingresar un valo numerico entero para la cantidad de KG.\n";
+
+                    else if (Convert.ToInt32(TxtKG.Text) <= 0)
+                        exceptionMessage += "La cantidad de KG debe ser mayor a cero.\n";
+
+                    if(aeronaveAReemplazar != null)
+                    {
+                        if (Convert.ToInt32(TxtKG.Text) < aeronaveAReemplazar.KG_Totales)
+                        {
+                            exceptionMessage += "La cantidad de KG debe ser igual o mayor a la de la aeronave a reemplazar.\n";
+                            TxtKG.Text = aeronaveAReemplazar.KG_Totales.ToString();
+                        }
+                    }
 
                     if (string.IsNullOrEmpty(DtpFechaAlta.Text))
                         exceptionMessage += "La fecha de alta no puede ser vacia.\n";
@@ -169,17 +194,6 @@ namespace AerolineaFrba.Abm_Aeronave
                         if (a != null && a.ID != aeronaveAModificar.ID)
                             MessageBox.Show("Ya existe una aeronave con la matricula ingresada.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                        //El usuario va a modificar una aeronave, verifico que no tenga viajes asignados
-                        var viajes = ViajePersistencia.ObtenerViajesPorAeronave(aeronaveAModificar, transaccion);
-                        if (viajes != null)
-                        {
-                            MessageBox.Show("La aeronave no puede ser modificada porque tiene viajes asignados", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            transaccion.Rollback();
-                            accionTerminada = false;
-                            Close();
-                        }
-                        else
-                        {
                             #region Modifico la aeronave
 
                             aeronaveAModificar.Matricula = TxtMatricula.Text;
@@ -203,12 +217,12 @@ namespace AerolineaFrba.Abm_Aeronave
                                 MessageBox.Show("Aeronave modificada satisfactoriamente", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                                 Close();
                             }
-                            else{
+                            else
+                            {
                                 transaccion.Rollback();
                                 MessageBox.Show("La Aeronave no fue modificada correctamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 Close();
                             }
-                        }
                     }
                 }
                 catch (Exception ex)
