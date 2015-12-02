@@ -60,7 +60,7 @@ namespace AerolineaFrba.Devolucion
                 if (ValidadorDeTipos.IsEmpty(cboTipoDoc.Text))
                     mensajeDeExcepcion = "Debe ingresar su tipo de Documento";
 
-                if (Txt_Dni.Text.Length > 8 || Txt_Dni.Text.Length < 7 || !ValidadorDeTipos.IsNumeric(Txt_Dni.Text))
+                if (!ValidadorDeTipos.IsNumeric(Txt_Dni.Text))
                     mensajeDeExcepcion = "El numero de documento es invalido";
 
                 if (!ValidadorDeTipos.IsEmpty(mensajeDeExcepcion))
