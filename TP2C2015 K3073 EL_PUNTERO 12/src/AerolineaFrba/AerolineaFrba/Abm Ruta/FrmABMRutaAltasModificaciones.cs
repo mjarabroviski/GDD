@@ -38,7 +38,6 @@ namespace AerolineaFrba.Abm_Ruta
             this.Text = (!modoModificacion) ? string.Format("{0} - {1}", "AerolineaFrba", "Nueva ruta") : string.Format("{0} - {1}", "AerolineaFrba", "Modificar ruta");
 
             #region Cargar comboBox
-            CmbTipoServicio.Enabled = false;
 
             CmbCiudadOrigen.DataSource = CiudadPersistencia.ObtenerTodos();
             CmbCiudadOrigen.ValueMember = "ID";
@@ -56,10 +55,6 @@ namespace AerolineaFrba.Abm_Ruta
                 //Esta trabajando en modo modificación
                 TxtCodigo.Text = RutaActual.Codigo_Ruta.ToString();
                 ChkInhabilitado.Checked = !(RutaActual.Habilitado);
-
-                CmbTipoServicio.DataSource = RutaPersistencia.ObtenerServiciosPorIDRuta(RutaActual.ID);
-                CmbTipoServicio.ValueMember = "ID_Servicio";
-                CmbTipoServicio.DisplayMember = "Nombre";
 
                 CmbCiudadOrigen.Text = RutaPersistencia.ObtenerCiudadPorID(RutaActual.ID_Ciudad_Origen);
                 CmbCiudadDestino.Text = RutaPersistencia.ObtenerCiudadPorID(RutaActual.ID_Ciudad_Destino);
@@ -89,12 +84,35 @@ namespace AerolineaFrba.Abm_Ruta
 
                 if (string.IsNullOrEmpty(TxtCodigo.Text))
                     exceptionMessage += "El código de la ruta no puede ser vacío.";
+                else
+                    if (!(ValidadorDeTipos.IsNumeric(TxtCodigo.Text)))
+                        exceptionMessage += Environment.NewLine + "El código de ruta debe ser un número";
+
+                if (CmbCiudadDestino.Text == CmbCiudadOrigen.Text)
+                    exceptionMessage += Environment.NewLine + "No puede crear una ruta con la misma ciudad de origen y destino";
 
                 if (string.IsNullOrEmpty(TxtBaseKg.Text))
                     exceptionMessage += Environment.NewLine + "Debe ingresar un precio base por Kg.";
+                else
+                {
+                    if (!ValidadorDeTipos.IsDecimal(TxtBaseKg.Text) || TxtBaseKg.Text.Contains("."))
+                        exceptionMessage += Environment.NewLine + "El precio base por Kg debe ser numerico";
+                    else
+                        if (double.Parse(TxtBaseKg.Text) <= 0)
+                            exceptionMessage += Environment.NewLine + "El precio base por Kg debe ser mayor a 0";
+                }
 
                 if (string.IsNullOrEmpty(TxtBasePasaje.Text))
                     exceptionMessage += Environment.NewLine + "Debe ingresar un precio base por pasaje";
+                else
+                {
+                    if (!ValidadorDeTipos.IsDecimal(TxtBasePasaje.Text) || TxtBasePasaje.Text.Contains("."))
+                        exceptionMessage += Environment.NewLine + "El precio base por pasaje debe ser numerico";
+                    else
+                        if (double.Parse(TxtBasePasaje.Text) <= 0)
+                            exceptionMessage += Environment.NewLine + "El precio base por pasaje debe ser mayor a 0";
+                }
+
 
                 if (!string.IsNullOrEmpty(exceptionMessage))
                     throw new Exception(exceptionMessage);
@@ -106,38 +124,18 @@ namespace AerolineaFrba.Abm_Ruta
                     #region Valido que no exista una ruta con la descripcion informada
                     var filtro = new RutaFiltros();
                     filtro.Codigo = Int32.Parse(TxtCodigo.Text);
-                    filtro.CiudadOrigen = CmbCiudadOrigen.Text;
-                    filtro.CiudadDestino = CmbCiudadDestino.Text;
-                    filtro.TipoServicio = CmbTipoServicio.Text;
-                    filtro.PrecioDesdeKg = double.Parse(TxtBaseKg.Text);
-                    filtro.PrecioHastaKg = double.Parse(TxtBaseKg.Text);
-                    filtro.PrecioDesdePasaje = double.Parse(TxtBasePasaje.Text);
-                    filtro.PrecioHastaPasaje = double.Parse(TxtBasePasaje.Text);
+                    filtro.CiudadOrigen = null;
+                    filtro.CiudadDestino = null;
+                    filtro.TipoServicio = null;
+                    filtro.PrecioDesdeKg = null;
+                    filtro.PrecioHastaKg = null;
+                    filtro.PrecioDesdePasaje = null;
+                    filtro.PrecioHastaPasaje = null;
 
                     var rutas = RutaPersistencia.ObtenerRutasPorParametros(filtro);
-                    var mensajeExcepcion = string.Empty;
 
                     if (rutas.Count!=0)
-                        throw new Exception("Ya existe una ruta con los datos ingresados");
-
-                    #endregion
-
-                    #region Validaciones
-
-                    if (filtro.CiudadOrigen == filtro.CiudadDestino)
-                        mensajeExcepcion += "No puede crear una ruta con la misma ciudad de origen y destino";
-
-                    if(!(ValidadorDeTipos.IsNumeric(TxtCodigo.Text)))
-                        mensajeExcepcion += Environment.NewLine + "El código de ruta debe ser un número";
-
-                    if (!(ValidadorDeTipos.IsNumeric(TxtBaseKg.Text)))
-                        mensajeExcepcion += Environment.NewLine + "El precio base del KG debe ser un número";
-
-                    if (!(ValidadorDeTipos.IsNumeric(TxtBasePasaje.Text)))
-                        mensajeExcepcion += Environment.NewLine + "El precio base del pasaje debe ser un número";
-
-                    if (!ValidadorDeTipos.IsEmpty(mensajeExcepcion))
-                        throw new Exception(mensajeExcepcion);
+                        throw new Exception("Ya existe una ruta con el código ingresado");
 
                     #endregion
 
@@ -145,10 +143,10 @@ namespace AerolineaFrba.Abm_Ruta
 
                     var ruta = new Ruta();
                     ruta.Codigo_Ruta = (int)(filtro.Codigo);
-                    ruta.ID_Ciudad_Origen = CiudadPersistencia.ObtenerIDPorNombreDeCiudad(filtro.CiudadOrigen);
-                    ruta.ID_Ciudad_Destino = CiudadPersistencia.ObtenerIDPorNombreDeCiudad(filtro.CiudadDestino);
-                    ruta.Precio_Base_KG = (double)filtro.PrecioDesdeKg;   //ES INDISTINTO PONER DESDE O HASTA PORQUE EN ESTE CASO SON IGUALES
-                    ruta.Precio_Base_Pasaje = (double)filtro.PrecioDesdePasaje;  //ES INDISTINTO PONER DESDE O HASTA PORQUE EN ESTE CASO SON IGUALES
+                    ruta.ID_Ciudad_Origen = CiudadPersistencia.ObtenerIDPorNombreDeCiudad(CmbCiudadOrigen.Text);
+                    ruta.ID_Ciudad_Destino = CiudadPersistencia.ObtenerIDPorNombreDeCiudad(CmbCiudadDestino.Text);
+                    ruta.Precio_Base_KG = double.Parse(TxtBaseKg.Text);
+                    ruta.Precio_Base_Pasaje = double.Parse(TxtBasePasaje.Text);
                     ruta.Habilitado = !(ChkInhabilitado.Checked);
 
                     //Impacto en la base
@@ -170,8 +168,8 @@ namespace AerolineaFrba.Abm_Ruta
                     RutaActual.Codigo_Ruta = Int32.Parse(TxtCodigo.Text);
                     RutaActual.ID_Ciudad_Origen = CiudadPersistencia.ObtenerIDPorNombreDeCiudad(CmbCiudadOrigen.Text);
                     RutaActual.ID_Ciudad_Destino = CiudadPersistencia.ObtenerIDPorNombreDeCiudad(CmbCiudadDestino.Text);
-                    RutaActual.Precio_Base_KG = double.Parse(TxtBaseKg.Text);   //ES INDISTINTO PONER DESDE O HASTA PORQUE EN ESTE CASO SON IGUALES
-                    RutaActual.Precio_Base_Pasaje = double.Parse(TxtBasePasaje.Text);  //ES INDISTINTO PONER DESDE O HASTA PORQUE EN ESTE CASO SON IGUALES
+                    RutaActual.Precio_Base_KG = double.Parse(TxtBaseKg.Text);   
+                    RutaActual.Precio_Base_Pasaje = double.Parse(TxtBasePasaje.Text);  
                     RutaActual.Habilitado = !(ChkInhabilitado.Checked);
 
                     //Impacto en la base

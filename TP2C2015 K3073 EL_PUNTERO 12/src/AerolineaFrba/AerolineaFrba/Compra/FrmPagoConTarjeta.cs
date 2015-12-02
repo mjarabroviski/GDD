@@ -174,6 +174,8 @@ namespace AerolineaFrba.Compra
 
         private void BtnCancelar_Click(object sender, EventArgs e)
         {
+            if (cantPasajes != 0)
+                CompraPersistencia.BorrarTablaAuxiliar();
             Close();
         }
     }

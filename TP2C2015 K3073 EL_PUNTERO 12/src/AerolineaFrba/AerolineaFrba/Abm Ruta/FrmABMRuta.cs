@@ -165,7 +165,16 @@ namespace AerolineaFrba.Abm_Ruta
                     filtrosSeteados = true;
 
                 if (!filtrosSeteados)
-                    exceptionMessage = "No se puede realizar la busqueda porque no ingreso ningun filtro";
+                    exceptionMessage += Environment.NewLine + "No se puede realizar la busqueda porque no ingreso ningun filtro";
+
+                if (!ValidadorDeTipos.IsEmpty(TxtCodigo.Text) && !ValidadorDeTipos.IsNumeric(TxtCodigo.Text))
+                    exceptionMessage += Environment.NewLine + "El código debe ser un número";
+
+                if ((!ValidadorDeTipos.IsEmpty(TxtDesdeKg.Text) && (!ValidadorDeTipos.IsDecimal(TxtDesdeKg.Text) || TxtDesdeKg.Text.Contains("."))) || 
+                    (!ValidadorDeTipos.IsEmpty(TxtHastaKg.Text) && (!ValidadorDeTipos.IsDecimal(TxtHastaKg.Text) || TxtHastaKg.Text.Contains("."))) || 
+                    (!ValidadorDeTipos.IsEmpty(TxtDesdePasaje.Text) && (!ValidadorDeTipos.IsDecimal(TxtDesdePasaje.Text) || TxtDesdePasaje.Text.Contains("."))) || 
+                    (!ValidadorDeTipos.IsEmpty(TxtHastaPasaje.Text) && (!ValidadorDeTipos.IsDecimal(TxtDesdePasaje.Text) || TxtHastaPasaje.Text.Contains("."))))
+                    exceptionMessage += Environment.NewLine + "Los precios deben ser números";
 
                 if (!ValidadorDeTipos.IsEmpty(exceptionMessage))
                     throw new Exception(exceptionMessage);

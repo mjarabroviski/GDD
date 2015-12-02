@@ -118,6 +118,7 @@
             // 
             // CmbTipoDoc
             // 
+            this.CmbTipoDoc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CmbTipoDoc.FormattingEnabled = true;
             this.CmbTipoDoc.Location = new System.Drawing.Point(132, 41);
             this.CmbTipoDoc.Name = "CmbTipoDoc";

@@ -314,6 +314,7 @@
             // 
             // CmbTipoDoc
             // 
+            this.CmbTipoDoc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CmbTipoDoc.Enabled = false;
             this.CmbTipoDoc.FormattingEnabled = true;
             this.CmbTipoDoc.Location = new System.Drawing.Point(132, 107);
@@ -361,6 +362,7 @@
             // 
             // CmbPasajeros
             // 
+            this.CmbPasajeros.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CmbPasajeros.FormattingEnabled = true;
             this.CmbPasajeros.Location = new System.Drawing.Point(132, 38);
             this.CmbPasajeros.Name = "CmbPasajeros";
