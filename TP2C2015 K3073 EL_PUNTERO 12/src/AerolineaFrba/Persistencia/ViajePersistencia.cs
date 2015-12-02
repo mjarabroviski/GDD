@@ -89,7 +89,7 @@ namespace Persistencia
 
         public static int ObtenerKGSDisponibles(int p)
         {
-                var param = new List<SPParameter>
+            var param = new List<SPParameter>
             { 
                 new SPParameter("ID_Viaje",p)
             };

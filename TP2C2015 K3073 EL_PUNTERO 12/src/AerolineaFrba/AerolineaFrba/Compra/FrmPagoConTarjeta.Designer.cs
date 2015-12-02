@@ -93,6 +93,7 @@
             // 
             // CmbTipoTarjeta
             // 
+            this.CmbTipoTarjeta.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CmbTipoTarjeta.FormattingEnabled = true;
             this.CmbTipoTarjeta.Location = new System.Drawing.Point(134, 75);
             this.CmbTipoTarjeta.Name = "CmbTipoTarjeta";
