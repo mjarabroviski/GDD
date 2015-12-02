@@ -111,7 +111,7 @@ namespace AerolineaFrba.Abm_Aeronave
                         exceptionMessage += "La cantidad de KG no puede ser vacia.\n";
 
                     else if (!ValidadorDeTipos.IsNumeric(TxtKG.Text))
-                        exceptionMessage += "De ingresar un valo numerico entero para la cantidad de KG.\n";
+                        exceptionMessage += "Debe ingresar un valor numerico entero para la cantidad de KG.\n";
 
                     else if (Convert.ToInt32(TxtKG.Text) <= 0)
                         exceptionMessage += "La cantidad de KG debe ser mayor a cero.\n";
@@ -192,7 +192,7 @@ namespace AerolineaFrba.Abm_Aeronave
                         //Verifico que no modifique la matricula por otra que ya exista
                         Aeronave a = AeronavePersistencia.ObtenerPorMatricula(TxtMatricula.Text, transaccion);
                         if (a != null && a.ID != aeronaveAModificar.ID)
-                            MessageBox.Show("Ya existe una aeronave con la matricula ingresada.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            throw new Exception("Ya existe una aeronave con la matricula ingresada.");
 
                             #region Modifico la aeronave
 

@@ -89,6 +89,7 @@
             this.Controls.Add(this.LstServicios);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "FrmABMRutaModificacionServicio";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Insertar o Modificar Servicios";
             this.Load += new System.EventHandler(this.FrmABMRutaModificacionServicio_Load);
             this.ResumeLayout(false);

@@ -115,17 +115,17 @@ namespace AerolineaFrba.Devolucion
             int doc = Convert.ToInt32(Txt_Dni.Text);
             int tipo = Convert.ToInt32(cboTipoDoc.SelectedValue);
             DateTime fecha = Dtp_FechaNacimiento.Value.Date;
-            Cliente cliente = ClientePersistencia.ObtenerClientePorDNIYFechaNac(doc, tipo, fecha);
+            cliente = ClientePersistencia.ObtenerClientePorDNIYFechaNac(doc, tipo, fecha);
             if (cliente == null)
             {
                 MessageBox.Show("No se encontraron clientes con esos datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                BotonesYtextosAestadoAnterior();
             }
             else
             {
                 ActualizarTodo();
                 Btn_DevolverTodos.Enabled = true;
             }
+            BotonesYtextosAestadoAnterior();
         }
 
         private void Btn_Buscar_Click(object sender, EventArgs e)
@@ -332,7 +332,7 @@ namespace AerolineaFrba.Devolucion
         {
             encomiendas = EncomiendaPersistencia.ObtenerEncomiendasFuturas(cliente.ID);
             pasajes = PasajePersistencia.ObtenerPasajesFuturos(cliente.ID);
-            if ((encomiendas == null || encomiendas.Count == 0) & (pasajes == null || pasajes.Count == 0))
+            if ((encomiendas == null || encomiendas.Count == 0) && (pasajes == null || pasajes.Count == 0))
             {
                 MessageBox.Show("No se encontraron compras disponibles para el cliente ingresado. ", "Atencion", MessageBoxButtons.OK);
             }

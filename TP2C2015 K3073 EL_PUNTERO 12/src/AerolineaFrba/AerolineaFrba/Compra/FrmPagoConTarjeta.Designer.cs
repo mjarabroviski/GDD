@@ -315,6 +315,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmPagoConTarjeta";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Pago Con Tarjeta de Credito";
             this.Load += new System.EventHandler(this.FrmPagoConTarjeta_Load);
             this.ResumeLayout(false);

@@ -177,6 +177,7 @@
             this.Controls.Add(this.BtnNuevo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "FrmABMRol";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Administracion de Roles";
             this.Load += new System.EventHandler(this.FrmABMRol_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DgvRol)).EndInit();

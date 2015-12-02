@@ -78,6 +78,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SeleccionDeUsuario";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Seleccion de Usuario";
             this.Load += new System.EventHandler(this.SeleccionDeUsuario_Load);
             this.ResumeLayout(false);

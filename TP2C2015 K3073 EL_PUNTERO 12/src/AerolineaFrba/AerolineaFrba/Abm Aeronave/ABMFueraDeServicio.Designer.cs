@@ -163,6 +163,7 @@
             this.Controls.Add(this.label4);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ABMFueraDeServicio";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Fuera De Servicio Aeronave";
             this.Load += new System.EventHandler(this.ABMFueraDeServicio_Load);
             this.ResumeLayout(false);

@@ -519,6 +519,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmCargaDatosPago";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Carga de Datos de Pago";
             this.Load += new System.EventHandler(this.FrmCargaDatosPago_Load);
             this.groupBox1.ResumeLayout(false);

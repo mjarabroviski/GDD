@@ -196,6 +196,7 @@
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "InformacionAeronave";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Informacion de Aeronave";
             this.Load += new System.EventHandler(this.InformacionAeronave_Load);
             this.ResumeLayout(false);

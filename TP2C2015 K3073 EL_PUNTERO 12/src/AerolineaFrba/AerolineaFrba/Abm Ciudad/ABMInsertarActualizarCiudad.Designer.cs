@@ -135,6 +135,7 @@
             this.MaximumSize = new System.Drawing.Size(341, 200);
             this.MinimumSize = new System.Drawing.Size(341, 200);
             this.Name = "ABMInsertarActualizarCiudad";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Insertar o Actualizar Ciudades";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

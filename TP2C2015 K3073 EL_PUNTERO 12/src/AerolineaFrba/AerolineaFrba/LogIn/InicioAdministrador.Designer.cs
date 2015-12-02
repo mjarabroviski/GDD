@@ -135,6 +135,7 @@
             this.Controls.Add(this.btnEntrar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "InicioAdministrador";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Inicio Administrador";
             this.Load += new System.EventHandler(this.InicioAdministrador_Load);
             this.ResumeLayout(false);

@@ -129,6 +129,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmIngresoCantidades";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Ingreso Cantidades";
             this.Load += new System.EventHandler(this.FrmIngresoCantidades_Load);
             this.ResumeLayout(false);

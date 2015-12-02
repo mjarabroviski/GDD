@@ -269,6 +269,7 @@
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ConsultaMillas";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Consulta Millas de Pasajero Frecuente";
             this.Load += new System.EventHandler(this.ConsultaMillas_Load);
             this.groupBox1.ResumeLayout(false);

@@ -92,6 +92,7 @@
             this.Controls.Add(this.label4);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "CantidadProducto";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cantidad de Producto";
             this.Load += new System.EventHandler(this.CantidadProducto_Load);
             this.ResumeLayout(false);

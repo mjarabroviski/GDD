@@ -225,6 +225,7 @@
             this.Controls.Add(this.DgvListado);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Listado_Estadistico";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Listado Estadistico";
             this.Load += new System.EventHandler(this.Listado_Estadistico_Load);
             this.GroupFiltros.ResumeLayout(false);

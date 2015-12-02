@@ -431,6 +431,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmCargaDatosPasajero";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Carga de Datos de Pasajero";
             this.Load += new System.EventHandler(this.FrmCargaDatosPasajero_Load);
             this.groupBox1.ResumeLayout(false);

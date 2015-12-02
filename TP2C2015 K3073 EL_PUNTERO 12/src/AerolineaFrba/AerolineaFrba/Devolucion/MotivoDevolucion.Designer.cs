@@ -86,6 +86,7 @@
             this.Controls.Add(this.Txt_Motivo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "MotivoDevolucion";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Motivo de la Devolucion";
             this.Load += new System.EventHandler(this.MotivoDevolucion_Load);
             this.ResumeLayout(false);

@@ -162,6 +162,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmCompra";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Compra de Pasajes/Encomiendas";
             this.Load += new System.EventHandler(this.FrmCompra_Load);
             this.groupBox1.ResumeLayout(false);

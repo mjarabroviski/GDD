@@ -71,7 +71,7 @@
             this.salirToolStripMenuItem});
             this.menuHome.Location = new System.Drawing.Point(0, 0);
             this.menuHome.Name = "menuHome";
-            this.menuHome.Size = new System.Drawing.Size(581, 24);
+            this.menuHome.Size = new System.Drawing.Size(1008, 24);
             this.menuHome.TabIndex = 0;
             this.menuHome.Text = "menuStrip1";
             // 
@@ -236,7 +236,7 @@
             // 
             this.pbFoto.Location = new System.Drawing.Point(0, 27);
             this.pbFoto.Name = "pbFoto";
-            this.pbFoto.Size = new System.Drawing.Size(580, 331);
+            this.pbFoto.Size = new System.Drawing.Size(1008, 635);
             this.pbFoto.TabIndex = 1;
             this.pbFoto.TabStop = false;
             // 
@@ -244,7 +244,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(581, 355);
+            this.ClientSize = new System.Drawing.Size(1008, 661);
             this.ControlBox = false;
             this.Controls.Add(this.pbFoto);
             this.Controls.Add(this.menuHome);
@@ -252,6 +252,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "HomeUsuario";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Home AerolineaFRBA";
             this.Load += new System.EventHandler(this.Home_Load);
             this.menuHome.ResumeLayout(false);

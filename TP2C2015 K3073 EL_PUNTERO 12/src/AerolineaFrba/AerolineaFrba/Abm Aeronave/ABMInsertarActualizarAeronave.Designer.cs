@@ -289,6 +289,7 @@
             this.Controls.Add(this.label4);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ABMInsertarActualizarAeronave";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Insertar o Modificar Aeronave";
             this.Load += new System.EventHandler(this.ABMInsertarActualizarAeronave_Load);
             this.ResumeLayout(false);

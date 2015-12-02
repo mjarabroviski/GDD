@@ -127,6 +127,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmInformeDatosCompra";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Informe de Datos de Compra";
             this.Load += new System.EventHandler(this.FrmInformeDatosCompra_Load);
             this.panel1.ResumeLayout(false);

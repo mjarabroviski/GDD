@@ -289,6 +289,7 @@
             this.Controls.Add(this.TxtCodigo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "FrmABMRutaAltasModificaciones";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Insertar o Modificar Rutas";
             this.Load += new System.EventHandler(this.FrmABMRutaAltasModificaciones_Load);
             this.ResumeLayout(false);

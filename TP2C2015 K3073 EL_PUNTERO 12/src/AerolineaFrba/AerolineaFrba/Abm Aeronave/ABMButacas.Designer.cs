@@ -156,6 +156,7 @@
             this.Controls.Add(this.DgvButacas);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ABMButacas";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Modificacion de Butacas";
             this.Load += new System.EventHandler(this.ABMButacas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DgvButacas)).EndInit();

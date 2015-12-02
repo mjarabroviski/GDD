@@ -154,13 +154,21 @@ namespace AerolineaFrba.Canje_Millas
                 TxtDni.Text = string.Empty;
                 TxtDni.Enabled = true;
                 LblBuscar.Enabled = true;
+                cboTipoDoc.Enabled = true;
             }
             else
             {
                 if (cliente.Millas == 0 || cliente.Millas < ProductoPersistencia.ObtenerProductoMinimo())
                 {
                     MessageBox.Show("El cliente seleccionado no cuenta con millas suficientes para realizar un canje", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    dtpNac.Visible = false;
+                    LbLNac.Visible = false;
+                    btnAceptar.Visible = false;
                     TxtDni.Text = string.Empty;
+                    TxtDni.Enabled = true;
+                    LblBuscar.Enabled = true;
+                    cboTipoDoc.Enabled = true;
+                    
                 }
                 else
                 {
@@ -189,6 +197,7 @@ namespace AerolineaFrba.Canje_Millas
                 TxtDni.Text = string.Empty;
                 TxtDni.Enabled = true;
                 LblBuscar.Enabled = true;
+                cboTipoDoc.Enabled = true;
             }
             diccionarioDeProductos = productos.ToDictionary(a => a.ID, a => a);
 
@@ -260,6 +269,7 @@ namespace AerolineaFrba.Canje_Millas
                                  TxtDni.Enabled = true;
                                  LblBuscar.Enabled = true;
                                  TxtMillas.Text = string.Empty;
+                                 cboTipoDoc.Enabled = true;
                              }
                              else ActualizarProductos();
                          }

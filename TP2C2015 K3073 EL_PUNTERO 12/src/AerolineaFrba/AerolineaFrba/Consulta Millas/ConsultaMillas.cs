@@ -132,6 +132,7 @@ namespace AerolineaFrba.Consulta_Millas
                         TxtDni.Text = string.Empty;
                         TxtDni.Enabled = true;
                         LblBuscar.Enabled = true;
+                        cboTipoDoc.Enabled = true;
 
                     }
                     else
@@ -162,6 +163,7 @@ namespace AerolineaFrba.Consulta_Millas
                 TxtDni.Text = string.Empty;
                 TxtDni.Enabled = true;
                 LblBuscar.Enabled = true;
+                cboTipoDoc.Enabled= true;
             }
             else
             {
@@ -178,6 +180,7 @@ namespace AerolineaFrba.Consulta_Millas
                     TxtDni.Text = string.Empty;
                     TxtDni.Enabled = true;
                     LblBuscar.Enabled = true;
+                    cboTipoDoc.Enabled = true;
 
                 }
                 else

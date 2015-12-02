@@ -65,6 +65,7 @@
             this.Controls.Add(this.dgvProductos);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "VerTodosLosProductos";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Productos ";
             this.Load += new System.EventHandler(this.VerTodosLosProductos_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();

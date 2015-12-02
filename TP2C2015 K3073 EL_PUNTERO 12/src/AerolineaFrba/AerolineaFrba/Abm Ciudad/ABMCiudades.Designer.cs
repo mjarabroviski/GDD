@@ -170,6 +170,7 @@
             this.MaximumSize = new System.Drawing.Size(720, 550);
             this.MinimumSize = new System.Drawing.Size(720, 550);
             this.Name = "ABMCiudades";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Administracion de Ciudades";
             this.Load += new System.EventHandler(this.ABMCiudades_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DgvCiudad)).EndInit();

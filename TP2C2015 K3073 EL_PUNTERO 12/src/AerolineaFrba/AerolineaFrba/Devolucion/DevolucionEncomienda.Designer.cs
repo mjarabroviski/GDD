@@ -247,6 +247,7 @@
             this.Controls.Add(this.DgvEncomiendas);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "DevolucionEncomiendaPasaje";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Devolución Encomienda/Pasaje";
             this.Load += new System.EventHandler(this.DevolucionEncomienda_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DgvEncomiendas)).EndInit();

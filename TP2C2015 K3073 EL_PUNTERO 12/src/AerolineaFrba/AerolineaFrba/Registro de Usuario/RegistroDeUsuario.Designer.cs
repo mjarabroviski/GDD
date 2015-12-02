@@ -162,6 +162,7 @@
             this.Controls.Add(this.TxtUsuario);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "RegistroDeUsuario";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Registro de Usuario";
             this.Load += new System.EventHandler(this.RegistroDeUsuario_Load);
             this.ResumeLayout(false);

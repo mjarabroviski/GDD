@@ -264,6 +264,7 @@
             this.Controls.Add(this.RegistroLlegadaADestino);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "RegistroLlegadaDestino";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Registro Llegada a Destino";
             this.Load += new System.EventHandler(this.RegistroLlegadaDestino_Load);
             this.RegistroLlegadaADestino.ResumeLayout(false);

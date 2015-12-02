@@ -250,6 +250,7 @@
             this.Controls.Add(this.DgvAeronaves);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ABMAeronaves";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Administracion de Aeronaves";
             this.Load += new System.EventHandler(this.ABMAeronaves_Load);
             this.GroupFiltros.ResumeLayout(false);

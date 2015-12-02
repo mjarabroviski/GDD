@@ -142,6 +142,7 @@
             this.Controls.Add(this.LblAceptar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ResetearContrasena";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Resetear Contraseña";
             this.ResumeLayout(false);
             this.PerformLayout();
