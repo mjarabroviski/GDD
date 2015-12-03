@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Configuracion;
 
 namespace AerolineaFrba.Compra
 {
@@ -62,8 +63,8 @@ namespace AerolineaFrba.Compra
             if (AdministradorSesion.UsuarioActual == null)
                 BtnEfectivo.Visible = false;
 
-            DtpFechaNac.MaxDate = DateTime.Now;
-            DtpFechaNac.Value = DateTime.Today;
+            DtpFechaNac.MaxDate = ConfiguracionDeVariables.FechaSistema;
+            DtpFechaNac.Value = ConfiguracionDeVariables.FechaSistema;
 
             CmbTipoDoc.DataSource = TipoDocumentoPersistencia.ObtenerTodos();
             CmbTipoDoc.ValueMember = "ID";
@@ -117,7 +118,7 @@ namespace AerolineaFrba.Compra
                 CmbTipoDoc.Text = "";
                 TxtNroCalle.Text = "";
                 TxtCalle.Text = "";
-                DtpFechaNac.Value = DateTime.Today;
+                DtpFechaNac.Value = ConfiguracionDeVariables.FechaSistema;
 
                 CmbPasajeros.DataSource = ClientePersistencia.ObtenerAuxiliares();
                 CmbPasajeros.ValueMember = "ID";

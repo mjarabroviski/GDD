@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Configuracion;
 
 namespace AerolineaFrba.Compra
 {
@@ -40,7 +41,7 @@ namespace AerolineaFrba.Compra
 
             #region Cargar comboBox
 
-            DtpFechaSalida.MinDate = DateTime.Now;
+            DtpFechaSalida.MinDate = ConfiguracionDeVariables.FechaSistema;
             
             CmbCiudadOrigen.DataSource = CiudadPersistencia.ObtenerTodos();
             CmbCiudadOrigen.ValueMember = "ID";

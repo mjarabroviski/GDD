@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Configuracion;
 
 namespace Persistencia
 {
@@ -178,7 +179,8 @@ namespace Persistencia
                 {
                     new SPParameter("ID_Ruta",ruta.ID),
                     new SPParameter("Motivo",motivo),
-                    new SPParameter("ID_Usuario",usuario.ID)
+                    new SPParameter("ID_Usuario",usuario.ID),
+                    new SPParameter("Fecha_Sistema",ConfiguracionDeVariables.FechaSistema)
                 };
             
             var sp = (transaccion != null)

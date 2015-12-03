@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Configuracion;
 
 namespace AerolineaFrba.Compra
 {
@@ -46,7 +47,8 @@ namespace AerolineaFrba.Compra
             CmbTipoDoc.DisplayMember = "Descripcion";
 
             TxtNroDoc.Select();
-            DtpFechaNac.MaxDate = DateTime.Now;
+            DtpFechaNac.MaxDate = ConfiguracionDeVariables.FechaSistema;
+            DtpFechaNac.Value = ConfiguracionDeVariables.FechaSistema;
 
             if (ordenPasaje == cantPasajesActual+1)
             {
@@ -232,7 +234,7 @@ namespace AerolineaFrba.Compra
                         TxtNroCalle.Text = "";
                         TxtMail.Text = "";
                         TxtTelefono.Text = "";
-                        DtpFechaNac.Value = DateTime.Today;
+                        DtpFechaNac.Value = ConfiguracionDeVariables.FechaSistema;
                     }
                 }
                 else
@@ -243,7 +245,7 @@ namespace AerolineaFrba.Compra
                     TxtNroCalle.Text = "";
                     TxtMail.Text = "";
                     TxtTelefono.Text = "";
-                    DtpFechaNac.Value = DateTime.Today;
+                    DtpFechaNac.Value = ConfiguracionDeVariables.FechaSistema;
                 }
             }
             catch (Exception ex)
@@ -293,7 +295,7 @@ namespace AerolineaFrba.Compra
                             TxtNroCalle.Text = "";
                             TxtMail.Text = "";
                             TxtTelefono.Text = "";
-                            DtpFechaNac.Value = DateTime.Today;
+                            DtpFechaNac.Value = ConfiguracionDeVariables.FechaSistema;
                         }
                     }
                     else
@@ -304,7 +306,7 @@ namespace AerolineaFrba.Compra
                         TxtNroCalle.Text = "";
                         TxtMail.Text = "";
                         TxtTelefono.Text = "";
-                        DtpFechaNac.Value = DateTime.Today;
+                        DtpFechaNac.Value = ConfiguracionDeVariables.FechaSistema;
                     }
                 }
                 catch (Exception ex)
