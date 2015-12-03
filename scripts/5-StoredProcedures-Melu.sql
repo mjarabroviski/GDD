@@ -236,6 +236,7 @@ END
 GO
 
 CREATE PROCEDURE [EL_PUNTERO].[HabilitarAeronavesQueVolvieronDeBajaServicio]
+@Fecha_Sistema datetime
 AS
 BEGIN
 
@@ -245,7 +246,7 @@ BEGIN
 	AND ID_AERONAVE IN (
 					SELECT ID_Aeronave FROM [EL_PUNTERO].[TL_BAJA_SERVICIO_AERONAVE] 
 					WHERE ID_Baja_Servicio = [EL_PUNTERO].[ObtenerIDBajaServicioMax](ID_AERONAVE)
-					AND Fecha_Reinicio_Servicio <= GETDATE())
+					AND Fecha_Reinicio_Servicio <= @Fecha_Sistema)
 	END
 GO
 

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Persistencia;
 using Persistencia.Entidades;
 using Sesion;
+using Configuracion;
 
 namespace AerolineaFrba.Devolucion
 {
@@ -248,7 +249,7 @@ namespace AerolineaFrba.Devolucion
             Txt_Dni.Text = string.Empty;
             if (Dtp_FechaNacimiento.Visible)
             {
-                Dtp_FechaNacimiento.Value = DateTime.Now;
+                Dtp_FechaNacimiento.Value = ConfiguracionDeVariables.FechaSistema;
                 Dtp_FechaNacimiento.Visible = false;
                 lblNac.Visible = false;
                 cboTipoDoc.Enabled = true;
