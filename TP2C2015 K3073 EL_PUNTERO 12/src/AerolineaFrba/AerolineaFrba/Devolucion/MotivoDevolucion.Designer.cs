@@ -32,6 +32,8 @@
             this.Lbl_ingresar = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.Btn_OK = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // Txt_Motivo
@@ -74,12 +76,40 @@
             this.Btn_OK.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.Btn_OK.Click += new System.EventHandler(this.Btn_OK_Click);
             // 
+            // label2
+            // 
+            this.label2.BackColor = System.Drawing.Color.DodgerBlue;
+            this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(226, 150);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(74, 33);
+            this.label2.TabIndex = 101;
+            this.label2.Text = "CANCELAR";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label2.Click += new System.EventHandler(this.label2_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.label7.Location = new System.Drawing.Point(232, 24);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(15, 20);
+            this.label7.TabIndex = 102;
+            this.label7.Text = "*";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // MotivoDevolucion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(372, 193);
             this.ControlBox = false;
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.Btn_OK);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Lbl_ingresar);
@@ -100,5 +130,7 @@
         private System.Windows.Forms.Label Lbl_ingresar;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label Btn_OK;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label7;
     }
 }

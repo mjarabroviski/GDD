@@ -196,7 +196,8 @@ GO
 
 ------------------------------------------------------------------------------------------------------------------------
 CREATE PROCEDURE [EL_PUNTERO].[ObtenerEncomiendasFuturas]
-@ID_Cliente int
+@ID_Cliente int,
+@Fecha_Sistema datetime
 AS 
 BEGIN
 	SELECT * 
@@ -205,7 +206,7 @@ BEGIN
 	WHERE C.ID_Cliente = @ID_Cliente 
 		  AND (SELECT V.Fecha_Salida 
 				FROM EL_PUNTERO.TL_VIAJE V
-				WHERE E.ID_Viaje = V.ID_Viaje) > GETDATE()
+				WHERE E.ID_Viaje = V.ID_Viaje) > @Fecha_Sistema
 		   AND E.ID_Encomienda NOT IN (SELECT DE.ID_Encomienda
 										FROM EL_PUNTERO.TL_DEVOLUCION_ENCOMIENDA DE
 										WHERE DE.ID_Encomienda = E.ID_Encomienda)
@@ -214,7 +215,8 @@ END
 GO
 
 CREATE PROCEDURE [EL_PUNTERO].[ObtenerPasajesFuturos]
-@ID_Cliente int
+@ID_Cliente int,
+@Fecha_Sistema datetime
 AS 
 BEGIN
 	SELECT * 
@@ -223,7 +225,7 @@ BEGIN
 	WHERE C.ID_Cliente = @ID_Cliente 
 		  AND (SELECT V.Fecha_Salida 
 				FROM EL_PUNTERO.TL_VIAJE V
-				WHERE P.ID_Viaje = V.ID_Viaje) > GETDATE()
+				WHERE P.ID_Viaje = V.ID_Viaje) > @Fecha_Sistema
 	AND P.ID_Pasaje NOT IN (SELECT DP.ID_Pasaje
 								FROM EL_PUNTERO.TL_DEVOLUCION_PASAJE DP
 								WHERE DP.ID_Pasaje = P.ID_Pasaje)

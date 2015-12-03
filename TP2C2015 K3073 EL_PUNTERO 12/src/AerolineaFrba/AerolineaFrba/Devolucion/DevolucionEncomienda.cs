@@ -101,6 +101,11 @@ namespace AerolineaFrba.Devolucion
                 {
                     cliente = clientes[0];
                     ActualizarTodo();
+                    if ((encomiendas == null || encomiendas.Count == 0) && (pasajes == null || pasajes.Count == 0))
+                    {
+                        MessageBox.Show("No se encontraron compras disponibles para el cliente ingresado. ", "Atencion", MessageBoxButtons.OK);
+                    }
+                    
                     Btn_DevolverTodos.Enabled = true;
                 }
             }
@@ -123,6 +128,11 @@ namespace AerolineaFrba.Devolucion
             else
             {
                 ActualizarTodo();
+                if ((encomiendas == null || encomiendas.Count == 0) && (pasajes == null || pasajes.Count == 0))
+                {
+                    MessageBox.Show("No se encontraron compras disponibles para el cliente ingresado. ", "Atencion", MessageBoxButtons.OK);
+                }
+            
                 Btn_DevolverTodos.Enabled = true;
             }
             BotonesYtextosAestadoAnterior();
@@ -277,11 +287,51 @@ namespace AerolineaFrba.Devolucion
             {
                 MotivoDevolucion Frmmotivo = new MotivoDevolucion();
                 Frmmotivo.ShowDialog();
+                if (Frmmotivo.accionTerminada)
+                {
+                    using (var transaccion = DBManager.Instance().Connection.BeginTransaction(IsolationLevel.Serializable))
+                    {
+                        try
+                        {
+                            DevolucionPersistencia.InsertarDevolucionEncomienda(encomiendaSeleccionada.ID, AdministradorSesion.UsuarioActual, Frmmotivo.Motivo, transaccion);
+                        }
+                        catch (Exception)
+                        {
+                            transaccion.Rollback();
+                            throw new Exception("Se produjo un error al realizar la devolución. ");
+                        }
+
+                        transaccion.Commit();
+                    }
+
+                    //Actualizo los DGV sin las devoluciones realizadas
+                    ActualizarTodo();
+                }
+            }
+        }
+
+        private void ActualizarTodo()
+        {
+            encomiendas = EncomiendaPersistencia.ObtenerEncomiendasFuturas(cliente.ID);
+            pasajes = PasajePersistencia.ObtenerPasajesFuturos(cliente.ID);
+            
+            LimpiarDataGridView();
+            ActualizarEncomiendaDGV(encomiendas);
+            ActualizarPasajeDGV(pasajes);
+        }
+
+        private void Btn_DevolverTodos_Click(object sender, EventArgs e)
+        {
+            MotivoDevolucion Frmmotivo = new MotivoDevolucion();
+            Frmmotivo.ShowDialog();
+            if (Frmmotivo.accionTerminada)
+            {
                 using (var transaccion = DBManager.Instance().Connection.BeginTransaction(IsolationLevel.Serializable))
                 {
                     try
                     {
-                        DevolucionPersistencia.InsertarDevolucionEncomienda(encomiendaSeleccionada.ID, AdministradorSesion.UsuarioActual, Frmmotivo.Motivo,transaccion);
+                        DevolucionPersistencia.DevolverTodasLasEncomiendas(cliente.ID, AdministradorSesion.UsuarioActual, Frmmotivo.Motivo, transaccion);
+                        DevolucionPersistencia.DevolverTodosLosPasajes(cliente.ID, AdministradorSesion.UsuarioActual, Frmmotivo.Motivo, transaccion);
                     }
                     catch (Exception)
                     {
@@ -291,13 +341,12 @@ namespace AerolineaFrba.Devolucion
 
                     transaccion.Commit();
                 }
-
                 //Actualizo los DGV sin las devoluciones realizadas
                 ActualizarTodo();
             }
         }
 
-        private void DgvPasaje_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void DgvPasaje_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
             //Solo funciona cuando el usuario hace click en los botones de la columnas
             if (e.RowIndex == -1 || e.ColumnIndex >= 0 && e.ColumnIndex < 7)
@@ -309,60 +358,26 @@ namespace AerolineaFrba.Devolucion
             {
                 MotivoDevolucion Frmmotivo = new MotivoDevolucion();
                 Frmmotivo.ShowDialog();
-                using (var transaccion = DBManager.Instance().Connection.BeginTransaction(IsolationLevel.Serializable))
+                if (Frmmotivo.accionTerminada)
                 {
-                    try
+                    using (var transaccion = DBManager.Instance().Connection.BeginTransaction(IsolationLevel.Serializable))
                     {
-                        DevolucionPersistencia.InsertarDevolucionPasaje(pasajeSeleccionado.ID, AdministradorSesion.UsuarioActual, Frmmotivo.Motivo, transaccion);
+                        try
+                        {
+                            DevolucionPersistencia.InsertarDevolucionPasaje(pasajeSeleccionado.ID, AdministradorSesion.UsuarioActual, Frmmotivo.Motivo, transaccion);
 
+                        }
+                        catch (Exception)
+                        {
+                            transaccion.Rollback();
+                            throw new Exception("Se produjo un error al insertar devolución. ");
+                        }
+                        transaccion.Commit();
+                        //Actualizo los DGV sin las devoluciones realizadas
+                        ActualizarTodo();
                     }
-                    catch (Exception)
-                    {
-                        transaccion.Rollback();
-                        throw new Exception("Se produjo un error al insertar devolución. ");
-                    }
-                    transaccion.Commit();
-                    //Actualizo los DGV sin las devoluciones realizadas
-                    ActualizarTodo();
                 }
             }
-        }
-
-        private void ActualizarTodo()
-        {
-            encomiendas = EncomiendaPersistencia.ObtenerEncomiendasFuturas(cliente.ID);
-            pasajes = PasajePersistencia.ObtenerPasajesFuturos(cliente.ID);
-            if ((encomiendas == null || encomiendas.Count == 0) && (pasajes == null || pasajes.Count == 0))
-            {
-                MessageBox.Show("No se encontraron compras disponibles para el cliente ingresado. ", "Atencion", MessageBoxButtons.OK);
-            }
-            
-            LimpiarDataGridView();
-            ActualizarEncomiendaDGV(encomiendas);
-            ActualizarPasajeDGV(pasajes);
-        }
-
-        private void Btn_DevolverTodos_Click(object sender, EventArgs e)
-        {
-            MotivoDevolucion Frmmotivo = new MotivoDevolucion();
-            Frmmotivo.ShowDialog();
-            using (var transaccion = DBManager.Instance().Connection.BeginTransaction(IsolationLevel.Serializable))
-            {
-                try
-                {
-                    DevolucionPersistencia.DevolverTodasLasEncomiendas(cliente.ID,AdministradorSesion.UsuarioActual, Frmmotivo.Motivo, transaccion);
-                    DevolucionPersistencia.DevolverTodosLosPasajes(cliente.ID, AdministradorSesion.UsuarioActual, Frmmotivo.Motivo, transaccion);
-                }
-                catch (Exception)
-                {
-                    transaccion.Rollback();
-                    throw new Exception("Se produjo un error al realizar la devolución. ");
-                }
-
-                transaccion.Commit();
-            }
-            //Actualizo los DGV sin las devoluciones realizadas
-            ActualizarTodo();
         }
     }
 }

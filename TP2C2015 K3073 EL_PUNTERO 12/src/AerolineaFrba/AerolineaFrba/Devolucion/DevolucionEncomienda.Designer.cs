@@ -108,6 +108,7 @@
             this.DgvPasaje.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DgvPasaje.Size = new System.Drawing.Size(611, 421);
             this.DgvPasaje.TabIndex = 91;
+            this.DgvPasaje.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvPasaje_CellContentClick_1);
             // 
             // Btn_Buscar2
             // 
