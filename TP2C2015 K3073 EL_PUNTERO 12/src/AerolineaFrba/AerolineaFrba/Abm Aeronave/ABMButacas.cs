@@ -41,6 +41,7 @@ namespace AerolineaFrba.Abm_Aeronave
 
             CboTipo.Enabled = false;
             BtnGrabar.Enabled = false;
+            btnHabilitar.Enabled = false;
             ActualizarPantalla(null);
             Limpiar();
         }
@@ -62,6 +63,7 @@ namespace AerolineaFrba.Abm_Aeronave
             ActualizarPantalla(null);
             CboTipo.Enabled = false;
             BtnGrabar.Enabled = false;
+            btnHabilitar.Enabled = false;
         }
 
         public void Limpiar()
@@ -116,7 +118,7 @@ namespace AerolineaFrba.Abm_Aeronave
             //Creo la columna de modificar
             var columnaActualizar = new DataGridViewButtonColumn
             {
-                Text = "Modificar Servicio",
+                Text = "Modificar",
                 UseColumnTextForButtonValue = true,
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells
             };
@@ -150,12 +152,22 @@ namespace AerolineaFrba.Abm_Aeronave
                 {
                     CboTipo.Enabled = true;
                     CboTipo.SelectedValue = butacaSeleccionada.ID_Tipo;
-                    BtnGrabar.Enabled = true;                  
+                    BtnGrabar.Enabled = true;
+
+                    if (!butacaSeleccionada.Habilitado)
+                    {
+                        btnHabilitar.Enabled = true;
+                    }
                 }
                 //El usuario tocó el botón de baja
                 else if (e.ColumnIndex == 4)
                 {
                     CboTipo.SelectedValue = butacaSeleccionada.ID_Tipo;
+                    if (!butacaSeleccionada.Habilitado)
+                    {
+                        MessageBox.Show("La butaca ya se encuentra dada de baja", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
                     var dialogAnswer = MessageBox.Show("Esta seguro que desea dar de baja la butaca?", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
                     if (dialogAnswer == DialogResult.Yes)
                     {
@@ -177,6 +189,16 @@ namespace AerolineaFrba.Abm_Aeronave
         private void BtnGrabar_Click(object sender, EventArgs e)
         {
             int cant = 0;
+
+            if (butacaSeleccionada.ID_Tipo == TipoButacaPersistencia.ObtenerTipoPorDescripcion(CboTipo.Text,transaccionConcurrente).ID)
+            {
+                BtnGrabar.Enabled = false;
+                CboTipo.Enabled = false;
+                btnHabilitar.Enabled = false;
+                ActualizarPantalla(null);
+                return;
+            }
+
             butacaSeleccionada.ID_Tipo = TipoButacaPersistencia.ObtenerTipoPorDescripcion(CboTipo.Text,transaccionConcurrente).ID;
             var dialogAnswer = MessageBox.Show("Esta seguro que desea modificar la butaca?", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
             if (dialogAnswer == DialogResult.Yes)
@@ -187,6 +209,7 @@ namespace AerolineaFrba.Abm_Aeronave
                     MessageBox.Show("La butaca fue modificada satisfactoriamente", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     BtnGrabar.Enabled = false;
                     CboTipo.Enabled = false;
+                    btnHabilitar.Enabled = false;
                     ActualizarPantalla(null);
                 }
                 else
@@ -194,6 +217,7 @@ namespace AerolineaFrba.Abm_Aeronave
                     MessageBox.Show("La butaca no fue modificada satisfactoriamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     BtnGrabar.Enabled = false;
                     CboTipo.Enabled = false;
+                    btnHabilitar.Enabled = false;
                 }
             }
         }
@@ -210,6 +234,20 @@ namespace AerolineaFrba.Abm_Aeronave
                 ActualizarPantalla(null);
             }
 
+        }
+
+        private void btnHabilitar_Click(object sender, EventArgs e)
+        {
+            var dialogAnswer = MessageBox.Show("Esta seguro que desea habilitar la butaca?", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+            if (dialogAnswer == DialogResult.Yes)
+            {
+                ButacaPersistencia.HabilitarButaca(butacaSeleccionada, transaccionConcurrente);
+                MessageBox.Show("La butaca fue modificada satisfactoriamente", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                BtnGrabar.Enabled = false;
+                CboTipo.Enabled = false;
+                btnHabilitar.Enabled = false;
+                ActualizarPantalla(null);
+            }
         }
     }
 }

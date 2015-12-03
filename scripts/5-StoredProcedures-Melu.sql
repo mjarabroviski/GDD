@@ -543,6 +543,16 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE [EL_PUNTERO].[HabilitarButaca]
+@ID_Butaca int
+AS
+BEGIN
+	UPDATE [EL_PUNTERO].[TL_BUTACA]
+	SET Habilitado = 1
+	WHERE ID_Butaca = @ID_Butaca	
+END
+GO
+
 CREATE PROCEDURE [EL_PUNTERO].[DarDeBajaButaca]
 @ID_Butaca int
 AS
@@ -835,9 +845,21 @@ CREATE PROCEDURE [EL_PUNTERO].[AgregarRegistroMillas]
 @ID_Viaje int
 AS
 BEGIN
+	--Resto las millas de los registros vencidos al cliente
+	UPDATE C
+	SET C.Millas -= (SELECT SUM(R.Millas)
+					FROM EL_PUNTERO.TL_REGISTRO_MILLAS R 
+					WHERE R.ID_Cliente = C.ID_Cliente 
+					AND DATEDIFF(DAY, R.Fecha_Inicio, GETDATE()) >= 366) 
+	FROM EL_PUNTERO.TL_CLIENTE C
+
+	UPDATE EL_PUNTERO.TL_CLIENTE
+	SET Millas = 0
+	WHERE Millas < 0 OR Millas is null
+
 	--Elimino los registros vencidos
 	DELETE FROM EL_PUNTERO.TL_REGISTRO_MILLAS 
-	WHERE DATEDIFF(DAY, Fecha_Inicio, GETDATE()) = 366
+	WHERE DATEDIFF(DAY, Fecha_Inicio, GETDATE()) >= 366
 
 	--Agrego Pasajes
 	INSERT INTO EL_PUNTERO.TL_REGISTRO_MILLAS (ID_Cliente,Codigo_Item,Fecha_Inicio,Millas)
@@ -852,13 +874,13 @@ BEGIN
 	--Sumo las millas del cliente
 	UPDATE C
 	SET C.Millas += (SELECT SUM(R.Millas) 
-					 FROM EL_PUNTERO.TL_REGISTRO_MILLAS R  
-					 WHERE R.ID_Cliente = C.ID_Cliente 
-					 AND ((R.Codigo_Item IN (SELECT P.Codigo_Pasaje FROM EL_PUNTERO.TL_PASAJE P WHERE P.ID_Viaje = @ID_Viaje)) 
-					 OR (R.Codigo_Item IN (SELECT E.Codigo_Encomienda FROM EL_PUNTERO.TL_ENCOMIENDA E WHERE E.ID_Viaje = @ID_Viaje)))) 
+					FROM EL_PUNTERO.TL_REGISTRO_MILLAS R 
+					WHERE R.ID_Cliente = C.ID_Cliente 
+					AND ((R.Codigo_Item IN (SELECT P.Codigo_Pasaje FROM EL_PUNTERO.TL_PASAJE P WHERE P.ID_Viaje = @ID_Viaje)) 
+					OR (R.Codigo_Item IN (SELECT E.Codigo_Encomienda FROM EL_PUNTERO.TL_ENCOMIENDA E WHERE E.ID_Viaje = @ID_Viaje))))
 	FROM EL_PUNTERO.TL_CLIENTE C
-
-	--Pongo en cero los demas campos de millas
+	
+	--Pongo en cero los demás clientes
 	UPDATE EL_PUNTERO.TL_CLIENTE
 	SET Millas = 0
 	WHERE Millas is null

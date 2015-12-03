@@ -170,6 +170,7 @@ DROP PROCEDURE [EL_PUNTERO].[GuardarCompraEnEfectivo]
 DROP PROCEDURE [EL_PUNTERO].[ObtenerPNR]
 DROP PROCEDURE [EL_PUNTERO].[GetClienteEnViaje]
 DROP PROCEDURE [EL_PUNTERO].[CiudadTieneViajes];
+DROP PROCEDURE [EL_PUNTERO].[HabilitarButaca];
 
 DROP TRIGGER [EL_PUNTERO].[Tr_DeshabilitarUsuariosConRolDeshabilitado];
 

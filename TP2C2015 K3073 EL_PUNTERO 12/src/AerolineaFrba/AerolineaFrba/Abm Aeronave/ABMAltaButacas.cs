@@ -51,23 +51,48 @@ namespace AerolineaFrba.Abm_Aeronave
 
                 var exceptionMessage = string.Empty;
 
-                if (string.IsNullOrEmpty(TxtPasillo.Text))
-                    exceptionMessage += "La cantidad de pasillo no puede ser vacia.\n";
+                //Alta aeronave (no se permiten valores en cero)
+                if (ult == 0)
+                {
+                    if (string.IsNullOrEmpty(TxtPasillo.Text))
+                        exceptionMessage += "La cantidad de pasillo no puede ser vacia.\n";
 
-                else if (!ValidadorDeTipos.IsNumeric(TxtPasillo.Text))
-                    exceptionMessage += "El valor de pasillo no es valido, debe ser un numero entero.\n";
+                    else if (!ValidadorDeTipos.IsNumeric(TxtPasillo.Text))
+                        exceptionMessage += "El valor de pasillo no es valido, debe ser un numero entero.\n";
 
-                else if (Convert.ToInt32(TxtPasillo.Text) <=0)
-                    exceptionMessage += "El valor de pasillo debe ser mayor a cero.\n";
+                    else if (Convert.ToInt32(TxtPasillo.Text) <= 0)
+                        exceptionMessage += "El valor de pasillo debe ser mayor a cero.\n";
 
-                if (string.IsNullOrEmpty(TxtVentanilla.Text))
-                    exceptionMessage += "La cantidad de ventanilla no puede ser vacia.\n";
+                    if (string.IsNullOrEmpty(TxtVentanilla.Text))
+                        exceptionMessage += "La cantidad de ventanilla no puede ser vacia.\n";
 
-                else if (!ValidadorDeTipos.IsNumeric(TxtVentanilla.Text))
-                    exceptionMessage += "El valor de ventanilla no es valido, debe ser un numero entero.\n";
+                    else if (!ValidadorDeTipos.IsNumeric(TxtVentanilla.Text))
+                        exceptionMessage += "El valor de ventanilla no es valido, debe ser un numero entero.\n";
 
-                else if (Convert.ToInt32(TxtVentanilla.Text) <= 0)
-                    exceptionMessage += "El valor de ventanilla debe ser mayor a cero.\n";
+                    else if (Convert.ToInt32(TxtVentanilla.Text) <= 0)
+                        exceptionMessage += "El valor de ventanilla debe ser mayor a cero.\n";
+                }
+                //modificacion aeronave (se permite algun valor en cero)
+                else 
+                {
+                    if (string.IsNullOrEmpty(TxtPasillo.Text))
+                        exceptionMessage += "La cantidad de pasillo no puede ser vacia. Si no desea agregar, ingrese cero.\n";
+
+                    else if (!ValidadorDeTipos.IsNumeric(TxtPasillo.Text))
+                        exceptionMessage += "El valor de pasillo no es valido, debe ser un numero entero.\n";
+
+                    else if (Convert.ToInt32(TxtPasillo.Text) < 0)
+                        exceptionMessage += "El valor de pasillo debe ser mayor o igual a cero.\n";
+
+                    if (string.IsNullOrEmpty(TxtVentanilla.Text))
+                        exceptionMessage += "La cantidad de ventanilla no puede ser vacia. Si no desea agregar, ingrese cero\n";
+
+                    else if (!ValidadorDeTipos.IsNumeric(TxtVentanilla.Text))
+                        exceptionMessage += "El valor de ventanilla no es valido, debe ser un numero entero.\n";
+
+                    else if (Convert.ToInt32(TxtVentanilla.Text) < 0)
+                        exceptionMessage += "El valor de ventanilla debe ser mayor o igual a cero.\n";
+                }
 
                 if (aeronaveReemplazo != null)
                 {
@@ -88,6 +113,13 @@ namespace AerolineaFrba.Abm_Aeronave
                     throw new Exception(exceptionMessage);
 
                 #endregion
+
+                if (Convert.ToInt32(TxtPasillo.Text) == 0 && Convert.ToInt32(TxtVentanilla.Text) == 0)
+                {
+                    accionTerminada = true;
+                    Close();
+                    return;
+                }
 
                     if (aeronave != null)
                     {

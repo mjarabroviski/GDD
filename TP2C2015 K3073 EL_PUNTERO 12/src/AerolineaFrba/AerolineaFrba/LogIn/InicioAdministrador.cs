@@ -90,16 +90,11 @@ namespace AerolineaFrba.LogIn
                 }
                 //Usuario Validado correctamente
                     UsuarioPersistencia.LimpiarIntentos(user);
-                    var dialogAnswer2 = MessageBox.Show("Usuario logueado correctamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    if (dialogAnswer2 == DialogResult.OK)
-                    {  
-                        AdministradorSesion.UsuarioActual = user;
-                        Hide();
-                        HomeUsuario home = new HomeUsuario();
-                        home.ShowDialog();
-                        Close();
-                        
-                    }
+                    AdministradorSesion.UsuarioActual = user;
+                    Hide();
+                    HomeUsuario home = new HomeUsuario();
+                    home.ShowDialog();
+                    Close();
 
                 return 0;
         }

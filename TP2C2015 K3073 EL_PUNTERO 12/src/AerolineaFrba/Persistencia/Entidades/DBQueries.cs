@@ -128,6 +128,7 @@ namespace Persistencia.Entidades
             public static String SPGetMaxNroButaca = "EL_PUNTERO.GetMaxNroButaca";
             public static String SPGetCantButacasPorAeronave = "EL_PUNTERO.GetCantButacasPorAeronave";
             public static String SPObtenerInfoButacasDisponibles = "EL_PUNTERO.ObtenerInfoButacasDisponibles";
+            public static String SPHabilitarButaca = "EL_PUNTERO.HabilitarButaca";
         }
 
         public static class Viaje

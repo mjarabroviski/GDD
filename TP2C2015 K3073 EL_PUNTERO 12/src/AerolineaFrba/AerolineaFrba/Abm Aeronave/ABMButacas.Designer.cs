@@ -36,6 +36,7 @@
             this.BtnLimpiar = new System.Windows.Forms.Label();
             this.BtnAgregarButacas = new System.Windows.Forms.Label();
             this.BtnCancelar = new System.Windows.Forms.Label();
+            this.btnHabilitar = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DgvButacas)).BeginInit();
             this.GroupFiltros.SuspendLayout();
             this.SuspendLayout();
@@ -48,7 +49,7 @@
             this.DgvButacas.AllowUserToResizeRows = false;
             this.DgvButacas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.DgvButacas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DgvButacas.Location = new System.Drawing.Point(12, 102);
+            this.DgvButacas.Location = new System.Drawing.Point(12, 142);
             this.DgvButacas.MultiSelect = false;
             this.DgvButacas.Name = "DgvButacas";
             this.DgvButacas.RowHeadersVisible = false;
@@ -59,12 +60,13 @@
             // 
             // GroupFiltros
             // 
+            this.GroupFiltros.Controls.Add(this.btnHabilitar);
             this.GroupFiltros.Controls.Add(this.BtnGrabar);
             this.GroupFiltros.Controls.Add(this.CboTipo);
             this.GroupFiltros.Controls.Add(this.label1);
             this.GroupFiltros.Location = new System.Drawing.Point(12, 12);
             this.GroupFiltros.Name = "GroupFiltros";
-            this.GroupFiltros.Size = new System.Drawing.Size(366, 73);
+            this.GroupFiltros.Size = new System.Drawing.Size(366, 110);
             this.GroupFiltros.TabIndex = 45;
             this.GroupFiltros.TabStop = false;
             this.GroupFiltros.Text = "MODIFICACION DE TIPO";
@@ -79,7 +81,7 @@
             this.BtnGrabar.Name = "BtnGrabar";
             this.BtnGrabar.Size = new System.Drawing.Size(88, 29);
             this.BtnGrabar.TabIndex = 71;
-            this.BtnGrabar.Text = "GUARDAR CAMBIOS";
+            this.BtnGrabar.Text = "GUARDAR SERVICIO";
             this.BtnGrabar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.BtnGrabar.Click += new System.EventHandler(this.BtnGrabar_Click);
             // 
@@ -107,7 +109,7 @@
             this.BtnLimpiar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.BtnLimpiar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnLimpiar.ForeColor = System.Drawing.Color.White;
-            this.BtnLimpiar.Location = new System.Drawing.Point(136, 330);
+            this.BtnLimpiar.Location = new System.Drawing.Point(136, 370);
             this.BtnLimpiar.Name = "BtnLimpiar";
             this.BtnLimpiar.Size = new System.Drawing.Size(118, 36);
             this.BtnLimpiar.TabIndex = 35;
@@ -121,7 +123,7 @@
             this.BtnAgregarButacas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.BtnAgregarButacas.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnAgregarButacas.ForeColor = System.Drawing.Color.White;
-            this.BtnAgregarButacas.Location = new System.Drawing.Point(12, 330);
+            this.BtnAgregarButacas.Location = new System.Drawing.Point(12, 370);
             this.BtnAgregarButacas.Name = "BtnAgregarButacas";
             this.BtnAgregarButacas.Size = new System.Drawing.Size(117, 36);
             this.BtnAgregarButacas.TabIndex = 69;
@@ -135,7 +137,7 @@
             this.BtnCancelar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.BtnCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnCancelar.ForeColor = System.Drawing.Color.White;
-            this.BtnCancelar.Location = new System.Drawing.Point(261, 330);
+            this.BtnCancelar.Location = new System.Drawing.Point(261, 370);
             this.BtnCancelar.Name = "BtnCancelar";
             this.BtnCancelar.Size = new System.Drawing.Size(117, 36);
             this.BtnCancelar.TabIndex = 70;
@@ -143,11 +145,25 @@
             this.BtnCancelar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.BtnCancelar.Click += new System.EventHandler(this.BtnCancelar_Click);
             // 
+            // btnHabilitar
+            // 
+            this.btnHabilitar.BackColor = System.Drawing.Color.DodgerBlue;
+            this.btnHabilitar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.btnHabilitar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnHabilitar.ForeColor = System.Drawing.Color.White;
+            this.btnHabilitar.Location = new System.Drawing.Point(98, 67);
+            this.btnHabilitar.Name = "btnHabilitar";
+            this.btnHabilitar.Size = new System.Drawing.Size(124, 29);
+            this.btnHabilitar.TabIndex = 72;
+            this.btnHabilitar.Text = "HABILITAR BUATACA";
+            this.btnHabilitar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnHabilitar.Click += new System.EventHandler(this.btnHabilitar_Click);
+            // 
             // ABMButacas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(392, 396);
+            this.ClientSize = new System.Drawing.Size(392, 432);
             this.ControlBox = false;
             this.Controls.Add(this.BtnLimpiar);
             this.Controls.Add(this.BtnAgregarButacas);
@@ -176,6 +192,7 @@
         private System.Windows.Forms.Label BtnAgregarButacas;
         private System.Windows.Forms.Label BtnCancelar;
         private System.Windows.Forms.Label BtnGrabar;
+        private System.Windows.Forms.Label btnHabilitar;
 
 
     }

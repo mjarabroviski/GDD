@@ -117,5 +117,16 @@ namespace Persistencia
 
             return sp.ExecuteReader<Butaca>();
         }
+
+        public static int HabilitarButaca(Butaca butaca, SqlTransaction transaccion)
+        {
+            var param = new List<SPParameter> { new SPParameter("ID_Butaca", butaca.ID)};
+
+            var sp = (transaccion != null)
+                    ? new StoreProcedure(DBQueries.Butaca.SPHabilitarButaca, param,transaccion)
+                    : new StoreProcedure(DBQueries.Butaca.SPHabilitarButaca, param);
+
+            return sp.ExecuteNonQuery(transaccion);
+        }
     }
 }
