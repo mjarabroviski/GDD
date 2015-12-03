@@ -11,6 +11,7 @@ using Persistencia;
 using Persistencia.Entidades;
 using Herramientas;
 using Filtros;
+using Configuracion;
 
 namespace AerolineaFrba.Abm_Aeronave
 {
@@ -63,6 +64,8 @@ namespace AerolineaFrba.Abm_Aeronave
             CboServicio.DisplayMember = "Nombre";
 
             #endregion
+
+            dtpAlta.Value = ConfiguracionDeVariables.FechaSistema;
 
             LimpiarFiltros();
         }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Persistencia.Entidades;
 using System.Data;
 using System.Data.SqlClient;
+using Configuracion;
 
 namespace Persistencia
 {
@@ -16,7 +17,8 @@ namespace Persistencia
         {
             var param = new List<SPParameter>
                 {
-                    new SPParameter("ID_Cliente", ID_Cliente)
+                    new SPParameter("ID_Cliente", ID_Cliente),
+                    new SPParameter("Fecha_Sistema", ConfiguracionDeVariables.FechaSistema)
                 };
             var sp = new StoreProcedure(DBQueries.Pasaje.SPObtenerPasajesFuturos,param);
             List<Pasaje> pasajes = sp.ExecuteReader<Pasaje>();

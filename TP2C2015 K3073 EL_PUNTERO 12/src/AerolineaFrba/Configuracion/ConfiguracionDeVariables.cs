@@ -24,7 +24,7 @@ namespace Configuracion
                 {
                     //Le seteo los valores almacenados en el config a las variables globales
                     ConnectionString = ConfigurationManager.ConnectionStrings["DBStringDeConexion"].ConnectionString;
-                    FechaSistema = DateTime.ParseExact(ConfigurationManager.AppSettings["FechaSistema"], "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                    FechaSistema = DateTime.ParseExact(ConfigurationManager.AppSettings["FechaSistema"], "yyyy-MM-dd hh:mm:ss", CultureInfo.InvariantCulture);
 
                     _iniciado = true;
                 }
