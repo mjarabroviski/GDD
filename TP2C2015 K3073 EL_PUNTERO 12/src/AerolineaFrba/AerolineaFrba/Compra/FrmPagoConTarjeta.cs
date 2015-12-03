@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Configuracion;
 
 namespace AerolineaFrba.Compra
 {
@@ -117,13 +118,13 @@ namespace AerolineaFrba.Compra
                     }
                     else
                     {
-                        if (Int32.Parse(TxtAnio.Text) < DateTime.Now.Year)
+                        if (Int32.Parse(TxtAnio.Text) < ConfiguracionDeVariables.FechaSistema.Year)
                         {
                             mensajeExcepcion += Environment.NewLine + "La tarjeta esta vencida";
                         }
-                        if (Int32.Parse(TxtAnio.Text) == DateTime.Now.Year)
+                        if (Int32.Parse(TxtAnio.Text) == ConfiguracionDeVariables.FechaSistema.Year)
                         {
-                            if (Int32.Parse(TxtMes.Text) <= DateTime.Now.Month)
+                            if (Int32.Parse(TxtMes.Text) <= ConfiguracionDeVariables.FechaSistema.Month)
                                 mensajeExcepcion += Environment.NewLine + "La tarjeta esta vencida";
                         }
                     }
