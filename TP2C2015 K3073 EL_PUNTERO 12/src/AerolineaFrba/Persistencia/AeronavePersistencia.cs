@@ -25,7 +25,7 @@ namespace Persistencia
         {
             var param = new List<SPParameter>
                 {
-                    new SPParameter("Fecha_Sistema",ConfiguracionDeVariables.FechaSistema), 
+                    new SPParameter("Fecha_Actual",ConfiguracionDeVariables.FechaSistema), 
                 };
             //Obtengo la lista de ciudades almacenadas en la base de datos
             var sp = new StoreProcedure(DBQueries.Aeronave.SPObtenerAeronavesHabilitadas,param);

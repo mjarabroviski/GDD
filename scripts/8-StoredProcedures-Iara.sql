@@ -52,11 +52,11 @@ GO
 
 
 CREATE PROCEDURE [EL_PUNTERO].[ObtenerAeronavesHabilitadas]
-@Fecha_Sistema datetime
+@Fecha_Actual datetime
 AS
 BEGIN
 	SET NOCOUNT ON;
-	EXECUTE [EL_PUNTERO].[HabilitarAeronavesQueVolvieronDeBajaServicio] @Fecha_Sistema
+	EXECUTE [EL_PUNTERO].[HabilitarAeronavesQueVolvieronDeBajaServicio] @Fecha_Actual
 	SELECT *
 	FROM [EL_PUNTERO].[TL_Aeronave]
 	WHERE Baja_Por_Fuera_De_Servicio = 0 AND Baja_Por_Vida_Util=0
