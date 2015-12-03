@@ -120,5 +120,10 @@ namespace AerolineaFrba.Abm_Aeronave
                 Close();
             }
         }
+
+        private void ABMCancelarOReemplazar_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

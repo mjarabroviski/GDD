@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Persistencia;
 using Persistencia.Entidades;
+using Configuracion;
 
 namespace AerolineaFrba.Canje_Millas
 {
@@ -37,6 +38,8 @@ namespace AerolineaFrba.Canje_Millas
             cboTipoDoc.DisplayMember = "Descripcion";
 
             #endregion
+
+            dtpNac.Value = ConfiguracionDeVariables.FechaSistema;
         }
 
         private void LimpiarDataGridView()
@@ -54,6 +57,7 @@ namespace AerolineaFrba.Canje_Millas
             LimpiarDataGridView();
             LbLNac.Visible = false;
             dtpNac.Visible = false;
+            dtpNac.Value = ConfiguracionDeVariables.FechaSistema;
             btnAceptar.Visible = false;
             cboTipoDoc.Enabled = true;
             TxtDni.Enabled = true;
@@ -106,6 +110,7 @@ namespace AerolineaFrba.Canje_Millas
                         MessageBox.Show("Por favor ingrese su fecha de nacimiento", "Atencion", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         dtpNac.Visible = true;
                         LbLNac.Visible = true;
+                        dtpNac.Value = ConfiguracionDeVariables.FechaSistema;
                         btnAceptar.Visible = true;
                         TxtDni.Enabled = false;
                         LblBuscar.Enabled = false;
@@ -150,6 +155,7 @@ namespace AerolineaFrba.Canje_Millas
                 MessageBox.Show("No se encontraron clientes con esos datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 dtpNac.Visible = false;
                 LbLNac.Visible = false;
+                dtpNac.Value = ConfiguracionDeVariables.FechaSistema;
                 btnAceptar.Visible = false;
                 TxtDni.Text = string.Empty;
                 TxtDni.Enabled = true;
@@ -163,6 +169,7 @@ namespace AerolineaFrba.Canje_Millas
                     MessageBox.Show("El cliente seleccionado no cuenta con millas suficientes para realizar un canje", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     dtpNac.Visible = false;
                     LbLNac.Visible = false;
+                    dtpNac.Value = ConfiguracionDeVariables.FechaSistema;
                     btnAceptar.Visible = false;
                     TxtDni.Text = string.Empty;
                     TxtDni.Enabled = true;
@@ -193,6 +200,7 @@ namespace AerolineaFrba.Canje_Millas
                 LimpiarDataGridView();
                 dtpNac.Visible = false;
                 LbLNac.Visible = false;
+                dtpNac.Value = ConfiguracionDeVariables.FechaSistema;
                 btnAceptar.Visible = false;
                 TxtDni.Text = string.Empty;
                 TxtDni.Enabled = true;
@@ -264,6 +272,7 @@ namespace AerolineaFrba.Canje_Millas
                                  LimpiarDataGridView();
                                  dtpNac.Visible = false;
                                  LbLNac.Visible = false;
+                                 dtpNac.Value = ConfiguracionDeVariables.FechaSistema;
                                  btnAceptar.Visible = false;
                                  TxtDni.Text = string.Empty;
                                  TxtDni.Enabled = true;

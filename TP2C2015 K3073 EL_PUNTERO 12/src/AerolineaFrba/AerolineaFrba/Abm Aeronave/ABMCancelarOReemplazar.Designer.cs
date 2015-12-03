@@ -101,6 +101,7 @@
             this.Name = "ABMCancelarOReemplazar";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Informacion";
+            this.Load += new System.EventHandler(this.ABMCancelarOReemplazar_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
