@@ -77,9 +77,14 @@ namespace AerolineaFrba.Registro_Llegada_Destino
 
         private void Btn_Registrar_Click(object sender, EventArgs e)
         {
+            
             try
             {
-
+                if (DtpFechaSalida.Value > ConfiguracionDeVariables.FechaSistema)
+                {
+                    volverAEstadoInicial();
+                    throw new Exception("No se puede registrar un viaje posterior a la fecha actual.");
+                }
                 #region declaraciones
                 var transaccion = DBManager.Instance().Connection.BeginTransaction(IsolationLevel.Serializable);
                 int ID_Aeronave = AeronavePersistencia.ObtenerPorMatricula(CboAeronave.Text,transaccion).ID;
