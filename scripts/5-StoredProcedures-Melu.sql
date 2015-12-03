@@ -1043,8 +1043,8 @@ BEGIN
 	DECLARE @Fecha_D_Posta datetime
 	DECLARE @Fecha_H_Posta datetime
 
-	SELECT @Fecha_D_Posta = CONVERT(datetime, @Fecha_Desde)
-	SELECT @Fecha_H_Posta = CONVERT(datetime, @Fecha_Hasta)
+	SELECT @Fecha_D_Posta = CONVERT(datetime, @Fecha_Desde, 120)
+	SELECT @Fecha_H_Posta = CONVERT(datetime, @Fecha_Hasta, 120)
 
 	SELECT TOP 5 C.Nombre_Ciudad AS Parametro,COUNT(P.ID_Pasaje) AS Valor
 	FROM EL_PUNTERO.TL_CIUDAD C
@@ -1065,8 +1065,8 @@ BEGIN
 	DECLARE @Fecha_D_Posta datetime
 	DECLARE @Fecha_H_Posta datetime
 
-	SELECT @Fecha_D_Posta = CONVERT(datetime, @Fecha_Desde)
-	SELECT @Fecha_H_Posta = CONVERT(datetime, @Fecha_Hasta)
+	SELECT @Fecha_D_Posta = CONVERT(datetime, @Fecha_Desde, 120)
+	SELECT @Fecha_H_Posta = CONVERT(datetime, @Fecha_Hasta, 120)
 
 	SELECT TOP 5 C.Nombre_Ciudad AS Parametro,
 	COUNT(*) AS Valor
@@ -1112,8 +1112,8 @@ BEGIN
 	DECLARE @Fecha_D_Posta datetime
 	DECLARE @Fecha_H_Posta datetime
 
-	SELECT @Fecha_D_Posta = CONVERT(datetime, @Fecha_Desde)
-	SELECT @Fecha_H_Posta = CONVERT(datetime, @Fecha_Hasta)
+	SELECT @Fecha_D_Posta = CONVERT(datetime, @Fecha_Desde, 120)
+	SELECT @Fecha_H_Posta = CONVERT(datetime, @Fecha_Hasta, 120)
 
 	SELECT TOP 5 UPPER(C.Apellido) + ' ' + UPPER(C.Nombre) AS Parametro,
 	SUM(R.Millas) - [EL_PUNTERO].[ObtenerMillasCanje](C.ID_Cliente,@Fecha_H_Posta) AS Valor
@@ -1134,8 +1134,8 @@ BEGIN
 	DECLARE @Fecha_D_Posta datetime
 	DECLARE @Fecha_H_Posta datetime
 
-	SELECT @Fecha_D_Posta = CONVERT(datetime, @Fecha_Desde)
-	SELECT @Fecha_H_Posta = CONVERT(datetime, @Fecha_Hasta)
+	SELECT @Fecha_D_Posta = CONVERT(datetime, @Fecha_Desde, 120)
+	SELECT @Fecha_H_Posta = CONVERT(datetime, @Fecha_Hasta, 120)
 
 	SELECT TOP 5 C.Nombre_Ciudad AS Parametro,COUNT(P.ID_Pasaje) AS Valor
 	FROM EL_PUNTERO.TL_CIUDAD C
@@ -1209,8 +1209,8 @@ BEGIN
 	DECLARE @Fecha_D_Posta datetime
 	DECLARE @Fecha_H_Posta datetime
 
-	SELECT @Fecha_D_Posta = CONVERT(datetime, @Fecha_Desde)
-	SELECT @Fecha_H_Posta = CONVERT(datetime, @Fecha_Hasta)
+	SELECT @Fecha_D_Posta = CONVERT(datetime, @Fecha_Desde, 120)
+	SELECT @Fecha_H_Posta = CONVERT(datetime, @Fecha_Hasta, 120)
 
 	SELECT TOP 5 A.Matricula AS Parametro,MAX([EL_PUNTERO].[CantFueraDeServicio](B.ID_Baja_Servicio,@Fecha_D_Posta,@Fecha_H_Posta )) AS Valor
 	FROM EL_PUNTERO.TL_AERONAVE A
