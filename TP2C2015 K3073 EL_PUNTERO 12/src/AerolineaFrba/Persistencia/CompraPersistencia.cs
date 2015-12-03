@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Configuracion;
 
 namespace Persistencia
 {
@@ -233,7 +234,8 @@ namespace Persistencia
                                                 new SPParameter("ID_Viaje", idViaje),
                                                 new SPParameter("KG", (int)cantEnc),
                                                 new SPParameter("Precio_Encomienda", precioEncomienda),
-                                                new SPParameter("ID_Usuario",usuarioActual ?? (object)DBNull.Value)
+                                                new SPParameter("ID_Usuario",usuarioActual ?? (object)DBNull.Value),
+                                                new SPParameter("Fecha_Sistema",ConfiguracionDeVariables.FechaSistema)
                                               };
             var sp = (transaccion != null)
                 ? new StoreProcedure(DBQueries.Compra.SPGuardarTarjetaYCompra, param, transaccion)
@@ -267,7 +269,8 @@ namespace Persistencia
                                                 new SPParameter("ID_Viaje", idViaje),
                                                 new SPParameter("KG", (int)cantEnc),
                                                 new SPParameter("Precio_Encomienda", precioEncomienda),
-                                                new SPParameter("ID_Usuario",usuarioActual.ID)
+                                                new SPParameter("ID_Usuario",usuarioActual.ID),
+                                                new SPParameter("Fecha_Sistema",ConfiguracionDeVariables.FechaSistema)
                                               };
             var sp = (transaccion != null)
                 ? new StoreProcedure(DBQueries.Compra.SPGuardarCompraEnEfectivo, param, transaccion)

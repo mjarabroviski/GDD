@@ -83,10 +83,11 @@
             // txtPNR
             // 
             this.txtPNR.Enabled = false;
-            this.txtPNR.Location = new System.Drawing.Point(87, 13);
+            this.txtPNR.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPNR.Location = new System.Drawing.Point(87, 12);
             this.txtPNR.Multiline = true;
             this.txtPNR.Name = "txtPNR";
-            this.txtPNR.Size = new System.Drawing.Size(144, 25);
+            this.txtPNR.Size = new System.Drawing.Size(144, 26);
             this.txtPNR.TabIndex = 108;
             this.txtPNR.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 

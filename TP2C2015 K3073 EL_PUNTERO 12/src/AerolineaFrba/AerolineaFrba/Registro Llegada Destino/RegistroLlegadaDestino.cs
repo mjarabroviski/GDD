@@ -11,6 +11,7 @@ using Persistencia.Entidades;
 using Persistencia;
 using AerolineaFrba.Home;
 using System.Globalization;
+using Configuracion;
 
 namespace AerolineaFrba.Registro_Llegada_Destino
 {
@@ -41,7 +42,7 @@ namespace AerolineaFrba.Registro_Llegada_Destino
         private void RegistroLlegadaDestino_Load(object sender, EventArgs e)
         {
             CargarCbos();
-            DtpFechaSalida.Value = DateTime.Now;
+            DtpFechaSalida.Value = ConfiguracionDeVariables.FechaSistema;
         }
 
 
@@ -71,14 +72,19 @@ namespace AerolineaFrba.Registro_Llegada_Destino
 
         private void limpiarCampos()
         {
-            DtpFechaSalida.Value = DateTime.Now;
+            DtpFechaSalida.Value = ConfiguracionDeVariables.FechaSistema;
         }
 
         private void Btn_Registrar_Click(object sender, EventArgs e)
         {
+            
             try
             {
-
+                if (DtpFechaSalida.Value > ConfiguracionDeVariables.FechaSistema)
+                {
+                    volverAEstadoInicial();
+                    throw new Exception("No se puede registrar un viaje posterior a la fecha actual.");
+                }
                 #region declaraciones
                 var transaccion = DBManager.Instance().Connection.BeginTransaction(IsolationLevel.Serializable);
                 int ID_Aeronave = AeronavePersistencia.ObtenerPorMatricula(CboAeronave.Text,transaccion).ID;
@@ -135,11 +141,6 @@ namespace AerolineaFrba.Registro_Llegada_Destino
             Btn_Cancelar.Enabled = false;
             Btn_Limpiar.Enabled = false;
             
-        }
-
-        private void CboAeronave_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

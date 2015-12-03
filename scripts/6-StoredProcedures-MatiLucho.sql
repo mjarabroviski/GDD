@@ -143,7 +143,8 @@ GO
 CREATE PROCEDURE [EL_PUNTERO].[CancelarPasajesYEncomiendasConRutaInhabilitada]
 	@ID_Ruta int,
 	@Motivo varchar(255),
-	@ID_Usuario int
+	@ID_Usuario int,
+	@Fecha_Sistema datetime
 AS
 BEGIN
 	SET NOCOUNT ON;
@@ -155,7 +156,7 @@ BEGIN
 
 	--Se llenan la fecha, el motivo y el usuario de los pasajes
 	UPDATE [EL_PUNTERO].TL_DEVOLUCION_PASAJE
-	SET Fecha_Devolucion=GETDATE(),
+	SET Fecha_Devolucion=@Fecha_Sistema,
 		Motivo=@Motivo,
 		ID_Usuario=@ID_Usuario
 	WHERE Fecha_Devolucion is NULL;
@@ -167,7 +168,7 @@ BEGIN
 
 	--Se llenan la fecha, el motivo y el usuario de las encomiendas
 	UPDATE [EL_PUNTERO].TL_DEVOLUCION_ENCOMIENDA
-	SET Fecha_Devolucion=GETDATE(),
+	SET Fecha_Devolucion=@Fecha_Sistema,
 		Motivo=@Motivo,
 		ID_Usuario=@ID_Usuario
 	WHERE Fecha_Devolucion is NULL;
@@ -614,7 +615,8 @@ CREATE PROCEDURE [EL_PUNTERO].[GuardarTarjetaYCompra]
 @ID_Viaje int,
 @KG int,
 @Precio_Encomienda numeric(18,2),
-@ID_Usuario int
+@ID_Usuario int,
+@Fecha_Sistema datetime
 AS
 BEGIN
 	DECLARE @ID_Cliente int
@@ -634,7 +636,7 @@ BEGIN
 	SET @ID_Tarjeta = (SELECT ID_Tarjeta FROM [EL_PUNTERO].[TL_TARJETA] WHERE Nro_Tarjeta=@Nro_Tarjeta AND @ID_Cliente=ID_Cliente AND @ID_Tipo_Tarjeta=ID_Tipo_Tarjeta)
 
 	INSERT INTO [EL_PUNTERO].[TL_COMPRA] (ID_Cliente,Fecha_Compra,ID_Tarjeta,ID_Usuario,Cantidad_Cuotas)
-		VALUES(@ID_Cliente,GETDATE(),@ID_Tarjeta,@ID_Usuario,@Cant_Cuotas)
+		VALUES(@ID_Cliente,@Fecha_Sistema,@ID_Tarjeta,@ID_Usuario,@Cant_Cuotas)
 
 	UPDATE EL_PUNTERO.TL_COMPRA
 		SET PNR = ID_Compra 
@@ -661,7 +663,8 @@ CREATE PROCEDURE [EL_PUNTERO].[GuardarCompraEnEfectivo]
 @ID_Viaje int,
 @KG int,
 @Precio_Encomienda numeric(18,2),
-@ID_Usuario int
+@ID_Usuario int,
+@Fecha_Sistema datetime
 AS
 BEGIN
 	DECLARE @ID_Cliente int
@@ -671,7 +674,7 @@ BEGIN
 	SET @ID_Cliente = (SELECT ID_Cliente FROM [EL_PUNTERO].[TL_CLIENTE] WHERE Nombre=@Nombre AND Apellido=@Apellido AND Nro_Documento=@Nro_Documento)
 
 	INSERT INTO [EL_PUNTERO].[TL_COMPRA] (ID_Cliente,Fecha_Compra,ID_Usuario)
-		VALUES(@ID_Cliente,GETDATE(),@ID_Usuario)
+		VALUES(@ID_Cliente,@Fecha_Sistema,@ID_Usuario)
 
 	UPDATE EL_PUNTERO.TL_COMPRA
 		SET PNR = ID_Compra 

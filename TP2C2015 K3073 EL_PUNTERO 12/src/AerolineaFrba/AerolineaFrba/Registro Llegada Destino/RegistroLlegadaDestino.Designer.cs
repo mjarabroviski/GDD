@@ -67,7 +67,6 @@
             this.CboAeronave.Name = "CboAeronave";
             this.CboAeronave.Size = new System.Drawing.Size(150, 21);
             this.CboAeronave.TabIndex = 70;
-            this.CboAeronave.SelectedIndexChanged += new System.EventHandler(this.CboAeronave_SelectedIndexChanged);
             // 
             // CboCiudadDestino
             // 

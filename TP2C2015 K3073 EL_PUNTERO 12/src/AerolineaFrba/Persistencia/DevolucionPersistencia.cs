@@ -90,6 +90,7 @@ namespace Persistencia
                     new SPParameter("ID_Encomienda",ID_Encomienda),
                     new SPParameter("Motivo",motivo),
                     new SPParameter("ID_Usuario",usuario.ID),
+                    new SPParameter("Fecha_Sistema",ConfiguracionDeVariables.FechaSistema),
                 };
 
             var sp = (transaccion != null)
@@ -105,6 +106,7 @@ namespace Persistencia
                     new SPParameter("ID_Pasaje",ID_Pasaje),
                     new SPParameter("Motivo",motivo),
                     new SPParameter("ID_Usuario",usuario.ID),
+                    new SPParameter("Fecha_Sistema",ConfiguracionDeVariables.FechaSistema),
                 };
 
             var sp = (transaccion != null)
@@ -120,6 +122,7 @@ namespace Persistencia
                     new SPParameter("ID_Cliente",ID_Cliente),
                     new SPParameter("Motivo",motivo),
                     new SPParameter("ID_Usuario",usuario.ID),
+                    new SPParameter("Fecha_Sistema",ConfiguracionDeVariables.FechaSistema),
                 };
 
             var sp = (transaccion != null)
@@ -134,6 +137,7 @@ namespace Persistencia
                     new SPParameter("ID_Cliente",ID_Cliente),
                     new SPParameter("Motivo",motivo),
                     new SPParameter("ID_Usuario",usuario.ID),
+                    new SPParameter("Fecha_Sistema",ConfiguracionDeVariables.FechaSistema),
                 };
 
             var sp = (transaccion != null)

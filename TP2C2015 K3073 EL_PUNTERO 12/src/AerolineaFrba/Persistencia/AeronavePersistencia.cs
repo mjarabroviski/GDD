@@ -23,8 +23,12 @@ namespace Persistencia
 
         public static List<Aeronave> ObtenerAeronavesHabilitadas()
         {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("Fecha_Sistema",ConfiguracionDeVariables.FechaSistema), 
+                };
             //Obtengo la lista de ciudades almacenadas en la base de datos
-            var sp = new StoreProcedure(DBQueries.Aeronave.SPObtenerAeronavesHabilitadas);
+            var sp = new StoreProcedure(DBQueries.Aeronave.SPObtenerAeronavesHabilitadas,param);
             return sp.ExecuteReader<Aeronave>();
         }
 

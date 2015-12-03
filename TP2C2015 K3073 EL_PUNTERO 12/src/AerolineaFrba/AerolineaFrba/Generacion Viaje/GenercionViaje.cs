@@ -11,6 +11,7 @@ using Persistencia.Entidades;
 using Persistencia;
 using AerolineaFrba.Home;
 using System.Globalization;
+using Configuracion;
 
 
 namespace AerolineaFrba.Generacion_Viaje
@@ -24,7 +25,7 @@ namespace AerolineaFrba.Generacion_Viaje
 
         private void GenercionViaje_Load(object sender, EventArgs e)
         {
-            DtpFechaSalida.MinDate = DateTime.Today;
+            DtpFechaSalida.MinDate = ConfiguracionDeVariables.FechaSistema;
             DtpFechaLlegadaEstimada.MinDate = DtpFechaSalida.Value.AddHours(1);
 
             CargarCbos();
@@ -68,7 +69,7 @@ namespace AerolineaFrba.Generacion_Viaje
         private void ActualizarFechas()
         {
 
-            DtpFechaSalida.Value = DateTime.Now;
+            DtpFechaSalida.Value = ConfiguracionDeVariables.FechaSistema;
             DtpFechaLlegadaEstimada.Enabled = false;
             DtpFechaSalida.Enabled = false;
            
