@@ -390,7 +390,7 @@
             this.BtnTarjeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.BtnTarjeta.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnTarjeta.ForeColor = System.Drawing.Color.White;
-            this.BtnTarjeta.Location = new System.Drawing.Point(575, 464);
+            this.BtnTarjeta.Location = new System.Drawing.Point(588, 464);
             this.BtnTarjeta.Name = "BtnTarjeta";
             this.BtnTarjeta.Size = new System.Drawing.Size(88, 43);
             this.BtnTarjeta.TabIndex = 102;
@@ -404,7 +404,7 @@
             this.BtnEfectivo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.BtnEfectivo.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnEfectivo.ForeColor = System.Drawing.Color.White;
-            this.BtnEfectivo.Location = new System.Drawing.Point(392, 464);
+            this.BtnEfectivo.Location = new System.Drawing.Point(378, 464);
             this.BtnEfectivo.Name = "BtnEfectivo";
             this.BtnEfectivo.Size = new System.Drawing.Size(88, 43);
             this.BtnEfectivo.TabIndex = 103;
