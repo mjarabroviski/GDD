@@ -21,7 +21,7 @@ namespace Persistencia.Entidades
         public IMapable Map(SqlDataReader reader)
         {
             bool llego;
-            if (reader["Habilitado"].ToString() == "1") hab = true;
+            if (reader["Llego"].ToString() == "1") llego = true;
             else llego = false;
             return new Viaje
             {
