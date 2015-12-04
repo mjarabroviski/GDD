@@ -49,7 +49,7 @@
             this.groupBox1.Controls.Add(this.CmbCiudadDestino);
             this.groupBox1.Controls.Add(this.CmbCiudadOrigen);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(110, 12);
+            this.groupBox1.Location = new System.Drawing.Point(222, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(504, 104);
             this.groupBox1.TabIndex = 1;
@@ -132,7 +132,7 @@
             this.DgvViaje.Name = "DgvViaje";
             this.DgvViaje.RowHeadersVisible = false;
             this.DgvViaje.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DgvViaje.Size = new System.Drawing.Size(718, 269);
+            this.DgvViaje.Size = new System.Drawing.Size(927, 269);
             this.DgvViaje.TabIndex = 34;
             this.DgvViaje.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvViaje_CellContentClick);
             // 
@@ -154,7 +154,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(743, 448);
+            this.ClientSize = new System.Drawing.Size(951, 448);
             this.ControlBox = false;
             this.Controls.Add(this.BtnCancelar);
             this.Controls.Add(this.DgvViaje);

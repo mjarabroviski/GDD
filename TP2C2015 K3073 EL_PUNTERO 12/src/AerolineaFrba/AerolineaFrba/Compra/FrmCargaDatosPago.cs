@@ -272,9 +272,10 @@ namespace AerolineaFrba.Compra
 
                     if (cantPas != 0)
                     {
-                        for (int i = 1; i <= ClientePersistencia.ObtenerAuxiliares().Count; i++)
+                        int cantAuxiliares = ClientePersistencia.ObtenerAuxiliares().Count;
+                        for (int i = 1; i <= cantAuxiliares; i++)
                         {
-                            CompraPersistencia.GuardarPasajeros(i, viajeActual.ID, precioPasajes);
+                            CompraPersistencia.GuardarPasajeros(i, viajeActual.ID, precioPasajes/cantAuxiliares);
                         }
                     }
 

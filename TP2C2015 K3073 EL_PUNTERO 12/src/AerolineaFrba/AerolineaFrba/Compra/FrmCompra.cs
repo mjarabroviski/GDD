@@ -131,7 +131,10 @@ namespace AerolineaFrba.Compra
                     CiudadOrigen = ViajePersistencia.ObtenerCiudadOrigenPorIDRuta(a.ID_Ruta),
                     CiudadDestino = ViajePersistencia.ObtenerCiudadDestinoPorIDRuta(a.ID_Ruta),
                     ButacasDisponibles = ViajePersistencia.ObtenerButacasDisponibles(a.ID) >=0 ? ViajePersistencia.ObtenerButacasDisponibles(a.ID) : 0,
-                    KGsDisponibles = ViajePersistencia.ObtenerKGSDisponibles(a.ID) >=0 ? ViajePersistencia.ObtenerKGSDisponibles(a.ID) : 0
+                    KGsDisponibles = ViajePersistencia.ObtenerKGSDisponibles(a.ID) >=0 ? ViajePersistencia.ObtenerKGSDisponibles(a.ID) : 0,
+                    PrecioBasePasaje = RutaPersistencia.ObtenerRutaPorID(a.ID_Ruta).Precio_Base_Pasaje,
+                    PrecioBaseKG = RutaPersistencia.ObtenerRutaPorID(a.ID_Ruta).Precio_Base_KG,
+                    Servicio = ServicioPersistencia.ObtenerServicioAeronave(a.ID_Aeronave).Nombre
                 });
                 DgvViaje.DataSource = bind.ToList();
                 DgvViaje.Columns[0].Visible = false;
@@ -193,7 +196,7 @@ namespace AerolineaFrba.Compra
             if (viajeSeleccionado != null)
             {
                 //El usuario tocó el botón de seleccionar
-                if (e.ColumnIndex == 6)
+                if (e.ColumnIndex == 9)
                 {
                     var ingresoCantidades = new FrmIngresoCantidades(viajeSeleccionado,this);
                     ingresoCantidades.ShowDialog();
