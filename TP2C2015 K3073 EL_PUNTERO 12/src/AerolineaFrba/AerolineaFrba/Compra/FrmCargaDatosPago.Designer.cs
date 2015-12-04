@@ -311,6 +311,8 @@
             this.TxtNroDoc.Name = "TxtNroDoc";
             this.TxtNroDoc.Size = new System.Drawing.Size(217, 20);
             this.TxtNroDoc.TabIndex = 80;
+            this.TxtNroDoc.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtNroDoc_KeyPress);
+            this.TxtNroDoc.Leave += new System.EventHandler(this.TxtNroDoc_Leave);
             // 
             // CmbTipoDoc
             // 
@@ -460,7 +462,6 @@
             this.label16.TabIndex = 107;
             this.label16.Text = "PRECIO";
             this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label16.Click += new System.EventHandler(this.label16_Click);
             // 
             // panel1
             // 
