@@ -143,8 +143,9 @@ namespace AerolineaFrba.Compra
                 if ((!(ValidadorDeTipos.IsMailValido(TxtMail.Text))) && (!(ValidadorDeTipos.IsEmpty(TxtMail.Text))))
                     mensajeExcepcion += Environment.NewLine + "Formato inválido de mail";
 
-                if (ClientePersistencia.ElClienteYaEstaDeViaje(CmbTipoDoc.SelectedIndex + 1, Int32.Parse(TxtNroDoc.Text), viajeActual.ID, TxtApellidos.Text) > 0)
-                    mensajeExcepcion += Environment.NewLine + "Ese cliente ya se encuentra en viaje para esas fechas";
+                if(!(ValidadorDeTipos.IsEmpty(TxtNroDoc.Text)))
+                    if (ClientePersistencia.ElClienteYaEstaDeViaje(CmbTipoDoc.SelectedIndex + 1, Int32.Parse(TxtNroDoc.Text), viajeActual.ID, TxtApellidos.Text) > 0)
+                        mensajeExcepcion += Environment.NewLine + "Ese cliente ya se encuentra en viaje para esas fechas";
 
                 if (!ValidadorDeTipos.IsEmpty(mensajeExcepcion))
                     throw new Exception(mensajeExcepcion);

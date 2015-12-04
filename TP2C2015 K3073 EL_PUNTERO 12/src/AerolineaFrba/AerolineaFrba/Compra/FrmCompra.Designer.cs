@@ -62,6 +62,7 @@
             this.DtpFechaSalida.Name = "DtpFechaSalida";
             this.DtpFechaSalida.Size = new System.Drawing.Size(231, 20);
             this.DtpFechaSalida.TabIndex = 28;
+            this.DtpFechaSalida.Value = new System.DateTime(2015, 11, 18, 0, 0, 0, 0);
             // 
             // BtnLimpiar
             // 

@@ -42,6 +42,7 @@ namespace AerolineaFrba.Compra
             #region Cargar comboBox
 
             DtpFechaSalida.MinDate = ConfiguracionDeVariables.FechaSistema;
+            DtpFechaSalida.Value = ConfiguracionDeVariables.FechaSistema;
             
             CmbCiudadOrigen.DataSource = CiudadPersistencia.ObtenerTodos();
             CmbCiudadOrigen.ValueMember = "ID";
@@ -58,7 +59,7 @@ namespace AerolineaFrba.Compra
 
         private void BorrarFiltrosUI()
         {
-            DtpFechaSalida.ResetText();
+            //DtpFechaSalida.ResetText();
             CmbCiudadOrigen.Text = "CIUDAD ORIGEN";
             CmbCiudadDestino.Text = "CIUDAD DESTINO";
         }
