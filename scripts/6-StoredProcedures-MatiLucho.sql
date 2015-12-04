@@ -602,6 +602,12 @@ BEGIN
 		INSERT INTO [EL_PUNTERO].[TL_CLIENTE] (Nombre,Apellido,ID_Tipo_Documento,Nro_Documento,Direccion,Telefono,Fecha_Nacimiento,Mail)
 			VALUES (@Nombre,@Apellido,@ID_Tipo_Documento,@Nro_Documento,@Direccion,@Telefono,@Fecha_Nacimiento,@Mail)	
 	END
+
+	IF (@Cant=1)
+	BEGIN
+		UPDATE [EL_PUNTERO].[TL_CLIENTE] SET Direccion=@Direccion,Telefono=@Telefono,Fecha_Nacimiento=@Fecha_Nacimiento,Mail=@Mail
+		WHERE Nombre=@Nombre AND Apellido=@Apellido AND Nro_Documento=@Nro_Documento
+	END
 END
 GO
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Persistencia.Entidades;
+using Configuracion;
 
 namespace Persistencia
 {
@@ -28,7 +29,8 @@ namespace Persistencia
                 {
                     new SPParameter("ID_Producto", producto.ID),
                     new SPParameter("Cantidad", cantidad),
-                    new SPParameter("ID_Cliente", cliente.ID)
+                    new SPParameter("ID_Cliente", cliente.ID),
+                    new SPParameter("Fecha_Actual", ConfiguracionDeVariables.FechaSistema)
                 };
 
             var sp = new StoreProcedure(DBQueries.Canje.SPGenerarCanje, param);

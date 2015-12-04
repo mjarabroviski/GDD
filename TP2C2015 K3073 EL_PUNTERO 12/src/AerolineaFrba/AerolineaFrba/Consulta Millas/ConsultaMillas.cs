@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Persistencia;
 using Persistencia.Entidades;
+using Configuracion;
 
 namespace AerolineaFrba.Consulta_Millas
 {
@@ -38,6 +39,8 @@ namespace AerolineaFrba.Consulta_Millas
             cboTipoDoc.DisplayMember = "Descripcion";
 
             #endregion
+
+            dtpNac.Value = ConfiguracionDeVariables.FechaSistema;
         }
 
         private void LblLimpiar_Click(object sender, EventArgs e)
@@ -45,6 +48,7 @@ namespace AerolineaFrba.Consulta_Millas
             LimpiarDataGridView();
             LbLNac.Visible = false;
             dtpNac.Visible = false;
+            dtpNac.Value = ConfiguracionDeVariables.FechaSistema;
             btnAceptar.Visible = false;
             cboTipoDoc.Enabled = true;
             TxtDni.Enabled = true;
@@ -105,6 +109,7 @@ namespace AerolineaFrba.Consulta_Millas
                          MessageBox.Show("Por favor ingrese su fecha de nacimiento", "Atencion", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                          dtpNac.Visible = true;
                          LbLNac.Visible = true;
+                         dtpNac.Value = ConfiguracionDeVariables.FechaSistema;
                          btnAceptar.Visible = true;
                          TxtDni.Enabled = false;
                          LblBuscar.Enabled = false;
@@ -128,6 +133,7 @@ namespace AerolineaFrba.Consulta_Millas
                         LimpiarDataGridView();
                         dtpNac.Visible = false;
                         LbLNac.Visible = false;
+                        dtpNac.Value = ConfiguracionDeVariables.FechaSistema;
                         btnAceptar.Visible = false;
                         TxtDni.Text = string.Empty;
                         TxtDni.Enabled = true;
@@ -159,6 +165,7 @@ namespace AerolineaFrba.Consulta_Millas
                 MessageBox.Show("No se encontraron clientes con esos datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 dtpNac.Visible = false;
                 LbLNac.Visible = false;
+                dtpNac.Value = ConfiguracionDeVariables.FechaSistema;
                 btnAceptar.Visible = false;
                 TxtDni.Text = string.Empty;
                 TxtDni.Enabled = true;
@@ -176,6 +183,7 @@ namespace AerolineaFrba.Consulta_Millas
                     LimpiarDataGridView();
                     dtpNac.Visible = false;
                     LbLNac.Visible = false;
+                    dtpNac.Value = ConfiguracionDeVariables.FechaSistema;
                     btnAceptar.Visible = false;
                     TxtDni.Text = string.Empty;
                     TxtDni.Enabled = true;

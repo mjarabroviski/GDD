@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Persistencia;
 using Persistencia.Entidades;
+using Configuracion;
 
 namespace AerolineaFrba.Abm_Aeronave
 {
@@ -28,6 +29,7 @@ namespace AerolineaFrba.Abm_Aeronave
         {
             txtAeronave.Enabled = false;
             txtAeronave.Text = aeronaveAModificar.Matricula;
+            DtpFechaComienzo.Value = ConfiguracionDeVariables.FechaSistema;
             DtpFechaReinicio.MinDate = DtpFechaComienzo.Value.Date;
         }
 
@@ -64,25 +66,34 @@ namespace AerolineaFrba.Abm_Aeronave
 
                     #endregion
 
-                     cant = AeronavePersistencia.BajaPorFueraDeServicio(aeronaveAModificar, DtpFechaComienzo.Value, DtpFechaReinicio.Value);
-                     //Tiene que modificar un registro e insertar un registro
-                     if (cant != 2) 
-                     {
-                         var cancelarOReemplazar = new ABMCancelarOReemplazar(aeronaveAModificar, false,DtpFechaComienzo.Value,DtpFechaReinicio.Value);
-                         cancelarOReemplazar.ShowDialog();
+                    if (AeronavePersistencia.LaAeronaveYaSeEncuentraBaja(aeronaveAModificar, DtpFechaComienzo.Value, DtpFechaReinicio.Value) > 0)
+                    {
+                        MessageBox.Show("La aeronave ya se encuentra dada de baja para esas fechas", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        accionTerminada = false;
+                        Close();
+                    }
+                    else
+                    {
+                        cant = AeronavePersistencia.BajaPorFueraDeServicio(aeronaveAModificar, DtpFechaComienzo.Value, DtpFechaReinicio.Value);
+                        //Tiene que modificar un registro e insertar un registro
+                        if (cant != 2)
+                        {
+                            var cancelarOReemplazar = new ABMCancelarOReemplazar(aeronaveAModificar, false, DtpFechaComienzo.Value, DtpFechaReinicio.Value);
+                            cancelarOReemplazar.ShowDialog();
 
-                         if (cancelarOReemplazar.accionTerminada)
-                         {
-                             AeronavePersistencia.DarDeBajaPorFueraDeServicio(aeronaveAModificar,DtpFechaComienzo.Value,DtpFechaReinicio.Value);
-                             accionTerminada = true;
-                             Close();
-                         }
-                     }
-                     else
-                     {
-                         accionTerminadaDeUna = true;
-                         Close();
-                     }
+                            if (cancelarOReemplazar.accionTerminada)
+                            {
+                                AeronavePersistencia.DarDeBajaPorFueraDeServicio(aeronaveAModificar, DtpFechaComienzo.Value, DtpFechaReinicio.Value);
+                                accionTerminada = true;
+                                Close();
+                            }
+                        }
+                        else
+                        {
+                            accionTerminadaDeUna = true;
+                            Close();
+                        }
+                    }
                  }     
                  catch (Exception ex) 
                     {

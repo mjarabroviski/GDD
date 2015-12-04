@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using Persistencia.Entidades;
 using System.Data;
 using Filtros;
+using Configuracion;
 
 namespace Persistencia
 {
@@ -121,7 +122,8 @@ namespace Persistencia
         public static int CiudadTieneViajes(int idCiudad)
         {
             //Obtengo la ciudad
-            var param = new List<SPParameter> { new SPParameter("ID_Ciudad", idCiudad) };
+            var param = new List<SPParameter> { new SPParameter("ID_Ciudad", idCiudad),
+                                                new SPParameter("Fecha_Sistema", ConfiguracionDeVariables.FechaSistema)};
             var sp = new StoreProcedure(DBQueries.Ciudad.SPCiudadTieneViajes, param);
 
             //Retorno una lista de Ciudades a partir de un ExecuteReader

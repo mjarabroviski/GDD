@@ -119,9 +119,7 @@ namespace AerolineaFrba.Generacion_Viaje
                     {
                         throw new Exception("Asegurese de ingresar el horario correctamente.");
                     }
-
                 }
-
                 #endregion
 
                 if (ValidarHorarioDeAeronave(DtpFechaSalida.Value, DtpFechaLlegadaEstimada.Value) == 0)

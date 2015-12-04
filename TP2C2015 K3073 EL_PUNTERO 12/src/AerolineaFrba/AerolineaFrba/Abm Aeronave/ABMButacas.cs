@@ -248,6 +248,13 @@ namespace AerolineaFrba.Abm_Aeronave
                 btnHabilitar.Enabled = false;
                 ActualizarPantalla(null);
             }
+            else
+            {
+                BtnGrabar.Enabled = false;
+                CboTipo.Enabled = false;
+                btnHabilitar.Enabled = false;
+                ActualizarPantalla(null);
+            }
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Persistencia.Entidades;
 using System.Data.SqlClient;
 using System.Data;
+using Configuracion;
 
 namespace Persistencia
 {
@@ -153,7 +154,8 @@ namespace Persistencia
             var param = new List<SPParameter>
                 {
                     new SPParameter("ID_Reemplazo", aeronaveAReemplazar.ID), 
-                    new SPParameter("ID_Nueva", aeronaveNueva.ID), 
+                    new SPParameter("ID_Nueva", aeronaveNueva.ID),
+                    new SPParameter("Fecha_Actual", ConfiguracionDeVariables.FechaSistema), 
                 };
 
             var sp = new StoreProcedure(DBQueries.Aeronave.SPReemplazo, param);

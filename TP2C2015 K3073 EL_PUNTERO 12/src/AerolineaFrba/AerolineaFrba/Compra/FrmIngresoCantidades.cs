@@ -41,12 +41,16 @@ namespace AerolineaFrba.Compra
         {
             try
             {
-                if((ValidadorDeTipos.IsEmpty(cboPasajes.Text)) && ((ValidadorDeTipos.IsEmpty(cboKGS.Text))))
+                if(((ValidadorDeTipos.IsEmpty(cboPasajes.Text)) && (ValidadorDeTipos.IsEmpty(cboKGS.Text))) ||
+                    ((ValidadorDeTipos.IsEmpty(cboPasajes.Text)) && (cboKGS.Text=="0")) ||
+                    ((cboPasajes.Text == "0") && (ValidadorDeTipos.IsEmpty(cboKGS.Text))) ||
+                    ((cboPasajes.Text == "0") && (cboKGS.Text == "0")))
                      throw new Exception("Debe ingresar cantidades mayores a 0");
-                if (!(ValidadorDeTipos.IsEmpty(cboPasajes.Text)))
+
+                if (!(ValidadorDeTipos.IsEmpty(cboPasajes.Text)) && (cboPasajes.Text != "0"))
                     cantPasajes = Convert.ToInt32(cboPasajes.Text);
 
-                if (!(ValidadorDeTipos.IsEmpty(cboKGS.Text)))
+                if (!(ValidadorDeTipos.IsEmpty(cboKGS.Text)) && (cboKGS.Text != "0"))
                     cantKGS = Convert.ToInt32(cboKGS.Text);
                     
 
@@ -79,12 +83,12 @@ namespace AerolineaFrba.Compra
 
         private void FrmIngresoCantidades_Load(object sender, EventArgs e)
         {
-            for (int i = 1; i <= maxPasajes; i++)
+            for (int i = 0; i <= maxPasajes; i++)
             {
                 cboPasajes.Items.Add(i);
             }
 
-            for (int i = 1; i <= maxKGS; i++)
+            for (int i = 0; i <= maxKGS; i++)
             {
                 cboKGS.Items.Add(i);
             }

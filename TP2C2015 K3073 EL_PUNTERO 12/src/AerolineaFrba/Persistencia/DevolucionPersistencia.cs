@@ -36,7 +36,8 @@ namespace Persistencia
                 {
                     new SPParameter("ID_Aeronave",aeronave.ID),
                     new SPParameter("Motivo",motivo),
-                    new SPParameter("ID_Usuario",usuario.ID)
+                    new SPParameter("ID_Usuario",usuario.ID),
+                    new SPParameter("Fecha_Actual",ConfiguracionDeVariables.FechaSistema)
                 };
 
             var sp = (transaccion != null)

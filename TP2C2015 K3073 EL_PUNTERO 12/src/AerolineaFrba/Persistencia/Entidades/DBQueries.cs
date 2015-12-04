@@ -116,6 +116,8 @@ namespace Persistencia.Entidades
             public static String SPBajaPorFueraDeServicio = "EL_PUNTERO.BajaPorFueraDeServicio";
             public static String SPSeleccionReemplazoPorServicio = "EL_PUNTERO.SeleccionReemplazoAeronavePorServicio";
             public static String SPReemplazoPorServicio = "EL_PUNTERO.ReemplazoAeronavePorServicio";
+            public static String SPLaAeronaveYaSeEncuentraBaja = "EL_PUNTERO.LaAeronaveYaSeEncuentraBaja";
+            public static String SPAeronaveEstaFueraDeServicio = "EL_PUNTERO.AeronaveEstaFueraDeServicio";
         }
 
         public static class Butaca

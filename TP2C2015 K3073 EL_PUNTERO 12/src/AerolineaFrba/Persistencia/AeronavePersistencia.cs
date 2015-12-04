@@ -15,7 +15,9 @@ namespace Persistencia
         public static List<Aeronave> ObtenerTodas()
         {
             //Obtengo la lista de aeronaves almacenadas en la base de datos
-            var sp = new StoreProcedure(DBQueries.Aeronave.SPGetAeronaves);
+            var param = new List<SPParameter> {new SPParameter("Fecha_Actual", ConfiguracionDeVariables.FechaSistema)};
+
+            var sp = new StoreProcedure(DBQueries.Aeronave.SPGetAeronaves,param);
             return sp.ExecuteReader<Aeronave>();
         }
 
@@ -23,7 +25,7 @@ namespace Persistencia
         {
             var param = new List<SPParameter>
                 {
-                    new SPParameter("Fecha_Sistema",ConfiguracionDeVariables.FechaSistema), 
+                    new SPParameter("Fecha_Actual",ConfiguracionDeVariables.FechaSistema), 
                 };
             //Obtengo la lista de ciudades almacenadas en la base de datos
             var sp = new StoreProcedure(DBQueries.Aeronave.SPObtenerAeronavesHabilitadas,param);
@@ -50,7 +52,8 @@ namespace Persistencia
                                                 new SPParameter("Fabricante", filtros.Fabricante ?? (object)DBNull.Value),
                                                 new SPParameter("Modelo", filtros.Modelo ?? (object)DBNull.Value),
                                                 new SPParameter("Nombre_Servicio", filtros.Servicio ?? (object)DBNull.Value),
-                                                new SPParameter("Fecha_Alta", (filtros.Fecha_Alta == DateTime.MinValue) ?  DateTime.Parse("01/01/1990") : filtros.Fecha_Alta)
+                                                new SPParameter("Fecha_Alta", (filtros.Fecha_Alta == DateTime.MinValue) ?  DateTime.Parse("01/01/1990") : filtros.Fecha_Alta),
+                                                new SPParameter("Fecha_Actual", ConfiguracionDeVariables.FechaSistema)
                                               };
 
             var sp = new StoreProcedure(DBQueries.Aeronave.SPGetAeronavesPorParametrosComo, param);
@@ -63,6 +66,7 @@ namespace Persistencia
             var param = new List<SPParameter>
                 {
                     new SPParameter("ID_Aeronave", aeronave.ID), 
+                    new SPParameter("Fecha_Actual", ConfiguracionDeVariables.FechaSistema)
                 };
 
             var sp = new StoreProcedure(DBQueries.Aeronave.SPBajaPorVidaUtil, param);
@@ -74,7 +78,8 @@ namespace Persistencia
         {
             var param = new List<SPParameter>
                 {
-                    new SPParameter("ID_Aeronave", aeronave.ID), 
+                    new SPParameter("ID_Aeronave", aeronave.ID),
+                    new SPParameter("Fecha_Actual", ConfiguracionDeVariables.FechaSistema)
                 };
 
             var sp = new StoreProcedure(DBQueries.Aeronave.SPDarDeBajaPorVidaUtil, param);
@@ -89,7 +94,8 @@ namespace Persistencia
                     new SPParameter("ID_Aeronave", aeronave.ID), 
                     new SPParameter("Modelo", aeronave.Modelo), 
                     new SPParameter("Fabricante", aeronave.Fabricante), 
-                    new SPParameter("ID_Servicio", aeronave.ID_Servicio) 
+                    new SPParameter("ID_Servicio", aeronave.ID_Servicio),
+                    new SPParameter("Fecha_Actual", ConfiguracionDeVariables.FechaSistema)
                 };
 
             var sp = new StoreProcedure(DBQueries.Aeronave.SPSeleccionReemplazo, param);
@@ -201,6 +207,37 @@ namespace Persistencia
             var sp = new StoreProcedure(DBQueries.Aeronave.SPSeleccionReemplazoPorServicio, param);
 
             return sp.ExecuteNonQuery(null);
+        }
+
+        public static int LaAeronaveYaSeEncuentraBaja(Aeronave aeronave, DateTime comienzo, DateTime reinicio)
+        {
+            var param = new List<SPParameter> { new SPParameter("ID_Aeronave", aeronave.ID),
+                                                new SPParameter("Comienzo", comienzo),
+                                                new SPParameter("Reinicio", reinicio)
+                                              };
+
+            var sp = new StoreProcedure(DBQueries.Aeronave.SPLaAeronaveYaSeEncuentraBaja, param);
+
+            List<Aeronave> aeronaves = sp.ExecuteReader<Aeronave>();
+
+            if (aeronaves == null || aeronaves.Count == 0)
+                return 0;
+            return aeronaves.Count;
+        }
+
+        public static int AeronaveEstaFueraDeServicio(Aeronave aeronave)
+        {
+            var param = new List<SPParameter> { new SPParameter("ID_Aeronave", aeronave.ID),
+                                                new SPParameter("Fecha_Actual", ConfiguracionDeVariables.FechaSistema),
+                                              };
+
+            var sp = new StoreProcedure(DBQueries.Aeronave.SPAeronaveEstaFueraDeServicio, param);
+
+            List<Aeronave> aeronaves = sp.ExecuteReader<Aeronave>();
+
+            if (aeronaves == null || aeronaves.Count == 0)
+                return 0;
+            return aeronaves.Count;
         }
     }
 }

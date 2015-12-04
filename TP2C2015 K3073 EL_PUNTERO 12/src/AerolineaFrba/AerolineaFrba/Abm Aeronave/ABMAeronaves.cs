@@ -96,7 +96,7 @@ namespace AerolineaFrba.Abm_Aeronave
                 Fabricante = a.Fabricante,
                 Modelo = a.Modelo,
                 Tipo_Servicio = ServicioPersistencia.ObtenerServicioPorID(a.ID_Servicio).Nombre,
-                Baja_Fuera_Servicio = a.Baja_Fuera_De_Servicio,
+                Baja_Fuera_Servicio = (AeronavePersistencia.AeronaveEstaFueraDeServicio(a) > 0),
                 Fecha_Alta = a.Fecha_Alta,
                 KG_Totales = a.KG_Totales
             });
@@ -253,7 +253,7 @@ namespace AerolineaFrba.Abm_Aeronave
                         cant = AeronavePersistencia.BajaPorVidaUtil(aeronaveSeleccionada);
                         if ( cant == -1 || cant == 0)
                         {
-                            var cancelarOReemplazar = new ABMCancelarOReemplazar(aeronaveSeleccionada, true, DateTime.Today, DateTime.Today);
+                            var cancelarOReemplazar = new ABMCancelarOReemplazar(aeronaveSeleccionada, true, ConfiguracionDeVariables.FechaSistema, ConfiguracionDeVariables.FechaSistema);
                             cancelarOReemplazar.ShowDialog();
 
                             if (cancelarOReemplazar.accionTerminada)
@@ -273,12 +273,6 @@ namespace AerolineaFrba.Abm_Aeronave
                 //El usuario toco el boton de dar baja por fuera de servicio
                 else if (e.ColumnIndex == 8)
                 {
-                    if (aeronaveSeleccionada.Baja_Fuera_De_Servicio)
-                    {
-                        MessageBox.Show("No se puede puede dar de baja una aeronave que ya se encuentra dada de baja", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
-
                     var dialogAnswer = MessageBox.Show(string.Format("Esta seguro que quiere dar de baja por fuera de servicio la aeronave {0}?", aeronaveSeleccionada.Matricula), "Atención", MessageBoxButtons.YesNo);
                     if (dialogAnswer == DialogResult.Yes)
                     {

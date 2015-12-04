@@ -175,12 +175,13 @@ END
 GO
 
 CREATE PROCEDURE [EL_PUNTERO].[CiudadTieneViajes]
-@ID_Ciudad int
+@ID_Ciudad int,
+@Fecha_Sistema datetime
 AS
 BEGIN
-	(SELECT * FROM [EL_PUNTERO].[TL_Ruta] WHERE ID_Ciudad_Origen = @ID_Ciudad AND ID_Ruta IN (SELECT ID_Ruta FROM [EL_PUNTERO].[TL_Viaje] WHERE Fecha_Salida >= GETDATE()))
+	(SELECT * FROM [EL_PUNTERO].[TL_Ruta] WHERE ID_Ciudad_Origen = @ID_Ciudad AND ID_Ruta IN (SELECT ID_Ruta FROM [EL_PUNTERO].[TL_Viaje] WHERE Fecha_Salida >= @Fecha_Sistema))
 	UNION ALL
-	(SELECT * FROM [EL_PUNTERO].[TL_Ruta] WHERE ID_Ciudad_Destino = @ID_Ciudad AND ID_Ruta IN (SELECT ID_Ruta FROM [EL_PUNTERO].[TL_Viaje] WHERE Fecha_Salida >= GETDATE()))
+	(SELECT * FROM [EL_PUNTERO].[TL_Ruta] WHERE ID_Ciudad_Destino = @ID_Ciudad AND ID_Ruta IN (SELECT ID_Ruta FROM [EL_PUNTERO].[TL_Viaje] WHERE Fecha_Salida >= @Fecha_Sistema))
 END
 GO
 
@@ -236,7 +237,7 @@ END
 GO
 
 CREATE PROCEDURE [EL_PUNTERO].[HabilitarAeronavesQueVolvieronDeBajaServicio]
-@Fecha_Sistema datetime
+@Fecha_Actual datetime
 AS
 BEGIN
 
@@ -246,15 +247,16 @@ BEGIN
 	AND ID_AERONAVE IN (
 					SELECT ID_Aeronave FROM [EL_PUNTERO].[TL_BAJA_SERVICIO_AERONAVE] 
 					WHERE ID_Baja_Servicio = [EL_PUNTERO].[ObtenerIDBajaServicioMax](ID_AERONAVE)
-					AND Fecha_Reinicio_Servicio <= @Fecha_Sistema)
+					AND Fecha_Reinicio_Servicio <= @Fecha_Actual)
 	END
 GO
 
 CREATE PROCEDURE [EL_PUNTERO].[GetAeronaves]
+@Fecha_Actual datetime
 AS
 BEGIN
 	SET NOCOUNT ON;
-	EXECUTE [EL_PUNTERO].[HabilitarAeronavesQueVolvieronDeBajaServicio];
+	EXECUTE [EL_PUNTERO].[HabilitarAeronavesQueVolvieronDeBajaServicio] @Fecha_Actual;
 	SELECT *
 	FROM [EL_PUNTERO].[TL_Aeronave]
 	WHERE Baja_Por_Vida_Util = 0
@@ -301,7 +303,8 @@ CREATE PROCEDURE [EL_PUNTERO].[GetAeronavesPorParametrosComo]
 @Fabricante nvarchar (30) = NULL,
 @Modelo nvarchar(30) = NULL,
 @Nombre_Servicio nvarchar(255) = NULL,
-@Fecha_Alta datetime = NULL
+@Fecha_Alta datetime = NULL,
+@Fecha_Actual datetime
 AS
 BEGIN
 	SET NOCOUNT ON;
@@ -315,21 +318,22 @@ BEGIN
 	AND (A.Fabricante LIKE ('%' + @Fabricante + '%') OR @Fabricante is NULL)
 	AND (A.Modelo LIKE ('%' + @Modelo + '%') OR @Modelo is NULL)
 	AND (S.Nombre LIKE ('%' + @Nombre_Servicio + '%') OR @Nombre_Servicio is NULL)
-	AND ((A.Fecha_Alta BETWEEN @Fecha_Alta AND GETDATE()) OR @Fecha_Alta = 01/01/0001)
+	AND ((A.Fecha_Alta BETWEEN @Fecha_Alta AND @Fecha_Actual) OR @Fecha_Alta = 01/01/0001)
 END
 GO
 
 CREATE PROCEDURE [EL_PUNTERO].[BajaPorVidaUtil]
-@ID_Aeronave int
+@ID_Aeronave int,
+@Fecha_Actual datetime
 AS
 BEGIN
-	IF(NOT(@ID_Aeronave IN (SELECT ID_Aeronave FROM EL_PUNTERO.TL_VIAJE V WHERE V.Fecha_Salida >= GETDATE()
+	IF(NOT(@ID_Aeronave IN (SELECT ID_Aeronave FROM EL_PUNTERO.TL_VIAJE V WHERE V.Fecha_Salida >= @Fecha_Actual
 	 AND (V.ID_Viaje IN (SELECT ID_Viaje FROM EL_PUNTERO.TL_ENCOMIENDA) 
 	 OR V.ID_Viaje IN (SELECT ID_Viaje FROM EL_PUNTERO.TL_PASAJE)))))
 	BEGIN
 	UPDATE EL_PUNTERO.TL_AERONAVE
 	SET Baja_Por_Vida_Util = 1,
-		Fecha_Baja_Definitiva = GETDATE()
+		Fecha_Baja_Definitiva = @Fecha_Actual
 	WHERE ID_Aeronave = @ID_Aeronave
 	END
 END
@@ -412,7 +416,7 @@ BEGIN
 END
 GO
 
-CREATE FUNCTION [EL_PUNTERO].[ObtenerAeronaveDeReemplazo](@ID_AeronaveBaja int, @Modelo nvarchar(30), @Servicio int, @Fabricante nvarchar(30))
+CREATE FUNCTION [EL_PUNTERO].[ObtenerAeronaveDeReemplazo](@ID_AeronaveBaja int, @Modelo nvarchar(30), @Servicio int, @Fabricante nvarchar(30), @Fecha_Actual datetime)
 RETURNS int
 AS
 BEGIN
@@ -428,7 +432,7 @@ DECLARE @maxLlegada datetime
 																			AND A.ID_Servicio = @Servicio
 																			AND not exists (SELECT 1 FROM [EL_PUNTERO].TL_VIAJE B WHERE A.ID_Aeronave = B.ID_Aeronave  
 																																	AND B.Fecha_Salida <= @maxLlegada
-																																	AND B.Fecha_Salida >= GETDATE())
+																																	AND B.Fecha_Salida >= @Fecha_Actual)
 	RETURN @reemplazo	
 END
 GO
@@ -437,14 +441,15 @@ CREATE PROCEDURE [EL_PUNTERO].[SeleccionReemplazoAeronave]
 @ID_Aeronave int,
 @Modelo nvarchar(30),
 @Fabricante nvarchar(30),
-@ID_Servicio int
+@ID_Servicio int,
+@Fecha_Actual datetime
 AS
 BEGIN
 DECLARE @reemplazo int
 
 	BEGIN TRY 
 
-	SET @reemplazo = [EL_PUNTERO].[ObtenerAeronaveDeReemplazo](@ID_Aeronave,@Modelo,@ID_Servicio,@Fabricante)
+	SET @reemplazo = [EL_PUNTERO].[ObtenerAeronaveDeReemplazo](@ID_Aeronave,@Modelo,@ID_Servicio,@Fabricante,@Fecha_Actual)
 	IF(@reemplazo is not null)
 	BEGIN
 	UPDATE EL_PUNTERO.TL_VIAJE 
@@ -576,54 +581,58 @@ END
 GO
 
 CREATE PROCEDURE [EL_PUNTERO].[DarDeBajaPorVidaUtil]
-@ID_Aeronave int
+@ID_Aeronave int,
+@Fecha_Actual datetime
 AS
 BEGIN
 	UPDATE [EL_PUNTERO].[TL_AERONAVE]
-	SET Baja_Por_Vida_Util = 1
+	SET Baja_Por_Vida_Util = 1,
+		Fecha_Baja_Definitiva = @Fecha_Actual
 	WHERE ID_Aeronave = @ID_Aeronave	
 END
 GO
 
 CREATE PROCEDURE [EL_PUNTERO].[ReemplazoAeronave]
 @ID_Reemplazo int,
-@ID_Nueva int
+@ID_Nueva int,
+@Fecha_Actual datetime
 AS
 BEGIN
 	UPDATE [EL_PUNTERO].TL_VIAJE 
 	SET ID_Aeronave = @ID_Nueva
-	WHERE ID_Aeronave = @ID_Reemplazo AND Fecha_Salida >= GETDATE();
+	WHERE ID_Aeronave = @ID_Reemplazo AND Fecha_Salida >= @Fecha_Actual;
 END
 GO
 
 CREATE PROCEDURE [EL_PUNTERO].[CancelarPasajesYEncomiendasPorBajaAeronave]
 	@ID_Aeronave int,
 	@Motivo varchar(255),
-	@ID_Usuario int
+	@ID_Usuario int,
+	@Fecha_Actual datetime
 AS
 BEGIN
 	SET NOCOUNT ON;
 
 	--Inserto los id_pasaje del viaje de la aeronave que viene por parametro 
 	INSERT INTO [EL_PUNTERO].[TL_DEVOLUCION_PASAJE] (ID_Pasaje)
-	SELECT P.ID_Pasaje FROM TL_PASAJE P WHERE ID_Viaje IN  (SELECT ID_Viaje FROM TL_VIAJE WHERE ID_Aeronave=@ID_Aeronave AND Fecha_Salida > GETDATE())
+	SELECT P.ID_Pasaje FROM TL_PASAJE P WHERE ID_Viaje IN  (SELECT ID_Viaje FROM TL_VIAJE WHERE ID_Aeronave=@ID_Aeronave AND Fecha_Salida > @Fecha_Actual)
 	AND P.ID_Pasaje NOT IN (SELECT D.ID_Pasaje FROM EL_PUNTERO.TL_DEVOLUCION_PASAJE D)
 
 	--Se llenan la fecha, el motivo y el usuario de los pasajes
 	UPDATE [EL_PUNTERO].TL_DEVOLUCION_PASAJE
-	SET Fecha_Devolucion=GETDATE(),
+	SET Fecha_Devolucion=@Fecha_Actual,
 		Motivo=@Motivo,
 		ID_Usuario=@ID_Usuario
 	WHERE Fecha_Devolucion is NULL;
 	
 	--Inserto los id_encomienda del viaje de la aeronave que viene por parametro 
 	INSERT INTO [EL_PUNTERO].[TL_DEVOLUCION_ENCOMIENDA] (ID_Encomienda)
-	SELECT E.ID_Encomienda FROM TL_ENCOMIENDA E WHERE ID_Viaje IN  (SELECT ID_Viaje FROM TL_VIAJE WHERE ID_Aeronave=@ID_Aeronave AND Fecha_Salida > GETDATE())
+	SELECT E.ID_Encomienda FROM TL_ENCOMIENDA E WHERE ID_Viaje IN  (SELECT ID_Viaje FROM TL_VIAJE WHERE ID_Aeronave=@ID_Aeronave AND Fecha_Salida > @Fecha_Actual)
 	AND E.ID_Encomienda NOT IN (SELECT D.ID_Encomienda FROM EL_PUNTERO.TL_DEVOLUCION_ENCOMIENDA D)
 
 	--Se llenan la fecha, el motivo y el usuario de las encomiendas
 	UPDATE [EL_PUNTERO].TL_DEVOLUCION_ENCOMIENDA
-	SET Fecha_Devolucion=GETDATE(),
+	SET Fecha_Devolucion=@Fecha_Actual,
 		Motivo=@Motivo,
 		ID_Usuario=@ID_Usuario
 	WHERE Fecha_Devolucion is NULL;
@@ -644,6 +653,51 @@ BEGIN
 	VALUES (@ID_Aeronave,@Comienzo,@Reinicio)
 END
 GO
+
+CREATE FUNCTION [EL_PUNTERO].[SeIntersectanFechasFueraDeServicio](@BajaDesde datetime,@BajaHasta datetime,@FechaDesde datetime,@FechaHasta datetime)
+RETURNS int
+AS
+BEGIN
+	DECLARE @resul int
+
+	SET @resul = 0
+	IF ((@BajaDesde>=@FechaDesde) AND (@BajaDesde<=@FechaHasta)) OR ((@BajaHasta>=@FechaDesde) AND (@BajaHasta<=@FechaHasta))
+	BEGIN
+		SET @resul = 1
+	END
+	RETURN @resul
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[LaAeronaveYaSeEncuentraBaja]
+@ID_Aeronave int,
+@Comienzo datetime,
+@Reinicio datetime
+AS
+BEGIN
+	IF(@ID_Aeronave IN (SELECT A.ID_Aeronave
+							FROM EL_PUNTERO.TL_AERONAVE A
+							INNER JOIN EL_PUNTERO.TL_BAJA_SERVICIO_AERONAVE B ON B.ID_Aeronave = A.ID_Aeronave
+							WHERE ([EL_PUNTERO].[SeIntersectanFechasFueraDeServicio](@Comienzo, @Reinicio, B.Fecha_Fuera_De_Servicio, B.Fecha_Reinicio_Servicio)) = 1))
+	BEGIN
+	SELECT * FROM EL_PUNTERO.TL_AERONAVE
+	END
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[AeronaveEstaFueraDeServicio]
+@ID_Aeronave int,
+@Fecha_Actual datetime
+AS
+BEGIN
+	SELECT A.*
+	FROM EL_PUNTERO.TL_AERONAVE A
+	INNER JOIN EL_PUNTERO.TL_BAJA_SERVICIO_AERONAVE B ON B.ID_Aeronave = A.ID_Aeronave
+	WHERE A.ID_Aeronave = @ID_Aeronave
+	AND @Fecha_Actual BETWEEN B.Fecha_Fuera_De_Servicio AND B.Fecha_Reinicio_Servicio
+END
+GO
+
 
 CREATE PROCEDURE [EL_PUNTERO].[BajaPorFueraDeServicio]
 @ID_Aeronave int,
@@ -670,7 +724,8 @@ CREATE PROCEDURE [EL_PUNTERO].[CancelarPasajesYEncomiendasPorBajaServicioAeronav
 	@Motivo varchar(255),
 	@ID_Usuario int,
 	@Comienzo datetime,
-	@Reinicio datetime
+	@Reinicio datetime,
+	@Fecha_Actual datetime
 AS
 BEGIN
 	SET NOCOUNT ON;
@@ -682,7 +737,7 @@ BEGIN
 
 	--Se llenan la fecha, el motivo y el usuario de los pasajes
 	UPDATE [EL_PUNTERO].TL_DEVOLUCION_PASAJE
-	SET Fecha_Devolucion=GETDATE(),
+	SET Fecha_Devolucion=@Fecha_Actual,
 		Motivo=@Motivo,
 		ID_Usuario=@ID_Usuario
 	WHERE Fecha_Devolucion is NULL;
@@ -694,7 +749,7 @@ BEGIN
 
 	--Se llenan la fecha, el motivo y el usuario de las encomiendas
 	UPDATE [EL_PUNTERO].TL_DEVOLUCION_ENCOMIENDA
-	SET Fecha_Devolucion=GETDATE(),
+	SET Fecha_Devolucion=@Fecha_Actual,
 		Motivo=@Motivo,
 		ID_Usuario=@ID_Usuario
 	WHERE Fecha_Devolucion is NULL;
@@ -843,7 +898,8 @@ END
 GO
 
 CREATE PROCEDURE [EL_PUNTERO].[AgregarRegistroMillas]
-@ID_Viaje int
+@ID_Viaje int,
+@Fecha_Actual datetime
 AS
 BEGIN
 	--Resto las millas de los registros vencidos al cliente
@@ -851,8 +907,12 @@ BEGIN
 	SET C.Millas -= (SELECT SUM(R.Millas)
 					FROM EL_PUNTERO.TL_REGISTRO_MILLAS R 
 					WHERE R.ID_Cliente = C.ID_Cliente 
-					AND DATEDIFF(DAY, R.Fecha_Inicio, GETDATE()) >= 366) 
+					AND DATEDIFF(DAY, R.Fecha_Inicio, @Fecha_Actual) >= 366) 
 	FROM EL_PUNTERO.TL_CLIENTE C
+	INNER JOIN EL_PUNTERO.TL_REGISTRO_MILLAS R  ON R.ID_Cliente = C.ID_Cliente
+	WHERE C.ID_Cliente IN (SELECT R.ID_Cliente
+					FROM EL_PUNTERO.TL_REGISTRO_MILLAS R 
+					WHERE DATEDIFF(DAY, R.Fecha_Inicio, @Fecha_Actual) >= 366)
 
 	UPDATE EL_PUNTERO.TL_CLIENTE
 	SET Millas = 0
@@ -860,16 +920,16 @@ BEGIN
 
 	--Elimino los registros vencidos
 	DELETE FROM EL_PUNTERO.TL_REGISTRO_MILLAS 
-	WHERE DATEDIFF(DAY, Fecha_Inicio, GETDATE()) >= 366
+	WHERE DATEDIFF(DAY, Fecha_Inicio, @Fecha_Actual) >= 366
 
 	--Agrego Pasajes
 	INSERT INTO EL_PUNTERO.TL_REGISTRO_MILLAS (ID_Cliente,Codigo_Item,Fecha_Inicio,Millas)
-	(SELECT DISTINCT ID_Cliente,Codigo_Pasaje, GETDATE(), (Precio/10) FROM EL_PUNTERO.TL_PASAJE WHERE ID_Viaje = @ID_Viaje
+	(SELECT DISTINCT ID_Cliente,Codigo_Pasaje, @Fecha_Actual, (Precio/10) FROM EL_PUNTERO.TL_PASAJE WHERE ID_Viaje = @ID_Viaje
 	AND ID_Pasaje NOT IN (SELECT ID_Pasaje FROM EL_PUNTERO.TL_DEVOLUCION_PASAJE))
 
 	--Agrego Encomiendas
 	INSERT INTO [EL_PUNTERO].[TL_REGISTRO_MILLAS] (ID_Cliente,Codigo_Item,Fecha_Inicio,Millas)
-	(SELECT DISTINCT ID_Cliente,Codigo_Encomienda, GETDATE(), (Precio/10) FROM EL_PUNTERO.TL_ENCOMIENDA E INNER JOIN EL_PUNTERO.TL_COMPRA C ON C.ID_Compra = E.ID_Compra  
+	(SELECT DISTINCT ID_Cliente,Codigo_Encomienda, @Fecha_Actual, (Precio/10) FROM EL_PUNTERO.TL_ENCOMIENDA E INNER JOIN EL_PUNTERO.TL_COMPRA C ON C.ID_Compra = E.ID_Compra  
 	WHERE ID_Viaje = @ID_Viaje AND ID_Encomienda NOT IN (SELECT ID_Encomienda FROM EL_PUNTERO.TL_DEVOLUCION_ENCOMIENDA))
 
 	--Sumo las millas del cliente
@@ -880,11 +940,9 @@ BEGIN
 					AND ((R.Codigo_Item IN (SELECT P.Codigo_Pasaje FROM EL_PUNTERO.TL_PASAJE P WHERE P.ID_Viaje = @ID_Viaje)) 
 					OR (R.Codigo_Item IN (SELECT E.Codigo_Encomienda FROM EL_PUNTERO.TL_ENCOMIENDA E WHERE E.ID_Viaje = @ID_Viaje))))
 	FROM EL_PUNTERO.TL_CLIENTE C
-	
-	--Pongo en cero los demás clientes
-	UPDATE EL_PUNTERO.TL_CLIENTE
-	SET Millas = 0
-	WHERE Millas is null
+	INNER JOIN EL_PUNTERO.TL_REGISTRO_MILLAS R  ON R.ID_Cliente = C.ID_Cliente 
+	WHERE ((R.Codigo_Item IN (SELECT P.Codigo_Pasaje FROM EL_PUNTERO.TL_PASAJE P WHERE P.ID_Viaje = @ID_Viaje)) 
+    OR (R.Codigo_Item IN (SELECT E.Codigo_Encomienda FROM EL_PUNTERO.TL_ENCOMIENDA E WHERE E.ID_Viaje = @ID_Viaje)))
 END
 GO
 
@@ -977,14 +1035,15 @@ GO
 CREATE PROCEDURE [EL_PUNTERO].[GenerarCanje]
 @ID_Producto int,
 @Cantidad int,
-@ID_Cliente int
+@ID_Cliente int,
+@Fecha_Actual datetime
 AS
 BEGIN
 	SET NOCOUNT ON;
 	
 	--Inserto el canje
 	INSERT INTO EL_PUNTERO.TL_CANJE (ID_Producto,Cantidad,Fecha_Canje,ID_Cliente)
-	VALUES (@ID_Producto, @Cantidad, GETDATE(), @ID_Cliente)
+	VALUES (@ID_Producto, @Cantidad, @Fecha_Actual, @ID_Cliente)
 
 	--Modifico las millas del cliente
 	UPDATE C
@@ -1182,22 +1241,6 @@ DECLARE @bajaHasta datetime
 		SET @resul = DATEDIFF(DAY, @bajaDesde, @bajaHasta)
 	END
 
-	RETURN @resul
-END
-GO
-
-
-CREATE FUNCTION [EL_PUNTERO].[SeIntersectanFechasFueraDeServicio](@BajaDesde datetime,@BajaHasta datetime,@FechaDesde datetime,@FechaHasta datetime)
-RETURNS int
-AS
-BEGIN
-	DECLARE @resul int
-
-	SET @resul = 0
-	IF ((@BajaDesde>=@FechaDesde) AND (@BajaDesde<=@FechaHasta)) OR ((@BajaHasta>=@FechaDesde) AND (@BajaHasta<=@FechaHasta))
-	BEGIN
-		SET @resul = 1
-	END
 	RETURN @resul
 END
 GO

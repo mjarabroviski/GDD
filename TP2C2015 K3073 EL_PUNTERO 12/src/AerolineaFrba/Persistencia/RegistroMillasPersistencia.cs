@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Persistencia.Entidades;
+using Configuracion;
 
 namespace Persistencia
 {
@@ -13,7 +14,8 @@ namespace Persistencia
         {
             var param = new List<SPParameter>
                 {
-                    new SPParameter("ID_Viaje", viajeId)
+                    new SPParameter("ID_Viaje", viajeId),
+                    new SPParameter("Fecha_Actual", ConfiguracionDeVariables.FechaSistema)
                 };
 
             var sp = new StoreProcedure(DBQueries.RegistroMillas.SPActualizarMillas, param);
