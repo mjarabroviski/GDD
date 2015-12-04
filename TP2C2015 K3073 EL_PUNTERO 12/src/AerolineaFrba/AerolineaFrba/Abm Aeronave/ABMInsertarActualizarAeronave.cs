@@ -64,7 +64,11 @@ namespace AerolineaFrba.Abm_Aeronave
                 DtpFechaAlta.Text = aeronaveAModificar.Fecha_Alta.ToString();
                 CboServicio.SelectedValue = aeronaveAModificar.ID_Servicio;
 
-                DtpFechaAlta.Enabled = false;
+                if (aeronaveAModificar.Fecha_Alta.Date <= ConfiguracionDeVariables.FechaSistema.Date)
+                {
+                    DtpFechaAlta.Enabled = false;
+                }
+
                 #endregion
             }
 
@@ -194,6 +198,10 @@ namespace AerolineaFrba.Abm_Aeronave
                         Aeronave a = AeronavePersistencia.ObtenerPorMatricula(TxtMatricula.Text, transaccion);
                         if (a != null && a.ID != aeronaveAModificar.ID)
                             throw new Exception("Ya existe una aeronave con la matricula ingresada.");
+
+                        //Valido que la fecha de alta sea menor al dia de hoy
+                        if (DtpFechaAlta.Value.Date < ConfiguracionDeVariables.FechaSistema.Date)
+                            throw new Exception("La fecha ingresada debe ser mayor a la actual.\n");
 
                             #region Modifico la aeronave
 
