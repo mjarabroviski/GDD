@@ -15,10 +15,14 @@ namespace Persistencia.Entidades
         public DateTime Fecha_Salida { get; set; }
         public DateTime Fecha_Llegada { get; set; }
         public DateTime Fecha_Llegada_Estimada { get; set; }
+        public bool Llego { get; set; }
 
         //Implementacion de IMapable
         public IMapable Map(SqlDataReader reader)
         {
+            bool llego;
+            if (reader["Habilitado"].ToString() == "1") hab = true;
+            else llego = false;
             return new Viaje
             {
                 ID = Int32.Parse(reader["ID_Viaje"].ToString()),
@@ -27,7 +31,7 @@ namespace Persistencia.Entidades
                 Fecha_Salida = DateTime.Parse(reader["Fecha_Salida"].ToString()),
                 Fecha_Llegada = DateTime.Parse(reader["Fecha_Llegada"].ToString()),
                 Fecha_Llegada_Estimada = DateTime.Parse(reader["Fecha_Llegada_Estimada"].ToString()),
-
+                Llego = llego
             };
         }
 

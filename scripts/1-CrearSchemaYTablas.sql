@@ -37,7 +37,8 @@ CREATE TABLE [EL_PUNTERO].[TL_VIAJE](
 	[Fecha_Llegada] datetime NOT NULL,
 	[Fecha_Llegada_Estimada] datetime NOT NULL,
 	[ID_Ruta] int NOT NULL,
-	[ID_Aeronave] int NOT NULL
+	[ID_Aeronave] int NOT NULL,
+	[Llego] bit DEFAULT 0
 );
 
 CREATE TABLE [EL_PUNTERO].[TL_CLIENTE](
