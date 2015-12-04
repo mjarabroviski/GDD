@@ -909,6 +909,10 @@ BEGIN
 					WHERE R.ID_Cliente = C.ID_Cliente 
 					AND DATEDIFF(DAY, R.Fecha_Inicio, @Fecha_Actual) >= 366) 
 	FROM EL_PUNTERO.TL_CLIENTE C
+	INNER JOIN EL_PUNTERO.TL_REGISTRO_MILLAS R  ON R.ID_Cliente = C.ID_Cliente
+	WHERE C.ID_Cliente IN (SELECT R.ID_Cliente
+					FROM EL_PUNTERO.TL_REGISTRO_MILLAS R 
+					WHERE DATEDIFF(DAY, R.Fecha_Inicio, @Fecha_Actual) >= 366)
 
 	UPDATE EL_PUNTERO.TL_CLIENTE
 	SET Millas = 0
@@ -936,11 +940,9 @@ BEGIN
 					AND ((R.Codigo_Item IN (SELECT P.Codigo_Pasaje FROM EL_PUNTERO.TL_PASAJE P WHERE P.ID_Viaje = @ID_Viaje)) 
 					OR (R.Codigo_Item IN (SELECT E.Codigo_Encomienda FROM EL_PUNTERO.TL_ENCOMIENDA E WHERE E.ID_Viaje = @ID_Viaje))))
 	FROM EL_PUNTERO.TL_CLIENTE C
-	
-	--Pongo en cero los demás clientes
-	UPDATE EL_PUNTERO.TL_CLIENTE
-	SET Millas = 0
-	WHERE Millas is null
+	INNER JOIN EL_PUNTERO.TL_REGISTRO_MILLAS R  ON R.ID_Cliente = C.ID_Cliente 
+	WHERE ((R.Codigo_Item IN (SELECT P.Codigo_Pasaje FROM EL_PUNTERO.TL_PASAJE P WHERE P.ID_Viaje = @ID_Viaje)) 
+    OR (R.Codigo_Item IN (SELECT E.Codigo_Encomienda FROM EL_PUNTERO.TL_ENCOMIENDA E WHERE E.ID_Viaje = @ID_Viaje)))
 END
 GO
 

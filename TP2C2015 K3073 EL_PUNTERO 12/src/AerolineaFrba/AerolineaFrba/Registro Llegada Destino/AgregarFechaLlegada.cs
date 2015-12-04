@@ -34,8 +34,8 @@ namespace AerolineaFrba.Registro_Llegada_Destino
             {
                 #region ValidacionesEnGral
                 var exceptionMessage = string.Empty;
-                if (viaje.Fecha_Salida > DtpFechaLlegada.Value)
-                    exceptionMessage += "La fecha de llegada no puede ser anterior a la fecha de salida.\n";
+                if (viaje.Fecha_Salida >= DtpFechaLlegada.Value)
+                    exceptionMessage += "La fecha de llegada debe ser mayor a la fecha de salida.\n";
                 if ( DtpFechaLlegada.Value > viaje.Fecha_Salida.AddDays(1))
                     exceptionMessage += "La fecha de llegada no puede superar las 24HS de vuelo.\n";
                 if (!string.IsNullOrEmpty(exceptionMessage))
