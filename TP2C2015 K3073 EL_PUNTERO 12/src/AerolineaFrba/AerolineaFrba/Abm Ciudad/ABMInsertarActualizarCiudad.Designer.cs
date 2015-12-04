@@ -62,7 +62,7 @@
             this.BtnCancelar.Name = "BtnCancelar";
             this.BtnCancelar.Size = new System.Drawing.Size(92, 36);
             this.BtnCancelar.TabIndex = 34;
-            this.BtnCancelar.Text = "LISTO";
+            this.BtnCancelar.Text = "CANCELAR";
             this.BtnCancelar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.BtnCancelar.Click += new System.EventHandler(this.LblCancelar_Click);
             // 

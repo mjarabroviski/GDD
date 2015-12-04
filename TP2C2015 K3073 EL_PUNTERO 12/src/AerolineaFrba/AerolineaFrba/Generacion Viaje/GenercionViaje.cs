@@ -119,9 +119,7 @@ namespace AerolineaFrba.Generacion_Viaje
                     {
                         throw new Exception("Asegurese de ingresar el horario correctamente.");
                     }
-
                 }
-
                 #endregion
 
                 if (ValidarHorarioDeAeronave(DtpFechaSalida.Value, DtpFechaLlegadaEstimada.Value) == 0)
@@ -136,10 +134,10 @@ namespace AerolineaFrba.Generacion_Viaje
                     int ID_Aeronave = AeronavePersistencia.ObtenerPorMatricula(CboAeronave.Text, transaccion).ID;
                     transaccion.Commit();
 
-                    ViajePersistencia.GenerarViaje(DtpFechaLlegada.Value, DtpFechaSalida.Value, DtpFechaLlegadaEstimada.Value, ID_Ruta, ID_Aeronave);
                     var dialogAnswer = MessageBox.Show("Esta seguro que desea generar el viaje?", "Atencion", MessageBoxButtons.YesNo);
                     if (DialogResult.Yes == dialogAnswer)
                     {
+                        ViajePersistencia.GenerarViaje(DtpFechaLlegada.Value, DtpFechaSalida.Value, DtpFechaLlegadaEstimada.Value, ID_Ruta, ID_Aeronave);
                         var dialogAnswer2 = MessageBox.Show("Viaje generado satisfactoriamente", "Informacion", MessageBoxButtons.OK);
                         LimpiarCampos();
                     }
