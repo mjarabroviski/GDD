@@ -52,11 +52,6 @@ namespace AerolineaFrba.Abm_Ruta
             }
         }
 
-        private void BtnCancelar_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
         private void BtnGuardar_Click(object sender, EventArgs e)
         {
             try
@@ -77,6 +72,10 @@ namespace AerolineaFrba.Abm_Ruta
                 if (dialogAnswer == DialogResult.Yes)
                 {
                     //Impacto en la base
+                    if (!modoModificacion)
+                        RutaPersistencia.InsertarRuta(RutaActual);
+                    else RutaPersistencia.ModificarRuta(RutaActual);
+
                     RutaPersistencia.InsertarRutaYServicios(RutaActual);
                     AccionCompleta = true;
                     Close();
@@ -87,6 +86,12 @@ namespace AerolineaFrba.Abm_Ruta
             {
                 MessageBox.Show(ex.Message, "Atención");
             }
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+            AccionCompleta = false;
+            Close();
         }
     }
 }

@@ -70,6 +70,7 @@ namespace Persistencia.Entidades
             public static String SPEliminarServiciosPorRuta = "EL_PUNTERO.EliminarServiciosPorRuta";
             public static String SPInsertarServiciosPorRuta = "EL_PUNTERO.InsertarServiciosPorRuta";
             public static String SPGetRutaPorID = "EL_PUNTERO.GetRutaPorID";
+            public static String SPObtenerCiudadDestinoPorRuta = "EL_PUNTERO.ObtenerCiudadDestinoPorRuta";
         }
 
         public static class Usuario { 

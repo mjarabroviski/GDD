@@ -239,5 +239,18 @@ namespace Persistencia
                 return 0;
             return aeronaves.Count;
         }
+
+        public static Aeronave ObtenerPorMatricula(string matricula)
+        {
+            var param = new List<SPParameter> { new SPParameter("Matricula", matricula) };
+            var sp = new StoreProcedure(DBQueries.Aeronave.SPGetAeronavePorMatricula, param);
+
+            var aeronaves = sp.ExecuteReader<Aeronave>();
+
+            if (aeronaves == null || aeronaves.Count == 0)
+                return null;
+
+            return aeronaves[0];
+        }
     }
 }

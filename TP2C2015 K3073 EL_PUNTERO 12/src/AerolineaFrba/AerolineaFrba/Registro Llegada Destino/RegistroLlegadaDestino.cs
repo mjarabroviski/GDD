@@ -85,30 +85,16 @@ namespace AerolineaFrba.Registro_Llegada_Destino
                     volverAEstadoInicial();
                     throw new Exception("No se puede registrar un viaje posterior a la fecha actual.");
                 }
+
                 #region declaraciones
-                var transaccion = DBManager.Instance().Connection.BeginTransaction(IsolationLevel.Serializable);
-                int ID_Aeronave = AeronavePersistencia.ObtenerPorMatricula(CboAeronave.Text,transaccion).ID;
-                transaccion.Commit();
+                Aeronave aeronave = AeronavePersistencia.ObtenerPorMatricula(CboAeronave.Text);
                 int ID_Origen = CiudadPersistencia.ObtenerIDPorNombreDeCiudad(CboCiudadOrigen.Text);
                 int ID_Destino = CiudadPersistencia.ObtenerIDPorNombreDeCiudad(CboCiudadDestino.Text);
-                var rutas = RutaPersistencia.ObtenerRutaPorOrigenYDestino(ID_Origen, ID_Destino);
-                int ID_Ruta;
-
-                if (rutas == null || rutas.Count == 0)
-                {
-                    volverAEstadoInicial();
-                    throw new Exception("Los campos ingresados no coninciden con un viaje realizado.");
-                }
-                else
-                {
-                    ID_Ruta = rutas[0].ID;
-                }
 
                 #endregion
 
                 #region busco aeronave
-                var aeronaves = ViajePersistencia.ValidarAeronaveDelViaje(ID_Aeronave, ID_Ruta, DtpFechaSalida.Value);
-                var viajes = ViajePersistencia.ObtenerViaje(ID_Aeronave, ID_Ruta, DtpFechaSalida.Value);
+                var viajes = ViajePersistencia.ObtenerViaje(aeronave.ID, ID_Origen, DtpFechaSalida.Value);
                 if (viajes == null || viajes.Count == 0)
                 {
                     limpiarCampos();
@@ -116,11 +102,32 @@ namespace AerolineaFrba.Registro_Llegada_Destino
                     throw new Exception("Los campos ingresados no coninciden con un viaje realizado.");
                 }
 
-                Aeronave aeronave = aeronaves[0];
                 Viaje viaje = viajes[0];
-                var infoAeronave = new InformacionAeronave(aeronave,viaje,this);
-                infoAeronave.ShowDialog();
-                volverAEstadoInicial();
+
+                if (viaje.Fecha_Llegada != DateTime.MinValue)
+                {
+                    limpiarCampos();
+                    CargarCbos();
+                    throw new Exception("El viaje ya fue registrado anteriormente.");
+                }
+
+                if (RutaPersistencia.ObtenerCiudadDestino(viaje.ID_Ruta) != ID_Destino)
+                {
+                    var dialogAnswer = MessageBox.Show("La ciudad de destino no coincide con la del viaje. Esta seguro que desea registrarlo de todos modos?", "Atencion", MessageBoxButtons.YesNo,MessageBoxIcon.Exclamation);
+                    if (dialogAnswer == DialogResult.Yes)
+                    {
+                        var infoAeronave = new InformacionAeronave(aeronave, viaje, this);
+                        infoAeronave.ShowDialog();
+                        volverAEstadoInicial();
+                    }
+                }
+                else
+                {
+                    var infoAeronave = new InformacionAeronave(aeronave, viaje, this);
+                    infoAeronave.ShowDialog();
+                    volverAEstadoInicial();
+                }
+                
                 #endregion
 
             }

@@ -193,12 +193,12 @@ namespace Persistencia
             return sp.ExecuteNonQuery(null);
         }
 
-        public static List<Viaje> ObtenerViaje(int ID_Aeronave, int ID_Ruta, DateTime fechasalida)
+        public static List<Viaje> ObtenerViaje(int ID_Aeronave, int ID_Origen, DateTime fechasalida)
         {
             var param = new List<SPParameter>
                 {
                     new SPParameter("Fecha_Salida", fechasalida), 
-                    new SPParameter("ID_Ruta",ID_Ruta),
+                    new SPParameter("ID_Origen",ID_Origen),
                     new SPParameter("ID_Aeronave",ID_Aeronave),
                 };
 

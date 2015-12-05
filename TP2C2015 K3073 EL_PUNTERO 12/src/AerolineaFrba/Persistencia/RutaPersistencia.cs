@@ -268,5 +268,20 @@ namespace Persistencia
 
             return rutas[0];
         }
+
+        public static int ObtenerCiudadDestino(int ID_Ruta)
+        {
+            var param = new List<SPParameter>
+            { 
+                new SPParameter("ID_Ruta", ID_Ruta)
+            };
+            var sp = new StoreProcedure(DBQueries.Ruta.SPObtenerCiudadDestinoPorRuta, param);
+
+            List<Ruta> rutas = sp.ExecuteReader<Ruta>();
+            if (rutas == null || rutas.Count == 0)
+                return 0;
+
+            return rutas[0].ID_Ciudad_Destino;
+        }
     }
 }

@@ -15,7 +15,6 @@ namespace Persistencia.Entidades
         public DateTime Fecha_Salida { get; set; }
         public DateTime Fecha_Llegada { get; set; }
         public DateTime Fecha_Llegada_Estimada { get; set; }
-        public bool Llego { get; set; }
 
         //Implementacion de IMapable
         public IMapable Map(SqlDataReader reader)
@@ -26,7 +25,7 @@ namespace Persistencia.Entidades
                 ID_Aeronave = Int32.Parse(reader["ID_Aeronave"].ToString()),
                 ID_Ruta = Int32.Parse(reader["ID_Ruta"].ToString()),
                 Fecha_Salida = DateTime.Parse(reader["Fecha_Salida"].ToString()),
-                Fecha_Llegada = DateTime.Parse(reader["Fecha_Llegada"].ToString()),
+                Fecha_Llegada = traerFechaLlegada(reader["Fecha_Llegada"].ToString()),
                 Fecha_Llegada_Estimada = DateTime.Parse(reader["Fecha_Llegada_Estimada"].ToString())
             };
         }
@@ -34,6 +33,12 @@ namespace Persistencia.Entidades
         public List<SPParameter> UnMap(IMapable entity)
         {
             return new List<SPParameter>();
+        }
+
+        public DateTime traerFechaLlegada(string fecha)
+        {
+            if (fecha == "") return DateTime.MinValue;
+            return DateTime.Parse(fecha);
         }
     }
 }

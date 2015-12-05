@@ -173,6 +173,7 @@ DROP PROCEDURE [EL_PUNTERO].[CiudadTieneViajes];
 DROP PROCEDURE [EL_PUNTERO].[HabilitarButaca];
 DROP PROCEDURE [EL_PUNTERO].[LaAeronaveYaSeEncuentraBaja];
 DROP PROCEDURE [EL_PUNTERO].[AeronaveEstaFueraDeServicio];
+DROP PROCEDURE [EL_PUNTERO].ObtenerCiudadDestinoPorRuta;
 
 DROP TRIGGER [EL_PUNTERO].[Tr_DeshabilitarUsuariosConRolDeshabilitado];
 

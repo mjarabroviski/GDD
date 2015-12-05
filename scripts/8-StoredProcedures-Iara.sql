@@ -34,6 +34,7 @@ BEGIN
 	FROM [EL_PUNTERO].[TL_CIUDAD] C
 	INNER JOIN [EL_PUNTERO].[TL_RUTA] R ON C.ID_Ciudad = R.ID_Ciudad_Destino
 	WHERE R.ID_Ciudad_Origen = @ID_Origen
+	AND R.Habilitado = 1
 	ORDER BY Nombre_Ciudad; 
 END
 GO
@@ -94,7 +95,6 @@ END
 GO
 
 CREATE PROCEDURE [EL_PUNTERO].[GenerarViaje]
-@Fecha_Llegada datetime,
 @Fecha_Salida datetime,
 @Fecha_Llegada_Estimada datetime,
 @ID_Ruta int,
@@ -103,8 +103,8 @@ CREATE PROCEDURE [EL_PUNTERO].[GenerarViaje]
 AS
 BEGIN
 	SET NOCOUNT ON;
-	INSERT INTO [EL_PUNTERO].[TL_VIAJE] (Fecha_Llegada,Fecha_Salida,Fecha_Llegada_Estimada,ID_Ruta,ID_Aeronave)
-	VALUES (@Fecha_Llegada,@Fecha_Salida,@Fecha_Llegada_Estimada,@ID_Ruta,@ID_Aeronave);
+	INSERT INTO [EL_PUNTERO].[TL_VIAJE] (Fecha_Salida,Fecha_Llegada_Estimada,ID_Ruta,ID_Aeronave)
+	VALUES (@Fecha_Salida,@Fecha_Llegada_Estimada,@ID_Ruta,@ID_Aeronave);
 END
 GO
 
@@ -166,20 +166,21 @@ GO
 
 CREATE PROCEDURE [EL_PUNTERO].[ObtenerViaje]
 @Fecha_Salida datetime,
-@ID_Ruta int,
+@ID_Origen int,
 @ID_Aeronave int
 
 AS 
 BEGIN
-	SELECT *
+	SELECT V.*
 	FROM [EL_PUNTERO].[TL_VIAJE] V
+	INNER JOIN EL_PUNTERO.TL_RUTA R ON V.ID_Ruta = R.ID_Ruta
 	WHERE DATEPART(year,V.Fecha_Salida) = DATEPART(year, @Fecha_Salida) 
     and DATEPART(month, V.Fecha_Salida) = DATEPART(month, @Fecha_Salida) 
     and DATEPART(day,V.Fecha_Salida)= DATEPART(day, @Fecha_Salida) 
 	and DATEPART(hour,V.Fecha_Salida)= DATEPART(hour, @Fecha_Salida) 
 	and DATEPART(minute,V.Fecha_Salida)= DATEPART(minute, @Fecha_Salida) 
 	and DATEPART(second ,V.Fecha_Salida)= DATEPART(second, @Fecha_Salida) 
-	and V.ID_Ruta = @ID_Ruta 
+	and R.ID_Ciudad_Origen = @ID_Origen
 	AND V.ID_Aeronave = @ID_Aeronave
 END
 GO
@@ -307,6 +308,7 @@ BEGIN
 	WHERE SR.ID_Servicio = @ID_Servicio 
 	      AND SR.ID_Ruta = R.ID_Ruta
 		  AND R.ID_Ciudad_Origen = C.ID_Ciudad
+		  AND R.Habilitado = 1
 	ORDER BY C.Nombre_Ciudad
 END
 GO
@@ -401,6 +403,19 @@ BEGIN
 		Motivo=@Motivo,
 		ID_Usuario=@ID_Usuario
 	WHERE Fecha_Devolucion is NULL;
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].ObtenerCiudadDestinoPorRuta
+@ID_Ruta int
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	SELECT *
+	FROM EL_PUNTERO.TL_RUTA R
+	WHERE R.ID_Ruta = @ID_Ruta
+	
 END
 GO
 

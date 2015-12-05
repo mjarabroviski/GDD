@@ -121,6 +121,7 @@ namespace AerolineaFrba.Abm_Ruta
 
                 if (!modoModificacion)
                 {
+
                     #region Valido que no exista una ruta con la descripcion informada
                     var filtro = new RutaFiltros();
                     filtro.Codigo = Int32.Parse(TxtCodigo.Text);
@@ -134,8 +135,19 @@ namespace AerolineaFrba.Abm_Ruta
 
                     var rutas = RutaPersistencia.ObtenerRutasPorParametros(filtro);
 
-                    if (rutas.Count!=0)
+                    if (rutas.Count > 0)
                         throw new Exception("Ya existe una ruta con el código ingresado");
+
+                    #endregion
+
+                    #region Me fijo que no exista una ruta con esas ciudades
+
+                    int ID_Origen = CiudadPersistencia.ObtenerIDPorNombreDeCiudad(CmbCiudadOrigen.Text);
+                    int ID_Destino = CiudadPersistencia.ObtenerIDPorNombreDeCiudad(CmbCiudadDestino.Text);
+                    if (RutaPersistencia.ObtenerRutaPorOrigenYDestino(ID_Origen, ID_Destino).Count > 0)
+                    {
+                        throw new Exception("Ya existe una ruta para esas ciudades seleccionadas");
+                    }
 
                     #endregion
 
@@ -150,11 +162,11 @@ namespace AerolineaFrba.Abm_Ruta
                     ruta.Habilitado = !(ChkInhabilitado.Checked);
 
                     //Impacto en la base
-                    RutaPersistencia.InsertarRuta(ruta);
                     AccionCompleta = true;
                     FrmABMRutaModificacionServicio frmModificarServicio = new FrmABMRutaModificacionServicio(ruta,false);
                     frmModificarServicio.ShowDialog();
-                    Close();
+                    if(frmModificarServicio.AccionCompleta)
+                        Close();
                     
                     #endregion
 
@@ -162,9 +174,23 @@ namespace AerolineaFrba.Abm_Ruta
                 }
                 else
                 {
+                    var rutaAModificar = RutaActual;
+                    #region Me fijo que no exista una ruta con esas ciudades
+                    int ID_Origen = CiudadPersistencia.ObtenerIDPorNombreDeCiudad(CmbCiudadOrigen.Text);
+                    int ID_Destino = CiudadPersistencia.ObtenerIDPorNombreDeCiudad(CmbCiudadDestino.Text);
+
+
+                    if (RutaActual.ID_Ciudad_Origen != ID_Origen || RutaActual.ID_Ciudad_Destino != ID_Destino)
+ 
+                    if (RutaPersistencia.ObtenerRutaPorOrigenYDestino(ID_Origen, ID_Destino).Count > 0)
+                    {
+                        throw new Exception("Ya existe una ruta para esas ciudades seleccionadas");
+                    }
+
+                    #endregion
+
                     #region Modifico una ruta existente
 
-                    var rutaAModificar = RutaActual;
                     RutaActual.Codigo_Ruta = Int32.Parse(TxtCodigo.Text);
                     RutaActual.ID_Ciudad_Origen = CiudadPersistencia.ObtenerIDPorNombreDeCiudad(CmbCiudadOrigen.Text);
                     RutaActual.ID_Ciudad_Destino = CiudadPersistencia.ObtenerIDPorNombreDeCiudad(CmbCiudadDestino.Text);
@@ -173,11 +199,11 @@ namespace AerolineaFrba.Abm_Ruta
                     RutaActual.Habilitado = !(ChkInhabilitado.Checked);
 
                     //Impacto en la base
-                    RutaPersistencia.ModificarRuta(RutaActual);
                     AccionCompleta = true;
                     FrmABMRutaModificacionServicio frmModificarServicio = new FrmABMRutaModificacionServicio(RutaActual,true);
                     frmModificarServicio.ShowDialog();
-                    Close();
+                    if (frmModificarServicio.AccionCompleta)
+                        Close();
 
                     #endregion
                 }
