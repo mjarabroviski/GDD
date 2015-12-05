@@ -35,6 +35,7 @@ namespace AerolineaFrba.Devolucion
             cboTipoDoc.DisplayMember = "Descripcion";
 
             #endregion
+            Btn_DevolverTodos.Enabled = false;
         }
 
         private void Btn_Cancelar_Click(object sender, EventArgs e)
@@ -106,8 +107,10 @@ namespace AerolineaFrba.Devolucion
                     {
                         MessageBox.Show("No se encontraron compras disponibles para el cliente ingresado. ", "Atencion", MessageBoxButtons.OK);
                     }
-                    
-                    Btn_DevolverTodos.Enabled = true;
+                    else
+                    {
+                        Btn_DevolverTodos.Enabled = true;
+                    }
                 }
             }
             catch (Exception ex)
@@ -133,8 +136,10 @@ namespace AerolineaFrba.Devolucion
                 {
                     MessageBox.Show("No se encontraron compras disponibles para el cliente ingresado. ", "Atencion", MessageBoxButtons.OK);
                 }
-            
-                Btn_DevolverTodos.Enabled = true;
+                else
+                {
+                    Btn_DevolverTodos.Enabled = true;
+                }
             }
             BotonesYtextosAestadoAnterior();
         }
@@ -172,7 +177,7 @@ namespace AerolineaFrba.Devolucion
 
                     DgvEncomiendas.DataSource = bind.ToList();
                     AgregarBotonesDeEncomienda();
-                    DgvEncomiendas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                    DgvEncomiendas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 }
                 #endregion
 
@@ -258,7 +263,6 @@ namespace AerolineaFrba.Devolucion
                 Btn_Buscar.Visible = true;
 
             }
-            Btn_DevolverTodos.Enabled = false;
             Btn_Finalizar.Enabled = true;
         }
         private void LimpiarDataGridView()
@@ -319,6 +323,7 @@ namespace AerolineaFrba.Devolucion
             LimpiarDataGridView();
             ActualizarEncomiendaDGV(encomiendas);
             ActualizarPasajeDGV(pasajes);
+            Btn_DevolverTodos.Enabled = false;
         }
 
         private void Btn_DevolverTodos_Click(object sender, EventArgs e)
@@ -333,6 +338,7 @@ namespace AerolineaFrba.Devolucion
                     {
                         DevolucionPersistencia.DevolverTodasLasEncomiendas(cliente.ID, AdministradorSesion.UsuarioActual, Frmmotivo.Motivo, transaccion);
                         DevolucionPersistencia.DevolverTodosLosPasajes(cliente.ID, AdministradorSesion.UsuarioActual, Frmmotivo.Motivo, transaccion);
+                   
                     }
                     catch (Exception)
                     {
