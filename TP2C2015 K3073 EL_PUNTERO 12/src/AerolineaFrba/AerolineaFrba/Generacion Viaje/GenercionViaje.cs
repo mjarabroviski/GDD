@@ -45,13 +45,6 @@ namespace AerolineaFrba.Generacion_Viaje
              CboAeronave.DisplayMember = "Matricula";
         }
 
-
-        private void DtpFechaLlegadaEstimada_ValueChanged(object sender, EventArgs e)
-        {
-            DtpFechaLlegada.Value = DtpFechaLlegadaEstimada.Value;
-        }
-
-
         private void Btn_Limpiar_Click(object sender, EventArgs e)
         {
             LimpiarCampos();
@@ -90,35 +83,14 @@ namespace AerolineaFrba.Generacion_Viaje
             {
                 #region validacionesDeHoras
 
-                if ( DtpFechaLlegada.Value.Month != DtpFechaSalida.Value.Month
-                    || DtpFechaLlegada.Value.Year != DtpFechaSalida.Value.Year)
+                if (DtpFechaLlegadaEstimada.Value <= DtpFechaSalida.Value)
                 {
-                    throw new Exception("Asegurese de ingresar el horario correctamente.");
-
-                }
-                if (DtpFechaLlegada.Value.Month == DtpFechaSalida.Value.Month
-                     && DtpFechaLlegada.Value.Year == DtpFechaSalida.Value.Year
-                     && DtpFechaLlegada.Value.Day != DtpFechaSalida.Value.Day
-                     && DtpFechaLlegada.Value.Day != DtpFechaSalida.Value.AddDays(1).Day
-                     )
-                {
-                    throw new Exception("Asegurese de ingresar el horario correctamente.");
-
+                    throw new Exception("La fecha de llegada estimada tiene que ser mayor que la de salida.");
                 }
 
-                if (DtpFechaLlegada.Value.Day == DtpFechaSalida.Value.Day)
+                if (DtpFechaLlegadaEstimada.Value > DtpFechaSalida.Value.AddDays(1))
                 {
-                    if (DtpFechaSalida.Value.TimeOfDay > DtpFechaLlegada.Value.TimeOfDay)
-                    {
-                       throw new Exception("Asegurese de ingresar el horario correctamente.");
-                    }
-                }
-                if (DtpFechaLlegada.Value.Day == DtpFechaSalida.Value.AddDays(1).Day)
-                {
-                    if (DtpFechaSalida.Value.TimeOfDay < DtpFechaLlegada.Value.TimeOfDay)
-                    {
-                        throw new Exception("Asegurese de ingresar el horario correctamente.");
-                    }
+                    throw new Exception("No puede estar en vuelo más de 24 horas.");
                 }
                 #endregion
 
@@ -137,7 +109,7 @@ namespace AerolineaFrba.Generacion_Viaje
                     var dialogAnswer = MessageBox.Show("Esta seguro que desea generar el viaje?", "Atencion", MessageBoxButtons.YesNo);
                     if (DialogResult.Yes == dialogAnswer)
                     {
-                        ViajePersistencia.GenerarViaje(DtpFechaLlegada.Value, DtpFechaSalida.Value, DtpFechaLlegadaEstimada.Value, ID_Ruta, ID_Aeronave);
+                        ViajePersistencia.GenerarViaje(DtpFechaSalida.Value, DtpFechaLlegadaEstimada.Value, ID_Ruta, ID_Aeronave);
                         var dialogAnswer2 = MessageBox.Show("Viaje generado satisfactoriamente", "Informacion", MessageBoxButtons.OK);
                         LimpiarCampos();
                     }
@@ -168,13 +140,6 @@ namespace AerolineaFrba.Generacion_Viaje
         private void DtpFechaSalida_ValueChanged_1(object sender, EventArgs e)
           {
                   DtpFechaLlegadaEstimada.Value = DtpFechaSalida.Value.AddHours(1);
-                  DtpFechaLlegada.Value = DtpFechaLlegadaEstimada.Value;
-          }
-
-          private void DtpFechaLlegadaEstimada_ValueChanged_1(object sender, EventArgs e)
-          {
-
-              DtpFechaLlegada.Value = DtpFechaLlegadaEstimada.Value;
           }
 
         private void Btn_SeleccionarCiudadDestino_Click_1(object sender, EventArgs e)

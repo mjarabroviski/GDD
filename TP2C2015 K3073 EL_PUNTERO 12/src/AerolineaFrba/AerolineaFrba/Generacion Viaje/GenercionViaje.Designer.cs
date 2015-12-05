@@ -37,14 +37,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.DtpFechaLlegada = new System.Windows.Forms.DateTimePicker();
             this.DtpFechaLlegadaEstimada = new System.Windows.Forms.DateTimePicker();
             this.DtpFechaSalida = new System.Windows.Forms.DateTimePicker();
             this.CboAeronave = new System.Windows.Forms.ComboBox();
             this.CboCiudadDestino = new System.Windows.Forms.ComboBox();
             this.CboCiudadOrigen = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
@@ -64,20 +62,18 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.DtpFechaLlegada);
             this.groupBox1.Controls.Add(this.DtpFechaLlegadaEstimada);
             this.groupBox1.Controls.Add(this.DtpFechaSalida);
             this.groupBox1.Controls.Add(this.CboAeronave);
             this.groupBox1.Controls.Add(this.CboCiudadDestino);
             this.groupBox1.Controls.Add(this.CboCiudadOrigen);
             this.groupBox1.Controls.Add(this.label9);
-            this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label21);
             this.groupBox1.Controls.Add(this.label14);
             this.groupBox1.Location = new System.Drawing.Point(14, 14);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(408, 312);
+            this.groupBox1.Size = new System.Drawing.Size(408, 278);
             this.groupBox1.TabIndex = 47;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "DATOS DEL VIAJE A GENERAR";
@@ -163,16 +159,6 @@
             this.label7.Text = "*";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // DtpFechaLlegada
-            // 
-            this.DtpFechaLlegada.CustomFormat = "d/M/yyyy     HH:mm:ss";
-            this.DtpFechaLlegada.Enabled = false;
-            this.DtpFechaLlegada.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.DtpFechaLlegada.Location = new System.Drawing.Point(121, 274);
-            this.DtpFechaLlegada.Name = "DtpFechaLlegada";
-            this.DtpFechaLlegada.Size = new System.Drawing.Size(179, 20);
-            this.DtpFechaLlegada.TabIndex = 76;
-            // 
             // DtpFechaLlegadaEstimada
             // 
             this.DtpFechaLlegadaEstimada.CustomFormat = "d/M/yyyy     HH:mm:ss";
@@ -182,7 +168,6 @@
             this.DtpFechaLlegadaEstimada.Name = "DtpFechaLlegadaEstimada";
             this.DtpFechaLlegadaEstimada.Size = new System.Drawing.Size(179, 20);
             this.DtpFechaLlegadaEstimada.TabIndex = 77;
-            this.DtpFechaLlegadaEstimada.ValueChanged += new System.EventHandler(this.DtpFechaLlegadaEstimada_ValueChanged_1);
             // 
             // DtpFechaSalida
             // 
@@ -235,15 +220,6 @@
             this.label9.Size = new System.Drawing.Size(0, 13);
             this.label9.TabIndex = 54;
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(14, 281);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(94, 13);
-            this.label6.TabIndex = 53;
-            this.label6.Text = "FECHA LLEGADA";
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -276,7 +252,7 @@
             this.Btn_Limpiar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Btn_Limpiar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_Limpiar.ForeColor = System.Drawing.Color.White;
-            this.Btn_Limpiar.Location = new System.Drawing.Point(120, 344);
+            this.Btn_Limpiar.Location = new System.Drawing.Point(120, 307);
             this.Btn_Limpiar.Name = "Btn_Limpiar";
             this.Btn_Limpiar.Size = new System.Drawing.Size(95, 32);
             this.Btn_Limpiar.TabIndex = 54;
@@ -290,7 +266,7 @@
             this.Btn_Cancelar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Btn_Cancelar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_Cancelar.ForeColor = System.Drawing.Color.White;
-            this.Btn_Cancelar.Location = new System.Drawing.Point(14, 344);
+            this.Btn_Cancelar.Location = new System.Drawing.Point(14, 307);
             this.Btn_Cancelar.Name = "Btn_Cancelar";
             this.Btn_Cancelar.Size = new System.Drawing.Size(95, 32);
             this.Btn_Cancelar.TabIndex = 53;
@@ -304,7 +280,7 @@
             this.Btn_GenerarViaje.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Btn_GenerarViaje.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_GenerarViaje.ForeColor = System.Drawing.Color.White;
-            this.Btn_GenerarViaje.Location = new System.Drawing.Point(327, 344);
+            this.Btn_GenerarViaje.Location = new System.Drawing.Point(327, 307);
             this.Btn_GenerarViaje.Name = "Btn_GenerarViaje";
             this.Btn_GenerarViaje.Size = new System.Drawing.Size(95, 32);
             this.Btn_GenerarViaje.TabIndex = 52;
@@ -316,7 +292,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(436, 389);
+            this.ClientSize = new System.Drawing.Size(436, 364);
             this.ControlBox = false;
             this.Controls.Add(this.Btn_Limpiar);
             this.Controls.Add(this.Btn_Cancelar);
@@ -339,7 +315,6 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label Btn_Limpiar;
         private System.Windows.Forms.Label Btn_Cancelar;
@@ -347,7 +322,6 @@
         private System.Windows.Forms.ComboBox CboCiudadOrigen;
         private System.Windows.Forms.ComboBox CboCiudadDestino;
         private System.Windows.Forms.ComboBox CboAeronave;
-        private System.Windows.Forms.DateTimePicker DtpFechaLlegada;
         private System.Windows.Forms.DateTimePicker DtpFechaLlegadaEstimada;
         private System.Windows.Forms.DateTimePicker DtpFechaSalida;
         private System.Windows.Forms.Label label7;

@@ -34,7 +34,7 @@ CREATE TABLE [EL_PUNTERO].[TL_PASAJE](
 CREATE TABLE [EL_PUNTERO].[TL_VIAJE](
 	[ID_Viaje] int IDENTITY (1,1),
 	[Fecha_Salida] datetime NOT NULL,
-	[Fecha_Llegada] datetime NOT NULL,
+	[Fecha_Llegada] datetime,
 	[Fecha_Llegada_Estimada] datetime NOT NULL,
 	[ID_Ruta] int NOT NULL,
 	[ID_Aeronave] int NOT NULL

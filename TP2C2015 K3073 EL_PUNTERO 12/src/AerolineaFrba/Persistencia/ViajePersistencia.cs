@@ -12,11 +12,10 @@ namespace Persistencia
 {
     public class ViajePersistencia
     {
-        public static int GenerarViaje(DateTime Fecha_Llegada,DateTime Fecha_Salida,DateTime Fecha_Llegada_Estimada,int ID_Ruta,int ID_Aeronave)
+        public static int GenerarViaje(DateTime Fecha_Salida,DateTime Fecha_Llegada_Estimada,int ID_Ruta,int ID_Aeronave)
         {
             var param = new List<SPParameter>
                 {
-                    new SPParameter("Fecha_Llegada",Fecha_Llegada), 
                     new SPParameter("Fecha_Salida", Fecha_Salida), 
                     new SPParameter("Fecha_Llegada_Estimada", Fecha_Llegada_Estimada), 
                     new SPParameter("ID_Ruta", ID_Ruta),
