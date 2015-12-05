@@ -196,6 +196,7 @@ namespace Persistencia.Entidades
             public static String SPActualizarMillas = "EL_PUNTERO.AgregarRegistroMillas";
             public static String SPGetAllRegistrosMillas = "EL_PUNTERO.GetAllRegistrosMillas";
             public static String SPObtenerRegistrosPorIDCliente = "EL_PUNTERO.GetRegistrosPorIDCliente";
+            public static String SPRestarMillasVencidas = "EL_PUNTERO.RestarMillasVencidas";
         }
 
         public static class Canje

@@ -37,11 +37,16 @@ namespace AerolineaFrba.Home
         private void Home_Load(object sender, EventArgs e)
         {
             SetMenuPorUsuario();
+            RestarMillasVencidas();
             if (AdministradorSesion.UsuarioActual != null) cambioDeContraseñaToolStripMenuItem.Visible = true;
 
             Image image = Image.FromFile("../../airliners-03.jpg");
             pbFoto.Image = image;
             pbFoto.SizeMode = PictureBoxSizeMode.AutoSize;
+        }
+
+        private void RestarMillasVencidas() {
+            RegistroMillasPersistencia.RestarMillasVencidas();
         }
 
         private void SetMenuPorUsuario()

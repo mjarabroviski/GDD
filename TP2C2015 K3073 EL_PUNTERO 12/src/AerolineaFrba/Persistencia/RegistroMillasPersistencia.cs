@@ -42,5 +42,17 @@ namespace Persistencia
 
             return sp.ExecuteReader<RegistroMillas>();
         }
+
+        public static void RestarMillasVencidas()
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("Fecha_Actual", ConfiguracionDeVariables.FechaSistema)
+                };
+
+            var sp = new StoreProcedure(DBQueries.RegistroMillas.SPRestarMillasVencidas, param);
+
+            sp.ExecuteNonQuery(null);
+        }
     }
 }

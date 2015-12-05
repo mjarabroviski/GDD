@@ -897,8 +897,7 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE [EL_PUNTERO].[AgregarRegistroMillas]
-@ID_Viaje int,
+CREATE PROCEDURE [EL_PUNTERO].[RestarMillasVencidas]
 @Fecha_Actual datetime
 AS
 BEGIN
@@ -921,6 +920,15 @@ BEGIN
 	--Elimino los registros vencidos
 	DELETE FROM EL_PUNTERO.TL_REGISTRO_MILLAS 
 	WHERE DATEDIFF(DAY, Fecha_Inicio, @Fecha_Actual) >= 366
+END
+GO
+
+CREATE PROCEDURE [EL_PUNTERO].[AgregarRegistroMillas]
+@ID_Viaje int,
+@Fecha_Actual datetime
+AS
+BEGIN
+	EXEC EL_PUNTERO.RestarMillasVencidas @Fecha_Actual
 
 	--Agrego Pasajes
 	INSERT INTO EL_PUNTERO.TL_REGISTRO_MILLAS (ID_Cliente,Codigo_Item,Fecha_Inicio,Millas)
