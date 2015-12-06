@@ -107,7 +107,7 @@ namespace AerolineaFrba.Devolucion
                     {
                         MessageBox.Show("No se encontraron compras disponibles para el cliente ingresado. ", "Atencion", MessageBoxButtons.OK);
                     }
-                    else
+                    else if(encomiendas != null || pasajes!= null)
                     {
                         Btn_DevolverTodos.Enabled = true;
                     }
@@ -136,7 +136,7 @@ namespace AerolineaFrba.Devolucion
                 {
                     MessageBox.Show("No se encontraron compras disponibles para el cliente ingresado. ", "Atencion", MessageBoxButtons.OK);
                 }
-                else
+                else if (encomiendas != null || pasajes != null)
                 {
                     Btn_DevolverTodos.Enabled = true;
                 }
@@ -323,7 +323,10 @@ namespace AerolineaFrba.Devolucion
             LimpiarDataGridView();
             ActualizarEncomiendaDGV(encomiendas);
             ActualizarPasajeDGV(pasajes);
-            Btn_DevolverTodos.Enabled = false;
+            if (encomiendas == null && pasajes == null)
+            {
+              Btn_DevolverTodos.Enabled = false;
+            }
         }
 
         private void Btn_DevolverTodos_Click(object sender, EventArgs e)
