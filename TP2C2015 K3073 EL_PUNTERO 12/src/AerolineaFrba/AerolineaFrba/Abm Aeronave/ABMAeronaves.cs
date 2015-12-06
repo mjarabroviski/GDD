@@ -96,7 +96,7 @@ namespace AerolineaFrba.Abm_Aeronave
                 Fabricante = a.Fabricante,
                 Modelo = a.Modelo,
                 Tipo_Servicio = ServicioPersistencia.ObtenerServicioPorID(a.ID_Servicio).Nombre,
-                Baja_Fuera_Servicio = (AeronavePersistencia.AeronaveEstaFueraDeServicio(a) > 0),
+                Fuera_De_Servicio = (AeronavePersistencia.AeronaveEstaFueraDeServicio(a) > 0),
                 Fecha_Alta = a.Fecha_Alta,
                 KG_Totales = a.KG_Totales
             });
@@ -225,6 +225,12 @@ namespace AerolineaFrba.Abm_Aeronave
                 if (e.ColumnIndex == 7)
                 {
                     //El usuario va a modificar una aeronave, verifico que no tenga viajes asignados
+                    if (aeronaveSeleccionada.Baja_Fuera_De_Servicio)
+                    {
+                         MessageBox.Show("La aeronave no puede ser modificada ya que se encuentra en baja por fuera de servicio", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                         return;
+                    }
+
                     var viajes = ViajePersistencia.ObtenerViajesPorAeronave(aeronaveSeleccionada, null);
                     if (viajes != null)
                         MessageBox.Show("La aeronave no puede ser modificada porque tiene viajes asignados", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

@@ -129,7 +129,7 @@ namespace AerolineaFrba.Abm_Aeronave
                             #region Inserto las butacas de pasillo
 
                             var cantPasillo = Convert.ToInt32(TxtPasillo.Text);
-                            for (int i = 1; i <= cantPasillo; i++)
+                            for (int i = 0; i < cantPasillo; i++)
                             {
                                 var pasillo = new Butaca();
                                 pasillo.Numero = i;
@@ -143,7 +143,7 @@ namespace AerolineaFrba.Abm_Aeronave
                             #region Inserto las butacas de ventanilla
 
                             var cantVentanilla = Convert.ToInt32(TxtVentanilla.Text);
-                            for (int i = cantPasillo + 1; i <= cantPasillo + cantVentanilla; i++)
+                            for (int i = cantPasillo ; i < cantPasillo + cantVentanilla; i++)
                             {
                                 var ventanilla = new Butaca();
                                 ventanilla.Numero = i;

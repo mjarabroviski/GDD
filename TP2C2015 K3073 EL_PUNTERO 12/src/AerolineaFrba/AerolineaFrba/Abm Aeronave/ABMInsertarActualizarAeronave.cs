@@ -46,6 +46,8 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void ABMInsertarActualizarAeronave_Load(object sender, EventArgs e)
         {
+            DtpFechaAlta.Value = ConfiguracionDeVariables.FechaSistema;
+
             #region Cargar Servicios
             //Carga el combobox de servicios
             CboServicio.DataSource = ServicioPersistencia.ObtenerTodos();

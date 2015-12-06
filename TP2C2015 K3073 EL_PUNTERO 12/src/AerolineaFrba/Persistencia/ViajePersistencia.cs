@@ -118,7 +118,8 @@ namespace Persistencia
 
         public static List<Viaje> ObtenerViajesPorAeronave(Aeronave aeronave, SqlTransaction transaction)
         {
-            var param = new List<SPParameter> { new SPParameter("ID_Aeronave", aeronave.ID) };
+            var param = new List<SPParameter> { new SPParameter("ID_Aeronave", aeronave.ID),
+                                                new SPParameter("Fecha_Actual", ConfiguracionDeVariables.FechaSistema)};
             var sp = new StoreProcedure(DBQueries.Viaje.SPGetViajesPorAeronave, param, transaction);
 
             var viajes = sp.ExecuteReaderTransactioned<Viaje>(transaction);
