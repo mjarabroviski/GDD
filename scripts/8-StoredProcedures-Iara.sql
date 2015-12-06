@@ -212,7 +212,10 @@ BEGIN
 		   AND E.ID_Encomienda NOT IN (SELECT DE.ID_Encomienda
 										FROM EL_PUNTERO.TL_DEVOLUCION_ENCOMIENDA DE
 										WHERE DE.ID_Encomienda = E.ID_Encomienda)
-	ORDER BY E.Codigo_Encomienda
+		   AND E.ID_Viaje IN(SELECT V2.ID_Viaje
+								 FROM EL_PUNTERO.TL_VIAJE V2
+								 WHERE V2.Fecha_Llegada IS NULL)
+	ORDER BY E.Codigo_Encomienda 
 END
 GO
 
@@ -231,6 +234,9 @@ BEGIN
 	AND P.ID_Pasaje NOT IN (SELECT DP.ID_Pasaje
 								FROM EL_PUNTERO.TL_DEVOLUCION_PASAJE DP
 								WHERE DP.ID_Pasaje = P.ID_Pasaje)
+	AND P.ID_Viaje IN (SELECT V2.ID_Viaje
+								 FROM EL_PUNTERO.TL_VIAJE V2
+								 WHERE V2.Fecha_Llegada IS NULL)
 	ORDER BY P.Codigo_Pasaje
 END
 GO
