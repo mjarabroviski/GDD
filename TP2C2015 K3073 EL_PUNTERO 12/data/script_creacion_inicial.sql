@@ -298,6 +298,7 @@ VALUES
 ('LCD Philips', 10, 100),
 ('Notebook Toshiba', 6, 150),
 ('Valija', 20, 50);
+('Pava Electriva', 20, 80);
 
 CREATE TABLE [EL_PUNTERO].[TL_TARJETA](
 	[ID_Tarjeta] int IDENTITY(1,1),
@@ -317,7 +318,7 @@ INSERT INTO EL_PUNTERO.TL_TIPO_TARJETA (Descripcion) VALUES ('AMEX');
 
 COMMIT
 
---Primary keys
+--Agregar Primary Keys
 BEGIN TRANSACTION
 ALTER TABLE [EL_PUNTERO].[TL_AERONAVE]
 ADD PRIMARY KEY ([ID_Aeronave]);
@@ -559,7 +560,7 @@ ALTER TABLE EL_PUNTERO.TL_COMPRA
 DROP COLUMN Codigo_Paquete
 COMMIT
 
---Foreign keys
+--Agregar Foreign Keys
 BEGIN TRANSACTION
 
 ALTER TABLE [EL_PUNTERO].[TL_AERONAVE]
@@ -1151,9 +1152,25 @@ DECLARE @reemplazo int
 	SET @reemplazo = [EL_PUNTERO].[ObtenerAeronaveDeReemplazo](@ID_Aeronave,@Modelo,@ID_Servicio,@Fabricante,@Fecha_Actual)
 	IF(@reemplazo is not null)
 	BEGIN
+
+	--Reemplazo los pasajes de ese viaje
+	UPDATE P
+	SET ID_Butaca = (SELECT B.ID_Butaca 
+					 FROM EL_PUNTERO.TL_BUTACA B
+					 WHERE B.ID_Aeronave = @reemplazo
+					 AND B.Nro_Butaca = B2.Nro_Butaca
+					 AND B2.Habilitado = 1)
+	FROM EL_PUNTERO.TL_PASAJE P
+	INNER JOIN EL_PUNTERO.TL_VIAJE V ON V.ID_Viaje = P.ID_Viaje
+	INNER JOIN EL_PUNTERO.TL_BUTACA B2 ON B2.ID_Butaca = P.ID_Butaca
+	WHERE V.ID_Aeronave = @ID_Aeronave
+	AND V.Fecha_Salida >= @Fecha_Actual
+
+	--Reemplazo los viajes de esa aeronave
 	UPDATE EL_PUNTERO.TL_VIAJE 
 	SET ID_Aeronave = @reemplazo
 	WHERE ID_Aeronave = @ID_Aeronave
+	AND Fecha_Salida >= @Fecha_Actual
 	END
 	
 	END TRY 
@@ -1164,13 +1181,22 @@ END
 GO
 
 CREATE PROCEDURE [EL_PUNTERO].[GetViajesPorAeronave]
-@ID_Aeronave int
+@ID_Aeronave int,
+@Fecha_Actual datetime
 AS
 BEGIN
 	SET NOCOUNT ON;
-	SELECT *
-	FROM [EL_PUNTERO].[TL_Viaje] 
-	WHERE ID_Aeronave = @ID_Aeronave
+	SELECT V.*
+	FROM [EL_PUNTERO].[TL_Pasaje] P
+	INNER JOIN EL_PUNTERO.TL_VIAJE V ON V.ID_Viaje = P.ID_Viaje
+	WHERE V.ID_Aeronave = @ID_Aeronave
+	AND Fecha_Salida >= @Fecha_Actual
+	UNION ALL
+	SELECT V.*
+	FROM [EL_PUNTERO].[TL_ENCOMIENDA] E
+	INNER JOIN EL_PUNTERO.TL_VIAJE V ON V.ID_Viaje = E.ID_Viaje
+	WHERE V.ID_Aeronave = @ID_Aeronave
+	AND Fecha_Salida >= @Fecha_Actual
 END
 GO
 
@@ -1297,9 +1323,24 @@ CREATE PROCEDURE [EL_PUNTERO].[ReemplazoAeronave]
 @Fecha_Actual datetime
 AS
 BEGIN
+	--Reemplazo los pasajes de ese viaje
+	UPDATE P
+	SET ID_Butaca = (SELECT B.ID_Butaca 
+					 FROM EL_PUNTERO.TL_BUTACA B
+					 WHERE B.ID_Aeronave = @ID_Nueva 
+					 AND B.Nro_Butaca = B2.Nro_Butaca
+					 AND B2.Habilitado = 1)
+	FROM EL_PUNTERO.TL_PASAJE P
+	INNER JOIN EL_PUNTERO.TL_VIAJE V ON V.ID_Viaje = P.ID_Viaje
+	INNER JOIN EL_PUNTERO.TL_BUTACA B2 ON B2.ID_Butaca = P.ID_Butaca
+	WHERE V.ID_Aeronave = @ID_Reemplazo
+	AND V.Fecha_Salida >= @Fecha_Actual
+
+	--Reemplazo los viajes
 	UPDATE [EL_PUNTERO].TL_VIAJE 
 	SET ID_Aeronave = @ID_Nueva
-	WHERE ID_Aeronave = @ID_Reemplazo AND Fecha_Salida >= @Fecha_Actual;
+	WHERE ID_Aeronave = @ID_Reemplazo 
+	AND Fecha_Salida >= @Fecha_Actual;
 END
 GO
 
@@ -1491,9 +1532,28 @@ DECLARE @reemplazo int
 	SET @reemplazo = [EL_PUNTERO].[ObtenerAeronaveDeReemplazoPorServicio](@ID_Aeronave,@Modelo,@ID_Servicio,@Fabricante,@Comienzo,@Reinicio)
 	IF(@reemplazo is not null)
 	BEGIN
+
+	--Reemplazo los pasajes de ese viaje
+	UPDATE P
+	SET ID_Butaca = (SELECT B.ID_Butaca 
+					 FROM EL_PUNTERO.TL_BUTACA B
+					 WHERE B.ID_Aeronave = @reemplazo
+					 AND B.Nro_Butaca = B2.Nro_Butaca
+					 AND B2.Habilitado = 1)
+	FROM EL_PUNTERO.TL_PASAJE P
+	INNER JOIN EL_PUNTERO.TL_VIAJE V ON V.ID_Viaje = P.ID_Viaje
+	INNER JOIN EL_PUNTERO.TL_BUTACA B2 ON B2.ID_Butaca = P.ID_Butaca
+	WHERE V.ID_Aeronave = @ID_Aeronave
+	AND V.Fecha_Salida >= @Comienzo
+    AND V.Fecha_Salida < @Reinicio
+
+	--Reemplazo los viajes de la aeronave
 	UPDATE EL_PUNTERO.TL_VIAJE 
 	SET ID_Aeronave = @reemplazo
 	WHERE ID_Aeronave = @ID_Aeronave
+	AND Fecha_Salida >= @Comienzo
+    AND Fecha_Salida < @Reinicio
+
 	END
 	
 	END TRY 
@@ -1510,9 +1570,26 @@ CREATE PROCEDURE [EL_PUNTERO].[ReemplazoAeronavePorServicio]
 @Reinicio datetime
 AS
 BEGIN
+	--Reemplazo los pasajes de ese viaje
+	UPDATE P
+	SET ID_Butaca = (SELECT B.ID_Butaca 
+					 FROM EL_PUNTERO.TL_BUTACA B
+					 WHERE B.ID_Aeronave = @ID_Nueva
+					 AND B.Nro_Butaca = B2.Nro_Butaca
+					 AND B2.Habilitado = 1)
+	FROM EL_PUNTERO.TL_PASAJE P
+	INNER JOIN EL_PUNTERO.TL_VIAJE V ON V.ID_Viaje = P.ID_Viaje
+	INNER JOIN EL_PUNTERO.TL_BUTACA B2 ON B2.ID_Butaca = P.ID_Butaca
+	WHERE V.ID_Aeronave = @ID_Reemplazo 
+	AND V.Fecha_Salida >= @Comienzo
+    AND V.Fecha_Salida < @Reinicio
+
+	--Reemplazo los viajes de la aeronave
 	UPDATE [EL_PUNTERO].TL_VIAJE 
 	SET ID_Aeronave = @ID_Nueva
-	WHERE ID_Aeronave = @ID_Reemplazo AND Fecha_Salida >= @Comienzo AND Fecha_Salida < @Reinicio;
+	WHERE ID_Aeronave = @ID_Reemplazo 
+	AND Fecha_Salida >= @Comienzo 
+	AND Fecha_Salida < @Reinicio;
 END
 GO
 
@@ -1653,7 +1730,6 @@ BEGIN
 END
 GO
 
----------------------------------------------------------------------------------------------------------------
 CREATE PROCEDURE [EL_PUNTERO].[GetAllRegistrosMillas]
 AS
 BEGIN
@@ -2277,8 +2353,6 @@ BEGIN
 END
 GO
 
------------------------------------------------------------------------------------------------------------------------
-
 CREATE PROCEDURE [EL_PUNTERO].[CrearTablaAuxiliarPasajeros]
 AS
 BEGIN
@@ -2729,7 +2803,6 @@ BEGIN
 END
 GO
 
-
 COMMIT
 
 BEGIN TRANSACTION
@@ -2930,7 +3003,6 @@ BEGIN
 END
 GO
 
-------------------------------------------------------------------------------------------------------------------------
 CREATE PROCEDURE [EL_PUNTERO].[ObtenerEncomiendasFuturas]
 @ID_Cliente int,
 @Fecha_Sistema datetime
@@ -2946,7 +3018,10 @@ BEGIN
 		   AND E.ID_Encomienda NOT IN (SELECT DE.ID_Encomienda
 										FROM EL_PUNTERO.TL_DEVOLUCION_ENCOMIENDA DE
 										WHERE DE.ID_Encomienda = E.ID_Encomienda)
-	ORDER BY E.Codigo_Encomienda
+		   AND E.ID_Viaje IN(SELECT V2.ID_Viaje
+								 FROM EL_PUNTERO.TL_VIAJE V2
+								 WHERE V2.Fecha_Llegada IS NULL)
+	ORDER BY E.Codigo_Encomienda 
 END
 GO
 
@@ -2965,6 +3040,9 @@ BEGIN
 	AND P.ID_Pasaje NOT IN (SELECT DP.ID_Pasaje
 								FROM EL_PUNTERO.TL_DEVOLUCION_PASAJE DP
 								WHERE DP.ID_Pasaje = P.ID_Pasaje)
+	AND P.ID_Viaje IN (SELECT V2.ID_Viaje
+								 FROM EL_PUNTERO.TL_VIAJE V2
+								 WHERE V2.Fecha_Llegada IS NULL)
 	ORDER BY P.Codigo_Pasaje
 END
 GO
@@ -3155,7 +3233,7 @@ GO
 
 COMMIT
 
---Trigger
+--Triggers
 BEGIN TRANSACTION
 
 SET ANSI_NULLS ON
@@ -3173,3 +3251,4 @@ END
 GO
 
 COMMIT
+

@@ -291,6 +291,7 @@ VALUES
 ('LCD Philips', 10, 100),
 ('Notebook Toshiba', 6, 150),
 ('Valija', 20, 50);
+('Pava Electriva', 20, 80);
 
 CREATE TABLE [EL_PUNTERO].[TL_TARJETA](
 	[ID_Tarjeta] int IDENTITY(1,1),
