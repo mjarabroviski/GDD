@@ -143,7 +143,7 @@ namespace AerolineaFrba.Compra
                 if ((!(ValidadorDeTipos.IsMailValido(TxtMail.Text))) && (!(ValidadorDeTipos.IsEmpty(TxtMail.Text))))
                     mensajeExcepcion += Environment.NewLine + "Formato inválido de mail";
 
-                if(!(ValidadorDeTipos.IsEmpty(TxtNroDoc.Text)))
+                if ((!(ValidadorDeTipos.IsEmpty(TxtNroDoc.Text))) && (ValidadorDeTipos.IsNumeric(TxtNroDoc.Text)))
                     if (ClientePersistencia.ElClienteYaEstaDeViaje(CmbTipoDoc.SelectedIndex + 1, Int32.Parse(TxtNroDoc.Text), viajeActual.ID, TxtApellidos.Text) > 0)
                         mensajeExcepcion += Environment.NewLine + "Ese cliente ya se encuentra en viaje para esas fechas";
 
@@ -205,7 +205,7 @@ namespace AerolineaFrba.Compra
                 if (!(ValidadorDeTipos.IsNumeric(TxtNroDoc.Text)) && !(ValidadorDeTipos.IsEmpty(TxtNroDoc.Text)))
                     throw new Exception("El documento debe ser un número");
 
-                if (!(ValidadorDeTipos.IsEmpty(TxtNroDoc.Text)))
+                if ((!(ValidadorDeTipos.IsEmpty(TxtNroDoc.Text))) && (ValidadorDeTipos.IsNumeric(TxtNroDoc.Text)))
                 {
                     Cliente cliente = CompraPersistencia.ObtenerClientePorDoc(CmbTipoDoc.Text, Int32.Parse(TxtNroDoc.Text));
                     if (cliente != null)
@@ -265,7 +265,7 @@ namespace AerolineaFrba.Compra
                     if (!(ValidadorDeTipos.IsNumeric(TxtNroDoc.Text)) && !(ValidadorDeTipos.IsEmpty(TxtNroDoc.Text)))
                         throw new Exception("El documento debe ser un número");
 
-                    if (!(ValidadorDeTipos.IsEmpty(TxtNroDoc.Text)))
+                    if ((!(ValidadorDeTipos.IsEmpty(TxtNroDoc.Text))) && (ValidadorDeTipos.IsNumeric(TxtNroDoc.Text)))
                     {
                         Cliente cliente = CompraPersistencia.ObtenerClientePorDoc(CmbTipoDoc.Text, Int32.Parse(TxtNroDoc.Text));
                         if (cliente != null)
